@@ -17,15 +17,15 @@ This is my personal guide to setup a development machine on Windows. Although th
 2. [Windows configuration](./2-windows-configuration.md)
     1. [Keyboard and Mouse Software](./2-windows-configuration.md#21-keyboard-and-mouse-software)
     2. Power Management
-3. [Desktop Software](./3-desktop-sftware.md)
-    1. Autenticação.gov
-    2. Ferdium
-    3. Gimp
-    4. Inkscape
-    5. PDF SAM
-    6. SpeedCrunch
-    7. Spotify
-    8. VLC
+3. [Desktop Software](./3-desktop-software.md)
+    1. [Autenticação.gov](./3-desktop-software.md#31-autenticaçãogov)
+    2. [Ferdium](./3-desktop-software.md#32-ferdium)
+    3. [GIMP](./3-desktop-software.md#33-gimp)
+    4. [Inkscape](./3-desktop-software.md#34-inkscape)
+    5. [PDFsam](./3-desktop-software.md#35-pdfsam)
+    6. [SpeedCrunch](3-desktop-software.md#36-speedcrunch)
+    7. [Spotify](./3-desktop-software.md#37-spotify)
+    8. [VLC](./3-desktop-software.md#38-vlc)
 4. [Development Software & Tools](./4-development-software-and-tools.md)
     1. Notepadd++
     2. Meld
