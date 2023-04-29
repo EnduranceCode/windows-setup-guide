@@ -14,9 +14,10 @@ This is my personal guide to setup a development machine on Windows. Although th
     3. [Windows Subsystem for Linux](./1-fundamental-software.md#13-windows-subsystem-for-linux)
     4. [Windows Terminal](./1-fundamental-software.md#14-windows-terminal)
     5. [Chocolatey](./1-fundamental-software.md#15-chocolatey)
-2. [Windows configuration](./2-windows-configuration.md)
+2. [Windows Configuration](./2-windows-configuration.md)
     1. [Keyboard and Mouse Software](./2-windows-configuration.md#21-keyboard-and-mouse-software)
-    2. Power Management
+    2. Windows Start Menu
+    3. Power Management
 3. [Desktop Software](./3-desktop-software.md)
     1. [Autenticação.gov](./3-desktop-software.md#31-autenticaçãogov)
     2. [Ferdium](./3-desktop-software.md#32-ferdium)

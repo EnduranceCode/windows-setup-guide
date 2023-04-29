@@ -7,7 +7,7 @@ This file contains the **Windows configuration** section of my [Setup guide for 
 2. [Windows configuration](#2-windows-configuration)
     1. [Keyboard and Mouse Software](#21-keyboard-and-mouse-software)
 
-## 2. Windows configuration
+## 2. Windows Configuration
 
 ### 2.1. Keyboard and Mouse Software
 
