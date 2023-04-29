@@ -9,11 +9,11 @@ This is my personal guide to setup a development machine on Windows. Although th
 ## Table of Contents
 
 1. [Fundamental Software](./1-fundamental-software.md)
-    1. Google Chrome
-    2. KeepassXC
-    3. Windows Subsystem for Linux
-    4. Windows Terminal
-    5. Chocolatey
+    1. [Google Chrome](./1-fundamental-software.md#11-google-chrome)
+    2. [KeepassXC](./1-fundamental-software.md#12-keepassxc)
+    3. [Windows Subsystem for Linux](./1-fundamental-software.md#13-windows-subsystem-for-linux)
+    4. [Windows Terminal](./1-fundamental-software.md#14-windows-terminal)
+    5. [Chocolatey](./1-fundamental-software.md#15-chocolatey)
 2. [Windows configuration](./2-windows-configuration.md)
     1. Power Management
 3. [Desktop Software](./3-desktop-sftware.md)
