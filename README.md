@@ -28,20 +28,20 @@ This is my personal guide to setup a development machine on Windows. Although th
     7. [Spotify](./3-desktop-software.md#37-spotify)
     8. [VLC](./3-desktop-software.md#38-vlc)
 4. [Development Software & Tools](./4-development-software-and-tools.md)
-    1. Notepadd++
-    2. Meld
-    3. Git Bash
-    4. Java
-    5. Apache Maven
-    6. Apache Tomcat
-    7. Quarkus
-    8. AWS CLI
-    9. Make
-    10. Rancher Desktop
-    11. Terraform
-    12. nvs
-    13. IntelliJ IDEA
-    14. Visual Studio Code
+    1. [Notepadd++](./4-development-software-and-tools.md#41-notepad)
+    2. [Meld](./4-development-software-and-tools.md#42-meld)
+    3. [Git Bash](./4-development-software-and-tools.md#43-git-bash)
+    4. [Java](./4-development-software-and-tools.md#44-java)
+    5. [Apache Maven](./4-development-software-and-tools.md#44-java)
+    6. [Apache Tomcat](./4-development-software-and-tools.md#46-apache-tomcat)
+    7. [Quarkus CLI](./4-development-software-and-tools.md#47-quarkus-cli)
+    8. [AWS CLI](./4-development-software-and-tools.md#48-aws-cli)
+    9. [Make](./4-development-software-and-tools.md#49-make)
+    10. [Rancher Desktop](./4-development-software-and-tools.md#410-rancher-desktop)
+    11. [Terraform](./4-development-software-and-tools.md#411-terraform)
+    12. [NVS (Node Version Switcher)](./4-development-software-and-tools.md#412-nvs-node-version-switcher)
+    13. [IntelliJ IDEA](./4-development-software-and-tools.md#413-intellij-idea)
+    14. [Visual Studio Code](./4-development-software-and-tools.md#414-visual-studio-code)
     15. Eclipse
-    16. DBeaver
-    17. Postman
+    16. [DBeaver](./4-development-software-and-tools.md#416-dbeaver)
+    17. [Postman](./4-development-software-and-tools.md#417-postman)
