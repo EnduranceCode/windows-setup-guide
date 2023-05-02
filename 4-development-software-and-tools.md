@@ -473,6 +473,24 @@ To install [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the [**JetBr
 
 Move the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) **Start Menu** *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder. Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox` that was created by the installer.
 
+Some antivirus software can interfere with the IDE build process, [causing builds to run dramatically slower](https://intellij-support.jetbrains.com/hc/en-us/articles/360006298560). To prevent this, the folders where the IDE writes a lot of files should be excluded from the antivirus software real-time scanning. That can be done following the following steps:
+
++ Click the Start button and search for “Windows Security”;
++ Start the *Windows Security* application;
++ Click on “Virus and threat protection”;
++ Click on “Manage settings” under “Virus & threat protection settings”;
++ Scroll down if needed, and then click on “Add or remove exclusions” (there will be a prompt for elevated permissions that must be accepted);
++ Click the button `+ Add an exclusion`, choose `Folder` from the dropdown list and then add all (one by one) the following folders:
+  + `C:\CODE`
+  + `%APPDATA%\JetBrains`
+  + `%LOCALAPPDATA%\JetBrains\`
+
+We also recommend [excluding the IDE process from the antivirus](https://intellij-support.jetbrains.com/hc/en-us/articles/360005028939-Slow-startup-on-Windows-splash-screen-appears-in-more-than-20-seconds) to improve the startup performance. To do that exclusion, on the on “Add or remove exclusions”, Click the button `+ Add an exclusion`, choose `Process` from the dropdown list and then add all (one by one) the following processes:
+
++ `idea64.exe`
++ `fsnotifier.exe`
++ `fsnotifier64.exe`
+
 Execute the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) chosen version and follow the instructions prompted. On the welcome screen, click the button `Enable New UI`.
 
 #### 4.13.2. Install plugins
