@@ -257,9 +257,13 @@ If everything is correct, the above command will output the **Apache Maven** ver
 
 ### 4.5.2. Configuration
 
-The default location for the *Maven Local Repository* is the `.m2` folder at the user's *Home Folder* (**%USERPROFILE%**). The development environment will better contained if a *Maven Local Repository* is set for each project. Therefore, replace the **{LABEL}** in the below command as appropriate and execute it on a Windows Command Prompt.
+The default location for the user's settings file and for the *Maven Local Repository* is the `.m2` folder at the user's *Home Folder* (`%USERPROFILE%`). Check it it already exists and if it doesn't, on a Windows Command Prompt, create it with the following command:
 
-    mkdir C:\DEV\apache-maven\m2-{PROJECT}
+    mkdir %USERPROFILE%\.m2
+
+The development environment will better contained if a *Maven Local Repository* is set for each project. Therefore, replace the **{LABEL}** in the below command as appropriate and execute it on a Windows Command Prompt.
+
+    mkdir %USERPROFILE%\.m2\repository-{PROJECT}
 
 > **Label Definition**
 >
@@ -267,7 +271,7 @@ The default location for the *Maven Local Repository* is the `.m2` folder at the
 
 To set the folder created with the above command as the custom location for the *Maven Local Repository*, edit the file `settings.xml` located at the `conf` folder of the **Apache Maven** installation folder, first replace the **{LABEL}** in the below snippet as appropriate and then insert the it immediately after the *localRepository* comment section.
 
-    <localRepository>C:\DEV\apache-maven\m2-{PROJECT}</localRepository>
+    <localRepository>${user.home}/.m2/repository-{PROJECT}</localRepository>
 
 > **Label Definition**
 >

@@ -32,7 +32,7 @@ This is my personal guide to setup a development machine on Windows. Although th
     2. [Meld](./4-development-software-and-tools.md#42-meld)
     3. [Git Bash](./4-development-software-and-tools.md#43-git-bash)
     4. [Java](./4-development-software-and-tools.md#44-java)
-    5. [Apache Maven](./4-development-software-and-tools.md#44-java)
+    5. [Apache Maven](./4-development-software-and-tools.md#45-apache-maven)
     6. [Apache Tomcat](./4-development-software-and-tools.md#46-apache-tomcat)
     7. [Quarkus CLI](./4-development-software-and-tools.md#47-quarkus-cli)
     8. [AWS CLI](./4-development-software-and-tools.md#48-aws-cli)
