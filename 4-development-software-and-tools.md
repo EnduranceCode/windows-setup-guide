@@ -523,6 +523,19 @@ To customize *Maven* within [**IntelliJ IDEA**](https://www.jetbrains.com/idea/)
 
 This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
+#### 4.13.5. Configure Tools
+
+##### 4.13.5.1. Terminal
+
+To customize the *Terminal* in use with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Tools->Terminak`. On this tab, change the input boxes listed below as described:
+
++ **Shell path** : `C:\Program Files\Git\bin\sh.exe --login --i`
++ **Default Tab name** : `Terminal`;
+
+This settings will only take effect when starting a new terminal. Therefore, create/add/open a new terminal window and terminate the old one.
+
+This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
+
 ## 4.14. Visual Studio Code
 
 [**Visual Studio Code**](https://code.visualstudio.com/), also commonly referred to as **VS Code**, is a source-code editor made by Microsoft with the Electron Framework, for Windows, Linux and macOS. Features include support for debugging, syntax highlighting, intelligent code completion, snippets, code refactoring, and embedded Git.
