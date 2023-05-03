@@ -45,6 +45,8 @@ Download [**Ferdium**](https://ferdium.org/) from the [official downloads page](
 
 Move the [**Ferdium**](https://ferdium.org/) **Start Menu** *shortcut* to the `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Tools` folder (Create the `Tools` folder if it doesn't exits).
 
+To enable sound on [**Ferdium**](https://ferdium.org/), at least with [Team's](https://www.microsoft.com/microsoft-teams/group-chat-software/) and bluetooth sound devices,, on the [Windows](https://www.microsoft.com/en-us/windows) settings, select `System->Sound`. On the `Sound`tab, scroll down and click on the option `App volume and devices preferences`. Then, for the [**Ferdium**](https://ferdium.org/), replace `Default` in the *Output* and *Input* dropdowns with the device you want to use with[**Ferdium**](https://ferdium.org/).
+
 ### 3.3. GIMP
 
 [**GIMP**](https://www.gimp.org/), an acronym for GNU Image Manipulation Program, is a multi-platform photo manipulation tool.
