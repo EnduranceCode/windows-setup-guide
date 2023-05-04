@@ -218,6 +218,8 @@ If everything is correct, the above command will output the **Java Compiler** ve
 
 ### 4.5. Apache Maven
 
+[**Apache Maven**](https://maven.apache.org/) is a build automation tool used primarily for Java projects. It can also be used to build and manage projects written in C#, Ruby, Scala, and other languages and it is hosted by the [Apache Software Foundation](https://en.wikipedia.org/wiki/Apache_Software_Foundation).
+
 ### 4.5.1. Installation
 
 To install [**Apache Maven**](https://maven.apache.org/), download the desired [Binary zip archive](https://maven.apache.org/download.cgi) and unpack it to the folder `C:\DEV\apache-maven`. Rename the extracted folder taking in consideration the following structure:
@@ -276,6 +278,23 @@ To set the folder created with the above command as the custom location for the 
 > **Label Definition**
 >
 > + **{PROJECT}** : The label that identifies the project name
+
+### 4.5.3. Usage & Maintenance
+
+For each change of the user's `settings.xml` file, placed on the folder `%USERPROFILE%\.m2`, a copy of the file that is replaced should be made and named with the following naming structure
+
+    settings[{PROJECT}-{DATE}].xml
+
+The different parts in the above name structure, shall be replaced as explained next:
+
+> + **{PROJECT}** : The name of the project where the settings.xml file was used with, e.g. *sa3*
+> + **{DATE}** : The date of the change on the format yyyy-mm-dd, e.g. *2020-03-21*
+>
+> With the above examples, the settings.xml backup file name would be *settings[sa3-2020-03-21].xml*
+
+If there's no need to have a user's `settings.xml` file, the last one in use should be backuped as explain above and then deleted.
+
+A `README.md` file must be stored on the folder `%USERPROFILE%\.m2` with a list a of all existing `settings.xml` file backups. This list must include the context of each bacuped file usage.
 
 ## 4.6. Apache Tomcat
 
