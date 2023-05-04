@@ -4,7 +4,7 @@ This file contains the **Development Software and Tools** section of my [Setup g
 
 ## Table of Contents
 
-4. [Development Software & Tools](#4-development-software-and-tools)
+4. [Development Software & Tools](#4-development-software--tools)
     1. [Notepadd++](#41-notepad)
     2. [Meld](#42-meld)
     3. [Git Bash](#43-git-bash)
@@ -23,7 +23,7 @@ This file contains the **Development Software and Tools** section of my [Setup g
     16. [DBeaver](#416-dbeaver)
     17. [Postman](#417-postman)
 
-## 4. Development Software and Tools
+## 4. Development Software & Tools
 
 ### 4.1 Notepad++
 
@@ -170,7 +170,7 @@ Copy the output of the above command and then add the public SSH key to the remo
 
 ### 4.4. Java
 
-### 4.4.1. Installation
+#### 4.4.1. Installation
 
 The instructions shown here describe how to manually install [Java](https://openjdk.java.net/) for the current *user account* on a Windows machine.
 
@@ -220,7 +220,7 @@ If everything is correct, the above command will output the **Java Compiler** ve
 
 [**Apache Maven**](https://maven.apache.org/) is a build automation tool used primarily for Java projects. It can also be used to build and manage projects written in C#, Ruby, Scala, and other languages and it is hosted by the [Apache Software Foundation](https://en.wikipedia.org/wiki/Apache_Software_Foundation).
 
-### 4.5.1. Installation
+#### 4.5.1. Installation
 
 To install [**Apache Maven**](https://maven.apache.org/), download the desired [Binary zip archive](https://maven.apache.org/download.cgi) and unpack it to the folder `C:\DEV\apache-maven`. Rename the extracted folder taking in consideration the following structure:
 
@@ -257,7 +257,7 @@ To check if **Apache Maven** was properly installed, on the same Windows Command
 
 If everything is correct, the above command will output the **Apache Maven** version.
 
-### 4.5.2. Configuration
+#### 4.5.2. Configuration
 
 The default location for the user's settings file and for the *Maven Local Repository* is the `.m2` folder at the user's *Home Folder* (`%USERPROFILE%`). Check it it already exists and if it doesn't, on a Windows Command Prompt, create it with the following command:
 
@@ -279,7 +279,7 @@ To set the folder created with the above command as the custom location for the 
 >
 > + **{PROJECT}** : The label that identifies the project name
 
-### 4.5.3. Usage & Maintenance
+#### 4.5.3. Usage & Maintenance
 
 For each change of the user's `settings.xml` file, placed on the folder `%USERPROFILE%\.m2`, a copy of the file that is replaced should be made and named with the following naming structure
 
@@ -296,9 +296,9 @@ If there's no need to have a user's `settings.xml` file, the last one in use sho
 
 A `README.md` file must be stored on the folder `%USERPROFILE%\.m2` with a list a of all existing `settings.xml` file backups. This list must include the context of each bacuped file usage.
 
-## 4.6. Apache Tomcat
+### 4.6. Apache Tomcat
 
-### 4.6.1. Installation
+#### 4.6.1. Installation
 
 To install [**Apache Tomcat**](http://tomcat.apache.org/) application server, download the desired [release zip archive](http://tomcat.apache.org/) and unpack it to the folder `C:\DEV\apache-tomcat`. Rename the extracted folder taking in consideration the following structure:
 
@@ -339,11 +339,11 @@ To install [**GNU Make**](https://www.gnu.org/software/make/), use a PowerShell 
 
     choco install make
 
-## 4.10. Rancher Desktop
+### 4.10. Rancher Desktop
 
 [**Rancher Desktop**](https://rancherdesktop.io/) is an app that provides container management and Kubernetes on the desktop. It is available for Mac (both on Intel and Apple Silicon), Windows, and Linux.
 
-### 4.10.1. Installation
+#### 4.10.1. Installation
 
 [Windows Linux Subsystem (WSL)](https://learn.microsoft.com/en-us/windows/wsl/) is required to run [**Rancher Desktop**](https://rancherdesktop.io/). If it isn't installed, follow the [instructions on this repository](./1-fundamental-software.md#13-windows-subsystem-for-linux) to install it.
 
@@ -405,9 +405,9 @@ To install [**Terraform**](https://www.terraform.io/), use a PowerShell console 
 
     choco install terraform
 
-## 4.12. NVS (Node Version Switcher)
+### 4.12. NVS (Node Version Switcher)
 
-### 4.12.1. Installation
+#### 4.12.1. Installation
 
 The instructions to install [**nvs**](https://github.com/jasongin/nvs) shown here are following the official instructions for the [manual setup from a Command Prompt](https://github.com/jasongin/nvs/blob/master/doc/SETUP.md#manual-setup---command-prompt).
 
@@ -484,11 +484,11 @@ From now on, the latest **node** lts version will be available on all shells of 
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-## 4.13. IntelliJ IDEA
+### 4.13. IntelliJ IDEA
 
 [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) is an integrated development environment written in Java for developing computer software written in Java, Kotlin, Groovy, and other JVM-based languages. It is developed by JetBrains and is available as an Apache 2 Licensed community edition, and in a proprietary commercial edition.
 
-### 4.13.1. Installation
+#### 4.13.1. Installation
 
 The [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) is the [recommended way](https://www.jetbrains.com/help/idea/installation-guide.html#toolbox) to install JetBrain products. Download the latest installation file from the [official download page](https://www.jetbrains.com/toolbox-app/). Then, execute the downloaded file to install [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/).
 
@@ -522,11 +522,11 @@ Execute the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) chosen version 
 
 #### 4.13.2. Install plugins
 
-#### 4.13.2.1. Install SonarLint plugin
+##### 4.13.2.1. Install SonarLint plugin
 
 [SonarLint](https://plugins.jetbrains.com/plugin/7973-sonarlint) is an IDE extension that helps to detect and fix quality issues as the code is written. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "SonarLint".  Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-#### 4.13.2.2. Install Markdown plugin
+##### 4.13.2.2. Install Markdown plugin
 
 [Markdown](https://plugins.jetbrains.com/plugin/7793-markdown) is an IDE extension that provides the capability to edit Markdown files within the IDE and see the rendered HTML in a live preview. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "Markdown". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
@@ -563,11 +563,11 @@ This settings will only take effect when starting a new terminal. Therefore, cre
 
 This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-## 4.14. Visual Studio Code
+### 4.14. Visual Studio Code
 
 [**Visual Studio Code**](https://code.visualstudio.com/), also commonly referred to as **VS Code**, is a source-code editor made by Microsoft with the Electron Framework, for Windows, Linux and macOS. Features include support for debugging, syntax highlighting, intelligent code completion, snippets, code refactoring, and embedded Git.
 
-### 4.14.1. Installation
+#### 4.14.1. Installation
 
 Download the [**Visual Studio Code**](https://code.visualstudio.com) *User Installer* file from the [official download page](https://code.visualstudio.com/download). Then, execute the downloaded file to install [**Visual Studio Code**](https://code.visualstudio.com).
 
@@ -581,131 +581,131 @@ Execute [**Visual Studio Code**](https://code.visualstudio.com) and on the `Mana
 + Extensions
 + UI State
 
-### 4.14.2. Install extensions
+#### 4.14.2. Install extensions
 
 With the `Settings Sync`turned on, [**Visual Studio Code**](https://code.visualstudio.com) will installed all the synced extensions. Wait for while to allow the installation of all extensions and then check if all were properly installed.
 
-#### 4.14.2.1. Auto Rename Tag
+##### 4.14.2.1. Auto Rename Tag
 
 Check if [Auto Rename Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag) is properly installed.
 
-#### 4.14.2.2. Better Comments
+##### 4.14.2.2. Better Comments
 
 Check if [Better Comments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments) is properly installed.
 
-#### 4.14.2.3. Data Workspace
+##### 4.14.2.3. Data Workspace
 
 Check if [Data Workspace](https://marketplace.visualstudio.com/items?itemName=ms-mssql.data-workspace-vscode) is properly installed.
 
-#### 4.14.2.4. Debugger for Java
+##### 4.14.2.4. Debugger for Java
 
 Check if [Debugger for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug) is properly installed.
 
-#### 4.14.2.5. EditorConfig for VS Code
+##### 4.14.2.5. EditorConfig for VS Code
 
 Check if [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig) is properly installed.
 
-#### 4.14.2.6. ESLint
+##### 4.14.2.6. ESLint
 
 Check if [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) is properly installed.
 
-#### 4.14.2.7. Extension Pack for java
+##### 4.14.2.7. Extension Pack for java
 
 Check if [Extension Pack for java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) is properly installed.
 
-#### 4.14.2.8. IntelliSense for CSS class names in HTML
+##### 4.14.2.8. IntelliSense for CSS class names in HTML
 
 Check if [IntelliSense for CSS class names in HTML](https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion) is properly installed.
 
-#### 4.14.2.9. Language Support for Java(TM) by Red Hat
+##### 4.14.2.9. Language Support for Java(TM) by Red Hat
 
 Check if [Language Support for Java(TM) by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.java) is properly installed.
 
-#### 4.14.2.10. lit-html
+##### 4.14.2.10. lit-html
 
 Check if [lit-html](https://marketplace.visualstudio.com/items?itemName=bierner.lit-html) is properly installed.
 
-#### 4.14.2.11. lit-plugin
+##### 4.14.2.11. lit-plugin
 
 Check if [lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin) is properly installed.
 
-#### 4.14.2.12. markdownlint
+##### 4.14.2.12. markdownlint
 
 Check if [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) is properly installed.
 
-#### 4.14.2.13. Maven for Java
+##### 4.14.2.13. Maven for Java
 
 Check if [Maven for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven) is properly installed.
 
-#### 4.14.2.14. MySQL Shell for VS Code
+##### 4.14.2.14. MySQL Shell for VS Code
 
 Check if [MySQL Shell for VS Code](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) is properly installed.
 
-#### 4.14.2.15. Path Intellisense
+##### 4.14.2.15. Path Intellisense
 
 Check if [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense) is properly installed.
 
-#### 4.14.2.16. PHP Debug
+##### 4.14.2.16. PHP Debug
 
 Check if [PHP Debug](https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug) is properly installed.
 
-#### 4.14.2.17. PHP Extension Pack
+##### 4.14.2.17. PHP Extension Pack
 
 Check if [PHP Extension Pack](https://marketplace.visualstudio.com/items?itemName=xdebug.php-pack) is properly installed.
 
-#### 4.14.2.18. PHP Intelliphense
+##### 4.14.2.18. PHP Intelliphense
 
 Check if [PHP Intelliphense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client) is properly installed.
 
-#### 4.14.2.18. Project Manager for Java
+##### 4.14.2.18. Project Manager for Java
 
 Check if [Project Manager for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-dependency) is properly installed.
 
-#### 4.14.2.19. Smarty
+##### 4.14.2.19. Smarty
 
 Check if [Smarty](https://marketplace.visualstudio.com/items?itemName=imperez.smarty) is properly installed.
 
-#### 4.14.2.20. SonarLint
+##### 4.14.2.20. SonarLint
 
 Check if [SonarLint](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode) is properly installed.
 
-#### 4.14.2.21. Spell Right
+##### 4.14.2.21. Spell Right
 
 Check if [Spell Right](https://marketplace.visualstudio.com/items?itemName=ban.spellright) is properly installed.
 
-#### 4.14.2.22. SQL Bindings
+##### 4.14.2.22. SQL Bindings
 
 Check if [SQL Bindings](https://marketplace.visualstudio.com/items?itemName=ms-mssql.sql-bindings-vscode) is properly installed.
 
-#### 4.14.2.23. SQL Database Projects
+##### 4.14.2.23. SQL Database Projects
 
 Check if [SQL Database Projects](https://marketplace.visualstudio.com/items?itemName=ms-mssql.sql-database-projects-vscode) is properly installed.
 
-#### 4.14.2.24. SQL Server (mssql)
+##### 4.14.2.24. SQL Server (mssql)
 
 Check if [SQL Server (mssql)](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql) is properly installed.
 
-#### 4.14.2.25. Test Runner for Java
+##### 4.14.2.25. Test Runner for Java
 
 Check if [Test Runner for Java)](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test) is properly installed.
 
-#### 4.14.2.26. WSL
+##### 4.14.2.26. WSL
 
 Check if [WSL)](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) is properly installed.
 
-#### 4.14.2.27. XML Tools
+##### 4.14.2.27. XML Tools
 
 Check if [XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml) is properly installed.
 
-## 4.15. Eclipse
+### 4.15. Eclipse
 
 TODO
 
-## 4.16. DBeaver
+### 4.16. DBeaver
 
 [**DBeaver**](https://dbeaver.io/) is free and open source universal database tool for developers and database administrators.
 
-### 4.16.1. Installation
+#### 4.16.1. Installation
 
 Download [**DBeaver**](https://dbeaver.io/) installer latest version from [official downloads page](https://dbeaver.io/download/). Then, execute the downloaded file and when prompted, choose to install [**DBeaver**](https://dbeaver.io/) only for the current user. When asked to select the components to install, check the following checkboxes:
 
@@ -715,11 +715,11 @@ Download [**DBeaver**](https://dbeaver.io/) installer latest version from [offic
 
 Move the [**DBeaver**](https://dbeaver.io/) **Start Menu** *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DBeaver Community` that was created by the installer.
 
-## 4.17. Postman
+### 4.17. Postman
 
 [**Postman**](https://www.postman.com/) helps you be more efficient while working with APIs. Using Postman, you can construct complex HTTP requests quickly, organize them in collections.
 
-### 4.17.1. Installation
+#### 4.17.1. Installation
 
 Download [**Postman**](https://www.postman.com/) installer latest version from [official downloads page](https://www.postman.com/downloads/). Then, execute the downloaded file and when prompted, sign in into the [**Postman**](https://www.postman.com/) account.
 
