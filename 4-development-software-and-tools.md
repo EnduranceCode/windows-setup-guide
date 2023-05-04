@@ -322,23 +322,31 @@ To install [**GNU Make**](https://www.gnu.org/software/make/), use a PowerShell 
 
 ## 4.10. Rancher Desktop
 
+[**Rancher Desktop**](https://rancherdesktop.io/) is an app that provides container management and Kubernetes on the desktop. It is available for Mac (both on Intel and Apple Silicon), Windows, and Linux.
+
 ### 4.10.1. Installation
 
-[Windows Linux Subsystem (WSL)](https://learn.microsoft.com/en-us/windows/wsl/) is required to run [Rancher Desktop](https://rancherdesktop.io/). If it isn't installed, follow the [instructions on this repository](./1-fundamental-software.md#13-windows-subsystem-for-linux) to install it.
+[Windows Linux Subsystem (WSL)](https://learn.microsoft.com/en-us/windows/wsl/) is required to run [**Rancher Desktop**](https://rancherdesktop.io/). If it isn't installed, follow the [instructions on this repository](./1-fundamental-software.md#13-windows-subsystem-for-linux) to install it.
 
 To [install](https://docs.rancherdesktop.io/getting-started/installation/) the software [Rancher Desktop](https://rancherdesktop.io/), download the latest version from the [releases page on GitHub](https://github.com/rancher-sandbox/rancher-desktop/releases) and then execute the downloaded executable.
 
 When prompted, choose the option *Install for all users of this machine* (there will be a prompt for elevated permissions that must be accepted) and when the installation is finished, click Finish to close the installation wizard and run the [Rancher Desktop](https://rancherdesktop.io/) application.
 
-On the [Rancher Desktop](https://rancherdesktop.io/) welcome screen, uncheck the option `Enable Kubernetes` and select `dockerd` as the *Container Engine*.
+On the [**Rancher Desktop**](https://rancherdesktop.io/) welcome screen, uncheck the option `Enable Kubernetes` and select `dockerd` as the *Container Engine*.
 
 It's now necessary to re-start Windows to enable all the previous changes.
 
-Make sure that [Rancher Desktop](https://rancherdesktop.io/) is running (launch it if necessary) and, on a PowerShell console, execute the following command:
+Make sure that [**Rancher Desktop**](https://rancherdesktop.io/) is running (launch it if necessary) and, on a PowerShell console, execute the following command:
 
     wsl --list --verbose
 
 If everything is correct, the output of the previous command will show the **rancher-desktop** distros running on [WSL](https://learn.microsoft.com/en-us/windows/wsl/).
+
+The [**Rancher Desktop**](https://rancherdesktop.io/) installation and usage files are [stored in the local](https://github.com/rancher-sandbox/rancher-desktop/discussions/1551#discussioncomment-2137434) in the following folders:
+
++ `%USERPROFILE%\AppData\Local\rancher-desktop` contains the distribution data, container images, logs, etc;
++ `%USERPROFILE%\AppData\Roaming\rancher-desktop` contains preferences;
++ `%USERPROFILE%\AppData\Local\Programs\Rancher Desktop` is the folder where the application is installed.
 
 To be able to run the `docker` command on the terminal, it's necessary to add your Windows user to the `docker-users` group. On a PowerShell console, execute the below command to check if the `docker-users` group exists and if your user belongs to it.
 
