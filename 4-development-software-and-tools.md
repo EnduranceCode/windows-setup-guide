@@ -524,7 +524,7 @@ Execute the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) chosen version 
 
 ##### 4.13.2.1. Install SonarLint plugin
 
-[SonarLint](https://plugins.jetbrains.com/plugin/7973-sonarlint) is an IDE extension that helps to detect and fix quality issues as the code is written. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "SonarLint".  Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
+[SonarLint](https://plugins.jetbrains.com/plugin/7973-sonarlint) is an IDE extension that helps to detect and fix quality issues as the code is written. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "SonarLint". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
 ##### 4.13.2.2. Install Markdown plugin
 
@@ -538,11 +538,19 @@ Execute the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) chosen version 
 
 To add the above mentioned Code Style Formatter settings, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Editor->Code Style->Java`. On this tab, click the `settings` icon choose `Import Scheme/IntelliJ IDEA code style XML` and pick the file(s) with the desired settings.
 
-#### 4.13.4. Configure Build Tools
+#### 4.13.4. Configure Version Control
 
-##### 4.13.4.1. Maven
+##### 4.13.4.1. Commit
 
-To customize *Maven* within [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Maven`. On this tab, change the input boxes listed below as described:
+On the **Version Control**, the *Local Changes* and the *Shelf* tabs are very useful on my workflow. To enable those tabs it's necessary to make a small [change on the default settings](https://intellij-support.jetbrains.com/hc/en-us/community/posts/4412759255698-2021-2-3-Git-Local-Changes-view-in-VCS-is-gone).
+
+To make the necessary change, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Version Control->Commit`.  On this tab, uncheck the `Use non-modal commit interface` checkbox.
+
+#### 4.13.5. Configure Build Tools
+
+##### 4.13.5.1. Maven
+
+To customize *Maven*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Maven`. On this tab, change the input boxes listed below as described:
 
 + **Maven home path** : The path to the chosen [system *Maven* instance](#451-installation);
 + **User setting file** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#452-configuration);
@@ -550,9 +558,9 @@ To customize *Maven* within [**IntelliJ IDEA**](https://www.jetbrains.com/idea/)
 
 This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.13.5. Configure Tools
+#### 4.13.6. Configure Tools
 
-##### 4.13.5.1. Terminal
+##### 4.13.6.1. Terminal
 
 To customize the *Terminal* in use with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Tools->Terminak`. On this tab, change the input boxes listed below as described:
 
@@ -563,9 +571,9 @@ This settings will only take effect when starting a new terminal. Therefore, cre
 
 This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.13.6. Run/Debug Configurations
+#### 4.13.7. Run/Debug Configurations
 
-##### 4.13.6.1 Shorten command line method
+##### 4.13.7.1 Shorten command line method
 
 To avoid the error "*Command line is too long*" when running tests it's necessary to set the "*Shorten command line*" method in the Run/Debug configuration to "*JAR manifest*". That can be done for the specific method or class, but it's better to [set it as default](https://stackoverflow.com/a/47927544) on [run/debug configuration templates](https://www.jetbrains.com/help/idea/run-debug-configuration.html#templates).
 
