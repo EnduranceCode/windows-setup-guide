@@ -16,9 +16,9 @@ This file contains the **Desktop Software** section of my [Setup guide for a dev
 
 ## 3. Desktop Software
 
-[**Autenticação.gov App**](https://www.autenticacao.gov.pt/) application allows the Portuguese citizens to take advantage of the electronic features of their Citizen Card.
-
 ### 3.1. Autenticação.gov
+
+[**Autenticação.gov App**](https://www.autenticacao.gov.pt/) application allows the Portuguese citizens to take advantage of the electronic features of their Citizen Card.
 
 #### 3.1.1. Installation
 

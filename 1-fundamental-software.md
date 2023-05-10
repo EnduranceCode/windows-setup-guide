@@ -17,6 +17,8 @@ This file contains the **Fundamental Software** section of my [Setup guide for a
 
 ### 1.1. Google Chrome
 
+[**Google Chrome**](https://www.google.com/chrome/) is a cross-platform web browser developed by [Google](https://en.wikipedia.org/wiki/Google).
+
 #### 1.1.1. Installation
 
 To install [**Google Chrome**](https://www.google.com/chrome/), start by downloading the latest version from [official downloads page](https://www.google.com/chrome/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).

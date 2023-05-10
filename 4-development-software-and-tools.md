@@ -170,9 +170,11 @@ Copy the output of the above command and then add the public SSH key to the remo
 
 ### 4.4. Java
 
+[**Java**](https://openjdk.org/) is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let programmers write once, run anywhere, meaning that compiled Java code can run on all platforms that support Java without the need to recompile.
+
 #### 4.4.1. Installation
 
-The instructions shown here describe how to manually install [Java](https://openjdk.java.net/) for the current *user account* on a Windows machine.
+The instructions shown here describe how to manually install [**Java**](https://openjdk.org/) for the current *user account* on a Windows machine.
 
 Download the *.zip* option of the desired JDK version and and unpack it to a folder inside `C:\DEV\java`. Rename the extracted folder taking in consideration the following structure:
 
@@ -298,6 +300,8 @@ A `README.md` file must be stored on the folder `%USERPROFILE%\.m2` with a list 
 
 ### 4.6. Apache Tomcat
 
+[**Apache Tomcat**](http://tomcat.apache.org/) is an open source implementation of the [Jakarta Servlet](https://projects.eclipse.org/projects/ee4j.servlet), [Jakarta Server Pages](https://projects.eclipse.org/projects/ee4j.jsp), [Jakarta Expression Language](https://projects.eclipse.org/projects/ee4j.el), [Jakarta WebSocket](https://projects.eclipse.org/projects/ee4j.websocket), [Jakarta Annotations](https://projects.eclipse.org/projects/ee4j.cahttps://projects.eclipse.org/projects/ee4j.authentication) specifications. These specifications are part of the [Jakarta EE platform](https://projects.eclipse.org/projects/ee4j.jakartaee-platform).
+
 #### 4.6.1. Installation
 
 To install [**Apache Tomcat**](http://tomcat.apache.org/) application server, download the desired [release zip archive](http://tomcat.apache.org/) and unpack it to the folder `C:\DEV\apache-tomcat`. Rename the extracted folder taking in consideration the following structure:
@@ -407,9 +411,11 @@ To install [**Terraform**](https://www.terraform.io/), use a PowerShell console 
 
 ### 4.12. NVS (Node Version Switcher)
 
+[**NVS**](https://github.com/jasongin/nvs) is a cross-platform utility for switching between different versions and forks of Node.js. [**NVS**](https://github.com/jasongin/nvs) is itself written in node JavaScript.
+
 #### 4.12.1. Installation
 
-The instructions to install [**nvs**](https://github.com/jasongin/nvs) shown here are following the official instructions for the [manual setup from a Command Prompt](https://github.com/jasongin/nvs/blob/master/doc/SETUP.md#manual-setup---command-prompt).
+The instructions to install [**NVS**](https://github.com/jasongin/nvs) shown here are following the official instructions for the [manual setup from a Command Prompt](https://github.com/jasongin/nvs/blob/master/doc/SETUP.md#manual-setup---command-prompt).
 
 To set `NVS_HOME` as environment variable for the current *user account* go to `Control Panel -> User Accounts` and choose the option ***Change my environment variables***.
 
@@ -435,11 +441,11 @@ On the ***User variables*** section, select the `Path` variable and click the **
 
 Click the **OK** button to close the window used to edit the `PATH` variable and then click the **OK** button on the *environment variables* window to close it.
 
-To check if **nvs** was properly installed, on the same Windows Command Prompt, check the output of the following command:
+To check if [**NVS**](https://github.com/jasongin/nvs) was properly installed, on the same Windows Command Prompt, check the output of the following command:
 
     nvs --version
 
-To be able to use **nvs** with [Git Bash](https://github.com/jasongin/nvs/blob/master/doc/SETUP.md#git-bash-on-windows), open a Git Bash terminal and execute the below command to source the `install` command:
+To be able to use [**NVS**](https://github.com/jasongin/nvs) with [Git Bash](https://github.com/jasongin/nvs/blob/master/doc/SETUP.md#git-bash-on-windows), open a Git Bash terminal and execute the below command to source the `install` command:
 
     . "$NVS_HOME/nvs.sh" install
 
