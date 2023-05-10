@@ -601,119 +601,36 @@ Execute [**Visual Studio Code**](https://code.visualstudio.com) and on the `Mana
 
 #### 4.14.2. Install extensions
 
-With the `Settings Sync`turned on, [**Visual Studio Code**](https://code.visualstudio.com) will installed all the synced extensions. Wait for while to allow the installation of all extensions and then check if all were properly installed.
+With the `Settings Sync` turned on, [**Visual Studio Code**](https://code.visualstudio.com) will installed all the synced extensions. Wait for while to allow the full synchronization and then check if all of the following extensions were properly installed:
 
-##### 4.14.2.1. Auto Rename Tag
-
-Check if [Auto Rename Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag) is properly installed.
-
-##### 4.14.2.2. Better Comments
-
-Check if [Better Comments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments) is properly installed.
-
-##### 4.14.2.3. Data Workspace
-
-Check if [Data Workspace](https://marketplace.visualstudio.com/items?itemName=ms-mssql.data-workspace-vscode) is properly installed.
-
-##### 4.14.2.4. Debugger for Java
-
-Check if [Debugger for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug) is properly installed.
-
-##### 4.14.2.5. EditorConfig for VS Code
-
-Check if [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig) is properly installed.
-
-##### 4.14.2.6. ESLint
-
-Check if [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) is properly installed.
-
-##### 4.14.2.7. Extension Pack for java
-
-Check if [Extension Pack for java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) is properly installed.
-
-##### 4.14.2.8. IntelliSense for CSS class names in HTML
-
-Check if [IntelliSense for CSS class names in HTML](https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion) is properly installed.
-
-##### 4.14.2.9. Language Support for Java(TM) by Red Hat
-
-Check if [Language Support for Java(TM) by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.java) is properly installed.
-
-##### 4.14.2.10. lit-html
-
-Check if [lit-html](https://marketplace.visualstudio.com/items?itemName=bierner.lit-html) is properly installed.
-
-##### 4.14.2.11. lit-plugin
-
-Check if [lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin) is properly installed.
-
-##### 4.14.2.12. markdownlint
-
-Check if [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) is properly installed.
-
-##### 4.14.2.13. Maven for Java
-
-Check if [Maven for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven) is properly installed.
-
-##### 4.14.2.14. MySQL Shell for VS Code
-
-Check if [MySQL Shell for VS Code](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) is properly installed.
-
-##### 4.14.2.15. Path Intellisense
-
-Check if [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense) is properly installed.
-
-##### 4.14.2.16. PHP Debug
-
-Check if [PHP Debug](https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug) is properly installed.
-
-##### 4.14.2.17. PHP Extension Pack
-
-Check if [PHP Extension Pack](https://marketplace.visualstudio.com/items?itemName=xdebug.php-pack) is properly installed.
-
-##### 4.14.2.18. PHP Intelliphense
-
-Check if [PHP Intelliphense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client) is properly installed.
-
-##### 4.14.2.18. Project Manager for Java
-
-Check if [Project Manager for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-dependency) is properly installed.
-
-##### 4.14.2.19. Smarty
-
-Check if [Smarty](https://marketplace.visualstudio.com/items?itemName=imperez.smarty) is properly installed.
-
-##### 4.14.2.20. SonarLint
-
-Check if [SonarLint](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode) is properly installed.
-
-##### 4.14.2.21. Spell Right
-
-Check if [Spell Right](https://marketplace.visualstudio.com/items?itemName=ban.spellright) is properly installed.
-
-##### 4.14.2.22. SQL Bindings
-
-Check if [SQL Bindings](https://marketplace.visualstudio.com/items?itemName=ms-mssql.sql-bindings-vscode) is properly installed.
-
-##### 4.14.2.23. SQL Database Projects
-
-Check if [SQL Database Projects](https://marketplace.visualstudio.com/items?itemName=ms-mssql.sql-database-projects-vscode) is properly installed.
-
-##### 4.14.2.24. SQL Server (mssql)
-
-Check if [SQL Server (mssql)](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql) is properly installed.
-
-##### 4.14.2.25. Test Runner for Java
-
-Check if [Test Runner for Java)](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test) is properly installed.
-
-##### 4.14.2.26. WSL
-
-Check if [WSL)](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) is properly installed.
-
-##### 4.14.2.27. XML Tools
-
-Check if [XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml) is properly installed.
++ [Auto Rename Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag);
++ [Better Comments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments);
++ [Data Workspace](https://marketplace.visualstudio.com/items?itemName=ms-mssql.data-workspace-vscode);
++ [Debugger for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug);
++ [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig);
++ [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint);
++ [Extension Pack for java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack);
++ [IntelliSense for CSS class names in HTML](https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion);
++ [Language Support for Java(TM) by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.java);
++ [lit-html](https://marketplace.visualstudio.com/items?itemName=bierner.lit-html);
++ [lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin);
++ [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint);
++ [Maven for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven);
++ [MySQL Shell for VS Code](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint);
++ [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense);
++ [PHP Debug](https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug);
++ [PHP Extension Pack](https://marketplace.visualstudio.com/items?itemName=xdebug.php-pack);
++ [PHP Intelliphense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client);
++ [Project Manager for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-dependency);
++ [Smarty](https://marketplace.visualstudio.com/items?itemName=imperez.smarty);
++ [SonarLint](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode);
++ [Spell Right](https://marketplace.visualstudio.com/items?itemName=ban.spellright);
++ [SQL Bindings](https://marketplace.visualstudio.com/items?itemName=ms-mssql.sql-bindings-vscode);
++ [SQL Database Projects](https://marketplace.visualstudio.com/items?itemName=ms-mssql.sql-database-projects-vscode);
++ [SQL Server (mssql)](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql):
++ [Test Runner for Java)](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test);
++ [WSL)](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl);
++ [XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml).
 
 ### 4.15. Eclipse
 
