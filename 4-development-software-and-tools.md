@@ -7,7 +7,7 @@ This file contains the **Development Software and Tools** section of my [Setup g
 4. [Development Software & Tools](#4-development-software--tools)
     1. [Notepadd++](#41-notepad)
     2. [Meld](#42-meld)
-    3. [Git Bash](#43-git-bash)
+    3. [Git & Git Bash](#43-git--git-bash)
     4. [Java](#44-java)
     5. [Apache Maven](#45-apache-maven)
     6. [Apache Tomcat](#46-apache-tomcat)
@@ -55,7 +55,11 @@ To install [**Meld**](https://meld.app/), download the latest version from [offi
 
 Move the [**Meld**](https://meld.app/) **Start Menu** *shortcut* to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits).
 
-### 4.3 Git Bash
+### 4.3 Git & Git Bash
+
+[**Git**](https://git-scm.com/) is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+
+**Git Bash** comes included as part of the [Git's Windows package](https://git-scm.com/download/win) and is an application for Microsoft Windows environments which provides an emulation layer for a [**Git**](https://git-scm.com/) command line experience. [Bash](https://www.gnu.org/software/bash/) is an acronym for Bourne Again Shell.
 
 #### 4.3.1. Installation
 
