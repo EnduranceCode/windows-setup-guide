@@ -89,7 +89,9 @@ Download [**SpeedCrunch**](http://www.speedcrunch.org) portable archive from the
 
 Inside the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Tools`, create a *shortcut* pointing to the file `%USERPROFILE%\AppData\Local\SpeedCrunch\speedcrunch.exe` and name it (the *shortcut*) `SpeedCrunch`. Then, edit the *shortcut* and point its icon to the main icon available on the file `%USERPROFILE%\AppData\Local\SpeedCrunch\speedcrunch.exe`.
 
-If the keyboard in use has a special key to start a calculator, assign [**SpeedCrunch**](http://www.speedcrunch.org) to key in question.
+If the keyboard in use has a special key to start a calculator, edit the [Windows Registry](https://learn.microsoft.com/troubleshoot/windows-server/performance/windows-registry-advanced-users) to assign [**SpeedCrunch**](http://www.speedcrunch.org) to the mentioned key.
+
+To open the [Registry Editor](https://www.bleepingcomputer.com/tutorials/how-to-use-the-windows-registry-editor/) as an administrator, click the *Windows Start Menu*, type `regedit` in the search field and then click on the *Run as an administrator* option that is shown. Then, navigate to the [key](https://www.lifewire.com/what-is-a-registry-key-2625999) `Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AppKey\18` and add a new string [registry value](https://www.lifewire.com/what-is-a-registry-value-2626042) with the value *ShellExecute* in the `Name` field and with value of the full path of the [**SpeedCrunch**](http://www.speedcrunch.org) executable file in the `Data` field.
 
 ### 3.7. Spotify
 
