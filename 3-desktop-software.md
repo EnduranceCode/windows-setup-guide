@@ -45,7 +45,7 @@ Download [**Ferdium**](https://ferdium.org/) from the [official downloads page](
 
 Move the [**Ferdium**](https://ferdium.org/) **Start Menu** *shortcut* to the `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Tools` folder (Create the `Tools` folder if it doesn't exits).
 
-To enable sound on [**Ferdium**](https://ferdium.org/), at least with [Team's](https://www.microsoft.com/microsoft-teams/group-chat-software/) and bluetooth sound devices, on the [Windows](https://www.microsoft.com/en-us/windows) settings, select `System->Sound`. On the `Sound`tab, scroll down and click on the option `App volume and devices preferences`. Then, for the [**Ferdium**](https://ferdium.org/), replace `Default` in the *Output* and *Input* dropdowns with the device you want to use with[**Ferdium**](https://ferdium.org/).
+To enable sound on [**Ferdium**](https://ferdium.org/), at least with [Team's](https://www.microsoft.com/microsoft-teams/group-chat-software/) and bluetooth sound devices, on the [Windows](https://www.microsoft.com/en-us/windows) settings, select `System->Sound`. On the `Sound`tab, scroll down and click on the option `App volume and devices preferences`. Then, for the [**Ferdium**](https://ferdium.org/), replace `Default` in the *Output* and *Input* dropdowns with the device you want to use with [**Ferdium**](https://ferdium.org/).
 
 ### 3.3. GIMP
 
@@ -53,11 +53,11 @@ To enable sound on [**Ferdium**](https://ferdium.org/), at least with [Team's](h
 
 #### 3.3.1. Installation
 
-To install [**GIMP**](https://www.gimp.org/), use a PowerShell console with *Administrator* privileges and execute the following command:
+To install [**GIMP**](https://www.gimp.org/), open a a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/XPDM27W10192Q0).
 
-    choco install gimp
+    winget install XPDM27W10192Q0 -s msstore
 
-Rename the [**GIMP**](https://www.gimp.org/) **Start Menu** shortcut to *GIMP* and then move it to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Graphics` folder (Create the `Graphics` folder if it doesn't exits).
+Rename the [**GIMP**](https://www.gimp.org/) **Start Menu** shortcut to *GIMP* and then move it to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Graphics` folder (Create the `Graphics` folder if it doesn't exits).
 
 ### 3.4. Inkscape
 
@@ -65,11 +65,9 @@ Rename the [**GIMP**](https://www.gimp.org/) **Start Menu** shortcut to *GIMP* a
 
 #### 3.4.1. Installation
 
-To install [**Inkscape**](https://inkscape.org/), use a PowerShell console with *Administrator* privileges and execute the following command:
+To install [**Inkscape**](https://inkscape.org/), open a a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/9PD9BHGLFC7H).
 
-    choco install inkscape
-
-If the installation script doesn't create a *shortcut* for [**Inkscape**](https://inkscape.org/), inside the folder `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Graphics`, create a *shortcut* pointing to the file `%PROGRAMFILES%\Inkscape\bin\inkscape.exe` and name it (the *shortcut*) `Inkscape`. Then, edit the *shortcut* and point its icon to the main icon available on the file `%PROGRAMFILES%\Inkscape\bin\inkscape.exe`.
+    winget install 9PD9BHGLFC7H -s msstore
 
 ### 3.5. PDFsam
 
@@ -99,9 +97,9 @@ If the keyboard in use has a special key to start a calculator, assign [**SpeedC
 
 #### 3.7.1. Installation
 
-Download [**Spotify**](https://www.spotify.com/) from the [official downloads page](https://www.spotify.com/us/download/windows/). Then, execute the downloaded file and when the installation process finishes, login into your [**Spotify**](https://www.spotify.com/) account.
+To install [**Spotify**](https://www.spotify.com/), open a a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/9NCBCSZSJRSB).
 
-Move the [**Spotify**](https://www.spotify.com/) **Start Menu** *shortcut* to the `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Audio & Video` folder (Create the `Audio & Video` folder if it doesn't exits).
+    winget install 9NCBCSZSJRSB -s msstore
 
 ### 3.8. VLC
 
@@ -109,8 +107,10 @@ VLC is a free and open source cross-platform multimedia player and framework tha
 
 #### 3.8.1. Installation
 
-To install [**VLC**](https://www.videolan.org/), use a PowerShell console with *Administrator* privileges and execute the following command:
+To install [**VLC**](https://www.videolan.org/), open a a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/XPDM1ZW6815MQM).
 
-    choco install vlc
+    winget install XPDM1ZW6815MQM -s msstore
+
+The [**VLC**](https://www.videolan.org/) intaller will [require elevation](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/how-it-works) to finalize the process and, therefore, Windows will prompt you to elevate. If you choose not to elevate, the application will fail to install/upgrade.
 
 Move the [**VLC**](https://www.videolan.org/) **Start Menu** shortcut to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Audio & Video` folder (Create the `Audio & Video` folder if it doesn't exits). Then delete the folder `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\VideoLAN`, including the rest of its contents.

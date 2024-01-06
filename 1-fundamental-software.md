@@ -100,13 +100,35 @@ The [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/
 
 Open the [Microsoft Store](https://aka.ms/wslstore) and install the [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701).
 
-### 1.5. Chocolatey
+### 1.5. Package Manager
 
-[**Chocolatey**](https://chocolatey.org/) is a universal package manager for Windows.
+A package manager is a software that easily automates the installation, upgradation, and configuration of third-party software or dependencies. [**Chocolatey**](https://chocolatey.org/) and [**winget**](https://github.com/microsoft/winget-cli) are both package managers for Windows software. Nowadays, I prefer [**winget**](https://github.com/microsoft/winget-cli) over [**Chocolatey**](https://chocolatey.org/) because [**winget**](https://github.com/microsoft/winget-cli) can be used to install software from the [Microsoft Store](https://apps.microsoft.com/home).
 
-#### 1.5.1. Installation
+#### 1.5.1. Install winget
 
-To install [**Chocolatey**](https://chocolatey.org/), open a PowerShell console as *Administrator* and execute the following command:
+Windows Package Manager [**winget**](https://github.com/microsoft/winget-cli) command-line tool is available on Windows 11 and modern versions of Windows 10 as a part of the [App Installer](https://apps.microsoft.com/detail/9NBLGGH4NNS1). To check if [**winget**](https://github.com/microsoft/winget-cli) is available, open a PowerShell console and execute the following command:
+
+    winget --version
+
+If [**winget**](https://github.com/microsoft/winget-cli) is already available on your system, the current version of the software will be displayed and now you should make sure it is updated with the latest version.
+
+If you need to install [**winget**](https://github.com/microsoft/winget-cli), open the [Microsoft Store](https://aka.ms/wslstore) and install the [App Installer](https://apps.microsoft.com/detail/9NBLGGH4NNS1) because that's how [**winget**](https://github.com/microsoft/winget-cli) is distribuited.
+
+Upgrading applications with [**winget**](https://github.com/microsoft/winget-cli) is very easy. To identify which apps are in need of an update, open a PowerShell console and execute the following command:
+
+    winget upgrade
+
+The above command will output a list of which app (if any) have an available update. To upgrade all applications with an available update, open a PowerShell console and execute the following command:
+
+    winget upgrade --all
+
+When running [**winget**](https://github.com/microsoft/winget-cli) without administrator privileges, some applications may [require elevation](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/how-it-works) to install. On those cases, Windows will prompt you to elevate. If you choose not to elevate, the application will fail to install/upgrade.
+
+Check the [official documentation](https://learn.microsoft.com/en-us/windows/package-manager/winget/) to know the full potential of [**winget**](https://github.com/microsoft/winget-cli).
+
+#### 1.5.2. Install Chocolatey
+
+If [**Chocolatey**](https://chocolatey.org/) is really needed, open a PowerShell console as *Administrator* and execute the upcoming command to install it.
 
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 

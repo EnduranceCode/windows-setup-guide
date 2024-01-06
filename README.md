@@ -13,7 +13,7 @@ This is my personal guide to setup a development machine on Windows. Although th
     2. [KeepassXC](./1-fundamental-software.md#12-keepassxc)
     3. [Windows Subsystem for Linux](./1-fundamental-software.md#13-windows-subsystem-for-linux)
     4. [Windows Terminal](./1-fundamental-software.md#14-windows-terminal)
-    5. [Chocolatey](./1-fundamental-software.md#15-chocolatey)
+    5. [Package Manager](./1-fundamental-software.md#15-package-manager)
 2. [Windows Configuration](./2-windows-configuration.md)
     1. [Keyboard and Mouse Software](./2-windows-configuration.md#21-keyboard-and-mouse-software)
     2. Windows Start Menu
