@@ -53,7 +53,7 @@ To enable sound on [**Ferdium**](https://ferdium.org/), at least with [Team's](h
 
 #### 3.3.1. Installation
 
-To install [**GIMP**](https://www.gimp.org/), open a a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/XPDM27W10192Q0).
+To install [**GIMP**](https://www.gimp.org/), apen a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/XPDM27W10192Q0).
 
     winget install XPDM27W10192Q0 -s msstore
 
@@ -65,7 +65,7 @@ Rename the [**GIMP**](https://www.gimp.org/) **Start Menu** shortcut to *GIMP* a
 
 #### 3.4.1. Installation
 
-To install [**Inkscape**](https://inkscape.org/), open a a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/9PD9BHGLFC7H).
+To install [**Inkscape**](https://inkscape.org/), apen a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/9PD9BHGLFC7H).
 
     winget install 9PD9BHGLFC7H -s msstore
 
@@ -97,7 +97,7 @@ If the keyboard in use has a special key to start a calculator, assign [**SpeedC
 
 #### 3.7.1. Installation
 
-To install [**Spotify**](https://www.spotify.com/), open a a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/9NCBCSZSJRSB).
+To install [**Spotify**](https://www.spotify.com/), apen a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/9NCBCSZSJRSB).
 
     winget install 9NCBCSZSJRSB -s msstore
 
@@ -107,7 +107,7 @@ VLC is a free and open source cross-platform multimedia player and framework tha
 
 #### 3.8.1. Installation
 
-To install [**VLC**](https://www.videolan.org/), open a a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/XPDM1ZW6815MQM).
+To install [**VLC**](https://www.videolan.org/), apen a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/XPDM1ZW6815MQM).
 
     winget install XPDM1ZW6815MQM -s msstore
 

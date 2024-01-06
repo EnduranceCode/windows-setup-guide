@@ -6,6 +6,7 @@ This file contains the **Windows configuration** section of my [Setup guide for 
 
 2. [Windows configuration](#2-windows-configuration)
     1. [Keyboard and Mouse Software](#21-keyboard-and-mouse-software)
+    2. [Windows Start Menu](#22-windows-start-menu)
 
 ## 2. Windows Configuration
 
@@ -18,3 +19,34 @@ This file contains the **Windows configuration** section of my [Setup guide for 
 To install [**Mouse and Keyboard Center**](https://support.microsoft.com/topic/mouse-and-keyboard-center-download-f5b10905-7887-eedb-2f1c-d0737a36a3b2), download the latest version from [official downloads page](https://support.microsoft.com/topic/mouse-and-keyboard-center-download-f5b10905-7887-eedb-2f1c-d0737a36a3b2). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
 
 Move the application shortcut to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Tools` folder (Create the `Tools` folder if it doesn't exits).
+
+### 2.2. Windows Start Menu
+
+To have the Windows **Start Menu** with a [strtucture similar](https://specifications.freedesktop.org/menu-spec/latest/apa.html) to the one that have on my [Lubuntu](https://lubuntu.me) machines, the following folders must be created:
+
++ Audio & Video;
++ Development;
++ Graphics;
++ Network
++ Office
++ Utility
+
+To create the above listed folders on the system wide **Start Menu**, open a PowerShell console with *Administrator* privileges and execute the following commands:
+
+    mkdir "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Audio & Video"
+    mkdir "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Development"
+    mkdir "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Graphics"
+    mkdir "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Network"
+    mkdir "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Office"
+    mkdir "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Utility"
+
+On the same PowerShell console, move all the Office shortcuts to the folder `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Office`.
+
+To create the above listed folders on the system wide **Start Menu**, open a regular PowerShell console and execute the following commands:
+
+    mkdir "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Audio & Video"
+    mkdir "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development"
+    mkdir "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Graphics"
+    mkdir "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Network"
+    mkdir "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Office"
+    mkdir "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Utility"
