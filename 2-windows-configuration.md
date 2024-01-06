@@ -7,6 +7,7 @@ This file contains the **Windows configuration** section of my [Setup guide for 
 2. [Windows configuration](#2-windows-configuration)
     1. [Keyboard and Mouse Software](#21-keyboard-and-mouse-software)
     2. [Windows Start Menu](#22-windows-start-menu)
+    3. [Power Management](#23-power-management)
 
 ## 2. Windows Configuration
 
@@ -50,3 +51,15 @@ To create the above listed folders on the system wide **Start Menu**, open a reg
     mkdir "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Network"
     mkdir "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Office"
     mkdir "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Utility"
+
+### 2.3. Power Management
+
+Keeping the Laptop plugged after the battery is fully charged affect its health significantly, therefore its is recommended to keep the battery’s charge between 20% an 80%. On the Windows 10 **Power Managent** we can setup an alarm/notifcation when the Laptop’s battery reaches a given low level. But there is no feature in Windows 10 to notify you when the battery reaches a given high level.
+
+[John Howard](https://learn.microsoft.com/pt-pt/archive/blogs/jhoward/), Senior Program Manager in the Hyper-V team at Microsoft, [created a script](https://learn.microsoft.com/pt-pt/archive/blogs/jhoward/get-an-alert-when-my-battery-reaches-95) that gives an alert when the battery reaches 95%. I've adapted that script to give the alert when the the battery charges reaches 80% of it's capacity and I've stored on my [OneDrive](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage), in my `dotfiles` folder.
+
+To be able to easily reference my `dotfiles` folder, it's necessary to create a [symlink](https://www.howtogeek.com/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/) to that foldewr on my `%USERPROFILE%` folder. That can be easily done, executing the upcoming command from the Windows Command Line.
+
+    mklink /J %USERPROFILE%\.dotfiles "%OneDriveCommercial%\dotfiles"
+
+Then, to execute the above mentioned script on every Windows start up, inside the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`, create a *shortcut* pointing to the file `%USERPROFILE%\.dotfiles\scripts\FullBattery.vbs`.

@@ -17,7 +17,7 @@ This is my personal guide to setup a development machine on Windows. Although th
 2. [Windows Configuration](./2-windows-configuration.md)
     1. [Keyboard and Mouse Software](./2-windows-configuration.md#21-keyboard-and-mouse-software)
     2. [Windows Start Menu](./2-windows-configuration.md#22-windows-start-menu)
-    3. Power Management
+    3. [Power Management](./2-windows-configuration.md#23-power-management)
 3. [Desktop Software](./3-desktop-software.md)
     1. [Autenticação.gov](./3-desktop-software.md#31-autenticaçãogov)
     2. [Ferdium](./3-desktop-software.md#32-ferdium)

@@ -71,14 +71,14 @@ The parameters used on the above command are personal choices, the list of avail
 
 The customization of the bash prompt is very personal and the files used to accomplish the desired customization are stored at the folder `%OneDriveCommercial%\dotfiles\bash`. To make use of the mentioned files on the bash prompt customization, execute the below command from the Windows Command Line.
 
-    mklink /J %USERPROFILE%\dotfiles "%OneDriveCommercial%\dotfiles"
+    mklink /J %USERPROFILE%\.dotfiles "%OneDriveCommercial%\dotfiles"
 
 Edit (or create) the file `~/.bashrc` and add the below snippet to the mentioned file.
 
-    # Source the file ~/dotfiles/bash/bashrc_rferrcan.sh to customize the bash shell
+    # Source the file ~/.dotfiles/bash/bashrc_rferrcan.sh to customize the bash shell
     #
-    if [ -f ~/dotfiles/bash/bashrc_rferrcan.sh ]; then
-        . ~/dotfiles/bash/bashrc_rferrcan.sh
+    if [ -f ~/.dotfiles/bash/bashrc_rferrcan.sh ]; then
+        . ~/.dotfiles/bash/bashrc_rferrcan.sh
     fi
 
 After applying the above mentioned changes, save and close the file `~/.bashrc`. To make the changes effective, execute, from a bash terminal, the following command:
