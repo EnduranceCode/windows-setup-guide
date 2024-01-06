@@ -31,17 +31,15 @@ This file contains the **Development Software and Tools** section of my [Setup g
 
 #### 4.1.1. Installation
 
-To install [**Notepad++**](https://notepad-plus-plus.org/), use a PowerShell console with *Administrator* privileges and execute the following command:
+[Download](https://notepad-plus-plus.org/downloads/) the latest portable version of [**Notepad++**](https://notepad-plus-plus.org/). Then extract the downloaded archive to the `%USERPROFILE%\AppData\Local\` folder (`%LOCALAPPDATA%`). Rename the new folder to `Notepad++`.
 
-    choco install notepadplusplus
+Inside the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development`, create a *shortcut* pointing to the file `%USERPROFILE%\AppData\Local\KeepassXC\KeePassXC.exe` and name it (the *shortcut*) `KeepassXC`. Then, edit the *shortcut* and point its icon to the main icon available on the file `%USERPROFILE%\AppData\Local\Notepad++\notepad++.exe`.
 
 #### 4.1.2. Configuration
 
-To replicate on [**Notepad++**](https://notepad-plus-plus.org/) the standard *Quit* Linux keyboard shortcut, select the menu option `Settings->Shortcut Mapper...`, delete the existing shortcut *CTRL+Q* and then change the shortcut *CTRL+W* to *CTRL+Q*.
+To replicate on [**Notepad++**](https://notepad-plus-plus.org/) the standard *Quit* Linux keyboard shortcut, select the menu option `Settings->Shortcut Mapper...`, change the existing shortcut *CTRL+Q* to *CTRL+W* and then change the previous existing shortcut *CTRL+W* to *CTRL+Q*. Repeat the process for the existing shortcuts *CTRL+SHIFT+Q* and *CTRL+SHIFT+W*.
 
-On the menu option `Settings->Plugins Admin...`, install the plugins [**BetterMultiSelection**](https://github.com/dail8859/BetterMultiSelection), [**DSpellCheck**](https://github.com/Predelnik/DSpellCheck) and [**XML Tools**](https://github.com/morbac/xmltools).
-
-Open [**Notepad++**](https://notepad-plus-plus.org/) as *Administrator* and on the menu option `Settings->Preferences->File association`, set the desired file associations.
+On the menu option `Settings->Plugins Admin...`, install the plugins [**BetterMultiSelection**](https://github.com/dail8859/BetterMultiSelection), [**DSpellCheck**](https://github.com/Predelnik/DSpellCheck), [Json Tools](https://github.com/molsonkiko/JsonToolsNppPlugin) and [**XML Tools**](https://github.com/morbac/xmltools).
 
 ### 4.2 Meld
 
