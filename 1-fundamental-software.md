@@ -171,7 +171,7 @@ Check the [official documentation](https://learn.microsoft.com/windows/package-m
 
 #### 1.5.2. Install Chocolatey
 
-If [**Chocolatey**](https://chocolatey.org/) is really needed, open a PowerShell console as *Administrator* and execute the upcoming command to install it.
+If you are going to do your development work on the `Windows Native File System` (instead of doing it on the `WSL File System`), install [**Chocolatey**](https://chocolatey.org/) executing on a PowerShell console with *Administrator*, the upcoming command to install it.
 
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 

@@ -121,11 +121,17 @@ Move the [**Meld**](https://meld.app/) *Start Menu* *shortcut* to the `%PROGRAMD
 
 [**Git**](https://git-scm.com/) is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
 
-**Git Bash** comes included as part of the [Git's Windows package](https://git-scm.com/download/win) and is an application for Microsoft Windows environments which provides an emulation layer for a [**Git**](https://git-scm.com/) command line experience. [Bash](https://www.gnu.org/software/bash/) is an acronym for Bourne Again Shell.
-
 #### 4.4.1. Installation
 
-To install [**Git**](https://git-scm.com/), use a PowerShell console with *Administrator* privileges and execute the following command:
+#### 4..4.1.1. Installation on the WSL File System
+
+[**Git**](https://git-scm.com/) is included on the [Ubuntu](https://ubuntu.com/) submodule of [WSL](https://learn.microsoft.com/windows/wsl/), therefore, it's not necessary to install it on the `WSL File System`.
+
+#### 4..4.1.2. Installation on the Windows Native File System
+
+**Git Bash** comes included as part of the [Git's Windows package](https://git-scm.com/download/win) and is an application for Microsoft Windows environments which provides an emulation layer for a [**Git**](https://git-scm.com/) command line experience.
+
+To install [**Git**](https://git-scm.com/) on the `Windows Native File System`, use a PowerShell console with *Administrator* privileges and execute the following command:
 
     choco install git /NoGuiHereIntegration /Symlinks
 
@@ -133,45 +139,62 @@ The parameters used on the above command are personal choices, the list of avail
 
 #### 4.4.2. Bash prompt customization
 
-The customization of the bash prompt is very personal and the files used to accomplish the desired customization are stored at the folder `%OneDriveCommercial%\dotfiles\bash`. To make use of the mentioned files on the bash prompt customization, execute the below command from the Windows Command Line.
+#### 4.4.2.1. Bash prompt customization on the WSL File System
+
+The customization of the bash prompt is very personal and the files used to accomplish my personal customization on the `WSL File System` are stored at the folder `%OneDriveCommercial%\dotfiles\bash-wsl`. To make use of the mentioned files on the bash prompt customization, replace the **{LABEL}** in the upcoming command as appropriate and then execute it from an [Ubuntu](https://ubuntu.com/) terminal.
+
+    mkdir -p ~/.bash_"$USER" && cp -r {ONEDRIVE_COMMERCIAL_PATH}/dotfiles/bash-wsl ~/.bash_"$USER"
+
+> **Label Definition**
+>
+> + **{ONEDRIVE_COMMERCIAL_PATH}** : Path to the folder `%OneDriveCommercial%`
+
+Replace the **{LABEL}** in the upcoming snippet as appropriate and the add it to the file `~/.bashrc`.
+
+    # Source the file ~/.bash_{USER}/bashrc_{USER}.sh to customize the bash shell
+    #
+    if [ -f ~/.bash_{USER}/bashrc_{USER}.sh ]; then
+        . ~/.bash_{USER}/bashrc_{USER}.sh
+    fi
+
+> **Label Definition**
+>
+> + **{USER}** : Output of the command `echo "$USER"`
+
+After applying the above mentioned changes, save and close the file `~/.bashrc`. To make the changes effective, execute, from the [Ubuntu](https://ubuntu.com/) terminal, the following command:
+
+    source ~/.bashrc
+
+#### 4.4.2.2. Bash prompt customization on the Windows Native File System
+
+The files used to accomplish my personal customization on the `Windows Native File System` are stored at the folder `%OneDriveCommercial%\dotfiles\bash-win`. If a [symlink](https://www.howtogeek.com/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/) to the folder `%OneDriveCommercial%\dotfiles` isn't yet created the Windows `%USERPROFILE%`, create executing the below command from the Windows Command Line.
 
     mklink /J %USERPROFILE%\.dotfiles "%OneDriveCommercial%\dotfiles"
 
-Edit (or create) the file `~/.bashrc` and add the below snippet to the mentioned file.
+Replace the **{LABEL}** in the upcoming snippet as appropriate and the add it to the file `~/.bashrc`.
 
-    # Source the file ~/.dotfiles/bash/bashrc_rferrcan.sh to customize the bash shell
+    # Source the file ~/.dotfiles/bash-win/bashrc_{USER}.sh to customize the bash shell
     #
-    if [ -f ~/.dotfiles/bash/bashrc_rferrcan.sh ]; then
-        . ~/.dotfiles/bash/bashrc_rferrcan.sh
+    if [ -f ~/.dotfiles/bash-win/bashrc_{USER}.sh ]; then
+        . ~/.dotfiles/bash-win/bashrc_{USER}.sh
     fi
+
+> **Label Definition**
+>
+> + **{USER}** : Output of the command `echo "$USER"`
 
 After applying the above mentioned changes, save and close the file `~/.bashrc`. To make the changes effective, execute, from a bash terminal, the following command:
 
-    souce ~/.bashrc
+    source ~/.bashrc
 
 #### 4.4.3. Git configuration
-
-To list Git's system wide configuration, execute the following command:
-
-    git config --system --list
-
-If the `pull.rebase` option is set to `false`, [make Git pull use rebase by default](https://sdq.kastel.kit.edu/wiki/Git_pull_--rebase_vs._--merge) system wide, executing the below command on a PowerShell console with *Administrator* privileges:
-
-    git config --system pull.rebase true
-
-Editing the file `C:\Program Files\Git\etc\gitconfig` file is another method to set Git's system wide configuration. To open the system wide `gitconfig` file, execute the below command in a PowerShell console with *Administrator* privileges:
-
-    .\notepad.exe 'C:\Program Files\Git\etc\gitconfig'
-
-After making on the file all the desired changes, save and close it. To confirm that everything is set as desired, list the Git's system configuration with the below command and check its output:
-
-    git config --system --list
 
 To set [Git's global configuration](https://www.learnenough.com/git-tutorial#sec-installation_and_setup), replace the **{LABELS}** in the below commands as appropriate and then execute it in an Git Bash terminal window.
 
     git config --global user.name "{USER_NAME}"
     git config --global user.email {USER_EMAIL}
     git config --global core.editor nano
+    git config --global pull.rebase true
     git config --list
 
 > **Label Definition**

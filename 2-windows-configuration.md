@@ -58,7 +58,7 @@ Keeping the Laptop plugged after the battery is fully charged affect its health 
 
 [John Howard](https://learn.microsoft.com/pt-pt/archive/blogs/jhoward/), Senior Program Manager in the Hyper-V team at Microsoft, [created a script](https://learn.microsoft.com/pt-pt/archive/blogs/jhoward/get-an-alert-when-my-battery-reaches-95) that gives an alert when the battery reaches 95%. I've adapted that script to give the alert when the the battery charges reaches 80% of it's capacity and I've stored on my [OneDrive](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage), in my `dotfiles` folder.
 
-To be able to easily reference my `dotfiles` folder, it's necessary to create a [symlink](https://www.howtogeek.com/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/) to that foldewr on my `%USERPROFILE%` folder. That can be easily done, executing the upcoming command from the Windows Command Line.
+If a [symlink](https://www.howtogeek.com/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/) to the folder `%OneDriveCommercial%\dotfiles` isn't yet created the Windows `%USERPROFILE%`, create executing the below command from the Windows Command Line to be able to easily reference the `dotfiles` folder.
 
     mklink /J %USERPROFILE%\.dotfiles "%OneDriveCommercial%\dotfiles"
 
