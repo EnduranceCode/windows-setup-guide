@@ -9,7 +9,7 @@ This file contains the **Fundamental Software** section of my [Setup guide for a
     2. [KeePassXC](#12-keepassxc)
     3. [Windows Subsystem for Linux](#13-windows-subsystem-for-linux)
     4. [Windows Terminal](#14-windows-terminal)
-    5. [Chocolatey](#15-chocolatey)
+    5. [Package Manager](#15-package-manager)
 
 ## 1. Fundamental Software
 
@@ -61,29 +61,43 @@ To upgrade [**KeepassXC**](https://keepassxc.org/), delete all files and folders
 
 #### 1.3.1. Installation
 
-Follow the [Official instructions](https://learn.microsoft.com/en-us/windows/wsl/install-manual) to manually install [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/). Open a PowerShell console as *Administrator* and [enable WSL](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-1---enable-the-windows-subsystem-for-linux) with the following command:
+Follow the [Official instructions](https://learn.microsoft.com/windows/wsl/install-manual) to manually [enable](https://learn.microsoft.com/windows/wsl/install-manual#step-1---enable-the-windows-subsystem-for-linux) the [**WSL**](https://learn.microsoft.com/windows/wsl/), executing the upcoming command on a PowerShell console with *administrator privileges*.
 
     dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 
-Before restarting the machine to [enable the Virtual Machine feature](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-3---enable-virtual-machine-feature), execute the below command on a PowerShell console with administrator privileges:
+Before restarting the machine, execute the below command on the same PowerShell console to [enable the Virtual Machine feature](https://learn.microsoft.com/windows/wsl/install-manual#step-3---enable-virtual-machine-feature).
 
     dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 
-Restart the machine to complete the [WSL](https://learn.microsoft.com/en-us/windows/wsl/) installation and update to **WSL 2**.
+Reboot the machine to be able to proceed with the [**WSL**](https://learn.microsoft.com/windows/wsl/) installation.
 
-[Download the latest Linux kernel update package](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package) and then execute the downloaded package to install it in the machine (there will be a prompt for elevated permissions that must be accepted). A new restart of the machine will probably be needed.
-
-Set [WSL 2 as your default version](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-5---set-wsl-2-as-your-default-version) executing the below command on a standard PowerShell command:
+After rebooting your machine, set [**WSL 2**](https://learn.microsoft.com/windows/wsl/basic-commands#set-wsl-version-to-1-or-2) as your default version. executing the below command on a standard PowerShell console.
 
     wsl --set-default-version 2
 
-Open the [Microsoft Store](https://aka.ms/wslstore) and install the latest [Ubuntu LTS version](https://ubuntu.com/about/release-cycle).
+[List all available Linux distributions](https://learn.microsoft.com/windows/wsl/basic-commands#list-available-linux-distributions) executing the bellow command on a standard PowerShell console.
+
+    wsl --list --online
+
+From the output of the above command, get the latest available [Ubuntu LTS version](https://ubuntu.com/about/release-cycle) and use it to replace the label **{DISTRO_NAME}** in the upcoming command. Then, execute it on a standard PowerShell console to set the [default distribuition](https://learn.microsoft.com/windows/wsl/basic-commands#set-default-linux-distribution).
+
+    wsl --set-default {DISTRO_NAME}
+
+Replace the label **{DISTRO_NAME}**, in the upcoming command, with the name of the latest available [Ubuntu LTS version](https://ubuntu.com/about/release-cycle) and then execute it on a standard PowerShell console to [install](https://learn.microsoft.com/windows/wsl/install#install-wsl-command) the latest available [Ubuntu LTS version](https://ubuntu.com/about/release-cycle).
+
+    wsl --install -d {DISTRO_NAME}
+
+The execution of the above command will [require elevation](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works), and therefore, Windows will prompt you to [elevate](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works#the-uac-user-experience). If you choose not to [elevate](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works#the-uac-user-experience), the [**WSL**](https://learn.microsoft.com/windows/wsl/) installation will fail.
+
+To [update](https://learn.microsoft.com/windows/wsl/troubleshooting#updating-wsl) the [**WSL**](https://learn.microsoft.com/windows/wsl/) installation, execute the following command on a standard PowerShell console.
+
+    wsl --update
 
 On a regular PowerShell console, execute the below command to list the installed Linux distributions and check if everything is correct:
 
     wsl --list --verbose
 
-If Ubuntu is not running with **WSL 2**, replace the **{LABEL}** in the below command as appropriate and execute it on a PowerShell console.
+If [Ubuntu](https://ubuntu.com/) is not running with [**WSL 2**](https://learn.microsoft.com/windows/wsl/), replace the **{LABEL}** in the below command as appropriate and execute it on a standard PowerShell console.
 
     wsl --set-version {DISTRO_NAME} 2
 
@@ -91,7 +105,35 @@ If Ubuntu is not running with **WSL 2**, replace the **{LABEL}** in the below co
 >
 > + **{DISTRO_NAME}** : Name of the Linux distribution to be executed with WSL 2
 
-The article [Set up a WSL development environment](https://learn.microsoft.com/en-us/windows/wsl/setup/environment) has some good optional advices to setup a development environment with **WSL**, but the most useful is the installation of the [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701).
+#### 1.3.2. Configuration
+
+Once the process of installing [Ubuntu](https://ubuntu.com/) on [**WSL**](https://learn.microsoft.com/windows/wsl/) is complete, open the distribution using the *Start Menu*. You will be asked to [create a User and Password](https://learn.microsoft.com/windows/wsl/setup/environment#set-up-your-linux-username-and-password) for your [Ubuntu](https://ubuntu.com/) installation.
+
+Configure the settings for your [Ubuntu](https://ubuntu.com/) installation, by using the `wsl.conf` file that is stored on `/etc` folder of every [**WSL**](https://learn.microsoft.com/windows/wsl/) distribuition. Open the file `/etc/wsl.conf` with the [nano text editor](https://www.nano-editor.org/), executing the below command on a [Ubuntu](https://ubuntu.com/) terminal.
+
+    nano /etc/wsl.conf
+
+To change the [default mount location](https://learn.microsoft.com/windows/wsl/wsl-config#automount-settings) of the Windows `C:\` drive from the default `/mnt/c` to `/c`, add the upcoming code snippet to the `/etc/wsl.conf` file.
+
+    [automount]
+    root=/
+
+Then, to [enable systemd support](https://learn.microsoft.com/windows/wsl/wsl-config#systemd-support), add the upcoming code snippet to the same `/etc/wsl.conf` file.
+
+    [boot]
+    systemd=true
+
+Save the changes with the command `CTRL + O` and then exit the [nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
+
+To enable the changes made on the `wsl.conf` file, youl will need to to restart your [**WSL**](https://learn.microsoft.com/windows/wsl/) instances. It can be done with the execution of the bellow command on a standard PowerShell console.
+
+    wsl.exe --shutdown
+
+ Once [Ubuntu](https://ubuntu.com/) restarts, *systemd* should be running. You can confirm executing the below command on a [Ubuntu](https://ubuntu.com/) terminal, which will show the status of your services.
+
+    systemctl list-unit-files --type=service
+
+The article [Set up a WSL development environment](https://learn.microsoft.com/windows/wsl/setup/environment) has some good optional advices to setup a development environment with  [**WSL**](https://learn.microsoft.com/windows/wsl/), but one that is almost mandatory is the installation of the [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701).
 
 ### 1.4. Windows Terminal
 
@@ -123,9 +165,9 @@ The above command will output a list of which app (if any) have an available upd
 
     winget upgrade --all
 
-When running [**winget**](https://github.com/microsoft/winget-cli) without administrator privileges, some applications may [require elevation](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/how-it-works) to install. On those cases, Windows will prompt you to elevate. If you choose not to elevate, the application will fail to install/upgrade.
+When running [**winget**](https://github.com/microsoft/winget-cli) without administrator privileges, some applications may [require elevation](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works) to install. On those cases, Windows will prompt you to elevate. If you choose not to elevate, the application will fail to install/upgrade.
 
-Check the [official documentation](https://learn.microsoft.com/en-us/windows/package-manager/winget/) to know the full potential of [**winget**](https://github.com/microsoft/winget-cli).
+Check the [official documentation](https://learn.microsoft.com/windows/package-manager/winget/) to know the full potential of [**winget**](https://github.com/microsoft/winget-cli).
 
 #### 1.5.2. Install Chocolatey
 

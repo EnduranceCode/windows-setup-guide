@@ -51,7 +51,7 @@ On the menu option `Settings->Plugins Admin...`, install the plugins [**BetterMu
 
 To install [**Meld**](https://meld.app/), download the latest version from [official downloads page](https://meld.app/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
 
-Move the [**Meld**](https://meld.app/) **Start Menu** *shortcut* to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits).
+Move the [**Meld**](https://meld.app/) *Start Menu* *shortcut* to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits).
 
 ### 4.3 Git & Git Bash
 
@@ -500,13 +500,13 @@ If everything is correct, the above commands will output the **node** version an
 
 The [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) is the [recommended way](https://www.jetbrains.com/help/idea/installation-guide.html#toolbox) to install JetBrain products. Download the latest installation file from the [official download page](https://www.jetbrains.com/toolbox-app/). Then, execute the downloaded file to install [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/).
 
-Move the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) **Start Menu** *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox` that was created by the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) installer.
+Move the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) *Start Menu* *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox` that was created by the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) installer.
 
 Execute the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) and then login in the JetBrains account. Then, on the `Toolbox App Menu`choose the `Settings` option and uncheck the checkbox `Launch Toolbox App at system startup`.  
 
 To install [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) and then choose the desired *IntelliJ IDEA* version to install and follow the instructions prompted.
 
-Move the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) **Start Menu** *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder. Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox` that was created by the installer.
+Move the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) *Start Menu* *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder. Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox` that was created by the installer.
 
 Some antivirus software can interfere with the IDE build process, [causing builds to run dramatically slower](https://intellij-support.jetbrains.com/hc/en-us/articles/360006298560). To prevent this, the folders where the IDE writes a lot of files should be excluded from the antivirus software real-time scanning. That can be done following the following steps:
 
@@ -597,7 +597,7 @@ From the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) main menu, select 
 
 Download the [**Visual Studio Code**](https://code.visualstudio.com) *User Installer* file from the [official download page](https://code.visualstudio.com/download). Then, execute the downloaded file to install [**Visual Studio Code**](https://code.visualstudio.com).
 
-Move the [**Visual Studio Code**](https://code.visualstudio.com) **Start Menu** *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Visual Studio Code` that was created by the installer.
+Move the [**Visual Studio Code**](https://code.visualstudio.com) *Start Menu* *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Visual Studio Code` that was created by the installer.
 
 Execute [**Visual Studio Code**](https://code.visualstudio.com) and on the `Manage` gear menu (on the bottom left of the application screen). select the [`Turn on Setting Sync...` option](https://code.visualstudio.com/docs/editor/settings-sync). When asked to sign in, choose the *GitHub* option and then insert the needed credentials. When asked what preferences to sync, select the checkboxes listed next:
 
@@ -656,7 +656,7 @@ Download [**DBeaver**](https://dbeaver.io/) installer latest version from [offic
 + Include Java
 + Associate .SQL files
 
-Move the [**DBeaver**](https://dbeaver.io/) **Start Menu** *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DBeaver Community` that was created by the installer.
+Move the [**DBeaver**](https://dbeaver.io/) *Start Menu* *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DBeaver Community` that was created by the installer.
 
 ### 4.17. Postman
 
@@ -666,4 +666,4 @@ Move the [**DBeaver**](https://dbeaver.io/) **Start Menu** *shortcut* to the `%U
 
 Download [**Postman**](https://www.postman.com/) installer latest version from [official downloads page](https://www.postman.com/downloads/). Then, execute the downloaded file and when prompted, sign in into the [**Postman**](https://www.postman.com/) account.
 
-Move the [**Postman**](https://www.postman.com/) **Start Menu** *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Tools` folder (Create the `Tools` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Postman` that was created by the installer.
+Move the [**Postman**](https://www.postman.com/) *Start Menu* *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Tools` folder (Create the `Tools` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Postman` that was created by the installer.
