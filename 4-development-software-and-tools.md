@@ -189,7 +189,7 @@ After applying the above mentioned changes, save and close the file `~/.bashrc`.
 
 #### 4.4.3. Git configuration
 
-To set [Git's global configuration](https://www.learnenough.com/git-tutorial#sec-installation_and_setup), replace the **{LABELS}** in the below commands as appropriate and then execute it in an Git Bash terminal window.
+To set [Git's global configuration](https://www.learnenough.com/git-tutorial#sec-installation_and_setup), replace the **{LABELS}** in the below commands as appropriate and then execute it in an [Git Bash](https://git-scm.com/) terminal window.
 
     git config --global user.name "{USER_NAME}"
     git config --global user.email {USER_EMAIL}
@@ -218,7 +218,7 @@ If the output of the above command contains a list of files (by default, the fil
 
 ##### 4.4.4.2. Generating a new SSH key
 
-To create a new SSH key, replace the **{LABEL}** in the below command as appropriate and then execute it in an Git Bash terminal window.
+To create a new SSH key, replace the **{LABEL}** in the below command as appropriate and then execute it in an [Git Bash](https://git-scm.com/) terminal window.
 
     ssh-keygen -t rsa -b 4096 -C "{EMAIL_ADDRESS}"
 
@@ -321,7 +321,7 @@ If everything is correct, the above command will output the **Java Compiler** ve
 
 #### 4.5.2. Installation on the Windows Native File System
 
-The instructions shown here describe how to manually install [**Java**](https://openjdk.org/) on the `Windoews Native File System` for the current *user account*.
+The instructions shown here describe how to manually install [**Java**](https://openjdk.org/) on the `Windows Native File System` for the current *user account*.
 
 Download the *.zip* option of the desired JDK version and and unpack it to a folder inside `C:\DEV\java`. Rename the extracted folder taking in consideration the following structure:
 
@@ -369,20 +369,109 @@ If everything is correct, the above command will output the **Java Compiler** ve
 
 [**Apache Maven**](https://maven.apache.org/) is a build automation tool used primarily for Java projects. It can also be used to build and manage projects written in C#, Ruby, Scala, and other languages and it is hosted by the [Apache Software Foundation](https://en.wikipedia.org/wiki/Apache_Software_Foundation).
 
-#### 4.6.1. Installation
+#### 4.6.1. Installation on the WSL File System
 
-To install [**Apache Maven**](https://maven.apache.org/), download the desired [Binary zip archive](https://maven.apache.org/download.cgi) and unpack it to the folder `C:\DEV\apache-maven`. Rename the extracted folder taking in consideration the following structure:
+To be able to install a specific [**Apache Maven**](https://maven.apache.org/) version on the `WSL Fily System`, I like to follow a procedure inspired by the [Linuxiz Blog](https://linuxize.com/post/how-to-install-apache-maven-on-ubuntu-18-04/).
 
-    maven-{VERSION}-{PROJECT}
+Start by creating the folder where [**Apache Maven**](https://maven.apache.org/) will be installed, executing the following commands:
+
+    sudo mkdir -p /opt/maven/candidates
+    sudo chown -R $USER:$USER /opt/maven/
+
+Check the output of the upcoming command to confirm that the folder was created as desired:
+
+    ls -la --group-directories-first /opt
+
+To download the desired [**Apache Maven**](https://maven.apache.org/) version in the `/tmp` directory, replace the **{LABEL}** in the upcoming command as appropriate and then execute it:
+
+    wget {DOWNLOAD_LINK} -P /tmp
+
+> **Label Definition**
+>
+> + **{DOWNLOAD_LINK}** : Download link to the binary `tar.gz` archive take from the official [download page](https://maven.apache.org/download.cgi)
+
+Once the download is completed, extract the archive in the `/opt/candidates` directory with the following command:
+
+    tar xf /tmp/apache-maven-*.tar.gz -C /opt/maven/candidates/
+
+Check the output of the upcoming command to confirm that the folder was created as desired:
+
+    ls -la --group-directories-first /opt/maven/candidates
+
+Then, rename the extracted folder taking in consideration the following structure:
+
+    apache-maven-{VERSION}-{PROJECT}
 
 The different parts in the above name structure, shall be replaced as explained next:
 
 > + **{VERSION}** : The Maven version number, e.g. *3.8.6*
 > + **{PROJECT}** : The name of the project where this instance of Maven will be used, e.g. *sa3*
 >
-> With the above examples, the Maven folder name would be *maven-3.8.6-sa3*
+> With the above examples, the Maven folder name would be *apache-maven-3.8.6-sa3*
 
-To set `MAVEN_HOME` as environment variable for the current *user account* go to `Control Panel -> User Accounts` and choose the option ***Change my environment variables***.
+Check the output of the upcoming command to confirm that the folder was renamed as desired:
+
+    ls -la --group-directories-first /opt/maven/candidates
+
+To have more control over [**Apache Maven**](https://maven.apache.org/) versions and updates, replace the **{LABEL}** in the upcoming command as appropriate and then execute it to create a symbolic link `current` that will point to the [**Apache Maven**](https://maven.apache.org/) installation folder:
+
+    ln -s /opt/maven/candidates/{MAVEN_FOLDER} /opt/maven/current
+
+> + **{MAVEN_FOLDER}** : The folder's name that contains the desired version, e.g. *apache-maven-3.8.6-sa3*
+
+Check the output of the upcoming commands to confirm that the the symlinnk was created as desired:
+
+    ls -la --group-directories-first /opt/maven/
+    ls -la --group-directories-first /opt/maven/current/
+
+Later if you want to upgrade your [**Apache Maven**](https://maven.apache.org/) installation you can simply unpack the newer version and change the symlink to point to the latest version.
+
+To set the `MAVEN_HOME` environment variable for your [WSL](https://learn.microsoft.com/windows/wsl/) user, open the file `~/.bashrc` with the [nano text editor](https://www.nano-editor.org/), executing the below command on a [Ubuntu](https://ubuntu.com/) terminal.
+
+    nano ~/.bashrc
+
+Then, add the upcoming snippet to the `~/.bashrc` imediatly before sourcing the file to customize the bash prompt.
+
+    # User's environmnent variables
+    export export MAVEN_HOME=/opt/maven/current
+
+    # User's path customization
+    export PATH=${MAVEN_HOME}/bin:${PATH}
+
+Save the changes with the command `CTRL + O` and then exit the [nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
+
+To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
+
+    source ~/.bashrc
+
+To check if the `MAVEN_HOME` environment variable was properly set, check the output of the following command:
+
+    echo $MAVEN_HOME
+
+To check if the users's `PATH` was properly set, check the output of the following command:
+
+    echo $PATH
+
+To check if **Apache Maven** was properly installed, check the output of the following command:
+
+    mvn -version
+
+If everything is correct, the above command will output the **Apache Maven** version.
+
+#### 4.6.2. Installation on the Windows Native File System
+
+To install [**Apache Maven**](https://maven.apache.org/), download the desired [Binary zip archive](https://maven.apache.org/download.cgi) and unpack it to the folder `C:\DEV\apache-maven`. Rename the extracted folder taking in consideration the following structure:
+
+    apache-maven-{VERSION}-{PROJECT}
+
+The different parts in the above name structure, shall be replaced as explained next:
+
+> + **{VERSION}** : The Maven version number, e.g. *3.8.6*
+> + **{PROJECT}** : The name of the project where this instance of Maven will be used, e.g. *sa3*
+>
+> With the above examples, the Maven folder name would be *apache-maven-3.8.6-sa3*
+
+To set the `MAVEN_HOME` environment variable for the current *user account* go to `Control Panel -> User Accounts` and choose the option ***Change my environment variables***.
 
 On the ***User variables*** section, click the **New** button and fill the *Variable name* input box with **MAVEN_HOME** and the *Variable value* input box with the path to the **Apache Maven** folder. If a `MAVEN_HOME` already exists, select it and click the **Edit** button, then fill the *Variable value* input box with the path to the **Apache Maven** installation folder.
 
@@ -408,13 +497,13 @@ If everything is correct, the above command will output the **Apache Maven** ver
 
 #### 4.6.2. Configuration
 
-The default location for the user's settings file and for the *Maven Local Repository* is the `.m2` folder at the user's *Home Folder* (`%USERPROFILE%`). Check it it already exists and if it doesn't, on a Windows Command Prompt, create it with the following command:
+The default location for the user's settings file and for the *Maven Local Repository* is the `.m2` folder at the user's *Home Folder*. Check it it already exists and if it doesn't create it with the upcoming command. If [**Apache Maven**](https://maven.apache.org/) is installed on the `WSL File System`, use a [Ubuntu](https://ubuntu.com/) terminal and if it is installed on the `Windows Native File System`. use a  [Git Bash](https://git-scm.com/) terminal.
 
-    mkdir %USERPROFILE%\.m2
+    mkdir -p ~/.m2
 
-The development environment will better contained if a *Maven Local Repository* is set for each project. Therefore, replace the **{LABEL}** in the below command as appropriate and execute it on a Windows Command Prompt.
+The development environment will better contained if a *Maven Local Repository* is set for each project. Therefore, replace the **{LABEL}** in the upcoming command as appropriate and execute it. If [**Apache Maven**](https://maven.apache.org/) is installed on the `WSL File System`, use a [Ubuntu](https://ubuntu.com/) terminal and if it is installed on the `Windows Native File System`. use a [Git Bash](https://git-scm.com/) terminal.
 
-    mkdir %USERPROFILE%\.m2\repository-{PROJECT}
+    mkdir -p ~/.m2/repository-{PROJECT}
 
 > **Label Definition**
 >
@@ -430,20 +519,20 @@ To set the folder created with the above command as the custom location for the 
 
 #### 4.6.3. Usage & Maintenance
 
-For each change of the user's `settings.xml` file, placed on the folder `%USERPROFILE%\.m2`, a copy of the file that is replaced should be made and named with the following naming structure
+For each change of the user's `settings.xml` file, placed on the folder `~/.m2`, a copy of the file that is replaced should be made and named with the following naming structure
 
-    settings[{PROJECT}-{DATE}].xml
+    settings-{PROJECT}-{DATE}.xml
 
 The different parts in the above name structure, shall be replaced as explained next:
 
 > + **{PROJECT}** : The name of the project where the settings.xml file was used with, e.g. *sa3*
 > + **{DATE}** : The date of the change on the format yyyy-mm-dd, e.g. *2020-03-21*
 >
-> With the above examples, the settings.xml backup file name would be *settings[sa3-2020-03-21].xml*
+> With the above examples, the settings.xml backup file name would be *settings-sa3-2020-03-21.xml*
 
 If there's no need to have a user's `settings.xml` file, the last one in use should be backuped as explain above and then deleted.
 
-A `README.md` file must be stored on the folder `%USERPROFILE%\.m2` with a list a of all existing `settings.xml` file backups. This list must include the context of each bacuped file usage.
+A `README.md` file must be stored on the folder `~/.m2` with a list a of all existing `settings.xml` file backups. This list must include the context of each bacuped file usage.
 
 ### 4.7. Apache Tomcat
 
@@ -510,7 +599,7 @@ Make sure that [**Rancher Desktop**](https://rancherdesktop.io/) is running (lau
 
     wsl --list --verbose
 
-If everything is correct, the output of the previous command will show the **rancher-desktop** distros running on [WSL](https://learn.microsoft.com/en-us/windows/wsl/).
+If everything is correct, the output of the previous command will show the **rancher-desktop** distros running on [WSL](https://learn.microsoft.com/windows/wsl/).
 
 The [**Rancher Desktop**](https://rancherdesktop.io/) installation and usage files are [stored in the local](https://github.com/rancher-sandbox/rancher-desktop/discussions/1551#discussioncomment-2137434) in the following folders:
 
@@ -540,7 +629,7 @@ If, successful, the output of the previous command will be `The command complete
 
 It's now necessary to re-start Windows to enable all the previous changes.
 
-To confirm that everything is correct, execute the below commands on a Git Bash terminal and check its output.
+To confirm that everything is correct, execute the below commands on a [Git Bash](https://git-scm.com/) terminal and check its output.
 
     net localgroup docker-users
     docker --version
@@ -592,7 +681,7 @@ To check if [**NVS**](https://github.com/jasongin/nvs) was properly installed, o
 
     nvs --version
 
-To be able to use [**NVS**](https://github.com/jasongin/nvs) with [Git Bash](https://github.com/jasongin/nvs/blob/master/doc/SETUP.md#git-bash-on-windows), open a Git Bash terminal and execute the below command to source the `install` command:
+To be able to use [**NVS**](https://github.com/jasongin/nvs) with [Git Bash](https://github.com/jasongin/nvs/blob/master/doc/SETUP.md#git-bash-on-windows), open a [Git Bash](https://git-scm.com/) terminal and execute the below command to source the `install` command:
 
     . "$NVS_HOME/nvs.sh" install
 
@@ -630,7 +719,7 @@ On the ***User variables*** section, select the `Path` variable and click the **
 
 Click the **OK** button to close the window used to edit the `PATH` variable and then click the **OK** button on the *environment variables* window to close it.
 
-From now on, the latest **node** lts version will be available on all shells of the system. To confirm that everything is properly set, check the output of the below commands executed from a Windows Command Prompt, from a PowerShell console and from a Git Bash terminal.
+From now on, the latest **node** lts version will be available on all shells of the system. To confirm that everything is properly set, check the output of the below commands executed from a Windows Command Prompt, from a PowerShell console and from a [Git Bash](https://git-scm.com/) terminal.
 
     node --version
     npm --version
