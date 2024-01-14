@@ -261,7 +261,9 @@ Copy the output of the above command and then add the public SSH key to the remo
 
 [**Java**](https://openjdk.org/) is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let programmers write once, run anywhere, meaning that compiled Java code can run on all platforms that support Java without the need to recompile.
 
-#### 4.5.1. Installation the WSL File System
+#### 4.5.1. Installation
+
+##### 4.5.1.1. Installation the WSL File System
 
 The easiest way to install and manage multiple versions of [**Java**](https://openjdk.org/) on the `WSL File System` is to use [SDKMAN](https://sdkman.io/). This is a free, lightweight, open-source utility written in [Bash](https://www.gnu.org/software/bash/) that provides a convenient command line interface to manage multiple versions of [**Java**](https://openjdk.org/) and also takes care of setting the necessary environment variables.
 
@@ -319,7 +321,7 @@ Finally, to check if the **Java Compiler** was properly installed, check the out
 
 If everything is correct, the above command will output the **Java Compiler** version.
 
-#### 4.5.2. Installation on the Windows Native File System
+##### 4.5.1.2. Installation on the Windows Native File System
 
 The instructions shown here describe how to manually install [**Java**](https://openjdk.org/) on the `Windows Native File System` for the current *user account*.
 
@@ -369,7 +371,9 @@ If everything is correct, the above command will output the **Java Compiler** ve
 
 [**Apache Maven**](https://maven.apache.org/) is a build automation tool used primarily for Java projects. It can also be used to build and manage projects written in C#, Ruby, Scala, and other languages and it is hosted by the [Apache Software Foundation](https://en.wikipedia.org/wiki/Apache_Software_Foundation).
 
-#### 4.6.1. Installation on the WSL File System
+#### 4.6.1. Installation
+
+##### 4.6.1.1. Installation on the WSL File System
 
 To be able to install a specific [**Apache Maven**](https://maven.apache.org/) version on the `WSL Fily System`, I like to follow a procedure inspired by the [Linuxiz Blog](https://linuxize.com/post/how-to-install-apache-maven-on-ubuntu-18-04/).
 
@@ -458,7 +462,7 @@ To check if **Apache Maven** was properly installed, check the output of the fol
 
 If everything is correct, the above command will output the **Apache Maven** version.
 
-#### 4.6.2. Installation on the Windows Native File System
+##### 4.6.1.2. Installation on the Windows Native File System
 
 To install [**Apache Maven**](https://maven.apache.org/), download the desired [Binary zip archive](https://maven.apache.org/download.cgi) and unpack it to the folder `C:\DEV\apache-maven`. Rename the extracted folder taking in consideration the following structure:
 
@@ -553,13 +557,29 @@ The different parts in the above name structure, shall be replaced as explained 
 
 ### 4.8 Quarkus CLI
 
-The [Quarkus CLI](https://quarkus.io/guides/cli-tooling) lets you create Quarkus projects, manage extensions and do essential build and development tasks using the underlying project build tool.
+The [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) lets you create Quarkus projects, manage extensions and do essential build and development tasks using the underlying project build tool.
 
 #### 4.8.1. Installation
 
-To install [Quarkus CLI](https://quarkus.io/guides/cli-tooling), use a PowerShell console with *Administrator* privileges and execute the following command:
+##### 4.8.1.1. Installation on the WSL File System
+
+To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) on the `WSL File System`, as recomended on the [Quarkus documentation](https://quarkus.io/guides/cli-tooling), use [SDKMAN](https://sdkman.io/), execute the upcomming command on a [Ubuntu](https://ubuntu.com/) terminal.
+
+    sdk install quarkus
+
+To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) installation was properly made, check the output of the following command:
+
+    quarkus --version
+
+##### 4.8.1.2. Installation on the Windows Native File System
+
+To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling), use a PowerShell console with *Administrator* privileges and execute the following command:
 
     choco install quarkus
+
+To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) installation was properly made, check the output of the following command:
+
+    quarkus --version
 
 ### 4.9 AWS CLI
 
