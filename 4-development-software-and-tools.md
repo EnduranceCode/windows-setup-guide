@@ -261,9 +261,67 @@ Copy the output of the above command and then add the public SSH key to the remo
 
 [**Java**](https://openjdk.org/) is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let programmers write once, run anywhere, meaning that compiled Java code can run on all platforms that support Java without the need to recompile.
 
-#### 4.5.1. Installation
+#### 4.5.1. Installation the WSL File System
 
-The instructions shown here describe how to manually install [**Java**](https://openjdk.org/) for the current *user account* on a Windows machine.
+The easiest way to install and manage multiple versions of [**Java**](https://openjdk.org/) on the `WSL File System` is to use [SDKMAN](https://sdkman.io/). This is a free, lightweight, open-source utility written in [Bash](https://www.gnu.org/software/bash/) that provides a convenient command line interface to manage multiple versions of [**Java**](https://openjdk.org/) and also takes care of setting the necessary environment variables.
+
+Following the [official instructions](https://sdkman.io/install), install [SDKMAN](https://sdkman.io/) and the necessary dependencies executing the upcomming commands on a [Ubuntu](https://ubuntu.com/) terminal:
+
+    sudo apt update
+    sudo apt install zip unzip
+    curl -s "https://get.sdkman.io" | bash
+
+After completing the installation process, open a new terminal or run the following command in the same shell:
+
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+To confirm the installation's success, execute the following command:
+
+    sdk version
+
+To list the available [**Java**](https://openjdk.org/) versions, execute the following command:
+
+    sdk list java
+
+To install a specific version of [**Java**](https://openjdk.org/), replace the **{LABEL}** in the upcoming command as appropriate and then execute it:
+
+    sdk install java {IDENTIFIER}
+
+> **Label Definition**
+>
+> + **{IDENTIFIER}** : Identifier of the desired [**Java**](https://openjdk.org/) version as shown in the output of the command `sdk list java`, e.g. *21.ea.35-open*
+
+To set a specific version of [**Java**](https://openjdk.org/) as the default, replace the **{LABEL}** in the upcoming command as appropriate and then execute it:
+
+    sdk default java {IDENTIFIER}
+
+> **Label Definition**
+>
+> + **{IDENTIFIER}** : Identifier of the desired [**Java**](https://openjdk.org/) version as shown in the output of the command `sdk list java`, e.g. *21.ea.35-open*
+
+To check if the `JAVA_HOME` value was properly set, check the output of the following command:
+
+    echo $JAVA_HOME
+
+To check if the Windows `PATH` value was properly set, check the output of the following command:
+
+    echo $PATH
+
+To check if **Java** was properly installed, check the output of the following command:
+
+    java -version
+
+If everything is correct, the above command will output **Java Runtime Environment** version.
+
+Finally, to check if the **Java Compiler** was properly installed, check the output of the following command:
+
+    javac -version
+
+If everything is correct, the above command will output the **Java Compiler** version.
+
+#### 4.5.2. Installation on the Windows Native File System
+
+The instructions shown here describe how to manually install [**Java**](https://openjdk.org/) on the `Windoews Native File System` for the current *user account*.
 
 Download the *.zip* option of the desired JDK version and and unpack it to a folder inside `C:\DEV\java`. Rename the extracted folder taking in consideration the following structure:
 
