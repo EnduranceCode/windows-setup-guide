@@ -595,9 +595,25 @@ To install [**AWS CLI**](https://aws.amazon.com/cli/), download the latest versi
 
 #### 4.10.1. Installation
 
+#### 4.10.1.1. Installation on the WSL File System
+
+To install [**GNU Make**](https://www.gnu.org/software/make/) on the `WSL File System`, execute the upcomming command on a [Ubuntu](https://ubuntu.com/) terminal.
+
+    sudo apt install make
+
+To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation was properly made, check the output of the following command:
+
+    make --version
+
+#### 4.10.1.1. Installation on the Windows Native File System
+
 To install [**GNU Make**](https://www.gnu.org/software/make/), use a PowerShell console with *Administrator* privileges and execute the following command:
 
     choco install make
+
+To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation was properly made, check the output of the following command:
+
+    make --version
 
 ### 4.11. Rancher Desktop
 
