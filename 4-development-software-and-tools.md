@@ -679,9 +679,55 @@ To confirm that everything is correct, execute the below commands on a [Git Bash
 
 #### 4.12.1. Installation
 
-To install [**Terraform**](https://www.terraform.io/), use a PowerShell console with *Administrator* privileges and execute the following command:
+##### 4.12.1.1. Installation on the WSL File System
+
+The easiest way to install and manage multiple versions of [**Terraform**](https://www.terraform.io/) on the `WSL File System` is to use [TFSwitch](https://tfswitch.warrensbox.com/). This is a command line tool that lets you switch between different versions of [**Terraform**](https://www.terraform.io/).
+
+Create a folder to [store the user's binaries](https://unix.stackexchange.com/a/36874) executing the following command:
+
+    mkdir -p ~/.local/bin
+
+It's necessary that the folder `~/.local/bin` is included on the `PATH` and, on [Ubuntu](https://ubuntu.com/), that is normaly done by the `~/.profile` script. Close the terminal and on a new [Ubuntu](https://ubuntu.com/) terminal and then check the output of the following command to confirm that `~/.local/bin` is included on the `PATH`.
+
+    echo $PATH
+
+Following the [official instructions](https://tfswitch.warrensbox.com/Install/), download [TFSwitch](https://tfswitch.warrensbox.com/) installation script to the folder `/tmp` executing the upcomming commands on a [Ubuntu](https://ubuntu.com/) terminal:
+
+    wget https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh -P /tmp
+
+Make the [TFSwitch](https://tfswitch.warrensbox.com/) installation script executable with the following command:
+
+    chmod 755 /tmp/install.sh
+
+Install [TFSwitch](https://tfswitch.warrensbox.com/) on the `~/.local/bin` executing the following command:
+
+    /tmp/install.sh -b ~/.local/bin/
+
+To verify if the [TFSwitch](https://tfswitch.warrensbox.com/) installation was properly made, check the output of the following command:
+
+    tfswitch --version
+
+To install a specific [**Terraform**](https://www.terraform.io/) on the `WSL File System`, replace the ***{LABEL}*** in the below command as appropriate and then execute it on a [Ubuntu](https://ubuntu.com/) terminal.
+
+    tfswitch -b ~/.local/bin/terraform {VERSION}
+
+> **Label Definition**
+>
+> + **{VERSION}** : The desired [**Terraform**](https://www.terraform.io/) version
+
+To verify if the [**Terraform**](https://www.terraform.io/) installation was properly made, check the output of the following command:
+
+    terraform --version
+
+##### 4.12.1.2. Installation on the Windows Native File System
+
+To install [**Terraform**](https://www.terraform.io/) on the `Windows Native File System`, use a PowerShell console with *Administrator* privileges and execute the following command:
 
     choco install terraform
+
+To verify if the [**Terraform**](https://www.terraform.io/) installation was properly made, check the output of the following command:
+
+    terraform --version
 
 ### 4.13. NVS (Node Version Switcher)
 
