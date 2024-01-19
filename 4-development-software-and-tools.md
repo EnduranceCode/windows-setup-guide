@@ -589,7 +589,29 @@ The [**AWS Command Line Interface (AWS CLI)**](https://aws.amazon.com/cli/) is a
 
 #### 4.9.1. Installation
 
-To install [**AWS CLI**](https://aws.amazon.com/cli/), download the latest version from [official downloads page](https://aws.amazon.com/cli/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
+##### 4.9.1.1. Installation on the WSL File System
+
+To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `WSL File System`, follow Linux's [AWS official instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) executing the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
+
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install
+
+To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was properly made, check the output of the following command:
+
+    aws --version
+
+If the `aws` command cannot be found, you might need to restart your terminal or follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
+
+##### 4.9.1.2. Installation on the Windows Native File System
+
+To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `Windows Native File System`, download the latest version from [official downloads page](https://aws.amazon.com/cli/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
+
+To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was properly made, check the output of the following command:
+
+    aws --version
+
+If Windows is unable to find the program, you might need to close and reopen the command prompt window to refresh the path, or follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
 
 ### 4.10 Make
 
