@@ -544,7 +544,9 @@ A `README.md` file must be stored on the folder `~/.m2` with a list a of all exi
 
 #### 4.7.1. Installation
 
-To install [**Apache Tomcat**](http://tomcat.apache.org/) application server, download the desired [release zip archive](http://tomcat.apache.org/) and unpack it to the folder `C:\DEV\apache-tomcat`. Rename the extracted folder taking in consideration the following structure:
+##### 4.7.1.1. Installation on the Windows Native File System
+
+To install [**Apache Tomcat**](http://tomcat.apache.org/) application server on the `Windows Native File System`, download the desired [release zip archive](http://tomcat.apache.org/) and unpack it to the folder `C:\DEV\apache-tomcat`. Rename the extracted folder taking in consideration the following structure:
 
     tomcat-{VERSION}-{PROJECT}
 
