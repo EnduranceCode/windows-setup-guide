@@ -1042,6 +1042,7 @@ With the `Settings Sync` turned on, [**Visual Studio Code**](https://code.visual
 + [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense);
 + [PHP Debug](https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug);
 + [PHP Extension Pack](https://marketplace.visualstudio.com/items?itemName=xdebug.php-pack);
++ [Prettier - Code Formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 + [PHP Intelliphense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client);
 + [Project Manager for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-dependency);
 + [Smarty](https://marketplace.visualstudio.com/items?itemName=imperez.smarty);
