@@ -17,7 +17,7 @@ This file contains the **Development Software and Tools** section of my [Setup g
     10. [Make](#410-make)
     11. [Rancher Desktop](#411-rancher-desktop)
     12. [Terraform](#412-terraform)
-    13. [NVS (Node Version Switcher)](#413-nvs-node-version-switcher)
+    13. [Node.js](#413-nodejs)
     14. [IntelliJ IDEA](#414-intellij-idea)
     15. [Visual Studio Code](#415-visual-studio-code)
     16. Eclipse
@@ -430,7 +430,7 @@ Check the output of the upcoming commands to confirm that the the symlinnk was c
 
 Later if you want to upgrade your [**Apache Maven**](https://maven.apache.org/) installation you can simply unpack the newer version and change the symlink to point to the latest version.
 
-To set the `MAVEN_HOME` environment variable for your [WSL](https://learn.microsoft.com/windows/wsl/) user, open the file `~/.bashrc` with the [nano text editor](https://www.nano-editor.org/), executing the below command on a [Ubuntu](https://ubuntu.com/) terminal.
+To set the `MAVEN_HOME` environment variable for your [WSL](https://learn.microsoft.com/windows/wsl/) user, open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/), executing the below command on a [Ubuntu](https://ubuntu.com/) terminal.
 
     nano ~/.bashrc
 
@@ -442,7 +442,7 @@ Then, add the upcoming snippet to the `~/.bashrc` imediatly before sourcing the 
     # User's path customization
     export PATH=${MAVEN_HOME}/bin:${PATH}
 
-Save the changes with the command `CTRL + O` and then exit the [nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
 
 To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
 
@@ -753,13 +753,67 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 
     terraform --version
 
-### 4.13. NVS (Node Version Switcher)
+### 4.13. Node.js
 
-[**NVS**](https://github.com/jasongin/nvs) is a cross-platform utility for switching between different versions and forks of Node.js. [**NVS**](https://github.com/jasongin/nvs) is itself written in node JavaScript.
+[**Node.js**](https://nodejs.org/) is a cross-platform, open-source JavaScript runtime environment that runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
 
 #### 4.13.1. Installation
 
-The instructions to install [**NVS**](https://github.com/jasongin/nvs) shown here are following the official instructions for the [manual setup from a Command Prompt](https://github.com/jasongin/nvs/blob/master/doc/SETUP.md#manual-setup---command-prompt).
+##### 4.13.1.1. Installation on the WSL File System
+
+A [popular method](https://nodejs.devhttps://nodejs.org/en/learn/getting-started/how-to-install-nodejs) to install and manage multiple versions of [**Node.js**](https://nodejs.org/) is to use [`nvm`](https://github.com/nvm-sh/nvm), which cam also be used  on the `WSL File System`. [`nvm`](https://github.com/nvm-sh/nvm) is a version manager for [**Node.js**](https://nodejs.org/), designed to be installed per-user, and invoked per-shell. It works on any POSIX-compliant shell (sh, dash, ksh, zsh, bash), in particular on these platforms: unix, macOS, and [WSL](https://github.com/nvm-sh/nvm#important-notes). [`nvm`](https://github.com/nvm-sh/nvm) is also recommended on [`npm`](https://www.npmjs.com/)'s [Official Documentation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+
+Make sure that you have the `build-essentials` package already installed and then, to install [`nvm`](https://github.com/nvm-sh/nvm), replace the **{LABEL}** in the upcoming command as appropriate and execute it from an [Ubuntu](https://ubuntu.com/) terminal.
+
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{VERSION_NUMBER}/install.sh | bash
+
+> **Label Definition**
+>
+> + **{VERSION_NUMBER}** : The latest version number found on [Installing and Updating](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) section of the project’s home repository
+
+Running the above command downloads a script and runs it. The script clones the [`nvm`](https://github.com/nvm-sh/nvm) repository to `~/.nvm` and adds a code snippet to the end of the `~/.bashrc` file. To add proper context to this new code snippet, start editing the `~/.bashrc` file, execute the following command to be able to edit with the [Nano text editor](https://www.nano-editor.org/).
+
+    nano ~/.bashrc
+
+and add the below comments above the mentioned new code snippet.
+
+    # Sets the environment for nvm (Node Version Manager)
+
+After completing the edition of the `.bashrc file`, save and close it. In order for the changes to take effect, run the following command:
+
+    source ~/.bashrc
+
+To check that [`nvm`](https://github.com/nvm-sh/nvm) is properly installed, run the following command:
+
+    nvm --version
+
+To have a list of default global packages installed with every new version of [**Node.js**](https://nodejs.org/), start editing the file `~/.config/nvm/default-packages` with the below command.
+
+    nano ~/.config/nvm/default-packages
+
+and add the desired packages names, one per line, to the file. After completing the edition of the file `~/.config/nvm/default-packages`, save and close it.
+
+To check if the edition of the file was successful, run the following command:
+
+    cat ~/.config/nvm/default-packages
+
+To install the latest available LTS version of [**Node.js**](https://nodejs.org/), run the following command:
+
+    nvm install --lts
+
+To check if node is correctly installed, run the following command
+
+    node --version
+
+When [**Node.js**](https://nodejs.org/) is installed, [`npm`](https://www.npmjs.com/) is automatically installed with it. However, according to [`npm`](https://www.npmjs.com/)'s documentation [`npm`](https://www.npmjs.com/) is released more frequently than[**Node.js**](https://nodejs.org/), so to install the latest stable version of [`npm`](https://www.npmjs.com/), run the following command:
+
+    nvm install-latest-npm
+
+##### 4.13.1.2. Installation on the Windows Native File System
+
+The easiest method to install and manage multiple versions of [**Node.js**](https://nodejs.org/) on the `Windows Native File System` is to use [NVS](https://github.com/jasongin/nvs). This is a cross-platform utility for switching between different versions and forks of [**Node.js**](https://nodejs.org/). [NVS](https://github.com/jasongin/nvs) is itself written in node JavaScript.
+
+The instructions to install [NVS](https://github.com/jasongin/nvs) shown here are following the official instructions for the [manual setup from a Command Prompt](https://github.com/jasongin/nvs/blob/master/doc/SETUP.md#manual-setup---command-prompt).
 
 To set `NVS_HOME` as environment variable for the current *user account* go to `Control Panel -> User Accounts` and choose the option ***Change my environment variables***.
 
@@ -785,11 +839,11 @@ On the ***User variables*** section, select the `Path` variable and click the **
 
 Click the **OK** button to close the window used to edit the `PATH` variable and then click the **OK** button on the *environment variables* window to close it.
 
-To check if [**NVS**](https://github.com/jasongin/nvs) was properly installed, on the same Windows Command Prompt, check the output of the following command:
+To check if [NVS](https://github.com/jasongin/nvs) was properly installed, on the same Windows Command Prompt, check the output of the following command:
 
     nvs --version
 
-To be able to use [**NVS**](https://github.com/jasongin/nvs) with [Git Bash](https://github.com/jasongin/nvs/blob/master/doc/SETUP.md#git-bash-on-windows), open a [Git Bash](https://git-scm.com/) terminal and execute the below command to source the `install` command:
+To be able to use [NVS](https://github.com/jasongin/nvs) with [Git Bash](https://github.com/jasongin/nvs/blob/master/doc/SETUP.md#git-bash-on-windows), open a [Git Bash](https://git-scm.com/) terminal and execute the below command to source the `install` command:
 
     . "$NVS_HOME/nvs.sh" install
 

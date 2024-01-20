@@ -40,7 +40,7 @@ This is my personal guide to setup a development machine on Windows. Although th
     10. [Make](./4-development-software-and-tools.md#410-make)
     11. [Rancher Desktop](./4-development-software-and-tools.md#411-rancher-desktop)
     12. [Terraform](./4-development-software-and-tools.md#412-terraform)
-    13. [NVS (Node Version Switcher)](./4-development-software-and-tools.md#413-nvs-node-version-switcher)
+    13. [Node.js](./4-development-software-and-tools.md#413-nodejs)
     14. [IntelliJ IDEA](./4-development-software-and-tools.md#414-intellij-idea)
     15. [Visual Studio Code](./4-development-software-and-tools.md#415-visual-studio-code)
     16. Eclipse
