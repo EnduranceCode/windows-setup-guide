@@ -900,7 +900,7 @@ Move the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) *St
 
 Execute the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) and then login in the JetBrains account. Then, on the `Toolbox App Menu`choose the `Settings` option and uncheck the checkbox `Launch Toolbox App at system startup`.  
 
-To install [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) and then choose the desired *IntelliJ IDEA* version to install and follow the instructions prompted.
+To install [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) and then choose the desired [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) version to install and follow the instructions prompted.
 
 Move the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) *Start Menu* *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder. Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox` that was created by the installer.
 
@@ -934,6 +934,10 @@ Execute the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) chosen version 
 
 [Markdown](https://plugins.jetbrains.com/plugin/7793-markdown) is an IDE extension that provides the capability to edit Markdown files within the IDE and see the rendered HTML in a live preview. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "Markdown". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
+##### 4.14.2.3. Install JPA Buddy
+
+[JPA Buddy](https://plugins.jetbrains.com/plugin/15075-jpa-buddy) is an IDE extension that helps developers work efficiently with Hibernate, EclipseLink, Spring Data JPA, Flyway, Liquibase, Lombok, MapStruct, and other related technologies in both Java and Kotlin. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "JPA Buddy". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
+
 #### 4.14.3. Set code formatters
 
 ##### 4.14.3.1. Java
@@ -956,26 +960,40 @@ To make the necessary change, on the [**IntelliJ IDEA**](https://www.jetbrains.c
 
 To customize *Maven*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Maven`. On this tab, change the input boxes listed below as described:
 
-+ **Maven home path** : The path to the chosen [system *Maven* instance](#451-installation);
-+ **User setting file** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#452-configuration);
-+ **Local repository** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#452-configuration);
++ **Maven home path** : The path to the chosen [system *Maven* instance](#461-installation);
++ **User setting file** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#462-configuration);
++ **Local repository** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#462-configuration);
 
-This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
+Beware that you must choose the [Apache Maven](https://maven.apache.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
 #### 4.14.6. Configure Tools
 
 ##### 4.14.6.1. Terminal
 
-To customize the *Terminal* in use with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Tools->Terminak`. On this tab, change the input boxes listed below as described:
+To customize the *Terminal* in use with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Tools->Terminak`. On this tab, take in consideration the file system you're working on and change the input boxes listed below as described:
 
-+ **Shell path** : `C:\Program Files\Git\bin\sh.exe --login --i`
-+ **Default Tab name** : `Terminal`;
++ `WSL File System`
+  + **Shell path** : `wsl.exe`
+  + **Default Tab name** : `Terminal`;
++ `Windows Native File System`
+  + **Shell path** : `C:\Program Files\Git\bin\sh.exe --login --i`
+  + **Default Tab name** : `Terminal`;
 
 This settings will only take effect when starting a new terminal. Therefore, create/add/open a new terminal window and terminate the old one.
 
 This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
 #### 4.14.7. Run/Debug Configurations
+
+To ensure that the building of a project on the `WSL File System` [works properly](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html#debugging_system_settings) you need to adapt the Windows Firewall configuration. Open a PowerShell console with *Administrator* privileges and execute the following command to allow connections using WSL:
+
+    New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "vEthernet (WSL)"  -Action Allow
+
+Then execute the command to renew the firewall rules:
+
+    Get-NetFirewallProfile -Name Public | Get-NetFirewallRule | where DisplayName -ILike "IntelliJ IDEA*" | Disable-NetFirewallRule
+
+After starting a debugger session, the Windows Firewall popup might appears and them, select the *Public networks* checkbox and click the `Allow access` button.
 
 ##### 4.14.7.1 Shorten command line method
 
