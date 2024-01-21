@@ -583,9 +583,24 @@ To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation
 
 If you're going to do your development work on the Windows native file system, you should choose [Rancher Desktop](https://rancherdesktop.io/) to replace [Docker Desktop](https://www.docker.com/products/docker-desktop/). But if you're planning to do all you development work on the [WSL](https://learn.microsoft.com/windows/wsl/) file system (taking advantage of the Linux tools), you should utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
 
-### 4.10.1. Installation
+### 4.10.1. Pre-Installation requirements
 
-### 4.10.1.1. Installation on the WSL File System
+To avoid future conflicts between the ports reserved by ***Hyper-V*** and the ports used by the [**Docker**](https://www.docker.com/) containers, you should [reset the "*TCP Dynamic Port Range*"](https://medium.com/@sevenall/completely-solve-the-problem-of-docker-containers-not-starting-or-running-on-windows-10-due-to-port-57f16ed6143). That is achieved executing the uppcoming commands from a PowerShell console with *Administrator* privileges:
+
+    netsh int ipv4 set dynamic tcp start=49152 num=16384
+    netsh int ipv6 set dynamic tcp start=49152 num=16384
+
+Followinbg the execution of the above commands, reboot the computer to apply the changes made.
+
+After restarting the computer, check the output of the following command:
+
+    netsh int ipv4 show dynamicport tcp
+
+The above command should now show that "*TCP Dynamic Port Range*" has been changed to 49152–65535. Now only the ports in this range may be reserved by ***Hyper-V***.
+
+### 4.10.2. Installation
+
+### 4.10.2.1. Installation on the WSL File System
 
 This section describes the necessary steps to install [**Docker**](https://www.docker.com/) and [Docker Engine](https://docs.docker.com/engine/) on a [WSL](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) distribuition. The following steps are based on the [official documentation for installing Docker on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) with some adaptations provided by [Paul Knulst](https://www.paulsblog.dev/how-to-install-docker-without-docker-desktop-on-windows/).
 
@@ -642,7 +657,7 @@ Then, verify if everything is running properly by checking the output of the fol
     sudo systemctl status containerd.service
     docker run hello-world
 
-### 4.10.1.1. Installation on the Windows Native File System with Rancher Desktop
+### 4.10.2.1. Installation on the Windows Native File System with Rancher Desktop
 
 [**Rancher Desktop**](https://rancherdesktop.io/) is an app that provides container management and Kubernetes on the desktop. It is available for Mac (both on Intel and Apple Silicon), Windows, and Linux.
 
@@ -674,13 +689,13 @@ To be able to run the `docker` command on the terminal, it's necessary to add yo
 
     net localgroup docker-users
 
-If the `docker-users` group doesn't exists yet, open a PowerShell console as **Administrator** and [create it](https://stackoverflow.com/a/64293327) with the following commands:
+If the `docker-users` group doesn't exists yet, open a PowerShell console as *Administrator* and [create it](https://stackoverflow.com/a/64293327) with the following commands:
 
     New-LocalGroup -Name 'docker-users' -Description 'docker Users Group'
     Add-LocalGroupMember -Group 'Administrators' -Member ('docker-users') -Verbose
     Add-LocalGroupMember -Group 'docker-users' -Member ('Username','Administrators') -Verbose
 
-To add your Windows user to the `docker-users` group, open a PowerShell console as **Administrator**, replace the ***{LABEL}*** in the below command as appropriate and then execute it.
+To add your Windows user to the `docker-users` group, open a PowerShell console as *Administrator*, replace the ***{LABEL}*** in the below command as appropriate and then execute it.
 
     net localgroup docker-users "{YOUR_USER_ID}" /ADD
 
