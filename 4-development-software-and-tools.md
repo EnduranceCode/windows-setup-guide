@@ -5,129 +5,65 @@ This file contains the **Development Software and Tools** section of my [Setup g
 ## Table of Contents
 
 4. [Development Software & Tools](#4-development-software--tools)
-    1. [Docker](#41-docker)
-    2. [Notepadd++](#42-notepad)
-    3. [Meld](#43-meld)
-    4. [Git & Git Bash](#44-git--git-bash)
-    5. [Java](#45-java)
-    6. [Apache Maven](#46-apache-maven)
-    7. [Apache Tomcat](#47-apache-tomcat)
-    8. [Quarkus CLI](#48-quarkus-cli)
-    9. [AWS CLI](#49-aws-cli)
-    10. [Make](#410-make)
-    11. [Rancher Desktop](#411-rancher-desktop)
-    12. [Terraform](#412-terraform)
-    13. [Node.js](#413-nodejs)
-    14. [IntelliJ IDEA](#414-intellij-idea)
-    15. [Visual Studio Code](#415-visual-studio-code)
-    16. Eclipse
-    17. [DBeaver](#417-dbeaver)
-    18. [Postman](#418-postman)
+    1. [Notepadd++](#41-notepad)
+    2. [Meld](#42-meld)
+    3. [Git & Git Bash](#43-git--git-bash)
+    4. [Java](#44-java)
+    5. [Apache Maven](#45-apache-maven)
+    6. [Apache Tomcat](#46-apache-tomcat)
+    7. [Quarkus CLI](#47-quarkus-cli)
+    8. [AWS CLI](#48-aws-cli)
+    9. [Make](#49-make)
+    10. [Docker](#410-docker)
+    11. [Terraform](#411-terraform)
+    12. [Node.js](#412-nodejs)
+    13. [IntelliJ IDEA](#413-intellij-idea)
+    14. [Visual Studio Code](#414-visual-studio-code)
+    15. Eclipse
+    16. [DBeaver](#416-dbeaver)
+    17. [Postman](#417-postman)
 
 ## 4. Development Software & Tools
 
-### 4.1 Docker
-
-[**Docker**](https://www.docker.com/) is an open-source containerization platform. It enables developers to package applications into containers, which are standardized, executable components combining application source code with the operating system libraries and dependencies required to run that code in any environment.
-
-[**Docker**](https://www.docker.com/) updated its [Docker Desktop License Agreement](https://docs.docker.com/subscription/?ref=paulsblog.dev#docker-desktop-license-agreement) and this change means that on companies with more than 250 employees or more than $10 million in annual revenue you will not be able to use [Docker Desktop](https://www.docker.com/products/docker-desktop/) without a paid subscription. A possible alternative is [Rancher Desktop](https://rancherdesktop.io/) but, as the license update is only related to [Docker Desktop](https://www.docker.com/products/docker-desktop/), it's also possible to utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
-
-If you're going to do your development work on the Windows native file system, you should choose [Rancher Desktop](https://rancherdesktop.io/) to replace [Docker Desktop](https://www.docker.com/products/docker-desktop/). But if you're planning to do all you development work on the [WSL](https://learn.microsoft.com/windows/wsl/) file system (taking advantage of the Linux tools), you should utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
-
-This section describes the necessary steps to install [**Docker**](https://www.docker.com/) and [Docker Engine](https://docs.docker.com/engine/) on a [WSL](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) distribuition. The following steps are based on the [official documentation for installing Docker on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) with some adaptations provided by [Paul Knulst](https://www.paulsblog.dev/how-to-install-docker-without-docker-desktop-on-windows/).
-
-On your [Ubuntu](https://ubuntu.com/) submodule of [WSL](https://learn.microsoft.com/windows/wsl/), install the required dependencies with the following commands:
-
-    sudo apt update
-    sudo apt -y install apt-transport-https ca-certificates curl gnupg lsb-release
-
-Then, add [**Docker**](https://www.docker.com/)'s official GPG key with the following commands:
-
-    sudo install -m 0755 -d /etc/apt/keyrings
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    sudo chmod a+r /etc/apt/keyrings/docker.gpg
-
-To add the [**Docker**](https://www.docker.com/) stable repository, execute the following command:
-
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt update
-
-Install the latetst version of the [**Docker**](https://www.docker.com/)'s packages with the following command:
-
-    sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-Add you user to the `docker` group with the following command
-
-    sudo usermod -aG docker $USER
-
-Log out and log back in so that your group membership is re-evaluated, or run the following command to activate the changes to groups:
-
-    newgrp docker
-
-Check the installed versions using the following commands
-
-    docker --version
-    dockerd --version
-    docker compose version
-
-On [Ubuntu](https://ubuntu.com/), the Docker service starts on boot by default, therefore, it won't be necessary to enable it. To verify that `docker` and `containerd` were started bu *systemd*, run the following commands:
-
-    sudo systemctl status docker.service
-    sudo systemctl status containerd.service
-
-The `iptables` used by [Ubuntu](https://ubuntu.com/) is the `nftables` version and this might stop [**Docker**](https://www.docker.com/)'s interaction with the firewall because using `nftables` natively requires Linux Kernel 5.8 but the latest Kernel version for the [WSL](https://learn.microsoft.com/windows/wsl/) is 5.4. Luckily, [Ubuntu](https://ubuntu.com/) still has the possibility to use a legacy version of `iptables` by simply executing upcoming command and choosing, when prompted, the option `1`.
-
-    sudo update-alternatives --config iptables
-
-After updating the `iptables` just restart the Docker daemon with the following command:
-
-    sudo systemctl restart docker.service
-
-Then, verify if everything is running properly by checking the output of the following commands:
-
-    sudo systemctl status docker.service
-    sudo systemctl status containerd.service
-    docker run hello-world
-
-### 4.2 Notepad++
+### 4.1 Notepad++
 
 [**Notepad++**](https://notepad-plus-plus.org/) is a free and open-source text and source code editor for use with Microsoft Windows. It supports tabbed editing, which allows working with multiple open files in a single window.
 
-#### 4.2.1. Installation
+#### 4.1.1. Installation
 
 [Download](https://notepad-plus-plus.org/downloads/) the latest portable version of [**Notepad++**](https://notepad-plus-plus.org/). Then extract the downloaded archive to the `%USERPROFILE%\AppData\Local\` folder (`%LOCALAPPDATA%`). Rename the new folder to `Notepad++`.
 
 Inside the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development`, create a *shortcut* pointing to the file `%USERPROFILE%\AppData\Local\KeepassXC\KeePassXC.exe` and name it (the *shortcut*) `KeepassXC`. Then, edit the *shortcut* and point its icon to the main icon available on the file `%USERPROFILE%\AppData\Local\Notepad++\notepad++.exe`.
 
-#### 4.2.2. Configuration
+#### 4.1.2. Configuration
 
 To replicate on [**Notepad++**](https://notepad-plus-plus.org/) the standard *Quit* Linux keyboard shortcut, select the menu option `Settings->Shortcut Mapper...`, change the existing shortcut *CTRL+Q* to *CTRL+W* and then change the previous existing shortcut *CTRL+W* to *CTRL+Q*. Repeat the process for the existing shortcuts *CTRL+SHIFT+Q* and *CTRL+SHIFT+W*.
 
 On the menu option `Settings->Plugins Admin...`, install the plugins [**BetterMultiSelection**](https://github.com/dail8859/BetterMultiSelection), [**DSpellCheck**](https://github.com/Predelnik/DSpellCheck), [Json Tools](https://github.com/molsonkiko/JsonToolsNppPlugin) and [**XML Tools**](https://github.com/morbac/xmltools).
 
-### 4.3 Meld
+### 4.2 Meld
 
 [**Meld**](https://meld.app/) is the visual diff and merge tool, targeted at developers. It allows users to compare two or three files or directories visually, color-coding the different lines.
 
 [WinMerge](https://winmerge.org/) is an excellent alternative to [**Meld**](https://meld.app/) but there's only the [Windows](https://www.microsoft.com/en-us/windows) and [**Meld**](https://meld.app/) is multiplatform and that allows me to use the same software on every operating system that I work with.
 
-#### 4.3.1. Installation
+#### 4.2.1. Installation
 
 To install [**Meld**](https://meld.app/), download the latest version from [official downloads page](https://meld.app/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
 
 Move the [**Meld**](https://meld.app/) *Start Menu* *shortcut* to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits).
 
-### 4.4 Git & Git Bash
+### 4.3 Git & Git Bash
 
 [**Git**](https://git-scm.com/) is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
 
-#### 4.4.1. Installation
+#### 4.3.1. Installation
 
-#### 4..4.1.1. Installation on the WSL File System
+#### 4..3.1.1. Installation on the WSL File System
 
 [**Git**](https://git-scm.com/) is included on the [Ubuntu](https://ubuntu.com/) submodule of [WSL](https://learn.microsoft.com/windows/wsl/), therefore, it's not necessary to install it on the `WSL File System`.
 
-#### 4..4.1.2. Installation on the Windows Native File System
+#### 4.3.1.2. Installation on the Windows Native File System
 
 **Git Bash** comes included as part of the [Git's Windows package](https://git-scm.com/download/win) and is an application for Microsoft Windows environments which provides an emulation layer for a [**Git**](https://git-scm.com/) command line experience.
 
@@ -137,9 +73,9 @@ To install [**Git**](https://git-scm.com/) on the `Windows Native File System`, 
 
 The parameters used on the above command are personal choices, the list of available parameters (and its definitions) can be found at [Git Package Parameters documentation page](https://github.com/chocolatey-community/chocolatey-packages/blob/master/automatic/git.install/ARGUMENTS.md).
 
-#### 4.4.2. Bash prompt customization
+#### 4.3.2. Bash prompt customization
 
-#### 4.4.2.1. Bash prompt customization on the WSL File System
+#### 4.3.2.1. Bash prompt customization on the WSL File System
 
 The customization of the bash prompt is very personal and the files used to accomplish my personal customization on the `WSL File System` are stored at the folder `%OneDriveCommercial%\dotfiles\bash-wsl`. To make use of the mentioned files on the bash prompt customization, replace the **{LABEL}** in the upcoming command as appropriate and then execute it from an [Ubuntu](https://ubuntu.com/) terminal.
 
@@ -165,7 +101,7 @@ After applying the above mentioned changes, save and close the file `~/.bashrc`.
 
     source ~/.bashrc
 
-#### 4.4.2.2. Bash prompt customization on the Windows Native File System
+#### 4.3.2.2. Bash prompt customization on the Windows Native File System
 
 The files used to accomplish my personal customization on the `Windows Native File System` are stored at the folder `%OneDriveCommercial%\dotfiles\bash-win`. If a [symlink](https://www.howtogeek.com/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/) to the folder `%OneDriveCommercial%\dotfiles` isn't yet created the Windows `%USERPROFILE%`, create executing the below command from the Windows Command Line.
 
@@ -187,7 +123,7 @@ After applying the above mentioned changes, save and close the file `~/.bashrc`.
 
     source ~/.bashrc
 
-#### 4.4.3. Git configuration
+#### 4.3.3. Git configuration
 
 To set [Git's global configuration](https://www.learnenough.com/git-tutorial#sec-installation_and_setup), replace the **{LABELS}** in the below commands as appropriate and then execute it in an [Git Bash](https://git-scm.com/) terminal window.
 
@@ -204,11 +140,11 @@ To set [Git's global configuration](https://www.learnenough.com/git-tutorial#sec
 
 Instructions for a more detailed Git global configuration can be found in the [Git's Official Documentation](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup).
 
-#### 4.4.4. SSH Keys
+#### 4.3.4. SSH Keys
 
 The [SSH Protocol](https://en.wikipedia.org/wiki/Secure_Shell) is very useful to connect and authenticate to remote servers and services. The creation and setup of the SSH keys described here follows the instructions at [GitHub](https://help.github.com/en/articles/connecting-to-github-with-ssh).
 
-##### 4.4.4.1. Checking for existing SSH keys
+##### 4.3.4.1. Checking for existing SSH keys
 
 To check if the system already has an SSH key set, type the following command:
 
@@ -216,7 +152,7 @@ To check if the system already has an SSH key set, type the following command:
 
 If the output of the above command contains a list of files (by default, the filenames of the public keys are *id_dsa.pub*, *id_ecdsa.pub*, *id_ed25519.pub* or *id_rsa.pub*), the system already has a SSH key and it can be used.
 
-##### 4.4.4.2. Generating a new SSH key
+##### 4.3.4.2. Generating a new SSH key
 
 To create a new SSH key, replace the **{LABEL}** in the below command as appropriate and then execute it in an [Git Bash](https://git-scm.com/) terminal window.
 
@@ -239,7 +175,7 @@ Type a secure passphrase when prompted. GitHub has further instructions on [work
     > Enter passphrase (empty for no passphrase): [Type a passphrase]
     > Enter same passphrase again: [Type passphrase again]
 
-##### 4.4.4.3. Adding the SSH key to the ssh-agent
+##### 4.3.4.3. Adding the SSH key to the ssh-agent
 
 To add the new SSH key to the `ssh-agent`, start it in the background with the command below.
 
@@ -249,7 +185,7 @@ The command below will add the private key to the `ssh-agent`.
 
     ssh-add ~/.ssh/id_rsa
 
-##### 4.4.4.4. Adding a new SSH key to the remote servers
+##### 4.3.4.4. Adding a new SSH key to the remote servers
 
 To be able to copy the public SSH key to the clipboard, display it in a bash terminal window with the following command:
 
@@ -257,13 +193,13 @@ To be able to copy the public SSH key to the clipboard, display it in a bash ter
 
 Copy the output of the above command and then add the public SSH key to the remote servers in use ([GitHub](https://github.com/settings/keys), [Bitbucket](https://bitbucket.org/account/user/ssh-keys), etc.).
 
-### 4.5. Java
+### 4.4. Java
 
 [**Java**](https://openjdk.org/) is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let programmers write once, run anywhere, meaning that compiled Java code can run on all platforms that support Java without the need to recompile.
 
-#### 4.5.1. Installation
+#### 4.4.1. Installation
 
-##### 4.5.1.1. Installation the WSL File System
+##### 4.4.1.1. Installation the WSL File System
 
 The easiest way to install and manage multiple versions of [**Java**](https://openjdk.org/) on the `WSL File System` is to use [SDKMAN](https://sdkman.io/). This is a free, lightweight, open-source utility written in [Bash](https://www.gnu.org/software/bash/) that provides a convenient command line interface to manage multiple versions of [**Java**](https://openjdk.org/) and also takes care of setting the necessary environment variables.
 
@@ -321,7 +257,7 @@ Finally, to check if the **Java Compiler** was properly installed, check the out
 
 If everything is correct, the above command will output the **Java Compiler** version.
 
-##### 4.5.1.2. Installation on the Windows Native File System
+##### 4.4.1.2. Installation on the Windows Native File System
 
 The instructions shown here describe how to manually install [**Java**](https://openjdk.org/) on the `Windows Native File System` for the current *user account*.
 
@@ -367,13 +303,13 @@ Finally, to check if the **Java Compiler** was properly installed, on the same W
 
 If everything is correct, the above command will output the **Java Compiler** version.
 
-### 4.6. Apache Maven
+### 4.5. Apache Maven
 
 [**Apache Maven**](https://maven.apache.org/) is a build automation tool used primarily for Java projects. It can also be used to build and manage projects written in C#, Ruby, Scala, and other languages and it is hosted by the [Apache Software Foundation](https://en.wikipedia.org/wiki/Apache_Software_Foundation).
 
-#### 4.6.1. Installation
+#### 4.5.1. Installation
 
-##### 4.6.1.1. Installation on the WSL File System
+##### 4.5.1.1. Installation on the WSL File System
 
 To be able to install a specific [**Apache Maven**](https://maven.apache.org/) version on the `WSL Fily System`, I like to follow a procedure inspired by the [Linuxiz Blog](https://linuxize.com/post/how-to-install-apache-maven-on-ubuntu-18-04/).
 
@@ -462,7 +398,7 @@ To check if **Apache Maven** was properly installed, check the output of the fol
 
 If everything is correct, the above command will output the **Apache Maven** version.
 
-##### 4.6.1.2. Installation on the Windows Native File System
+##### 4.5.1.2. Installation on the Windows Native File System
 
 To install [**Apache Maven**](https://maven.apache.org/), download the desired [Binary zip archive](https://maven.apache.org/download.cgi) and unpack it to the folder `C:\DEV\apache-maven`. Rename the extracted folder taking in consideration the following structure:
 
@@ -499,7 +435,7 @@ To check if **Apache Maven** was properly installed, on the same Windows Command
 
 If everything is correct, the above command will output the **Apache Maven** version.
 
-#### 4.6.2. Configuration
+#### 4.5.2. Configuration
 
 The default location for the user's settings file and for the *Maven Local Repository* is the `.m2` folder at the user's *Home Folder*. Check it it already exists and if it doesn't create it with the upcoming command. If [**Apache Maven**](https://maven.apache.org/) is installed on the `WSL File System`, use a [Ubuntu](https://ubuntu.com/) terminal and if it is installed on the `Windows Native File System`. use a  [Git Bash](https://git-scm.com/) terminal.
 
@@ -521,7 +457,7 @@ To set the folder created with the above command as the custom location for the 
 >
 > + **{PROJECT}** : The label that identifies the project name
 
-#### 4.6.3. Usage & Maintenance
+#### 4.5.3. Usage & Maintenance
 
 For each change of the user's `settings.xml` file, placed on the folder `~/.m2`, a copy of the file that is replaced should be made and named with the following naming structure
 
@@ -538,13 +474,13 @@ If there's no need to have a user's `settings.xml` file, the last one in use sho
 
 A `README.md` file must be stored on the folder `~/.m2` with a list a of all existing `settings.xml` file backups. This list must include the context of each bacuped file usage.
 
-### 4.7. Apache Tomcat
+### 4.6. Apache Tomcat
 
 [**Apache Tomcat**](http://tomcat.apache.org/) is an open source implementation of the [Jakarta Servlet](https://projects.eclipse.org/projects/ee4j.servlet), [Jakarta Server Pages](https://projects.eclipse.org/projects/ee4j.jsp), [Jakarta Expression Language](https://projects.eclipse.org/projects/ee4j.el), [Jakarta WebSocket](https://projects.eclipse.org/projects/ee4j.websocket), [Jakarta Annotations](https://projects.eclipse.org/projects/ee4j.cahttps://projects.eclipse.org/projects/ee4j.authentication) specifications. These specifications are part of the [Jakarta EE platform](https://projects.eclipse.org/projects/ee4j.jakartaee-platform).
 
-#### 4.7.1. Installation
+#### 4.6.1. Installation
 
-##### 4.7.1.1. Installation on the Windows Native File System
+##### 4.6.1.1. Installation on the Windows Native File System
 
 To install [**Apache Tomcat**](http://tomcat.apache.org/) application server on the `Windows Native File System`, download the desired [release zip archive](http://tomcat.apache.org/) and unpack it to the folder `C:\DEV\apache-tomcat`. Rename the extracted folder taking in consideration the following structure:
 
@@ -557,13 +493,13 @@ The different parts in the above name structure, shall be replaced as explained 
 >
 > With the above examples, the Tomcat folder name would be *tomcat-8.5.82-sa3*
 
-### 4.8 Quarkus CLI
+### 4.7 Quarkus CLI
 
 The [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) lets you create Quarkus projects, manage extensions and do essential build and development tasks using the underlying project build tool.
 
-#### 4.8.1. Installation
+#### 4.7.1. Installation
 
-##### 4.8.1.1. Installation on the WSL File System
+##### 4.7.1.1. Installation on the WSL File System
 
 To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) on the `WSL File System`, as recomended on the [Quarkus documentation](https://quarkus.io/guides/cli-tooling), use [SDKMAN](https://sdkman.io/), execute the upcomming command on a [Ubuntu](https://ubuntu.com/) terminal.
 
@@ -573,7 +509,7 @@ To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) instal
 
     quarkus --version
 
-##### 4.8.1.2. Installation on the Windows Native File System
+##### 4.7.1.2. Installation on the Windows Native File System
 
 To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling), use a PowerShell console with *Administrator* privileges and execute the following command:
 
@@ -583,13 +519,13 @@ To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) instal
 
     quarkus --version
 
-### 4.9 AWS CLI
+### 4.8 AWS CLI
 
 The [**AWS Command Line Interface (AWS CLI)**](https://aws.amazon.com/cli/) is a unified tool to manage your AWS services. With just one tool to download and configure, you can control multiple AWS services from the command line and automate them through scripts.
 
-#### 4.9.1. Installation
+#### 4.8.1. Installation
 
-##### 4.9.1.1. Installation on the WSL File System
+##### 4.8.1.1. Installation on the WSL File System
 
 To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `WSL File System`, follow Linux's [AWS official instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) executing the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
 
@@ -603,7 +539,7 @@ To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was pro
 
 If the `aws` command cannot be found, you might need to restart your terminal or follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
 
-##### 4.9.1.2. Installation on the Windows Native File System
+##### 4.8.1.2. Installation on the Windows Native File System
 
 To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `Windows Native File System`, download the latest version from [official downloads page](https://aws.amazon.com/cli/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
 
@@ -613,13 +549,13 @@ To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was pro
 
 If Windows is unable to find the program, you might need to close and reopen the command prompt window to refresh the path, or follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
 
-### 4.10 Make
+### 4.9 Make
 
 [**GNU Make**](https://www.gnu.org/software/make/) is a tool which controls the generation of executables and other non-source files of a program from the program's source files.
 
-#### 4.10.1. Installation
+#### 4.9.1. Installation
 
-#### 4.10.1.1. Installation on the WSL File System
+#### 4.9.1.1. Installation on the WSL File System
 
 To install [**GNU Make**](https://www.gnu.org/software/make/) on the `WSL File System`, execute the upcomming command on a [Ubuntu](https://ubuntu.com/) terminal.
 
@@ -629,7 +565,7 @@ To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation
 
     make --version
 
-#### 4.10.1.1. Installation on the Windows Native File System
+#### 4.9.1.1. Installation on the Windows Native File System
 
 To install [**GNU Make**](https://www.gnu.org/software/make/), use a PowerShell console with *Administrator* privileges and execute the following command:
 
@@ -639,11 +575,76 @@ To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation
 
     make --version
 
-### 4.11. Rancher Desktop
+### 4.10 Docker
+
+[**Docker**](https://www.docker.com/) is an open-source containerization platform. It enables developers to package applications into containers, which are standardized, executable components combining application source code with the operating system libraries and dependencies required to run that code in any environment.
+
+[**Docker**](https://www.docker.com/) updated its [Docker Desktop License Agreement](https://docs.docker.com/subscription/?ref=paulsblog.dev#docker-desktop-license-agreement) and this change means that on companies with more than 250 employees or more than $10 million in annual revenue you will not be able to use [Docker Desktop](https://www.docker.com/products/docker-desktop/) without a paid subscription. A possible alternative is [Rancher Desktop](https://rancherdesktop.io/) but, as the license update is only related to [Docker Desktop](https://www.docker.com/products/docker-desktop/), it's also possible to utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
+
+If you're going to do your development work on the Windows native file system, you should choose [Rancher Desktop](https://rancherdesktop.io/) to replace [Docker Desktop](https://www.docker.com/products/docker-desktop/). But if you're planning to do all you development work on the [WSL](https://learn.microsoft.com/windows/wsl/) file system (taking advantage of the Linux tools), you should utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
+
+### 4.10.1. Installation
+
+### 4.10.1.1. Installation on the WSL File System
+
+This section describes the necessary steps to install [**Docker**](https://www.docker.com/) and [Docker Engine](https://docs.docker.com/engine/) on a [WSL](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) distribuition. The following steps are based on the [official documentation for installing Docker on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) with some adaptations provided by [Paul Knulst](https://www.paulsblog.dev/how-to-install-docker-without-docker-desktop-on-windows/).
+
+On your [Ubuntu](https://ubuntu.com/) submodule of [WSL](https://learn.microsoft.com/windows/wsl/), install the required dependencies with the following commands:
+
+    sudo apt update
+    sudo apt -y install apt-transport-https ca-certificates curl gnupg lsb-release
+
+Then, add [**Docker**](https://www.docker.com/)'s official GPG key with the following commands:
+
+    sudo install -m 0755 -d /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+To add the [**Docker**](https://www.docker.com/) stable repository, execute the following command:
+
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt update
+
+Install the latetst version of the [**Docker**](https://www.docker.com/)'s packages with the following command:
+
+    sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+Add you user to the `docker` group with the following command
+
+    sudo usermod -aG docker $USER
+
+Log out and log back in so that your group membership is re-evaluated, or run the following command to activate the changes to groups:
+
+    newgrp docker
+
+Check the installed versions using the following commands
+
+    docker --version
+    dockerd --version
+    docker compose version
+
+On [Ubuntu](https://ubuntu.com/), the Docker service starts on boot by default, therefore, it won't be necessary to enable it. To verify that `docker` and `containerd` were started bu *systemd*, run the following commands:
+
+    sudo systemctl status docker.service
+    sudo systemctl status containerd.service
+
+The `iptables` used by [Ubuntu](https://ubuntu.com/) is the `nftables` version and this might stop [**Docker**](https://www.docker.com/)'s interaction with the firewall because using `nftables` natively requires Linux Kernel 5.8 but the latest Kernel version for the [WSL](https://learn.microsoft.com/windows/wsl/) is 5.4. Luckily, [Ubuntu](https://ubuntu.com/) still has the possibility to use a legacy version of `iptables` by simply executing upcoming command and choosing, when prompted, the option `1`.
+
+    sudo update-alternatives --config iptables
+
+After updating the `iptables` just restart the Docker daemon with the following command:
+
+    sudo systemctl restart docker.service
+
+Then, verify if everything is running properly by checking the output of the following commands:
+
+    sudo systemctl status docker.service
+    sudo systemctl status containerd.service
+    docker run hello-world
+
+### 4.10.1.1. Installation on the Windows Native File System with Rancher Desktop
 
 [**Rancher Desktop**](https://rancherdesktop.io/) is an app that provides container management and Kubernetes on the desktop. It is available for Mac (both on Intel and Apple Silicon), Windows, and Linux.
-
-#### 4.11.1. Installation
 
 [**Rancher Desktop**](https://rancherdesktop.io/) installation is only necessary if you're going to do your development work on the Windows Native File System because, if you're going to do all you development work on the [WSL](https://learn.microsoft.com/windows/wsl/) file system, you should utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
 
@@ -663,7 +664,7 @@ Make sure that [**Rancher Desktop**](https://rancherdesktop.io/) is running (lau
 
 If everything is correct, the output of the previous command will show the **rancher-desktop** distros running on [WSL](https://learn.microsoft.com/windows/wsl/).
 
-The [**Rancher Desktop**](https://rancherdesktop.io/) installation and usage files are [stored in the local](https://github.com/rancher-sandbox/rancher-desktop/discussions/1551#discussioncomment-2137434) in the following folders:
+The [**Rancher Desktop**](https://rancherdesktop.io/) installation and usage files are [stored in the following folders](https://github.com/rancher-sandbox/rancher-desktop/discussions/1551#discussioncomment-2137434):
 
 + `%USERPROFILE%\AppData\Local\rancher-desktop` contains the distribution data, container images, logs, etc;
 + `%USERPROFILE%\AppData\Roaming\rancher-desktop` contains preferences;
@@ -697,13 +698,13 @@ To confirm that everything is correct, execute the below commands on a [Git Bash
     docker --version
     kubectl version
 
-### 4.12 Terraform
+### 4.11 Terraform
 
 [**Terraform**](https://www.terraform.io/) is a tool for building, changing, and versioning infrastructure safely and efficiently.
 
-#### 4.12.1. Installation
+#### 4.11.1. Installation
 
-##### 4.12.1.1. Installation on the WSL File System
+##### 4.11.1.1. Installation on the WSL File System
 
 The easiest way to install and manage multiple versions of [**Terraform**](https://www.terraform.io/) on the `WSL File System` is to use [TFSwitch](https://tfswitch.warrensbox.com/). This is a command line tool that lets you switch between different versions of [**Terraform**](https://www.terraform.io/).
 
@@ -743,7 +744,7 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 
     terraform --version
 
-##### 4.12.1.2. Installation on the Windows Native File System
+##### 4.11.1.2. Installation on the Windows Native File System
 
 To install [**Terraform**](https://www.terraform.io/) on the `Windows Native File System`, use a PowerShell console with *Administrator* privileges and execute the following command:
 
@@ -753,13 +754,13 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 
     terraform --version
 
-### 4.13. Node.js
+### 4.12. Node.js
 
 [**Node.js**](https://nodejs.org/) is a cross-platform, open-source JavaScript runtime environment that runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
 
-#### 4.13.1. Installation
+#### 4.12.1. Installation
 
-##### 4.13.1.1. Installation on the WSL File System
+##### 4.12.1.1. Installation on the WSL File System
 
 A [popular method](https://nodejs.devhttps://nodejs.org/en/learn/getting-started/how-to-install-nodejs) to install and manage multiple versions of [**Node.js**](https://nodejs.org/) is to use [`nvm`](https://github.com/nvm-sh/nvm), which cam also be used  on the `WSL File System`. [`nvm`](https://github.com/nvm-sh/nvm) is a version manager for [**Node.js**](https://nodejs.org/), designed to be installed per-user, and invoked per-shell. It works on any POSIX-compliant shell (sh, dash, ksh, zsh, bash), in particular on these platforms: unix, macOS, and [WSL](https://github.com/nvm-sh/nvm#important-notes). [`nvm`](https://github.com/nvm-sh/nvm) is also recommended on [`npm`](https://www.npmjs.com/)'s [Official Documentation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
@@ -809,7 +810,7 @@ When [**Node.js**](https://nodejs.org/) is installed, [`npm`](https://www.npmjs.
 
     nvm install-latest-npm
 
-##### 4.13.1.2. Installation on the Windows Native File System
+##### 4.12.1.2. Installation on the Windows Native File System
 
 The easiest method to install and manage multiple versions of [**Node.js**](https://nodejs.org/) on the `Windows Native File System` is to use [NVS](https://github.com/jasongin/nvs). This is a cross-platform utility for switching between different versions and forks of [**Node.js**](https://nodejs.org/). [NVS](https://github.com/jasongin/nvs) is itself written in node JavaScript.
 
@@ -888,11 +889,11 @@ From now on, the latest **node** lts version will be available on all shells of 
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-### 4.14. IntelliJ IDEA
+### 4.13. IntelliJ IDEA
 
 [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) is an integrated development environment written in Java for developing computer software written in Java, Kotlin, Groovy, and other JVM-based languages. It is developed by JetBrains and is available as an Apache 2 Licensed community edition, and in a proprietary commercial edition.
 
-#### 4.14.1. Installation
+#### 4.13.1. Installation
 
 The [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) is the [recommended way](https://www.jetbrains.com/help/idea/installation-guide.html#toolbox) to install JetBrain products. Download the latest installation file from the [official download page](https://www.jetbrains.com/toolbox-app/). Then, execute the downloaded file to install [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/).
 
@@ -924,51 +925,51 @@ We also recommend [excluding the IDE process from the antivirus](https://intelli
 
 Execute the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) chosen version and follow the instructions prompted. On the welcome screen, click the button `Enable New UI`.
 
-#### 4.14.2. Install plugins
+#### 4.13.2. Install plugins
 
-##### 4.14.2.1. Install SonarLint plugin
+##### 4.13.2.1. Install SonarLint plugin
 
 [SonarLint](https://plugins.jetbrains.com/plugin/7973-sonarlint) is an IDE extension that helps to detect and fix quality issues as the code is written. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "SonarLint". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-##### 4.14.2.2. Install Markdown plugin
+##### 4.13.2.2. Install Markdown plugin
 
 [Markdown](https://plugins.jetbrains.com/plugin/7793-markdown) is an IDE extension that provides the capability to edit Markdown files within the IDE and see the rendered HTML in a live preview. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "Markdown". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-##### 4.14.2.3. Install JPA Buddy
+##### 4.13.2.3. Install JPA Buddy
 
 [JPA Buddy](https://plugins.jetbrains.com/plugin/15075-jpa-buddy) is an IDE extension that helps developers work efficiently with Hibernate, EclipseLink, Spring Data JPA, Flyway, Liquibase, Lombok, MapStruct, and other related technologies in both Java and Kotlin. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "JPA Buddy". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-#### 4.14.3. Set code formatters
+#### 4.13.3. Set code formatters
 
-##### 4.14.3.1. Java
+##### 4.13.3.1. Java
 
 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) seems to be the most popular **Code Style Guide** for [Java](https://www.java.com/en/). This style guide is licensed under the [CC-By 3.0 License](https://creativecommons.org/licenses/by/3.0/) and a there's a [repository](https://github.com/google/styleguide) where a formatter configuration file for [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) is available.
 
 To add the above mentioned Code Style Formatter settings, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Editor->Code Style->Java`. On this tab, click the `settings` icon choose `Import Scheme/IntelliJ IDEA code style XML` and pick the file(s) with the desired settings.
 
-#### 4.14.4. Configure Version Control
+#### 4.13.4. Configure Version Control
 
-##### 4.14.4.1. Commit
+##### 4.13.4.1. Commit
 
 On the **Version Control**, the *Local Changes* and the *Shelf* tabs are very useful on my workflow. To enable those tabs it's necessary to make a small [change on the default settings](https://intellij-support.jetbrains.com/hc/en-us/community/posts/4412759255698-2021-2-3-Git-Local-Changes-view-in-VCS-is-gone).
 
 To make the necessary change, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Version Control->Commit`.  On this tab, uncheck the `Use non-modal commit interface` checkbox.
 
-#### 4.14.5. Configure Build Tools
+#### 4.13.5. Configure Build Tools
 
-##### 4.14.5.1. Maven
+##### 4.13.5.1. Maven
 
 To customize *Maven*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Maven`. On this tab, change the input boxes listed below as described:
 
-+ **Maven home path** : The path to the chosen [system *Maven* instance](#461-installation);
-+ **User setting file** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#462-configuration);
-+ **Local repository** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#462-configuration);
++ **Maven home path** : The path to the chosen [system *Maven* instance](#451-installation);
++ **User setting file** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#452-configuration);
++ **Local repository** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#452-configuration);
 
 Beware that you must choose the [Apache Maven](https://maven.apache.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.14.6. Configure Tools
+#### 4.13.6. Configure Tools
 
-##### 4.14.6.1. Terminal
+##### 4.13.6.1. Terminal
 
 To customize the *Terminal* in use with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Tools->Terminak`. On this tab, take in consideration the file system you're working on and change the input boxes listed below as described:
 
@@ -983,7 +984,7 @@ This settings will only take effect when starting a new terminal. Therefore, cre
 
 This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.14.7. Run/Debug Configurations
+#### 4.13.7. Run/Debug Configurations
 
 To ensure that the building of a project on the `WSL File System` [works properly](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html#debugging_system_settings) you need to adapt the Windows Firewall configuration. Open a PowerShell console with *Administrator* privileges and execute the following command to allow connections using WSL:
 
@@ -995,7 +996,7 @@ Then execute the command to renew the firewall rules:
 
 After starting a debugger session, the Windows Firewall popup might appears and them, select the *Public networks* checkbox and click the `Allow access` button.
 
-##### 4.14.7.1 Shorten command line method
+##### 4.13.7.1 Shorten command line method
 
 To avoid the error "*Command line is too long*" when running tests it's necessary to set the "*Shorten command line*" method in the Run/Debug configuration to "*JAR manifest*". That can be done for the specific method or class, but it's better to [set it as default](https://stackoverflow.com/a/47927544) on [run/debug configuration templates](https://www.jetbrains.com/help/idea/run-debug-configuration.html#templates).
 
@@ -1003,11 +1004,11 @@ From the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) main menu, select 
 
 [Then](https://stackoverflow.com/a/65639857), click on the `Modify options` link (`ALT+M`) and set/select the `Shorten command line` option. Back on the `JUnit` tab, there will be a new dropdown input box named `Shorten command line`. In this new dropdown, choose the *Jar manifest* option. Click the button `OK` (once to close the `Select configuration templates` pop up and again to close the  `Run->Edit Configurations` pop up screen) and from now on all the new `JUnit` Run/Debug configurations will use this template.
 
-### 4.15. Visual Studio Code
+### 4.14. Visual Studio Code
 
 [**Visual Studio Code**](https://code.visualstudio.com/), also commonly referred to as **VS Code**, is a source-code editor made by Microsoft with the Electron Framework, for Windows, Linux and macOS. Features include support for debugging, syntax highlighting, intelligent code completion, snippets, code refactoring, and embedded Git.
 
-#### 4.15.1. Installation
+#### 4.14.1. Installation
 
 Download the [**Visual Studio Code**](https://code.visualstudio.com) *User Installer* file from the [official download page](https://code.visualstudio.com/download). Then, execute the downloaded file to install [**Visual Studio Code**](https://code.visualstudio.com).
 
@@ -1021,7 +1022,7 @@ Execute [**Visual Studio Code**](https://code.visualstudio.com) and on the `Mana
 + Extensions
 + UI State
 
-#### 4.15.2. Install extensions
+#### 4.14.2. Install extensions
 
 With the `Settings Sync` turned on, [**Visual Studio Code**](https://code.visualstudio.com) will installed all the synced extensions. Wait for while to allow the full synchronization and then check if all of the following extensions were properly installed:
 
@@ -1055,15 +1056,15 @@ With the `Settings Sync` turned on, [**Visual Studio Code**](https://code.visual
 + [WSL)](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl);
 + [XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml).
 
-### 4.16. Eclipse
+### 4.15. Eclipse
 
 TODO
 
-### 4.17. DBeaver
+### 4.16. DBeaver
 
 [**DBeaver**](https://dbeaver.io/) is free and open source universal database tool for developers and database administrators.
 
-#### 4.17.1. Installation
+#### 4.16.1. Installation
 
 Download [**DBeaver**](https://dbeaver.io/) installer latest version from [official downloads page](https://dbeaver.io/download/). Then, execute the downloaded file and when prompted, choose to install [**DBeaver**](https://dbeaver.io/) only for the current user. When asked to select the components to install, check the following checkboxes:
 
@@ -1073,11 +1074,11 @@ Download [**DBeaver**](https://dbeaver.io/) installer latest version from [offic
 
 Move the [**DBeaver**](https://dbeaver.io/) *Start Menu* *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DBeaver Community` that was created by the installer.
 
-### 4.18. Postman
+### 4.17. Postman
 
 [**Postman**](https://www.postman.com/) helps you be more efficient while working with APIs. Using Postman, you can construct complex HTTP requests quickly, organize them in collections.
 
-#### 4.18.1. Installation
+#### 4.17.1. Installation
 
 Download [**Postman**](https://www.postman.com/) installer latest version from [official downloads page](https://www.postman.com/downloads/). Then, execute the downloaded file and when prompted, sign in into the [**Postman**](https://www.postman.com/) account.
 
