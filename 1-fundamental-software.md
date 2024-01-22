@@ -187,10 +187,24 @@ Check the [official documentation](https://learn.microsoft.com/windows/package-m
 
 #### 1.5.2. Install Chocolatey
 
-If you are going to do your development work on the `Windows Native File System` (instead of doing it on the `WSL File System`), install [**Chocolatey**](https://chocolatey.org/) executing on a PowerShell console with *Administrator*, the upcoming command to install it.
+If you are going to do your development work on the `Windows Native File System` (instead of doing it exclusively on the `WSL File System`) you should also install [**Chocolatey**](https://chocolatey.org/).
+
+Before proceeding with the installation of [**Chocolatey**](https://chocolatey.org/), you must ensure **Get-ExecutionPolicy** is not ***Restricted***. The upcoming command, executed on a PowerShell console with *Administrator* priviliges. will output the current [execution policy](https://go.microsoft.com/fwlink/?LinkID=135170).
+
+    Get-ExecutionPolicy
+
+If the output of the above command shows ***Restricted***, then run the following command on the same PowerShell console:
+
+    Set-ExecutionPolicy Bypass -Scope Process
+
+Or the upcoming command, for quite a [bit more security](https://chocolatey.org/install).
+
+    Set-ExecutionPolicy AllSigned
+
+Then, on the same PowerShell console, execute the below command to install [**Chocolatey**](https://chocolatey.org/).
 
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 To list the installed chocolatey packages, execute the following command on a PowerShell console:
 
-    choco list --local-only
+    choco list
