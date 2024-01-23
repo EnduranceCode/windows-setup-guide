@@ -527,11 +527,11 @@ The [**AWS Command Line Interface (AWS CLI)**](https://aws.amazon.com/cli/) is a
 
 ##### 4.8.1.1. Installation on the WSL File System
 
-To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `WSL File System`, follow Linux's [AWS official instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) executing the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
+To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `WSL File System`, take in consideration Linux's [AWS official instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and execute the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
 
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-    unzip awscliv2.zip
-    sudo ./aws/install
+    curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscliv2.zip
+    unzip /tmp/awscliv2.zip -d /tmp/
+    sudo /tmp/aws/install
 
 To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was properly made, check the output of the following command:
 
