@@ -261,7 +261,7 @@ If everything is correct, the above command will output the **Java Compiler** ve
 
 The instructions shown here describe how to manually install [**Java**](https://openjdk.org/) on the `Windows Native File System` for the current *user account*.
 
-Download the *.zip* option of the desired JDK version and and unpack it to a folder inside `C:\DEV\java`. Rename the extracted folder taking in consideration the following structure:
+Download the *.zip* option of the desired [JDK version and vendor](https://javaalmanac.io/). Then, unpack it to a folder inside `C:\DEV\java`. Rename the extracted folder taking in consideration the following structure:
 
     {VENDOR}-{VERSION}-{PROJECT}
 
