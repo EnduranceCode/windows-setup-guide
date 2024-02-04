@@ -543,6 +543,8 @@ If the `aws` command cannot be found, you might need to restart your terminal or
 
     curl https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb -o /tmp/session-manager-plugin.deb
 
+To install the downloaded `.deb` package executing the following command:
+
     sudo dpkg -i /tmp/session-manager-plugin.deb
 
 Run the following commands to verify that the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installed successfully.
