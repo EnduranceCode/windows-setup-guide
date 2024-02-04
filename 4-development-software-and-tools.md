@@ -539,15 +539,39 @@ To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was pro
 
 If the `aws` command cannot be found, you might need to restart your terminal or follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
 
+[AWS](https://aws.amazon.com/) also provides a [Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) that "enables you to establish secure connections to your Amazon Elastic Compute Cloud (EC2) instances, edge devices, on-premises servers, and virtual machines (VMs)". Follow the Debian and Ubuntu [official instructions](https://docs.aws.amazon.com/systems-manager/latest/userguide/install-plugin-debian-and-ubuntu.html) to install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `WSL File System` and download the `.deb` package executing the following command:
+
+    curl https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb -o /tmp/session-manager-plugin.deb
+
+    sudo dpkg -i /tmp/session-manager-plugin.deb
+
+Run the following commands to verify that the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installed successfully.
+
+    session-manager-plugin
+
+If the installation was successful, the following message is returned.
+
+    The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
+
 ##### 4.8.1.2. Installation on the Windows Native File System
 
-To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `Windows Native File System`, download the latest version from [official downloads page](https://aws.amazon.com/cli/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
+To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `Windows Native File System`, download the latest version from the [official downloads page](https://aws.amazon.com/cli/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
 
 To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was properly made, check the output of the following command:
 
     aws --version
 
 If Windows is unable to find the program, you might need to close and reopen the command prompt window to refresh the path, or follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
+
+To install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `Windows Native File System`, follow the [official instructions](https://docs.aws.amazon.com/systems-manager/latest/userguide/install-plugin-windows.html) and download the latest version of the installer from the [official downloads page](https://s3.amazonaws.com/session-manager-downloads/plugin/latest/windows/SessionManagerPluginSetup.exe). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
+
+Run the following commands to verify that the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installed successfully.
+
+    session-manager-plugin
+
+If the installation was successful, the following message is returned.
+
+    The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
 
 ### 4.9 Make
 
