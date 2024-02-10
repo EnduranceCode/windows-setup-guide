@@ -17,7 +17,7 @@ This file contains the **Fundamental Software** section of my [Setup guide for a
 
 With [Lubuntu](https://lubuntu.me) I normally choose [Firefox](https://www.mozilla.org/firefox/new/) as my default browser and on Windows I used to choose [**Google Chrome**](https://www.google.com/chrome/). At the moment, I'm also trying to use [Firefox](https://www.mozilla.org/firefox/new/) on Windows.
 
-#### 1.1.1. Google Chrome
+#### 1.1.1. Firefox
 
 [**Firefox**](https://www.mozilla.org/firefox/new/) is a cross-platform web browser developed by [Mozilla](https://en.wikipedia.org/wiki/Mozilla).
 
