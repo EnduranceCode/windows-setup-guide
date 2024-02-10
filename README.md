@@ -25,7 +25,7 @@ This is my personal guide to setup a development machine on Windows. Although th
     4. [Inkscape](./3-desktop-software.md#34-inkscape)
     5. [PDFsam](./3-desktop-software.md#35-pdfsam)
     6. [SpeedCrunch](3-desktop-software.md#36-speedcrunch)
-    7. [Spotify](./3-desktop-software.md#37-spotify)
+    7. [Spotube](./3-desktop-software.md#37-spotube)
     8. [VLC](./3-desktop-software.md#38-vlc)
 4. [Development Software & Tools](./4-development-software-and-tools.md)
     1. [Notepadd++](./4-development-software-and-tools.md#41-notepad)

@@ -11,7 +11,7 @@ This file contains the **Desktop Software** section of my [Setup guide for a dev
     4. [Inkscape](#34-inkscape)
     5. [PDFsam](#35-pdfsam)
     6. [SpeedCrunch](#36-speedcrunch)
-    7. [Spotify](#37-spotify)
+    7. [Spotube](#37-spotube)
     8. [VLC](#38-vlc)
 
 ## 3. Desktop Software
@@ -53,7 +53,7 @@ To enable sound on [**Ferdium**](https://ferdium.org/), at least with [Team's](h
 
 #### 3.3.1. Installation
 
-To install [**GIMP**](https://www.gimp.org/), apen a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/XPDM27W10192Q0).
+To install [**GIMP**](https://www.gimp.org/), open a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/XPDM27W10192Q0).
 
     winget install XPDM27W10192Q0 -s msstore
 
@@ -65,7 +65,7 @@ Rename the [**GIMP**](https://www.gimp.org/) *Start Menu* shortcut to *GIMP* and
 
 #### 3.4.1. Installation
 
-To install [**Inkscape**](https://inkscape.org/), apen a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/9PD9BHGLFC7H).
+To install [**Inkscape**](https://inkscape.org/), open a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/9PD9BHGLFC7H).
 
     winget install 9PD9BHGLFC7H -s msstore
 
@@ -93,15 +93,15 @@ If the keyboard in use has a special key to start a calculator, edit the [Window
 
 To open the [Registry Editor](https://www.bleepingcomputer.com/tutorials/how-to-use-the-windows-registry-editor/) as an administrator, click the Windows *Start Menu*, type `regedit` in the search field and then click on the *Run as an administrator* option that is shown. Then, navigate to the [key](https://www.lifewire.com/what-is-a-registry-key-2625999) `Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AppKey\18` and add a new string [registry value](https://www.lifewire.com/what-is-a-registry-value-2626042) with the value *ShellExecute* in the `Name` field and with value of the full path of the [**SpeedCrunch**](http://www.speedcrunch.org) executable file in the `Data` field.
 
-### 3.7. Spotify
+### 3.7. Spotube
 
-[**Spotify**](https://www.spotify.com/) is a audio streaming and media services provider.
+[**Spotube**](https://spotube.krtirtho.dev/) is a fast, modern, lightweight & efficient Spotify Music Client for every platform.
 
 #### 3.7.1. Installation
 
-To install [**Spotify**](https://www.spotify.com/), apen a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/9NCBCSZSJRSB).
+To install [**Spotube**](https://spotube.krtirtho.dev/), open a PowerShell console and execute the upcoming command to execute the installation with the [official package](https://spotube.krtirtho.dev/other-downloads/package-manager).
 
-    winget install 9NCBCSZSJRSB -s msstore
+    winget install --id KRTirtho.Spotube
 
 ### 3.8. VLC
 
@@ -109,7 +109,7 @@ VLC is a free and open source cross-platform multimedia player and framework tha
 
 #### 3.8.1. Installation
 
-To install [**VLC**](https://www.videolan.org/), apen a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/XPDM1ZW6815MQM).
+To install [**VLC**](https://www.videolan.org/), open a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/XPDM1ZW6815MQM).
 
     winget install XPDM1ZW6815MQM -s msstore
 
