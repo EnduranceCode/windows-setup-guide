@@ -5,7 +5,7 @@ This file contains the **Fundamental Software** section of my [Setup guide for a
 ## Table of Contents
 
 1. [Fundamental Software](#1-fundamental-software)
-    1. [Google Chrome](#11-google-chrome)
+    1. [Browser](#11-browser)
     2. [KeePassXC](#12-keepassxc)
     3. [Windows Subsystem for Linux](#13-windows-subsystem-for-linux)
     4. [Windows Terminal](#14-windows-terminal)
@@ -13,29 +13,57 @@ This file contains the **Fundamental Software** section of my [Setup guide for a
 
 ## 1. Fundamental Software
 
-[**Google Chrome**](https://www.google.com/chrome/) is a cross-platform web browser developed by [Google](https://en.wikipedia.org/wiki/Google). With [Lubuntu](https://lubuntu.me) I normally choose [Firefox](https://www.mozilla.org/firefox/new/) but on Windows I normally use [**Google Chrome**](https://www.google.com/chrome/).
+### 1.1. Browser
 
-### 1.1. Google Chrome
+With [Lubuntu](https://lubuntu.me) I normally choose [Firefox](https://www.mozilla.org/firefox/new/) as my default browser and on Windows I used to choose [**Google Chrome**](https://www.google.com/chrome/). At the moment, I'm also trying to use [Firefox](https://www.mozilla.org/firefox/new/) on Windows.
+
+#### 1.1.1. Google Chrome
+
+[**Firefox**](https://www.mozilla.org/firefox/new/) is a cross-platform web browser developed by [Mozilla](https://en.wikipedia.org/wiki/Mozilla).
+
+##### 1.1.1.1. Installation
+
+To install [**Firefox**](https://www.mozilla.org/firefox/new/), start by downloading the latest version from [official downloads page](https://www.mozilla.org/firefox/new/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
+
+##### 1.1.1.2. Configuration
+
+Set [**Google Chrome**](https://www.google.com/chrome/) preferences as desired and then install the following extensions:
+
++ [AWS Extend Switch Roles](https://addons.mozilla.org/firefox/addon/aws-extend-switch-roles3/)
++ [ColorZilla](https://addons.mozilla.org/firefox/addon/colorzilla/)
++ [Firefox Multi-Account Containers](https://addons.mozilla.org/firefox/addon/multi-account-containers/)
++ [KeePassXC-Browser](https://addons.mozilla.org/firefox/addon/keepassxc-browser/)
++ [Omnivore](https://addons.mozilla.org/firefox/addon/omnivore/)
++ [Proxy SwitchyOmega](https://addons.mozilla.org/firefox/addon/switchyomega/)
++ [Raindrop.io](https://addons.mozilla.org/firefox/addon/raindropio/)
++ [Tab Session Manager](https://addons.mozilla.org/firefox/addon/tab-session-manager/)
++ [Wapplyzer](https://addons.mozilla.org/firefox/addon/wappalyzer/)
+
+Set the options of all the above extensions. Use the extensions settings backups/exports stored in the folder `%OneDriveCommercial%\dotfiles\browser\extensions` to better customize the relevant extension.
+
+#### 1.1.2. Google Chrome
 
 [**Google Chrome**](https://www.google.com/chrome/) is a cross-platform web browser developed by [Google](https://en.wikipedia.org/wiki/Google).
 
-#### 1.1.1. Installation
+##### 1.1.2.1. Installation
 
 To install [**Google Chrome**](https://www.google.com/chrome/), start by downloading the latest version from [official downloads page](https://www.google.com/chrome/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
 
-#### 1.1.2. Configuration
+##### 1.1.2.2. Configuration
 
 Set [**Google Chrome**](https://www.google.com/chrome/) preferences as desired and then install the following extensions:
 
 + [AWS Extend Switch Roles](https://chrome.google.com/webstore/detail/aws-extend-switch-roles/jpmkfafbacpgapdghgdpembnojdlgkdl)
++ [ColorZilla](https://chromewebstore.google.com/detail/colorzilla/bhlhnicpbhignbdhedgjhgdocnmhomnp)
 + [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa)
 + [KeePassXC-Browser](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk)
 + [Omnivore](https://chromewebstore.google.com/detail/omnivore/blkggjdmcfjdbmmmlfcpplkchpeaiiab)
 + [Proxy SwitchyOmega](https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif)
 + [Raindrop.io](https://chromewebstore.google.com/detail/raindropio/ldgfbffkinooeloadekpmfoklnobpien)
 + [Tab Session Manager](https://chrome.google.com/webstore/detail/tab-session-manager/iaiomicjabeggjcfkbimgmglanimpnae)
++ [Wapplyzer](https://chromewebstore.google.com/detail/wappalyzer-technology-pro/gppongmhjkpfnbhagpmjfkannfbllamg)
 
-Set the options of all the above extensions. Use the extensions settings backups/exports stored in the folder `%OneDriveCommercial%\dotfiles\chrome\extensions` to better customize the relevant extension.
+Set the options of all the above extensions. Use the extensions settings backups/exports stored in the folder `%OneDriveCommercial%\dotfiles\browser\extensions` to better customize the relevant extension.
 
 ### 1.2. KeePassXC
 

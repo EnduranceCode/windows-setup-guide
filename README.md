@@ -9,7 +9,7 @@ This is my personal guide to setup a development machine on Windows. Although th
 ## Table of Contents
 
 1. [Fundamental Software](./1-fundamental-software.md)
-    1. [Google Chrome](./1-fundamental-software.md#11-google-chrome)
+    1. [Browser](./1-fundamental-software.md#11-browser)
     2. [KeepassXC](./1-fundamental-software.md#12-keepassxc)
     3. [Windows Subsystem for Linux](./1-fundamental-software.md#13-windows-subsystem-for-linux)
     4. [Windows Terminal](./1-fundamental-software.md#14-windows-terminal)
