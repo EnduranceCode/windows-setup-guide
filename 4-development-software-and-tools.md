@@ -67,11 +67,64 @@ Move the [**Meld**](https://meld.app/) *Start Menu* *shortcut* to the `%PROGRAMD
 
 **Git Bash** comes included as part of the [Git's Windows package](https://git-scm.com/download/win) and is an application for Microsoft Windows environments which provides an emulation layer for a [**Git**](https://git-scm.com/) command line experience.
 
-To install [**Git**](https://git-scm.com/) on the `Windows Native File System`, use a PowerShell console with *Administrator* privileges and execute the following command:
+To install [**Git**](https://git-scm.com/) on the `Windows Native File System`, download the latest version from [official downloads page](https://git-scm.com/download/win). Then, execute the downloaded file *as administrator*.
 
-    choco install git /NoGuiHereIntegration /Symlinks
+On the *Select Start Menu Folder* step of the installation program, insert the following text on the input box:
 
-The parameters used on the above command are personal choices, the list of available parameters (and its definitions) can be found at [Git Package Parameters documentation page](https://github.com/chocolatey-community/chocolatey-packages/blob/master/automatic/git.install/ARGUMENTS.md).
++ Development
+
+On the *Select Components* step of the installation program, make sure that you will only check the following checkboxes:
+
++ Git LFS (Large File Support);
++ Associate .git* configuration files with the default text editor;
++ Associate .sh files to be run with Bash
++ Add a Git Bash Profile for Windows Terminal
++ Scala (Git add-on to manage large-scale repositories)
+
+On the *Choosing the default editor used by Git* step of the installation program, select the following text editor:
+
++ Nano editor
+
+On the *Adjusting the name of the initial branch in new repositories* step of the installation program, select the following option:
+
++ Let Git decide
+
+On the *Adjusting your PATH environment* step of the installation program, select the following option:
+
++ Git from the command line and also from 3rd-party software
+
+On the *Choosing the SSH executable* step of the installation program, select the following option:
+
++ Use bundled OpenSSH
+
+On the *Choosing HTTPS transport backend* step of the installation program, select the following option:
+
++ Use the OpenSSL library
+
+On the *Configuring the line ending conversions* step of the installation program, select the following option:
+
++ Checkout Windows-style, commit Unix-style line endings
+
+On the *Configuring the terminal emulator to use with Git Bash* step of the installation program, select the following option:
+
++ Use MinTTY (the default terminal of MSYS2)
+
+On the *Choose the default behavior of 'git pull'* step of the installation program, select the following option:
+
++ Rebase
+
+On the *Choose a credential helper* step of the installation program, select the following option:
+
++ Git Credential Manager
+
+On the *Configuring extra options* step of the installation program, check the following checkboxes:
+
++ Enable file system caching
++ Enable symbolic links
+
+On the *Configuring experimental options* step of the installation program, keep all the checkboxes unchecked.
+
+When the installation is complete, configure the **Git Bash** profile on the [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701).
 
 #### 4.3.2. Bash prompt customization
 
@@ -87,10 +140,10 @@ The customization of the bash prompt is very personal and the files used to acco
 
 Replace the **{LABEL}** in the upcoming snippet as appropriate and the add it to the file `~/.bashrc`.
 
-    # Source the file ~/.bash_{USER}/bashrc_{USER}.sh to customize the bash shell
+    # Source the file ~/.bash_{USER}/bash_{USER}.sh to customize the bash shell
     #
-    if [ -f ~/.bash_{USER}/bashrc_{USER}.sh ]; then
-        . ~/.bash_{USER}/bashrc_{USER}.sh
+    if [ -f ~/.bash_{USER}/bash_{USER}.sh ]; then
+        . ~/.bash_{USER}/bash_{USER}.sh
     fi
 
 > **Label Definition**
@@ -107,19 +160,22 @@ The files used to accomplish my personal customization on the `Windows Native Fi
 
     mklink /J %USERPROFILE%\.dotfiles "%OneDriveCommercial%\dotfiles"
 
-Replace the **{LABEL}** in the upcoming snippet as appropriate and the add it to the file `~/.bashrc`.
+To edit the file `~/.bashrc`, open it (or create it) with the [Nano text editor](https://www.nano-editor.org/), executing the below command on a **Git Bash** terminal:
+
+    nano ~/.bashrc
+
+Then, within the file `~/.bashrc`, paste the upcoming snippet and replace the **{LABEL}** as appropriate.
 
     # Source the file ~/.dotfiles/bash-win/bashrc_{USER}.sh to customize the bash shell
-    #
     if [ -f ~/.dotfiles/bash-win/bashrc_{USER}.sh ]; then
-        . ~/.dotfiles/bash-win/bashrc_{USER}.sh
+        source ~/.dotfiles/bash-win/bashrc_{USER}.sh
     fi
 
 > **Label Definition**
 >
 > + **{USER}** : Output of the command `echo "$USER"`
 
-After applying the above mentioned changes, save and close the file `~/.bashrc`. To make the changes effective, execute, from a bash terminal, the following command:
+After applying the above mentioned changes, save and close the file `~/.bashrc`. To make the changes effective, execute from a **Git Bash** terminal, the following command:
 
     source ~/.bashrc
 

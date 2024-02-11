@@ -181,11 +181,11 @@ To verify if the `build-essentials` installation was properly made, check the ou
 
 ### 1.4. Windows Terminal
 
-The [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) is a terminal application for users of command-line tools and shells like Command Prompt, PowerShell, and WSL. Its main features include multiple tabs, panes, Unicode and UTF-8 character support, a GPU accelerated text rendering engine, and custom themes, styles, and configurations.
+The [**Windows Terminal**](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) is a terminal application for users of command-line tools and shells like Command Prompt, PowerShell, and WSL. Its main features include multiple tabs, panes, Unicode and UTF-8 character support, a GPU accelerated text rendering engine, and custom themes, styles, and configurations.
 
 #### 1.4.1. Installation
 
-Open the [Microsoft Store](https://aka.ms/wslstore) and install the [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701).
+Open the [Microsoft Store](https://aka.ms/wslstore) and install the [**Windows Terminal**](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701).
 
 ### 1.5. Package Manager
 
