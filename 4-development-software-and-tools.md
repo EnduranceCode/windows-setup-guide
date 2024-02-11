@@ -749,7 +749,7 @@ Then, verify if everything is running properly by checking the output of the fol
 
 To [install](https://docs.rancherdesktop.io/getting-started/installation/) the software [Rancher Desktop](https://rancherdesktop.io/), download the latest version from the [releases page on GitHub](https://github.com/rancher-sandbox/rancher-desktop/releases) and then execute the downloaded executable.
 
-When prompted, choose the option *Install for all users of this machine* (there will be a prompt for elevated permissions that must be accepted) and when the installation is finished, click Finish to close the installation wizard and run the [Rancher Desktop](https://rancherdesktop.io/) application.
+When prompted, choose the option *Install for all users of this machine* (there will be a prompt for elevated permissions that must be accepted) and when the installation is finished, uncheck the checkbox *Run Rancher Desktop* and click Finish to close the installation wizard. After closing the installation wizard, start the [Rancher Desktop](https://rancherdesktop.io/) application from the Windows Start Menu.
 
 On the [**Rancher Desktop**](https://rancherdesktop.io/) welcome screen, uncheck the option `Enable Kubernetes` and select `dockerd` as the *Container Engine*.
 
