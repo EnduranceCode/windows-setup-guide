@@ -567,9 +567,9 @@ To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) instal
 
 ##### 4.7.1.2. Installation on the Windows Native File System
 
-To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling), use a PowerShell console with *Administrator* privileges and execute the following command:
+To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling), open a [Git Bash](https://git-scm.com/) terminal and execute the following command:
 
-    choco install quarkus
+    scoop install main/quarkus-cli
 
 To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) installation was properly made, check the output of the following command:
 
@@ -613,15 +613,20 @@ If the installation was successful, the following message is returned.
 
 ##### 4.8.1.2. Installation on the Windows Native File System
 
-To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `Windows Native File System`, download the latest version from the [official downloads page](https://aws.amazon.com/cli/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
+To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `Windows Native File System`, open a [Git Bash](https://git-scm.com/) terminal and execute the following command:
+
+    scoop install main/aws
 
 To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was properly made, check the output of the following command:
 
     aws --version
 
-If Windows is unable to find the program, you might need to close and reopen the command prompt window to refresh the path, or follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
+If there's ant problem using the [**AWS CLI**](https://aws.amazon.com/cli/), follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
 
-To install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `Windows Native File System`, follow the [official instructions](https://docs.aws.amazon.com/systems-manager/latest/userguide/install-plugin-windows.html) and download the latest version of the installer from the [official downloads page](https://s3.amazonaws.com/session-manager-downloads/plugin/latest/windows/SessionManagerPluginSetup.exe). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
+To install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `Windows Native File System`, open a [Git Bash](https://git-scm.com/) terminal and execute the following commands:
+
+    scoop bucket add extras
+    scoop install extras/aws-session-manager-plugin
 
 Run the following commands to verify that the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installed successfully.
 
@@ -649,9 +654,9 @@ To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation
 
 ##### 4.9.1.1. Installation on the Windows Native File System
 
-To install [**GNU Make**](https://www.gnu.org/software/make/), use a PowerShell console with *Administrator* privileges and execute the following command:
+To install [**GNU Make**](https://www.gnu.org/software/make/), open a [Git Bash](https://git-scm.com/) terminal and execute the following command:
 
-    choco install make
+    scoop install main/make
 
 To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation was properly made, check the output of the following command:
 
@@ -843,9 +848,17 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 
 ##### 4.11.1.2. Installation on the Windows Native File System
 
-To install [**Terraform**](https://www.terraform.io/) on the `Windows Native File System`, use a PowerShell console with *Administrator* privileges and execute the following command:
+To install [**Terraform**](https://www.terraform.io/) on the `Windows Native File System`, open a [Git Bash](https://git-scm.com/) terminal and execute the below command and execute the following command:
 
-    choco install terraform
+    scoop install main/terraform
+
+Using [Scoop](https://scoop.sh/), it's possible to [install a specifc version](https://github.com/ScoopInstaller/Scoop/wiki/FAQ#how-do-i-install-a-specific-version-of-an-app) of an app. To do that for [**Terraform**](https://www.terraform.io/), replace the ***{LABEL}*** in the below command as appropriate and then execute it on a [Git Bash](https://git-scm.com/) terminal.
+
+    scoop install terraform@ {VERSION}
+
+> **Label Definition**
+>
+> + **{VERSION}** : The desired [**Terraform**](https://www.terraform.io/) version
 
 To verify if the [**Terraform**](https://www.terraform.io/) installation was properly made, check the output of the following command:
 

@@ -213,7 +213,36 @@ When running [**winget**](https://github.com/microsoft/winget-cli) without admin
 
 Check the [official documentation](https://learn.microsoft.com/windows/package-manager/winget/) to know the full potential of [**winget**](https://github.com/microsoft/winget-cli).
 
-#### 1.5.2. Install Chocolatey
+#### 1.5.2. Install Scoop
+
+[**Scoop**](https://scoop.sh/) installs programs from the command line with a minimal amount of friction as it doesn't require Admin privileges.
+
+To [**Scoop**](https://scoop.sh/), open a PowerShell console and execute the following commands:
+
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+
+To check if everything was properly installed and if further actions are necessary, execute the following command:
+
+    scoop checkup
+
+If the above command outputs a warning  stating that *Windows Developer Mode* is not enabled, you should consider enabling it because operations relevant to [symlinks](https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/) may fail without proper rights.
+
+To enable *Windows Developer Mode*, follow the [official instructions](https://learn.microsoft.com/windows/apps/get-started/enable-your-device-for-development).
+
+The output of the command `scoop checkup`, might show some recomendations to install some additional packages. If it does, install it using the recommended commands.
+
+To check if all issues were solved with the previous actions, re-run the following command:
+
+    scoop checkup
+
+The output of the above command, should now be `No problems identified!`.
+
+To list all apps installed with [**Scoop**](https://scoop.sh/), execute the following command:
+
+    scoop list
+
+#### 1.5.3. Install Chocolatey
 
 If you are going to do your development work on the `Windows Native File System` (instead of doing it exclusively on the `WSL File System`) you should also install [**Chocolatey**](https://chocolatey.org/).
 
@@ -225,7 +254,7 @@ If the output of the above command shows ***Restricted***, then run the followin
 
     Set-ExecutionPolicy Bypass -Scope Process
 
-Or the upcoming command, for quite a [bit more security](https://chocolatey.org/install).
+Or the prefarable upcoming command, for quite a [bit more security](https://chocolatey.org/install).
 
     Set-ExecutionPolicy AllSigned
 
