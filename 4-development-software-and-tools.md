@@ -35,7 +35,7 @@ To install [**Notepad++**](https://notepad-plus-plus.org/), open a PowerShell co
     scoop bucket add extras
     scoop install extras/notepadplusplus
 
-Move the [**Notepad++**](https://notepad-plus-plus.org/) *Start Menu* shortcut from the folder `C:\Users\rferrcan\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits).
+Move the [**Notepad++**](https://notepad-plus-plus.org/) *Start Menu* shortcut from the folder `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits).
 
 #### 4.1.2. Configuration
 
@@ -54,7 +54,7 @@ To install [**Meld**](https://meld.app/), open a PowerShell console and execute 
     scoop bucket add extras
     scoop install extras/meld
 
-Move the [**Meld**](https://meld.app/) *Start Menu* shortcut from the folder `C:\Users\rferrcan\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits).
+Move the [**Meld**](https://meld.app/) *Start Menu* shortcut from the folder `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits).
 
 ### 4.3. Java
 
@@ -174,7 +174,7 @@ If everything is correct, the above command will output the **Java Compiler** ve
 
 ##### 4.4.1.1. Installation on the WSL File System
 
-To be able to install a specific [**Apache Maven**](https://maven.apache.org/) version on the `WSL Fily System`, I like to follow a procedure inspired by the [Linuxiz Blog](https://linuxize.com/post/how-to-install-apache-maven-on-ubuntu-18-04/).
+To be able to install a specific [**Apache Maven**](https://maven.apache.org/) version on the `WSL File System`, I like to follow a procedure inspired by the [Linuxiz Blog](https://linuxize.com/post/how-to-install-apache-maven-on-ubuntu-18-04/).
 
 Start by creating the folder where [**Apache Maven**](https://maven.apache.org/) will be installed, executing the following commands:
 
@@ -235,7 +235,7 @@ To set the `MAVEN_HOME` environment variable for your [WSL](https://learn.micros
 
 Then, add the upcoming snippet to the `~/.bashrc` immediately before sourcing the file to customize the bash prompt.
 
-    # User's environmnent variables
+    # User's environment variables
     export export MAVEN_HOME=/opt/maven/current
 
     # User's path customization
@@ -932,7 +932,7 @@ Download the [**Visual Studio Code**](https://code.visualstudio.com) *User Insta
 
 Move the [**Visual Studio Code**](https://code.visualstudio.com) *Start Menu* *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Visual Studio Code` that was created by the installer.
 
-Execute [**Visual Studio Code**](https://code.visualstudio.com) and on the `Manage` gear menu (on the bottom left of the application screen). select the [`Turn on Setting Sync...` option](https://code.visualstudio.com/docs/editor/settings-sync). When asked to sign in, choose the *GitHub* option and then insert the needed credentials. When asked what preferences to sync, select the checkboxes listed next:
+Execute [**Visual Studio Code**](https://code.visualstudio.com) and to enable the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sync) option, click on te gear menu (on the bottom left of the application screen) and select the [`Setting Sync...`](https://code.visualstudio.com/docs/editor/settings-sync) option. When asked to sign in, choose the *GitHub* option and then insert the needed credentials. When asked what preferences to sync, select the checkboxes listed next:
 
 + Settings;
 + Keyboard Shortcuts for each platform;
@@ -942,20 +942,23 @@ Execute [**Visual Studio Code**](https://code.visualstudio.com) and on the `Mana
 
 #### 4.13.2. Install extensions
 
-With the `Settings Sync` turned on, [**Visual Studio Code**](https://code.visualstudio.com) will installed all the synced extensions. Wait for while to allow the full synchronization and then check if all of the following extensions were properly installed:
+With the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sync) option on, [**Visual Studio Code**](https://code.visualstudio.com) will installed all the synced extensions. Wait for while to allow the full synchronization and then check if all of the following extensions were properly installed:
 
 + [Auto Rename Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag);
 + [Better Comments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments);
++ [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker);
 + [Data Workspace](https://marketplace.visualstudio.com/items?itemName=ms-mssql.data-workspace-vscode);
 + [Debugger for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug);
++ [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 + [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
 + [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig);
 + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint);
 + [Extension Pack for java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack);
-+ [Gradle for Java]()
++ [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot);
++ [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat);
++ [Gradle for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle);
 + [IntelliSense for CSS class names in HTML](https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion);
 + [Language Support for Java(TM) by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.java);
-+ [lit-html](https://marketplace.visualstudio.com/items?itemName=bierner.lit-html);
 + [lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin);
 + [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint);
 + [Maven for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven);
@@ -963,8 +966,8 @@ With the `Settings Sync` turned on, [**Visual Studio Code**](https://code.visual
 + [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense);
 + [PHP Debug](https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug);
 + [PHP Extension Pack](https://marketplace.visualstudio.com/items?itemName=xdebug.php-pack);
-+ [Prettier - Code Formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 + [PHP Intelliphense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client);
++ [Prettier - Code Formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 + [Project Manager for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-dependency);
 + [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance)
 + [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
@@ -972,12 +975,11 @@ With the `Settings Sync` turned on, [**Visual Studio Code**](https://code.visual
 + [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)
 + [Smarty](https://marketplace.visualstudio.com/items?itemName=imperez.smarty);
 + [SonarQube for IDE](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode);
-+ [Spell Right](https://marketplace.visualstudio.com/items?itemName=ban.spellright);
 + [SQL Bindings](https://marketplace.visualstudio.com/items?itemName=ms-mssql.sql-bindings-vscode);
 + [SQL Database Projects](https://marketplace.visualstudio.com/items?itemName=ms-mssql.sql-database-projects-vscode);
 + [SQL Server (mssql)](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql):
 + [Test Runner for Java)](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test);
-+ [WSL)](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl);
++ [WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl);
 + [XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml).
 
 ### 4.14. Eclipse
