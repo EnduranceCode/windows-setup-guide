@@ -100,6 +100,10 @@ To set a specific version of [**Java**](https://openjdk.org/) as the default, re
 >
 > + **{IDENTIFIER}** : Identifier of the desired [**Java**](https://openjdk.org/) version as shown in the output of the command `sdk list java`, e.g. *21.ea.35-open*
 
+Restart the *bash* section with the [following command](https://unix.stackexchange.com/a/217907):
+
+    exec "$SHELL"
+
 To check if the `JAVA_HOME` value was properly set, check the output of the following command:
 
     echo $JAVA_HOME
