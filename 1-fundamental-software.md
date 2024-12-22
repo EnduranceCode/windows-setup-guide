@@ -383,10 +383,10 @@ After applying the above mentioned changes, save and close the file `~/.bashrc`.
 
 To set [Git's global configuration](https://www.learnenough.com/git-tutorial#sec-installation_and_setup), replace the **{LABELS}** in the below commands as appropriate and then execute it in an [Git Bash](https://git-scm.com/) terminal window.
 
-    git config --global user.name "{USER_NAME}"
-    git config --global user.email {USER_EMAIL}
     git config --global core.editor nano
     git config --global pull.rebase true
+    git config --global user.name "{USER_NAME}"
+    git config --global user.email {USER_EMAIL}
     git config --list
 
 > **Label Definition**
