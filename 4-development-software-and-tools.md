@@ -5,7 +5,7 @@ This file contains the **Development Software and Tools** section of my [Setup g
 ## Table of Contents
 
 4. [Development Software & Tools](#4-development-software--tools)
-    1. [Notepadd++](#41-notepad)
+    1. [Notepad++](#41-notepad)
     2. [Meld](#42-meld)
     3. [Java](#43-java)
     4. [Apache Maven](#44-apache-maven)
@@ -35,7 +35,7 @@ To install [**Notepad++**](https://notepad-plus-plus.org/), open a PowerShell co
     scoop bucket add extras
     scoop install extras/notepadplusplus
 
-Move the [**Notepad++**](https://notepad-plus-plus.org/) *Start Menu* shortcut from the folder `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits).
+Move the [**Notepad++**](https://notepad-plus-plus.org/) *Start Menu* shortcut from the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Development` folder (Create the `Development` folder if it doesn't exits).
 
 #### 4.1.2. Configuration
 
@@ -54,7 +54,7 @@ To install [**Meld**](https://meld.app/), open a PowerShell console and execute 
     scoop bucket add extras
     scoop install extras/meld
 
-Move the [**Meld**](https://meld.app/) *Start Menu* shortcut from the folder `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits).
+Move the [**Meld**](https://meld.app/) *Start Menu* shortcut from the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Scoop Apps` to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Development` folder (Create the `Development` folder if it doesn't exits).
 
 ### 4.3. Java
 
@@ -626,11 +626,11 @@ Create a folder to [store the user's binaries](https://unix.stackexchange.com/a/
 
     mkdir -p ~/.local/bin
 
-It's necessary that the folder `~/.local/bin` is included on the `PATH` and, on [Ubuntu](https://ubuntu.com/), that is normaly done by the `~/.profile` script. Close the terminal and on a new [Ubuntu](https://ubuntu.com/) terminal and then check the output of the following command to confirm that `~/.local/bin` is included on the `PATH`.
+It's necessary that the folder `~/.local/bin` is included on the `PATH` and, on [Ubuntu](https://ubuntu.com/), that is normally done by the `~/.profile` script. Close the terminal and on a new [Ubuntu](https://ubuntu.com/) terminal and then check the output of the following command to confirm that `~/.local/bin` is included on the `PATH`.
 
     echo $PATH
 
-Following the [official instructions](https://tfswitch.warrensbox.com/Install/), download [TFSwitch](https://tfswitch.warrensbox.com/) installation script to the folder `/tmp` executing the upcomming commands on a [Ubuntu](https://ubuntu.com/) terminal:
+Following the [official instructions](https://tfswitch.warrensbox.com/Install/), download [TFSwitch](https://tfswitch.warrensbox.com/) installation script to the folder `/tmp` executing the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal:
 
     wget https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh -P /tmp
 

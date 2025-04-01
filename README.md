@@ -29,7 +29,7 @@ This is my personal guide to setup a development machine on Windows. Although th
     7. [Spotube](./3-desktop-software.md#37-spotube)
     8. [VLC](./3-desktop-software.md#38-vlc)
 4. [Development Software & Tools](./4-development-software-and-tools.md)
-    1. [Notepadd++](./4-development-software-and-tools.md#41-notepad)
+    1. [Notepad++](./4-development-software-and-tools.md#41-notepad)
     2. [Meld](./4-development-software-and-tools.md#42-meld)
     3. [Java](./4-development-software-and-tools.md#43-java)
     4. [Apache Maven](./4-development-software-and-tools.md#44-apache-maven)
