@@ -65,9 +65,10 @@ Rename the [**GIMP**](https://www.gimp.org/) *Start Menu* shortcut to *GIMP* and
 
 #### 3.4.1. Installation
 
-To install [**Inkscape**](https://inkscape.org/), open a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/9PD9BHGLFC7H).
+To install [**Inkscape**](https://inkscape.org/), open a PowerShell console and execute the following command:
 
-    winget install 9PD9BHGLFC7H -s msstore
+    scoop bucket add extras
+    scoop install extras/inkscape
 
 ### 3.5. PDFsam
 
