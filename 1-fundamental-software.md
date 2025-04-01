@@ -90,7 +90,7 @@ After rebooting your machine, set [**WSL 2**](https://learn.microsoft.com/window
 
     wsl --list --online
 
-From the output of the above command, get the latest available [Ubuntu LTS version](https://ubuntu.com/about/release-cycle) and use it to replace the label **{DISTRO_NAME}** in the upcoming command. Then, execute it on a standard PowerShell console to set the [default distribuition](https://learn.microsoft.com/windows/wsl/basic-commands#set-default-linux-distribution).
+From the output of the above command, get the latest available [Ubuntu LTS version](https://ubuntu.com/about/release-cycle) and use it to replace the label **{DISTRO_NAME}** in the upcoming command. Then, execute it on a standard PowerShell console to set the [default distribution](https://learn.microsoft.com/windows/wsl/basic-commands#set-default-linux-distribution).
 
     wsl --set-default {DISTRO_NAME}
 
@@ -120,7 +120,7 @@ If [Ubuntu](https://ubuntu.com/) is not running with [**WSL 2**](https://learn.m
 
 Once the process of installing [Ubuntu](https://ubuntu.com/) on [**WSL**](https://learn.microsoft.com/windows/wsl/) is complete, open the distribution using the *Start Menu*. You will be asked to [create a User and Password](https://learn.microsoft.com/windows/wsl/setup/environment#set-up-your-linux-username-and-password) for your [Ubuntu](https://ubuntu.com/) installation.
 
-Configure the settings for your [Ubuntu](https://ubuntu.com/) installation, by using the `wsl.conf` file that is stored on `/etc` folder of every [**WSL**](https://learn.microsoft.com/windows/wsl/) distribuition. Open the file `/etc/wsl.conf` with the [nano text editor](https://www.nano-editor.org/), executing the below command on a [Ubuntu](https://ubuntu.com/) terminal.
+Configure the settings for your [Ubuntu](https://ubuntu.com/) installation by using the `wsl.conf` file that is stored on `/etc` folder of every [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution. Open the file `/etc/wsl.conf` with the [nano text editor](https://www.nano-editor.org/), executing the below command on a [Ubuntu](https://ubuntu.com/) terminal.
 
     nano /etc/wsl.conf
 
@@ -152,7 +152,7 @@ It's recommended to regularly update and upgrade your packages using [Ubuntu](ht
 
     sudo apt update && sudo apt full-upgrade
 
-Aditional sofware can be installed using [Ubuntu](https://ubuntu.com/)'s package manager, exactly as in any other [Ubuntu](https://ubuntu.com/) installation.
+Additional software can be installed using [Ubuntu](https://ubuntu.com/)'s package manager, exactly as in any other [Ubuntu](https://ubuntu.com/) installation.
 
 To be able to install software from its source code, you need to make sure your system has a C++ compiler. The `build-essentials` packages are meta-packages that include all the necessary tools for compiling software. You can install it with the following command:
 
@@ -213,7 +213,7 @@ If the above command outputs a warning  stating that *Windows Developer Mode* is
 
 To enable *Windows Developer Mode*, follow the [official instructions](https://learn.microsoft.com/windows/apps/get-started/enable-your-device-for-development).
 
-The output of the command `scoop checkup`, might show some recomendations to install some additional packages. If it does, install it using the recommended commands.
+The output of the command `scoop checkup`, might show some recommendations to install some additional packages. If it does, install it using the recommended commands.
 
 To check if all issues were solved with the previous actions, re-run the following command:
 
