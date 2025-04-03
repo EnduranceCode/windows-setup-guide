@@ -555,6 +555,37 @@ Then, verify if everything is running properly by checking the output of the fol
     sudo systemctl status containerd.service
     docker run hello-world
 
+By default, [**Docker**](https://www.docker.com/) tries to retrieve credentials using `docker-credential-secretservice`, which relies on the Secret Service API via DBus, but typically it isn’t available within WSL, which may not have full integration with system services like secret stores. An alternative to the Secret Service API is [`pass`](https://www.passwordstore.org/), which can be installed with the following command:
+
+    sudo apt install pass
+
+When it's necessary to manage credentials with [**Docker**](https://www.docker.com/), [`pass`](https://www.passwordstore.org/) requires a GPG key to encrypt passwords and it can be created with the following command:
+
+    gpg --full-generate-key
+
+Following the above command, when prompted, set the following options:
+
+    Kind of key:    RSA and RSA
+    Key expiration: {KEY_EXPIRATION}
+    Real name:      {REAL_NAME}
+    Email address:  {EMAIL}
+    Passphrase:     {PASSPHRASE}
+
+Once the GPG key is created, it is necessary to initialize it. Do it by replacing the ***{LABEL}*** in the below command as appropriate and then execute it.
+
+    pass init {EMAIL_ADDRESS}
+
+> **Label Definition**
+>
+> + **{EMAIL_ADDRESS}** : The e-mail address to be used as label for the GPG key
+
+Upon success of the GPG key initialization, edit the [**Docker**](https://www.docker.com/) configuration to use the [`pass`](https://www.passwordstore.org/) credentials helper executing the following commands:
+
+    mkdir -p ~/.docker
+    echo '{
+        "credsStore": "pass"
+    }' > ~/.docker/config.json
+
 ##### 4.9.2.1. Installation on the Windows Native File System with Rancher Desktop
 
 [**Rancher Desktop**](https://rancherdesktop.io/) is an app that provides container management and Kubernetes on the desktop. It is available for Mac (both on Intel and Apple Silicon), Windows, and Linux.
