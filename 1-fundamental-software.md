@@ -358,7 +358,7 @@ After applying the above mentioned changes, save and close the file `~/.bashrc`.
 
 ##### 1.5.2.2. Bash prompt customization on the Windows Native File System
 
-The files used to accomplish my personal customization on the `Windows Native File System` are stored at the folder `%OneDriveCommercial%\dotfiles\bash-win`. If a [symlink](https://www.howtogeek.com/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/) to the folder `%OneDriveCommercial%\dotfiles` isn't yet created the Windows `%USERPROFILE%`, create executing the below command from the Windows Command Prompt.
+The files used to accomplish my personal customization on the `Windows Native File System` are stored at the folder `%OneDriveCommercial%\dotfiles\bash-win`. If a [symlink](https://www.howtogeek.com/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/) to the folder `%OneDriveCommercial%\dotfiles` isn't yet created in the `%USERPROFILE%` folder, create it executing the below command from the Windows Command Prompt.
 
     mklink /J %USERPROFILE%\.dotfiles "%OneDriveCommercial%\dotfiles"
 
