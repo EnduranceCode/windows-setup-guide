@@ -1035,6 +1035,25 @@ Download [**DBeaver**](https://dbeaver.io/) installer latest version from [offic
 
 Move the [**DBeaver**](https://dbeaver.io/) *Start Menu* *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DBeaver Community` that was created by the installer.
 
+[**DBeaver**](https://dbeaver.io/) will store the drivers it uses in the folder `%USERPROFILE%\AppData\Roaming\DBeaverData\drivers`.
+
+When using applications like [Zscaler](https://www.zscaler.com/), it might be necessary to import security certificate to the [**DBeaver**](https://dbeaver.io/) JRE Keystore. On a **Git Bash** terminal, navigate to the folder `%USERPROFILE%\AppData\Local\DBeaver\jre\lib\security`, replace the **{LABELS}** in the upcoming command as appropriate and then execute it:
+
+    keytool -importcert -trustcacerts -alias {CERTIFICATE_ALIAS} -file {PATH_TO_DER_CERTIFICATE} -keystore cacerts -storepass changeit -noprompt
+
+> **Label Definition**
+>
+> + **{PATH_TO_DER_CERTIFICATE}** : Path to the `.der` certificate file
+> + **{CERTIFICATE_ALIAS}**       : The chosen certificate alias
+
+To confirm that the certificate was added to the JRE keystore, replace the **{LABELS}** in the upcoming command as appropriate and then execute it:
+
+    keytool -v -list -keystore cacerts -alias {CERTIFICATE_ALIAS} -storepass changeit -noprompt
+
+> **Label Definition**
+>
+> + **{CERTIFICATE_ALIAS}** : The chosen certificate alias
+
 ### 4.16. Postman
 
 [**Postman**](https://www.postman.com/) helps you be more efficient while working with APIs. Using Postman, you can construct complex HTTP requests quickly, organize them in collections.
