@@ -10,7 +10,7 @@ This file contains the **Desktop Software** section of my [Setup guide for a dev
     3. [Inkscape](#33-inkscape)
     4. [PDFsam](#34-pdfsam)
     5. [SpeedCrunch](#35-speedcrunch)
-    6. [Spotube](#36-spotube)
+    6. [Spotify](#36-spotify)
     7. [VLC](#37-vlc)
 
 ## 3. Desktop Software
@@ -68,7 +68,7 @@ To install [**PDFsam Basic**](https://pdfsam.org/pdfsam-basic/), execute the upc
     scoop bucket add extras
     scoop install extras/pdfsam
 
-Move the [**PDFsam Basic**](https://pdfsam.org/pdfsam-basic/) *Start Menu* shortcut from the folder `C:\Users\rferrcan\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps`to the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Office` (Create the `Office` folder if it doesn't exits).
+Move the [**PDFsam Basic**](https://pdfsam.org/pdfsam-basic/) *Start Menu* shortcut from the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps`to the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Office` (Create the `Office` folder if it doesn't exits).
 
 ### 3.5. SpeedCrunch
 
@@ -81,21 +81,24 @@ To install [**SpeedCrunch**](http://www.speedcrunch.org), execute the upcoming c
     scoop bucket add extras
     scoop install extras/speedcrunch
 
-Move the [**SpeedCrunch**](http://www.speedcrunch.org) *Start Menu* shortcut from the folder `C:\Users\rferrcan\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Utility` (Create the `Utility` folder if it doesn't exits).
+Move the [**SpeedCrunch**](http://www.speedcrunch.org) *Start Menu* shortcut from the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Utility` (Create the `Utility` folder if it doesn't exits).
 
 If the keyboard in use has a special key to start a calculator, edit the [Windows Registry](https://learn.microsoft.com/troubleshoot/windows-server/performance/windows-registry-advanced-users) to assign [**SpeedCrunch**](http://www.speedcrunch.org) to the mentioned key.
 
 To open the [Registry Editor](https://www.bleepingcomputer.com/tutorials/how-to-use-the-windows-registry-editor/) as an administrator, click the Windows *Start Menu*, type `regedit` in the search field and then click on the *Run as an administrator* option that is shown. Then, navigate to the [key](https://www.lifewire.com/what-is-a-registry-key-2625999) `Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AppKey\18` and add a new string [registry value](https://www.lifewire.com/what-is-a-registry-value-2626042) with the value *ShellExecute* in the `Name` field and with value of the full path of the [**SpeedCrunch**](http://www.speedcrunch.org) executable file in the `Data` field.
 
-### 3.6. Spotube
+### 3.6. Spotify
 
-[**Spotube**](https://spotube.krtirtho.dev/) is a fast, modern, lightweight & efficient Spotify Music Client for every platform.
+[**Spotify**](https://open.spotify.com/) is an application for the corresponding audio streaming and media service provider.
 
 #### 3.6.1. Installation
 
-To install [**Spotube**](https://spotube.krtirtho.dev/), open a PowerShell console and execute the upcoming command to execute the installation with the [official package](https://spotube.krtirtho.dev/other-downloads/package-manager).
+To install [**Spotify**](https://open.spotify.com/), open a PowerShell console and execute the following commands:
 
-    winget install --id KRTirtho.Spotube
+    scoop bucket add extras
+    scoop install extras/spotify
+
+Move the [**Spotify**](https://open.spotify.com/) *Start Menu* shortcut from the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Audio & Video` folder (Create the `Audio & Video` folder if it doesn't exits).
 
 ### 3.7. VLC
 
@@ -108,4 +111,4 @@ To install [**VLC**](https://www.videolan.org/), open a PowerShell console and e
     scoop bucket add extras
     scoop install extras/vlc
 
-Move the [**VLC**](https://www.videolan.org/) *Start Menu* shortcut from the folder `C:\Users\rferrcan\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Audio & Video` folder (Create the `Audio & Video` folder if it doesn't exits).
+Move the [**VLC**](https://www.videolan.org/) *Start Menu* shortcut from the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Audio & Video` folder (Create the `Audio & Video` folder if it doesn't exits).
