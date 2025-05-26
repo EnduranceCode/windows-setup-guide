@@ -16,7 +16,7 @@ This file contains the **Fundamental Software** section of my [Setup guide for a
 
 ### 1.1. Browser
 
-With [Lubuntu](https://lubuntu.me) I normally choose [Firefox](https://www.mozilla.org/firefox/new/) as my default browser and on Windows I used to choose [**Google Chrome**](https://www.google.com/chrome/). At the moment, I'm also trying to use [Firefox](https://www.mozilla.org/firefox/new/) on Windows.
+With [Lubuntu](https://lubuntu.me) I normally choose [Firefox](https://www.mozilla.org/firefox/new/) as my default browser and on Windows I used to choose [**Google Chrome**](https://www.google.com/chrome/). At the moment, I'm also choosing [Firefox](https://www.mozilla.org/firefox/new/) on Windows, mainly due to Firefox's [Multi-Account Containers](https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/) extension.
 
 #### 1.1.1. Firefox
 
@@ -28,19 +28,22 @@ To install [**Firefox**](https://www.mozilla.org/firefox/new/), start by downloa
 
 ##### 1.1.1.2. Configuration
 
-Set [**Google Chrome**](https://www.google.com/chrome/) preferences as desired and then install the following extensions:
+Set [**Firefox**](https://www.mozilla.org/firefox/new/) preferences as desired and then install the following extensions:
 
 + [AWS Extend Switch Roles](https://addons.mozilla.org/firefox/addon/aws-extend-switch-roles3/)
 + [ColorZilla](https://addons.mozilla.org/firefox/addon/colorzilla/)
++ [Firefox Facebook Container](https://addons.mozilla.org/en-US/firefox/addon/facebook-container/)
 + [Firefox Multi-Account Containers](https://addons.mozilla.org/firefox/addon/multi-account-containers/)
++ [FoxyProxy Standard](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/)
 + [KeePassXC-Browser](https://addons.mozilla.org/firefox/addon/keepassxc-browser/)
-+ [Omnivore](https://addons.mozilla.org/firefox/addon/omnivore/)
-+ [Proxy SwitchyOmega](https://addons.mozilla.org/firefox/addon/switchyomega/)
++ [Linkding](https://addons.mozilla.org/en-US/firefox/addon/linkding-extension/)
++ [Markdown Viewer](https://addons.mozilla.org/en-US/firefox/addon/markdown-viewer-chrome/)
 + [Raindrop.io](https://addons.mozilla.org/firefox/addon/raindropio/)
++ [Search by Image](https://addons.mozilla.org/en-US/firefox/addon/search_by_image/)
 + [Tab Session Manager](https://addons.mozilla.org/firefox/addon/tab-session-manager/)
 + [Wapplyzer](https://addons.mozilla.org/firefox/addon/wappalyzer/)
 
-Set the options of all the above extensions. Use the extensions settings backups/exports stored in the folder `%OneDriveCommercial%\dotfiles\browser\extensions` to better customize the relevant extension.
+Set the options of all the above extensions. I like to use the extensions settings backups/exports that I store in the folder `%OneDriveCommercial%\dotfiles\browser\extensions` to better customize the relevant extension.
 
 #### 1.1.2. Google Chrome
 
@@ -58,13 +61,13 @@ Set [**Google Chrome**](https://www.google.com/chrome/) preferences as desired a
 + [ColorZilla](https://chromewebstore.google.com/detail/colorzilla/bhlhnicpbhignbdhedgjhgdocnmhomnp)
 + [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa)
 + [KeePassXC-Browser](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk)
-+ [Omnivore](https://chromewebstore.google.com/detail/omnivore/blkggjdmcfjdbmmmlfcpplkchpeaiiab)
++ [Linkding](https://chromewebstore.google.com/detail/linkding-extension/beakmhbijpdhipnjhnclmhgjlddhidpe)
 + [Proxy SwitchyOmega](https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif)
 + [Raindrop.io](https://chromewebstore.google.com/detail/raindropio/ldgfbffkinooeloadekpmfoklnobpien)
 + [Tab Session Manager](https://chrome.google.com/webstore/detail/tab-session-manager/iaiomicjabeggjcfkbimgmglanimpnae)
 + [Wapplyzer](https://chromewebstore.google.com/detail/wappalyzer-technology-pro/gppongmhjkpfnbhagpmjfkannfbllamg)
 
-Set the options of all the above extensions. Use the extensions settings backups/exports stored in the folder `%OneDriveCommercial%\dotfiles\browser\extensions` to better customize the relevant extension.
+Set the options of all the above extensions. I like to use the extensions settings backups/exports that I store in the folder `%OneDriveCommercial%\dotfiles\browser\extensions` to better customize the relevant extension.
 
 ### 1.2. Windows Subsystem for Linux
 
