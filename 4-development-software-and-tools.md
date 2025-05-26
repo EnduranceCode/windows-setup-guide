@@ -112,7 +112,7 @@ To check if the Windows `PATH` value was properly set, check the output of the f
 
     echo $PATH
 
-To check if **Java** was properly installed, check the output of the following command:
+To check if [**Java**](https://openjdk.org/) was properly installed, check the output of the following command:
 
     java -version
 
@@ -123,6 +123,23 @@ Finally, to check if the **Java Compiler** was properly installed, check the out
     javac -version
 
 If everything is correct, the above command will output the **Java Compiler** version.
+
+When using applications like [Zscaler](https://www.zscaler.com/), it might be necessary to import security certificate to the [**Java**](https://openjdk.org/) Keystore. Do it by replacing the **{LABELS}** in the upcoming command as appropriate and then execute it:
+
+    keytool -importcert -trustcacerts -alias {CERTIFICATE_ALIAS} -file {PATH_TO_DER_CERTIFICATE} -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
+
+> **Label Definition**
+>
+> + **{PATH_TO_DER_CERTIFICATE}** : Path to the `.der` certificate file
+> + **{CERTIFICATE_ALIAS}**       : The chosen certificate alias
+
+To confirm that the certificate was added to the JRE keystore, replace the **{LABELS}** in the upcoming command as appropriate and then execute it:
+
+    keytool -v -list -keystore $JAVA_HOME/lib/security/cacerts -alias {CERTIFICATE_ALIAS} -storepass changeit -noprompt
+
+> **Label Definition**
+>
+> + **{CERTIFICATE_ALIAS}** : The chosen certificate alias
 
 ##### 4.3.1.2. Installation on the Windows Native File System
 
@@ -158,7 +175,7 @@ To check if the Windows `PATH` value was properly set, on the same Windows Comma
 
     echo %PATH%
 
-To check if **Java** was properly installed, on the same Windows Command Prompt, check the output of the following command:
+To check if [**Java**](https://openjdk.org/) was properly installed, on the same Windows Command Prompt, check the output of the following command:
 
     java -version
 
@@ -169,6 +186,23 @@ Finally, to check if the **Java Compiler** was properly installed, on the same W
     javac -version
 
 If everything is correct, the above command will output the **Java Compiler** version.
+
+When using applications like [Zscaler](https://www.zscaler.com/), it might be necessary to import security certificate to the [**Java**](https://openjdk.org/) Keystore. On a **Git Bash** terminal, replace the **{LABELS}** in the upcoming command as appropriate and then execute it:
+
+    keytool -importcert -trustcacerts -alias {CERTIFICATE_ALIAS} -file {PATH_TO_DER_CERTIFICATE} -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
+
+> **Label Definition**
+>
+> + **{PATH_TO_DER_CERTIFICATE}** : Path to the `.der` certificate file
+> + **{CERTIFICATE_ALIAS}**       : The chosen certificate alias
+
+To confirm that the certificate was added to the JRE keystore, replace the **{LABELS}** in the upcoming command as appropriate and then execute it:
+
+    keytool -v -list -keystore $JAVA_HOME/lib/security/cacerts -alias {CERTIFICATE_ALIAS} -storepass changeit -noprompt
+
+> **Label Definition**
+>
+> + **{CERTIFICATE_ALIAS}** : The chosen certificate alias
 
 ### 4.4. Apache Maven
 
