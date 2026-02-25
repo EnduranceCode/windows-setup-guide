@@ -266,70 +266,41 @@ To list the installed chocolatey packages, execute the following command on a Po
 
 ##### 1.5.1.2. Installation on the Windows Native File System
 
-**Git Bash** comes included as part of the [Git's Windows package](https://git-scm.com/download/win) and is an application for Microsoft Windows environments which provides an emulation layer for a [**Git**](https://git-scm.com/) command line experience.
+**Git Bash** comes included as part of the [Git's Windows package](https://git-scm.com/install/windows) and is an application for Microsoft Windows environments which provides an emulation layer for a [**Git**](https://git-scm.com/) command line experience.
 
-[**Git**](https://git-scm.com/), as stated on the [official downloads page](https://git-scm.com/download/win), can be installed on the `Windows Native File System` with [**winget**](https://github.com/microsoft/winget-cli). To [**Git**](https://git-scm.com/), open a PowerShell console and execute the following commands:
+[**Git**](https://git-scm.com/), as stated on the [official downloads page](https://git-scm.com/install/windows), can be installed on the `Windows Native File System` with [**winget**](https://github.com/microsoft/winget-cli). To install [**Git Bash**](https://git-scm.com/install/windows), open a PowerShell console and execute the following commands:
 
     winget install --id Git.Git -e --source winget
 
-The above command will start the [**Git**](https://git-scm.com/) installation wizard that will prompt you with a few questions.
+The above command will start the [**Git**](https://git-scm.com/) installation. As the `-e` flag is used, it defaults to a "silent" or "headless" installation. It essentially skips the UI wizard and applies the default settings and doesn't requires *administrator privileges* to perform the installation.
 
-On the *Select Start Menu Folder* step of the installation program, insert the following text on the input box:
+After the completion of the installation, to ensure LFS is initialized, execute the following command:
 
-+ Development
+    git lfs install
 
-On the *Select Components* step of the installation program, make sure that you will only check the following checkboxes:
+To ensure ensure that the PATH environment is adjusted for [**Git**](https://git-scm.com/) from the command line and also from 3rd-party software add, in necessary, the following paths to your Windows User `Path` Environment Variable:
 
-+ Git LFS (Large File Support);
-+ Associate .git* configuration files with the default text editor;
-+ Associate .sh files to be run with Bash
-+ Add a Git Bash Profile for Windows Terminal
-+ Scalar (Git add-on to manage large-scale repositories)
++ `%LocalAppData%\Programs\Git\cmd`
++ `%LocalAppData%\Programs\Git\mingw64\bin`
++ `%LocalAppData%\Programs\Git\usr\bin`
 
-On the *Choosing the default editor used by Git* step of the installation program, select the following text editor:
+Enabling Windows ***Developer Mode** is a prerequisite for [**Git**](https://git-scm.com/) to actually create symbolic links without requiring you to run every terminal as an Administrator. That is achieved executing the upcoming commands from a PowerShell console with *Administrator* privileges:
 
-+ Nano editor
+    reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevSelfSigned" /d 1
 
-On the *Adjusting the name of the initial branch in new repositories* step of the installation program, select the following option:
+The above command modifies the Windows Registry. It is likely necessary to restart the terminal (or the computer) for the registry change to be fully recognized.
 
-+ Let Git decide
+Configure the **Git Bash** profile on the [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701), executing the following steps:
 
-On the *Adjusting your PATH environment* step of the installation program, select the following option:
-
-+ Git from the command line and also from 3rd-party software
-
-On the *Choosing the SSH executable* step of the installation program, select the following option:
-
-+ Use bundled OpenSSH
-
-On the *Choosing HTTPS transport backend* step of the installation program, select the following option:
-
-+ Use the OpenSSL library
-
-On the *Configuring the line ending conversions* step of the installation program, select the following option:
-
-+ Checkout Windows-style, commit Unix-style line endings
-
-On the *Configuring the terminal emulator to use with Git Bash* step of the installation program, select the following option:
-
-+ Use MinTTY (the default terminal of MSYS2)
-
-On the *Choose the default behavior of 'git pull'* step of the installation program, select the following option:
-
-+ Rebase
-
-On the *Choose a credential helper* step of the installation program, select the following option:
-
-+ Git Credential Manager
-
-On the *Configuring extra options* step of the installation program, check the following checkboxes:
-
-+ Enable file system caching
-+ Enable symbolic links
-
-On the *Configuring experimental options* step of the installation program, keep all the checkboxes unchecked.
-
-When the installation is complete, configure the **Git Bash** profile on the [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701).
+1. Open the [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701);
+2. Press `Ctrl + ,` (Comma) to open the [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) Settings;
+3. Click **Add a new profile** (bottom left);
+4. Click **+ New empty profile**;
+5. Set the following:
+    + **Name:** Git Bash
+    + **Command line:** `%LocalAppData%\Programs\Git\bin\bash.exe -l -i`
+    + **Starting directory:** `%USERPROFILE%`
+    + **Icon:** `File` `%LocalAppData%\Programs\Git\mingw64\share\git\git-for-windows.ico`
 
 #### 1.5.2. Bash prompt customization
 
@@ -388,7 +359,13 @@ After applying the above mentioned changes, save and close the file `~/.bashrc`.
 
 To set [Git's global configuration](https://www.learnenough.com/git-tutorial#sec-installation_and_setup), replace the **{LABELS}** in the below commands as appropriate and then execute it in an [Git Bash](https://git-scm.com/) terminal window.
 
+    git config --global core.autocrlf true
     git config --global core.editor nano
+    git config --global core.fscache true
+    git config --global core.symlinks true
+    git config --global credential.helper manager
+    git config --global http.sslBackend openssl
+    git config --global init.defaultBranch master
     git config --global pull.rebase true
     git config --global user.name "{USER_NAME}"
     git config --global user.email {USER_EMAIL}
