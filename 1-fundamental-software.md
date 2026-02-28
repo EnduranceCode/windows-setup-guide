@@ -1,6 +1,6 @@
 # Setup guide for a development machine on Windows
 
-This file contains the **Fundamental Software** section of my [Setup guide for a development machine on Windows](https://github.com/EnduranceCode/windows-development-machine). The introduction to this guide as well as its full *Table of Contents* can be found on the [README.md](./README.md) file of this repository. The *Table of Contents* of this section is listed below.
+This file contains the **Fundamental Software** section of my [Setup guide for a development machine on Windows](https://github.com/EnduranceCode/windows-development-machine). The introduction to this guide as well as its full *Table of Contents* can be found on the [README.md](./README.md) file of this repository. The *Table of Contents* of this section is shown below.
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ This file contains the **Fundamental Software** section of my [Setup guide for a
 
 ### 1.1. Browser
 
-With [Lubuntu](https://lubuntu.me) I normally choose [Firefox](https://www.mozilla.org/firefox/new/) as my default browser and on Windows I used to choose [**Google Chrome**](https://www.google.com/chrome/). At the moment, I'm also choosing [Firefox](https://www.mozilla.org/firefox/new/) on Windows, mainly due to Firefox's [Multi-Account Containers](https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/) extension.
+With [Lubuntu](https://lubuntu.me) I use [Firefox](https://www.mozilla.org/firefox/new/) as my default browser and on Windows I used to choose [**Google Chrome**](https://www.google.com/chrome/). At the moment, I'm also using [Firefox](https://www.mozilla.org/firefox/new/) on Windows, mainly due to Firefox's [Multi-Account Containers](https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/) extension.
 
 #### 1.1.1. Firefox
 
@@ -24,7 +24,7 @@ With [Lubuntu](https://lubuntu.me) I normally choose [Firefox](https://www.mozil
 
 ##### 1.1.1.1. Installation
 
-To install [**Firefox**](https://www.mozilla.org/firefox/new/), start by downloading the latest version from [official downloads page](https://www.mozilla.org/firefox/new/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
+To install [**Firefox**](https://www.mozilla.org/firefox/new/), download the latest version from the [official downloads page](https://www.mozilla.org/firefox/new/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
 
 ##### 1.1.1.2. Configuration
 
@@ -43,7 +43,7 @@ Set [**Firefox**](https://www.mozilla.org/firefox/new/) preferences as desired a
 + [Tab Session Manager](https://addons.mozilla.org/firefox/addon/tab-session-manager/)
 + [Wapplyzer](https://addons.mozilla.org/firefox/addon/wappalyzer/)
 
-Set the options of all the above extensions. I like to use the extensions settings backups/exports that I store in the folder `%OneDriveCommercial%\dotfiles\browser\extensions` to better customize the relevant extension.
+Set the desired options for all the above extensions. The folder `root/home/user/browser/extensions` in the [**system-configuration-files**](https://github.com/EnduranceCode/system-configuration-files) repository contains settings that can be imported to the browser extensions that support it.
 
 #### 1.1.2. Google Chrome
 
@@ -51,7 +51,7 @@ Set the options of all the above extensions. I like to use the extensions settin
 
 ##### 1.1.2.1. Installation
 
-To install [**Google Chrome**](https://www.google.com/chrome/), start by downloading the latest version from [official downloads page](https://www.google.com/chrome/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
+To install [**Google Chrome**](https://www.google.com/chrome/), download the latest version from the [official downloads page](https://www.google.com/chrome/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
 
 ##### 1.1.2.2. Configuration
 
@@ -67,7 +67,7 @@ Set [**Google Chrome**](https://www.google.com/chrome/) preferences as desired a
 + [Tab Session Manager](https://chrome.google.com/webstore/detail/tab-session-manager/iaiomicjabeggjcfkbimgmglanimpnae)
 + [Wapplyzer](https://chromewebstore.google.com/detail/wappalyzer-technology-pro/gppongmhjkpfnbhagpmjfkannfbllamg)
 
-Set the options of all the above extensions. I like to use the extensions settings backups/exports that I store in the folder `%OneDriveCommercial%\dotfiles\browser\extensions` to better customize the relevant extension.
+Set the desired options for all the above extensions. The folder `root/home/user/browser/extensions` in the [**system-configuration-files**](https://github.com/EnduranceCode/system-configuration-files) repository contains settings that can be imported to the browser extensions that support it.
 
 ### 1.2. Windows Subsystem for Linux
 
@@ -75,7 +75,7 @@ Set the options of all the above extensions. I like to use the extensions settin
 
 #### 1.2.1. Installation
 
-Follow the [Official instructions](https://learn.microsoft.com/windows/wsl/install-manual) to manually [enable](https://learn.microsoft.com/windows/wsl/install-manual#step-1---enable-the-windows-subsystem-for-linux) the [**WSL**](https://learn.microsoft.com/windows/wsl/), executing the upcoming command on a PowerShell console with *administrator privileges*.
+Follow the [Official instructions](https://learn.microsoft.com/windows/wsl/install-manual) to manually [enable](https://learn.microsoft.com/windows/wsl/install-manual#step-1---enable-the-windows-subsystem-for-linux) [**WSL**](https://learn.microsoft.com/windows/wsl/), executing the upcoming command on a PowerShell console with *administrator privileges*.
 
     dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 
@@ -107,7 +107,7 @@ To [update](https://learn.microsoft.com/windows/wsl/troubleshooting#updating-wsl
 
     wsl --update
 
-On a regular PowerShell console, execute the below command to list the installed Linux distributions and check if everything is correct:
+The execution of the above command will also [require elevation](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works). On a regular PowerShell console, execute the below command to list the installed Linux distributions and check if everything is correct:
 
     wsl --list --verbose
 
@@ -205,7 +205,7 @@ Check the [official documentation](https://learn.microsoft.com/windows/package-m
 
 [**Scoop**](https://scoop.sh/) installs programs from the command line with a minimal amount of friction as it doesn't require Admin privileges.
 
-To [**Scoop**](https://scoop.sh/), open a PowerShell console and execute the following commands:
+To install [**Scoop**](https://scoop.sh/), open a PowerShell console and execute the following commands:
 
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
     Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
@@ -214,7 +214,7 @@ To check if everything was properly installed and if further actions are necessa
 
     scoop checkup
 
-If the above command outputs a warning  stating that *Windows Developer Mode* is not enabled, you should consider enabling it because operations relevant to [symlinks](https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/) may fail without proper rights.
+If the above command outputs a warning stating that *Windows Developer Mode* is not enabled, you should consider enabling it because operations relevant to [symlinks](https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/) may fail without proper rights. It is also recommended to enable *Long Paths* option on the **Advanced Windows Settings**.
 
 To enable *Windows Developer Mode*, follow the [official instructions](https://learn.microsoft.com/windows/apps/get-started/enable-your-device-for-development).
 
@@ -272,7 +272,7 @@ To list the installed chocolatey packages, execute the following command on a Po
 
     winget install --id Git.Git -e --source winget
 
-The above command will start the [**Git**](https://git-scm.com/) installation. As the `-e` flag is used, it defaults to a "silent" or "headless" installation. It essentially skips the UI wizard and applies the default settings and doesn't requires *administrator privileges* to perform the installation.
+The above command will start the [**Git**](https://git-scm.com/) installation. As the `-e` flag is used, it defaults to a "silent" or "headless" installation. It essentially skips the UI wizard and applies the default settings and doesn't requires _administrator privileges_ to perform the installation.
 
 After the completion of the installation, to ensure LFS is initialized, execute the following command:
 
@@ -284,11 +284,7 @@ To ensure ensure that the PATH environment is adjusted for [**Git**](https://git
 + `%LocalAppData%\Programs\Git\mingw64\bin`
 + `%LocalAppData%\Programs\Git\usr\bin`
 
-Enabling Windows ***Developer Mode** is a prerequisite for [**Git**](https://git-scm.com/) to actually create symbolic links without requiring you to run every terminal as an Administrator. That is achieved executing the upcoming commands from a PowerShell console with *Administrator* privileges:
-
-    reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevSelfSigned" /d 1
-
-The above command modifies the Windows Registry. It is likely necessary to restart the terminal (or the computer) for the registry change to be fully recognized.
+Enabling Windows ***Developer Mode*** is a prerequisite for [**Git**](https://git-scm.com/) to actually create symbolic links without requiring you to run every terminal as an Administrator. To enable *Windows Developer Mode*, follow the [official instructions](https://learn.microsoft.com/windows/apps/get-started/enable-your-device-for-development).
 
 Configure the **Git Bash** profile on the [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701), executing the following steps:
 
@@ -302,60 +298,7 @@ Configure the **Git Bash** profile on the [Windows Terminal](https://apps.micros
     + **Starting directory:** `%USERPROFILE%`
     + **Icon:** `File` `%LocalAppData%\Programs\Git\mingw64\share\git\git-for-windows.ico`
 
-#### 1.5.2. Bash prompt customization
-
-##### 1.5.2.1. Bash prompt customization on the WSL File System
-
-The customization of the bash prompt is very personal and the files used to accomplish my personal customization on the `WSL File System` are stored at the folder `%OneDriveCommercial%\dotfiles\bash-wsl`. To make use of the mentioned files on the bash prompt customization, replace the **{LABEL}** in the upcoming command as appropriate and then execute it from an [Ubuntu](https://ubuntu.com/) terminal.
-
-    mkdir -p ~/.bash_"$USER" && cp -r {ONEDRIVE_COMMERCIAL_PATH}/dotfiles/bash-wsl/* ~/.bash_"$USER"
-
-> **Label Definition**
->
-> + **{ONEDRIVE_COMMERCIAL_PATH}** : Path to the folder `%OneDriveCommercial%`
-
-Replace the **{LABEL}** in the upcoming snippet as appropriate and the add it to the file `~/.bashrc`.
-
-    # Source the file ~/.bash_{USER}/bash_{USER}.sh to customize the bash shell
-    #
-    if [ -f ~/.bash_{USER}/bash_{USER}.sh ]; then
-        . ~/.bash_{USER}/bash_{USER}.sh
-    fi
-
-> **Label Definition**
->
-> + **{USER}** : Output of the command `echo "$USER"`
-
-After applying the above mentioned changes, save and close the file `~/.bashrc`. To make the changes effective, execute, from the [Ubuntu](https://ubuntu.com/) terminal, the following command:
-
-    source ~/.bashrc
-
-##### 1.5.2.2. Bash prompt customization on the Windows Native File System
-
-The files used to accomplish my personal customization on the `Windows Native File System` are stored at the folder `%OneDriveCommercial%\dotfiles\bash-win`. If a [symlink](https://www.howtogeek.com/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/) to the folder `%OneDriveCommercial%\dotfiles` isn't yet created in the `%USERPROFILE%` folder, create it executing the below command from the Windows Command Prompt.
-
-    mklink /J %USERPROFILE%\.dotfiles "%OneDriveCommercial%\dotfiles"
-
-To edit the file `~/.bashrc`, open it (or create it) with the [Nano text editor](https://www.nano-editor.org/), executing the below command on a **Git Bash** terminal:
-
-    nano ~/.bashrc
-
-Then, within the file `~/.bashrc`, paste the upcoming snippet and replace the **{LABEL}** as appropriate.
-
-    # Source the file ~/.dotfiles/bash-win/bashrc_{USER}.sh to customize the bash shell
-    if [ -f ~/.dotfiles/bash-win/bashrc_{USER}.sh ]; then
-        source ~/.dotfiles/bash-win/bashrc_{USER}.sh
-    fi
-
-> **Label Definition**
->
-> + **{USER}** : Output of the command `echo "$USER"`
-
-After applying the above mentioned changes, save and close the file `~/.bashrc`. To make the changes effective, execute from a **Git Bash** terminal, the following command:
-
-    source ~/.bashrc
-
-#### 1.5.3. Git configuration
+#### 1.5.2. Git configuration
 
 To set [Git's global configuration](https://www.learnenough.com/git-tutorial#sec-installation_and_setup), replace the **{LABELS}** in the below commands as appropriate and then execute it in an [Git Bash](https://git-scm.com/) terminal window.
 
@@ -377,6 +320,103 @@ To set [Git's global configuration](https://www.learnenough.com/git-tutorial#sec
 > + **{USER_EMAIL}** : The e-mail of the user
 
 Instructions for a more detailed Git global configuration can be found in the [Git's Official Documentation](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup).
+
+#### 1.5.3. Bash prompt customization
+
+##### 1.5.3.1. Bash prompt customization on the WSL File System
+
+The customization of the bash prompt is very personal and the files used to accomplish my personal customization on the `WSL File System` are stored at the folder `root/home/user/.bash_USER` in the [**system-configuration-files**](https://github.com/EnduranceCode/system-configuration-files) repository. The easiest way to use the files on the referred repository is to start by cloning it to your local machine. Do it with the execution of the following command:
+
+    git clone https://github.com/EnduranceCode/system-configuration-files.git
+
+To [copy](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/) the mentioned folder (and files) to your local machine `home` folder, replace the ***{LABELS}*** in the below commands as appropriate and execute it.
+
+    cp -r {SYSTEM_CONFIGURATION_FILES_REPOSITORY_ROOT_FOLDER}/root/home/user/.bash_USER ~/
+
+> **Label Definition**
+>
+> + **{SYSTEM_CONFIGURATION_FILES_REPOSITORY_ROOT_FOLDER}** : Path to the system-configuration-files repository root folder
+
+To be able to use the files copied in the previous step for the bash environment customization, execute the following commands:
+
+    mv ~/.bash_USER ~/.bash_"${USER}"
+    mv ~/.bash_"${USER}"/bash_USER.sh ~/.bash_"${USER}"/bash_"${USER}".sh
+    chown -R "${USER}":"${USER}" ~/.bash_"${USER}"
+    chmod -R 700 ~/.bash_"${USER}"
+
+To complete the process, it's necessary to edit the file `.bashrc` located in the home folder and add the lines below to the end of the mentioned file.
+
+    # Source the file that enables personal prompt customization and implements custom alias
+    # All prompt customization alias implementation must be done in the file sourced below
+    #
+    if [ -f ~/.bash_"${USER}"/bash_"${USER}".sh ]; then
+        . ~/.bash_"${USER}"/bash_"${USER}".sh
+    fi
+
+Open the file `.bashrc` with [*nano text editor*](https://www.nano-editor.org/) executing the following command:
+
+    nano ~/.bashrc
+
+After adding the necessary modifications, save the file with the command `CTRL + O` and then exit [*nano text editor*](https://www.nano-editor.org/) with the command `CTRL + X`.
+
+Make the changes effective with the following command:
+
+    source ~/.bashrc
+
+##### 1.5.3.2. Bash prompt customization on the Windows Native File System
+
+The files used to accomplish my personal customization on the `Windows Native File System` are stored at the folder `root/home/user/.bash_USER` in the [**system-configuration-files**](https://github.com/EnduranceCode/system-configuration-files) repository. The easiest way to use the files on the referred repository is to start by cloning it to your local machine. Do it with the execution of the following command:
+
+    git clone https://github.com/EnduranceCode/system-configuration-files.git
+
+To [copy](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/) the mentioned folder (and files) to your local machine `home` folder, replace the ***{LABELS}*** in the below commands as appropriate and execute it.
+
+    cp -r {SYSTEM_CONFIGURATION_FILES_REPOSITORY_ROOT_FOLDER}/root/home/user/.bash_USER ~/
+
+> **Label Definition**
+>
+> + **{SYSTEM_CONFIGURATION_FILES_REPOSITORY_ROOT_FOLDER}** : Path to the system-configuration-files repository root folder
+
+The bash prompt customization provided by the files copied in the previous step depends on the existence of the environment variable `USER`. Check if the variable is set with the following command:
+
+    echo $USER
+
+If the output of the above command is empty, it's necessary to edit the file `.bashrc` located in the home folder and add the snippet below to the end of the mentioned file.
+
+    # Match the Git Bash and Windows login
+    export USER="$USERNAME"
+
+Open the file `.bashrc` with [*nano text editor*](https://www.nano-editor.org/) executing the following command:
+
+    nano ~/.bashrc
+
+After adding the required snippet, save the file with the command `CTRL + O` and then exit [*nano text editor*](https://www.nano-editor.org/) with the command `CTRL + X`. Make the changes effective with the following command:
+
+    source ~/.bashrc
+
+Then, execute the following commands:
+
+    mv ~/.bash_USER ~/.bash_"${USER}"
+    mv ~/.bash_"${USER}"/bash_USER.sh ~/.bash_"${USER}"/bash_"${USER}".sh
+
+To complete the process, it's necessary to edit the file `.bashrc` located in the home folder and add the lines below to the end of the mentioned file.
+
+    # Source the file that enables personal prompt customization and implements custom alias
+    # All prompt customization alias implementation must be done in the file sourced below
+    #
+    if [ -f ~/.bash_"${USER}"/bash_"${USER}".sh ]; then
+        . ~/.bash_"${USER}"/bash_"${USER}".sh
+    fi
+
+Open the file `.bashrc` with [*nano text editor*](https://www.nano-editor.org/) executing the following command:
+
+    nano ~/.bashrc
+
+After adding the necessary modifications, save the file with the command `CTRL + O` and then exit [*nano text editor*](https://www.nano-editor.org/) with the command `CTRL + X`.
+
+Make the changes effective with the following command:
+
+    source ~/.bashrc
 
 #### 1.5.4. SSH Keys
 
@@ -404,7 +444,7 @@ The above command creates a new SSH key, using the provided email as a label.
 
     > Generating public/private rsa key pair.
 
-When  prompted to "Enter a file in which to save the key," press Enter to accept the default file location.
+When prompted to "Enter a file in which to save the key," press Enter to accept the default file location.
 
     > Enter a file in which to save the key (/home/you/.ssh/id_rsa): [Press enter]
 
@@ -449,8 +489,6 @@ Check if the output of the above last command shows a suggestion to install `vcr
 Following the execution of the above command, there will be several prompts for elevated permissions which must all be be accepted to complete the installation. A restart of the machine will be necessary to complete the installation but before restarting the machine, check if the output of the installation command states that the `vcredist2022` installer can be removed. If it does, after the restart of the machine, execute the following command on a PowerShell console:
 
     scoop uninstall extras/vcredist2022
-
-Move the [**KeePassXC**](https://keepassxc.org/) *Start Menu* shortcut from the folder `C:\Users\rferrcan\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps`to the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Utility` (Create the `Utility` folder if it doesn't exits).
 
 #### 1.6.2. Configuration
 
