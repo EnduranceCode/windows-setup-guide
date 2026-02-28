@@ -216,7 +216,7 @@ To check if everything was properly installed and if further actions are necessa
 
 If the above command outputs a warning stating that *Windows Developer Mode* is not enabled, you should consider enabling it because operations relevant to [symlinks](https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/) may fail without proper rights. It is also recommended to enable *Long Paths* option on the **Advanced Windows Settings**.
 
-To enable *Windows Developer Mode*, follow the [official instructions](https://learn.microsoft.com/windows/apps/get-started/enable-your-device-for-development).
+To enable *Windows Developer Mode* and *Long Paths*, follow the instructions provided in the [Advanced Windows Settings](2-windows-configuration.md#21-advanced-windows-settings) of this guide.
 
 The output of the command `scoop checkup`, might show some recommendations to install some additional packages. If it does, install it using the recommended commands.
 
@@ -284,7 +284,7 @@ To ensure ensure that the PATH environment is adjusted for [**Git**](https://git
 + `%LocalAppData%\Programs\Git\mingw64\bin`
 + `%LocalAppData%\Programs\Git\usr\bin`
 
-Enabling Windows ***Developer Mode*** is a prerequisite for [**Git**](https://git-scm.com/) to actually create symbolic links without requiring you to run every terminal as an Administrator. To enable *Windows Developer Mode*, follow the [official instructions](https://learn.microsoft.com/windows/apps/get-started/enable-your-device-for-development).
+Enabling Windows ***Developer Mode*** is a prerequisite for [**Git**](https://git-scm.com/) to actually create symbolic links without requiring you to run every terminal as an Administrator. To enable *Windows Developer Mode*, follow the [Advanced Windows Settings](./2-windows-configuration.md#21-advanced-windows-settings) of this guide.
 
 Configure the **Git Bash** profile on the [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701), executing the following steps:
 

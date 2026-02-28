@@ -35,8 +35,6 @@ To install [**Notepad++**](https://notepad-plus-plus.org/), open a PowerShell co
     scoop bucket add extras
     scoop install extras/notepadplusplus
 
-Move the [**Notepad++**](https://notepad-plus-plus.org/) *Start Menu* shortcut from the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Development` folder (Create the `Development` folder if it doesn't exits).
-
 #### 4.1.2. Configuration
 
 On the menu option `Settings->Plugins Admin...`, install the plugins [**BetterMultiSelection**](https://github.com/dail8859/BetterMultiSelection), [**DSpellCheck**](https://github.com/Predelnik/DSpellCheck), [Json Tools](https://github.com/molsonkiko/JsonToolsNppPlugin) and [**XML Tools**](https://github.com/morbac/xmltools).
@@ -53,8 +51,6 @@ To install [**Meld**](https://meld.app/), open a PowerShell console and execute 
 
     scoop bucket add extras
     scoop install extras/meld
-
-Move the [**Meld**](https://meld.app/) *Start Menu* shortcut from the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Scoop Apps` to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Development` folder (Create the `Development` folder if it doesn't exits).
 
 ### 4.3. Java
 
@@ -145,7 +141,7 @@ To confirm that the certificate was added to the JRE keystore, replace the **{LA
 
 The instructions shown here describe how to manually install [**Java**](https://openjdk.org/) on the `Windows Native File System` for the current *user account*.
 
-Download the *.zip* option of the desired [JDK version and vendor](https://javaalmanac.io/). Then, unpack it to a folder inside `C:\DEV\java`. Rename the extracted folder taking in consideration the following structure:
+Download the *.zip* option of the desired [JDK version and vendor](https://javaalmanac.io/). Then, unpack it to a folder inside `C:\dev\java`. Rename the extracted folder taking in consideration the following structure:
 
     {VENDOR}-{VERSION}-{PROJECT}
 
@@ -301,7 +297,7 @@ If everything is correct, the above command will output the **Apache Maven** ver
 
 ##### 4.4.1.2. Installation on the Windows Native File System
 
-To install [**Apache Maven**](https://maven.apache.org/), download the desired [Binary zip archive](https://maven.apache.org/download.cgi) and unpack it to the folder `C:\DEV\apache-maven`. Rename the extracted folder taking in consideration the following structure:
+To install [**Apache Maven**](https://maven.apache.org/), download the desired [Binary zip archive](https://maven.apache.org/download.cgi) and unpack it to the folder `C:\dev\apache-maven`. Rename the extracted folder taking in consideration the following structure:
 
     apache-maven-{VERSION}-{PROJECT}
 
@@ -383,7 +379,7 @@ A `README.md` file must be stored on the folder `~/.m2` with a list a of all exi
 
 ##### 4.5.1.1. Installation on the Windows Native File System
 
-To install [**Apache Tomcat**](http://tomcat.apache.org/) application server on the `Windows Native File System`, download the desired [release zip archive](http://tomcat.apache.org/) and unpack it to the folder `C:\DEV\apache-tomcat`. Rename the extracted folder taking in consideration the following structure:
+To install [**Apache Tomcat**](http://tomcat.apache.org/) application server on the `Windows Native File System`, download the desired [release zip archive](http://tomcat.apache.org/) and unpack it to the folder `C:\dev\apache-tomcat`. Rename the extracted folder taking in consideration the following structure:
 
     tomcat-{VERSION}-{PROJECT}
 
@@ -884,13 +880,9 @@ If everything is correct, the above commands will output the **node** version an
 
 The [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) is the [recommended way](https://www.jetbrains.com/help/idea/installation-guide.html#toolbox) to install JetBrain products. Download the latest installation file from the [official download page](https://www.jetbrains.com/toolbox-app/). Then, execute the downloaded file to install [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/).
 
-Move the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) *Start Menu* *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox` that was created by the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) installer.
-
 Execute the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) and then login in the JetBrains account. Then, on the `Toolbox App Menu`choose the `Settings` option and uncheck the checkbox `Launch Toolbox App at system startup`.  
 
 To install [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) and then choose the desired [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) version to install and follow the instructions prompted.
-
-Move the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) *Start Menu* *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder. Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox` that was created by the installer.
 
 Some antivirus software can interfere with the IDE build process, [causing builds to run dramatically slower](https://intellij-support.jetbrains.com/hc/en-us/articles/360006298560). To prevent this, the folders where the IDE writes a lot of files should be excluded from the antivirus software real-time scanning. That can be done following the following steps:
 
@@ -900,7 +892,7 @@ Some antivirus software can interfere with the IDE build process, [causing build
 + Click on “Manage settings” under “Virus & threat protection settings”;
 + Scroll down if needed, and then click on “Add or remove exclusions” (there will be a prompt for elevated permissions that must be accepted);
 + Click the button `+ Add an exclusion`, choose `Folder` from the dropdown list and then add all (one by one) the following folders:
-  + `C:\CODE`
+  + `C:\code`
   + `%APPDATA%\JetBrains`
   + `%LOCALAPPDATA%\JetBrains\`
 
@@ -999,8 +991,6 @@ From the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) main menu, select 
 
 Download the [**Visual Studio Code**](https://code.visualstudio.com) *User Installer* file from the [official download page](https://code.visualstudio.com/download). Then, execute the downloaded file to install [**Visual Studio Code**](https://code.visualstudio.com).
 
-Move the [**Visual Studio Code**](https://code.visualstudio.com) *Start Menu* *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Visual Studio Code` that was created by the installer.
-
 Execute [**Visual Studio Code**](https://code.visualstudio.com) and to enable the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sync) option, click on te gear menu (on the bottom left of the application screen) and select the [`Setting Sync...`](https://code.visualstudio.com/docs/editor/settings-sync) option. When asked to sign in, choose the *GitHub* option and then insert the needed credentials. When asked what preferences to sync, select the checkboxes listed next:
 
 + Settings;
@@ -1067,8 +1057,6 @@ Download [**DBeaver**](https://dbeaver.io/) installer latest version from [offic
 + Include Java
 + Associate .SQL files
 
-Move the [**DBeaver**](https://dbeaver.io/) *Start Menu* *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Development` folder (Create the `Development` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DBeaver Community` that was created by the installer.
-
 [**DBeaver**](https://dbeaver.io/) will store the drivers it uses in the folder `%USERPROFILE%\AppData\Roaming\DBeaverData\drivers`.
 
 When using applications like [Zscaler](https://www.zscaler.com/), it might be necessary to import security certificate to the [**DBeaver**](https://dbeaver.io/) JRE Keystore. On a **Git Bash** terminal, navigate to the folder `%USERPROFILE%\AppData\Local\DBeaver\jre\lib\security`, replace the **{LABELS}** in the upcoming command as appropriate and then execute it:
@@ -1095,5 +1083,3 @@ To confirm that the certificate was added to the JRE keystore, replace the **{LA
 #### 4.16.1. Installation
 
 Download [**Postman**](https://www.postman.com/) installer latest version from [official downloads page](https://www.postman.com/downloads/). Then, execute the downloaded file and when prompted, sign in into the [**Postman**](https://www.postman.com/) account.
-
-Move the [**Postman**](https://www.postman.com/) *Start Menu* *shortcut* to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Tools` folder (Create the `Tools` folder if it doesn't exits). Then delete the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Postman` that was created by the installer.

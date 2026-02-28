@@ -28,8 +28,6 @@ It will, probably, be necessary to restart the machine to complete the [**Autent
 
 Download the [**Autenticação.gov Plugin**](https://autenticacao.gov.pt/fa/ajuda/autenticacaogovpt.aspx) from the [official downloads page](https://autenticacao.gov.pt/fa/ajuda/autenticacaogovpt.aspx). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
 
-Rename the [**Autenticação.gov App**](https://www.autenticacao.gov.pt/) *Start Menu* shortcut to *Autenticação.gov - App* and rename the [**Autenticação.gov Plugin**](https://www.autenticacao.gov.pt/) *Start Menu* shortcut to *Autenticação.gov - Plugin*. Then, move both shortcuts to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Tools` folder (Create the `Tools` folder if it doesn't exits).
-
 #### 3.1.2. Configuration
 
 Go through the [**Autenticação.gov App**](https://www.autenticacao.gov.pt/) configuration options and set it as desired, but make sure that the auto start is disabled. Do the same with the [**Autenticação.gov Plugin**](https://autenticacao.gov.pt/fa/ajuda/autenticacaogovpt.aspx).
@@ -42,9 +40,8 @@ Go through the [**Autenticação.gov App**](https://www.autenticacao.gov.pt/) co
 
 To install [**GIMP**](https://www.gimp.org/), open a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/XPDM27W10192Q0).
 
-    winget install XPDM27W10192Q0 -s msstore
-
-Rename the [**GIMP**](https://www.gimp.org/) *Start Menu* shortcut to *GIMP* and then move it to the `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Graphics` folder (Create the `Graphics` folder if it doesn't exits).
+    scoop bucket add extras
+    scoop install extras/gimp
 
 ### 3.3. Inkscape
 
@@ -68,8 +65,6 @@ To install [**PDFsam Basic**](https://pdfsam.org/pdfsam-basic/), execute the upc
     scoop bucket add extras
     scoop install extras/pdfsam
 
-Move the [**PDFsam Basic**](https://pdfsam.org/pdfsam-basic/) *Start Menu* shortcut from the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps`to the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Office` (Create the `Office` folder if it doesn't exits).
-
 ### 3.5. SpeedCrunch
 
 [**SpeedCrunch**](http://www.speedcrunch.org) is a high-precision scientific calculator featuring a fast, keyboard-driven user interface. It is free and open-source software, licensed under the GPL.
@@ -80,12 +75,6 @@ To install [**SpeedCrunch**](http://www.speedcrunch.org), execute the upcoming c
 
     scoop bucket add extras
     scoop install extras/speedcrunch
-
-Move the [**SpeedCrunch**](http://www.speedcrunch.org) *Start Menu* shortcut from the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Utility` (Create the `Utility` folder if it doesn't exits).
-
-If the keyboard in use has a special key to start a calculator, edit the [Windows Registry](https://learn.microsoft.com/troubleshoot/windows-server/performance/windows-registry-advanced-users) to assign [**SpeedCrunch**](http://www.speedcrunch.org) to the mentioned key.
-
-To open the [Registry Editor](https://www.bleepingcomputer.com/tutorials/how-to-use-the-windows-registry-editor/) as an administrator, click the Windows *Start Menu*, type `regedit` in the search field and then click on the *Run as an administrator* option that is shown. Then, navigate to the [key](https://www.lifewire.com/what-is-a-registry-key-2625999) `Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AppKey\18` and add a new string [registry value](https://www.lifewire.com/what-is-a-registry-value-2626042) with the value *ShellExecute* in the `Name` field and with value of the full path of the [**SpeedCrunch**](http://www.speedcrunch.org) executable file in the `Data` field.
 
 ### 3.6. Spotify
 
@@ -98,8 +87,6 @@ To install [**Spotify**](https://open.spotify.com/), open a PowerShell console a
     scoop bucket add extras
     scoop install extras/spotify
 
-Move the [**Spotify**](https://open.spotify.com/) *Start Menu* shortcut from the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Audio & Video` folder (Create the `Audio & Video` folder if it doesn't exits).
-
 ### 3.7. VLC
 
 VLC is a free and open source cross-platform multimedia player and framework that plays most multimedia files as well as DVDs, Audio CDs, VCDs, and various streaming protocols.
@@ -110,5 +97,3 @@ To install [**VLC**](https://www.videolan.org/), open a PowerShell console and e
 
     scoop bucket add extras
     scoop install extras/vlc
-
-Move the [**VLC**](https://www.videolan.org/) *Start Menu* shortcut from the folder `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps` to the `%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Audio & Video` folder (Create the `Audio & Video` folder if it doesn't exits).
