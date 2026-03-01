@@ -760,9 +760,11 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 
 #### 4.11.1. Installation
 
+The most pratical way to install [**Node.js**](https://nodejs.org/) is via a Node version manager because it allows you to easily install and switch between numerous versions of [**Node.js**](https://nodejs.org/). This is useful when a project you’re working on requires a different version of [**Node.js**](https://nodejs.org/) than what you currently have installed.
+
 ##### 4.11.1.1. Installation on the WSL File System
 
-A [popular method](https://nodejs.devhttps://nodejs.org/en/learn/getting-started/how-to-install-nodejs) to install and manage multiple versions of [**Node.js**](https://nodejs.org/) is to use [`nvm`](https://github.com/nvm-sh/nvm), which cam also be used  on the `WSL File System`. [`nvm`](https://github.com/nvm-sh/nvm) is a version manager for [**Node.js**](https://nodejs.org/), designed to be installed per-user, and invoked per-shell. It works on any POSIX-compliant shell (sh, dash, ksh, zsh, bash), in particular on these platforms: unix, macOS, and [WSL](https://github.com/nvm-sh/nvm#important-notes). [`nvm`](https://github.com/nvm-sh/nvm) is also recommended on [`npm`](https://www.npmjs.com/)'s [Official Documentation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+The Node version manager that I use on Linux is [`nvm`](https://github.com/nvm-sh/nvm), which cam also be used  on the `WSL File System`. [`nvm`](https://github.com/nvm-sh/nvm) is a version manager for [**Node.js**](https://nodejs.org/), designed to be installed per-user, and invoked per-shell. It works on any POSIX-compliant shell (sh, dash, ksh, zsh, bash), in particular on these platforms: unix, macOS, and [WSL](https://github.com/nvm-sh/nvm#important-notes). [`nvm`](https://github.com/nvm-sh/nvm) is also recommended on [`npm`](https://www.npmjs.com/)'s [Official Documentation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
 Make sure that you have the `build-essentials` package already installed and then, to install [`nvm`](https://github.com/nvm-sh/nvm), replace the **{LABEL}** in the upcoming command as appropriate and execute it from an [Ubuntu](https://ubuntu.com/) terminal.
 
@@ -812,7 +814,74 @@ When [**Node.js**](https://nodejs.org/) is installed, [`npm`](https://www.npmjs.
 
 ##### 4.11.1.2. Installation on the Windows Native File System
 
-The easiest method to install and manage multiple versions of [**Node.js**](https://nodejs.org/) on the `Windows Native File System` is to use [NVS](https://github.com/jasongin/nvs). This is a cross-platform utility for switching between different versions and forks of [**Node.js**](https://nodejs.org/). [NVS](https://github.com/jasongin/nvs) is itself written in node JavaScript.
+My go to Node version manager on on the `Windows Native File System` used to be [NVS](https://github.com/jasongin/nvs) but, it has seen very little activity recently, with the last major release being in 2023. Therefore, I'm now starting to use [fnm (Fast Node Manager)](https://github.com/Schniz/fnm).
+
+###### 4.11.1.2.1. fnm (Fast Node Manager)
+
+[fnm](https://github.com/Schniz/fnm) can be installed with [scoop](https://scoop.sh/) executing, PowerShell console, the following command:
+
+    scoop install fnm
+
+Before you can use [fnm](https://github.com/Schniz/fnm), you have to first set up your shell.
+
+To be able to use [fnm](https://github.com/Schniz/fnm) with Git Bash, edit the `~/.bashrc` file and add the bellow snippet.
+
+    # fnm shel setup
+    eval "$(fnm env --use-on-cd --shell bash --version-file-strategy=recursive)"
+
+Check out also the [Official Configuration](https://github.com/Schniz/fnm/blob/master/docs/configuration.md) section to enable other highly recommended features.
+
+To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
+
+    source ~/.bashrc
+
+At this stage, you will probably be prompt to install the default [**Node.js**](https://nodejs.org/) version and you should refuse to install it. To check if [fnm](https://github.com/Schniz/fnm) was properly installed, execute the following commands:
+
+    fnm -V
+    fnm -h
+
+To install and use the latest [**Node.js**](https://nodejs.org/) LTS version, on Git Bash, execute the following command:
+
+    fnm install --lts
+    fnm use lts-latest
+    fnm list
+
+To be able to use [fnm](https://github.com/Schniz/fnm) with PowerShell, you will need add the bellow snippet to you profile file.
+
+    # fnm shel setup
+    fnm env --use-on-cd --shell powershell --version-file-strategy=recursive | Out-String | Invoke-Expression
+
+To create a PowerShell profile, if it doesn't exists yet, execute the below command on a PowerShell console.
+
+    if (-not (Test-Path $profile)) { New-Item $profile -Force }
+
+To edit you PowerShell profile, execute, on a PowerShell console, the following command:
+
+    Invoke-Item $profile
+
+To check if [fnm](https://github.com/Schniz/fnm) was properly installed, execute the following commands:
+
+    fnm -V
+    fnm -h
+
+To install and use the latest [**Node.js**](https://nodejs.org/) LTS version, on PowerShell, execute the following command:
+
+    fnm install --lts
+    fnm use lts-latest
+    fnm list
+
+For an extended usage documentation, check the [official documentation](https://github.com/Schniz/fnm/blob/master/docs/commands.md)
+
+From now on, the latest [**Node.js**](https://nodejs.org/) LTS version will be available on Git Bash and PowerShell. To set up other shells, check the [official documentation](https://github.com/Schniz/fnm?tab=readme-ov-file#shell-setup). To confirm that everything is properly set, check the output of the below commands executed from a from a PowerShell console and from a [Git Bash](https://git-scm.com/) terminal.
+
+    node --version
+    npm --version
+
+If everything is correct, the above commands will output the **node** version and the **npm** version.
+
+###### 4.11.1.2.2. NVS (Node Version Switcher)
+
+Although I'm now using [fnm](https://github.com/Schniz/fnm) as my preferred Node Version Manager, I'm keeping here, for historical reference, my guide to install [NVS](https://github.com/jasongin/nvs).
 
 The instructions to install [NVS](https://github.com/jasongin/nvs) shown here are following the official instructions for the [manual setup from a Command Prompt](https://github.com/jasongin/nvs/blob/master/doc/SETUP.md#manual-setup---command-prompt).
 
