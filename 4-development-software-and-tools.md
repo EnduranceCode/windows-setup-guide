@@ -360,20 +360,33 @@ To set the folder created with the above command as the custom location for the 
 
 #### 4.4.3. Usage & Maintenance
 
-For each change of the user's `settings.xml` file, placed on the folder `~/.m2`, a copy of the file that is replaced should be made and named with the following naming structure
+To maintain a transparent development environment, each project version uses a dedicated settings file. These are linked to the default Maven location (`~/.m2/settings.xml`) using **Symbolic Links** (Windows Developer mode must be enabled). This allows IDEs and the CLI to work without additional flags or admin permissions, while providing a clear visual indication of which configuration is currently active.
+
+Every project configuration must be stored in `~/.m2/` using following naming structure:
 
     settings-{PROJECT}-{DATE}.xml
 
 The different parts in the above name structure, shall be replaced as explained next:
 
 > + **{PROJECT}** : The name of the project where the settings.xml file was used with, e.g. *sa3*
-> + **{DATE}** : The date of the change on the format yyyy-mm-dd, e.g. *2020-03-21*
+> + **{DATE}** : The date of the change on the format yyyymmdd, e.g. *20200321*
 >
-> With the above examples, the settings.xml backup file name would be *settings-sa3-2020-03-21.xml*
+> With the above examples, the settings.xml backup file name would be *settings-sa3-20200321.xml*
 
-If there's no need to have a user's `settings.xml` file, the last one in use should be backed up as explain above and then deleted.
+If a project requires no specific configuration, create an "empty" settings file containing only the basic `<settings>` tags to ensure Maven remains functional:
 
-A `README.md` file must be stored on the folder `~/.m2` with a list a of all existing `settings.xml` file backups. This list must include the context of each backed up file usage.
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+</settings>
+```
+
+To switch to a different project or update to a new version, you must first delete the existing link and then create the new one. Replace the placeholders in the below command as necessary and then execute it on a Windows Command Prompt console to create/update the `~/.m2/settings.xml` symbolic link.
+
+    del %USERPROFILE%\.m2\settings.xml
+    mklink %USERPROFILE%\.m2\settings.xml %USERPROFILE%\.m2\settings-{PROJECT}-{DATE}.xml
 
 ### 4.5. Apache Tomcat
 
