@@ -964,7 +964,7 @@ If everything is correct, the above commands will output the **node** version an
 
 #### 4.12.1. Installation
 
-The [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) is the [recommended way](https://www.jetbrains.com/help/idea/installation-guide.html#toolbox) to install JetBrain products. Download the latest installation file from the [official download page](https://www.jetbrains.com/toolbox-app/). Then, execute the downloaded file to install [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/).
+The [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) is the [recommended process](https://www.jetbrains.com/help/idea/installation-guide.html#toolbox) to install JetBrain products. Download the latest installation file from the [official download page](https://www.jetbrains.com/toolbox-app/). Then, execute the downloaded file to install [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/).
 
 Execute the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) and then login in the JetBrains account. Then, on the `Toolbox App Menu`choose the `Settings` option and uncheck the checkbox `Launch Toolbox App at system startup`.  
 
@@ -979,28 +979,21 @@ Some antivirus software can interfere with the IDE build process, [causing build
 + Scroll down if needed, and then click on “Add or remove exclusions” (there will be a prompt for elevated permissions that must be accepted);
 + Click the button `+ Add an exclusion`, choose `Folder` from the dropdown list and then add all (one by one) the following folders:
   + `C:\code`
-  + `%APPDATA%\JetBrains`
+  + `%APPDATA%\JetBrains\`
   + `%LOCALAPPDATA%\JetBrains\`
 
-We also recommend [excluding the IDE process from the antivirus](https://intellij-support.jetbrains.com/hc/en-us/articles/360005028939-Slow-startup-on-Windows-splash-screen-appears-in-more-than-20-seconds) to improve the startup performance. To do that exclusion, on the on “Add or remove exclusions”, Click the button `+ Add an exclusion`, choose `Process` from the dropdown list and then add all (one by one) the following processes:
+It is also recommend to [exclude the IDE process from the antivirus](https://intellij-support.jetbrains.com/hc/en-us/articles/360005028939-Slow-startup-on-Windows-splash-screen-appears-in-more-than-20-seconds) to improve the startup performance. To do that exclusion, on the on “Add or remove exclusions”, Click the button `+ Add an exclusion`, choose `Process` from the dropdown list and then add all (one by one) the following processes:
 
 + `idea64.exe`
 + `fsnotifier.exe`
-+ `fsnotifier64.exe`
-
-Execute the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) chosen version and follow the instructions prompted. On the welcome screen, click the button `Enable New UI`.
 
 #### 4.12.2. Install plugins
 
-##### 4.12.2.1. Install SonarLint plugin
+##### 4.12.2.1. Install SonarQube plugin
 
-[SonarLint](https://plugins.jetbrains.com/plugin/7973-sonarlint) is an IDE extension that helps to detect and fix quality issues as the code is written. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "SonarLint". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
+[SonarQube](https://plugins.jetbrains.com/plugin/7973-sonarqube-for-ide) is an IDE extension that helps to detect and fix quality issues as the code is written. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "SonarQube". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-##### 4.12.2.2. Install Markdown plugin
-
-[Markdown](https://plugins.jetbrains.com/plugin/7793-markdown) is an IDE extension that provides the capability to edit Markdown files within the IDE and see the rendered HTML in a live preview. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "Markdown". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
-
-##### 4.12.2.3. Install JPA Buddy
+##### 4.12.2.2. Install JPA Buddy
 
 [JPA Buddy](https://plugins.jetbrains.com/plugin/15075-jpa-buddy) is an IDE extension that helps developers work efficiently with Hibernate, EclipseLink, Spring Data JPA, Flyway, Liquibase, Lombok, MapStruct, and other related technologies in both Java and Kotlin. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "JPA Buddy". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
@@ -1016,9 +1009,17 @@ To add the above mentioned Code Style Formatter settings, on the [**IntelliJ IDE
 
 ##### 4.12.4.1. Commit
 
-On the **Version Control**, the *Local Changes* and the *Shelf* tabs are very useful on my workflow. To enable those tabs it's necessary to make a small [change on the default settings](https://intellij-support.jetbrains.com/hc/en-us/community/posts/4412759255698-2021-2-3-Git-Local-Changes-view-in-VCS-is-gone).
+Modern IntelliJ IDEA versions uses a **non-modal Commit tool window** (accessible via `Alt + 0` or the checkmark icon on the left sidebar). The **Shelf** tab is contextual; it only appears in the Commit tool window when you have at least one shelved change. To manage your shelf:
 
-To make the necessary change, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Version Control->Commit`.  On this tab, uncheck the `Use non-modal commit interface` checkbox.
+1.  Open the **Commit** tool window.
+2.  If you have shelved items, the **Shelf** tab will appear next to the **Changes** tab header.
+3.  If you do not see the tab, it means your shelf is currently empty.
+
+To move changes to the shelf instead of committing them, take the following steps:
+
+1.  In the **Commit** tool window, right-click the files or the "Changes" changelist.
+2.  Select **Shelf Changes...** from the context menu.
+3.  Provide a name for the shelf and click **Shelf Changes**. The **Shelf** tab will now become visible.
 
 #### 4.12.5. Configure Build Tools
 
@@ -1036,14 +1037,18 @@ Beware that you must choose the [Apache Maven](https://maven.apache.org/) accord
 
 ##### 4.12.6.1. Terminal
 
-To customize the *Terminal* in use with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Tools->Terminak`. On this tab, take in consideration the file system you're working on and change the input boxes listed below as described:
+To customize the *Terminal* in use with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Tools->Terminal`. On this tab, take in consideration the file system you're working on and change the input boxes listed below as described:
 
 + `WSL File System`
   + **Shell path** : `wsl.exe`
   + **Default Tab name** : `Terminal`;
 + `Windows Native File System`
-  + **Shell path** : `C:\Program Files\Git\bin\sh.exe --login --i`
+  + **Shell path** : `C:\Users\{USER}\AppData\Local\Programs\Git\bin\bash.exe --login -i`
   + **Default Tab name** : `Terminal`;
+
+> **Label Definition**
+>
+> + **{USER}** : Windows username
 
 This settings will only take effect when starting a new terminal. Therefore, create/add/open a new terminal window and terminate the old one.
 
@@ -1065,7 +1070,7 @@ After starting a debugger session, the Windows Firewall popup might appears and 
 
 To avoid the error "*Command line is too long*" when running tests it's necessary to set the "*Shorten command line*" method in the Run/Debug configuration to "*JAR manifest*". That can be done for the specific method or class, but it's better to [set it as default](https://stackoverflow.com/a/47927544) on [run/debug configuration templates](https://www.jetbrains.com/help/idea/run-debug-configuration.html#templates).
 
-From the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) main menu, select `Run->Edit Configurations...`. On the screen that pop-up, click `Select configuration templates...` (bottom left corner of the pop-up screen). On the following pop-up screen, select the `JUnit` tab.
+From the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) main menu, select `Run->Edit Configurations...`. On the screen that pop-up, click `Edit configuration templates...` (bottom left corner of the pop-up screen). On the following pop-up screen, select the `JUnit` tab.
 
 [Then](https://stackoverflow.com/a/65639857), click on the `Modify options` link (`ALT+M`) and set/select the `Shorten command line` option. Back on the `JUnit` tab, there will be a new dropdown input box named `Shorten command line`. In this new dropdown, choose the *Jar manifest* option. Click the button `OK` (once to close the `Select configuration templates` pop up and again to close the  `Run->Edit Configurations` pop up screen) and from now on all the new `JUnit` Run/Debug configurations will use this template.
 
