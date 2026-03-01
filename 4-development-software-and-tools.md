@@ -141,6 +141,10 @@ To confirm that the certificate was added to the JRE keystore, replace the **{LA
 
 The instructions shown here describe how to manually install [**Java**](https://openjdk.org/) on the `Windows Native File System` for the current *user account*.
 
+Start by creating the folder where [**Java**](https://openjdk.org/) will be installed, executing, on a **Git Bash** terminal the following commands:
+
+    mkdir -p /c/dev/java
+
 Download the *.zip* option of the desired [JDK version and vendor](https://javaalmanac.io/). Then, unpack it to a folder inside `C:\dev\java`. Rename the extracted folder taking in consideration the following structure:
 
     {VENDOR}-{VERSION}-{PROJECT}
@@ -153,7 +157,7 @@ The different parts in the above name structure, shall be replaced as explained 
 >
 > With the above examples, the JDK folder name would be *oracle-jdk1.8.0.231-sa3*
 
-To set `JAVA_HOME` as environment variable for the current *user account*, go to `Control Panel -> User Accounts` and choose the option ***Change my environment variables***.
+To set `JAVA_HOME` as environment variable for the current *user account*, go to `Control Panel -> User Accounts -> User Accounts` and choose the option ***Change my environment variables***.
 
 On the ***User variables*** section, click the **New** button and fill the *Variable name* input box with `JAVA_HOME` and *Variable value* input box with the path to the JDK folder. If a `JAVA_HOME` already exists, select it and click the **Edit** button, then fill the *Variable value* input box with the path to the desired JDK folder.
 
