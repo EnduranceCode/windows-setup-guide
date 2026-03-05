@@ -30,6 +30,8 @@ This file contains the **Development Software and Tools** section of my [Setup g
 
 #### 4.1.1. Installation
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 To install [**Notepad++**](https://notepad-plus-plus.org/), open a PowerShell console and execute the following commands:
 
     scoop bucket add extras
@@ -47,6 +49,8 @@ On the menu option `Settings->Plugins Admin...`, install the plugins [**BetterMu
 
 #### 4.2.1. Installation
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 To install [**Meld**](https://meld.app/), open a PowerShell console and execute the following commands:
 
     scoop bucket add extras
@@ -59,6 +63,8 @@ To install [**Meld**](https://meld.app/), open a PowerShell console and execute 
 #### 4.3.1. Installation
 
 ##### 4.3.1.1. Installation the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
 
 The easiest way to install and manage multiple versions of [**Java**](https://openjdk.org/) on the `WSL File System` is to use [SDKMAN](https://sdkman.io/). This is a free, lightweight, open-source utility written in [Bash](https://www.gnu.org/software/bash/) that provides a convenient command line interface to manage multiple versions of [**Java**](https://openjdk.org/) and also takes care of setting the necessary environment variables.
 
@@ -139,6 +145,8 @@ To confirm that the certificate was added to the JRE keystore, replace the **{LA
 
 ##### 4.3.1.2. Installation on the Windows Native File System
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 The instructions shown here describe how to manually install [**Java**](https://openjdk.org/) on the `Windows Native File System` for the current *user account*.
 
 Start by creating the folder where [**Java**](https://openjdk.org/) will be installed, executing, on a **Git Bash** terminal the following commands:
@@ -211,6 +219,8 @@ To confirm that the certificate was added to the JRE keystore, replace the **{LA
 #### 4.4.1. Installation
 
 ##### 4.4.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
 
 To be able to install a specific [**Apache Maven**](https://maven.apache.org/) version on the `WSL File System`, I like to follow a procedure inspired by the [Linuxiz Blog](https://linuxize.com/post/how-to-install-apache-maven-on-ubuntu-18-04/).
 
@@ -300,6 +310,8 @@ To check if **Apache Maven** was properly installed, check the output of the fol
 If everything is correct, the above command will output the **Apache Maven** version.
 
 ##### 4.4.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 To install [**Apache Maven**](https://maven.apache.org/), download the desired [Binary zip archive](https://maven.apache.org/download.cgi) and unpack it to the folder `C:\dev\apache-maven`. Rename the extracted folder taking in consideration the following structure:
 
@@ -396,6 +408,8 @@ To switch to a different project or update to a new version, you must first dele
 
 ##### 4.5.1.1. Installation on the Windows Native File System
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 To install [**Apache Tomcat**](http://tomcat.apache.org/) application server on the `Windows Native File System`, download the desired [release zip archive](http://tomcat.apache.org/) and unpack it to the folder `C:\dev\apache-tomcat`. Rename the extracted folder taking in consideration the following structure:
 
     tomcat-{VERSION}-{PROJECT}
@@ -415,6 +429,8 @@ The [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) lets you create Qua
 
 ##### 4.6.1.1. Installation on the WSL File System
 
+![WSL](https://img.shields.io/badge/WSL-purple)
+
 To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) on the `WSL File System`, as recommended on the [Quarkus documentation](https://quarkus.io/guides/cli-tooling), use [SDKMAN](https://sdkman.io/), execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
 
     sdk install quarkus
@@ -424,6 +440,8 @@ To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) instal
     quarkus --version
 
 ##### 4.6.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling), open a [Git Bash](https://git-scm.com/) terminal and execute the following command:
 
@@ -440,6 +458,8 @@ The [**AWS Command Line Interface (AWS CLI)**](https://aws.amazon.com/cli/) is a
 #### 4.7.1. Installation
 
 ##### 4.7.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
 
 To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `WSL File System`, take in consideration Linux's [AWS official instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and execute the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
 
@@ -470,6 +490,8 @@ If the installation was successful, the following message is returned.
     The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
 
 ##### 4.7.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `Windows Native File System`, open a [Git Bash](https://git-scm.com/) terminal and execute the following command:
 
@@ -502,6 +524,8 @@ If the installation was successful, the following message is returned.
 
 ##### 4.8.1.1. Installation on the WSL File System
 
+![WSL](https://img.shields.io/badge/WSL-purple)
+
 To install [**GNU Make**](https://www.gnu.org/software/make/) on the `WSL File System`, execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
 
     sudo apt install make
@@ -511,6 +535,8 @@ To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation
     make --version
 
 ##### 4.8.1.1. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 To install [**GNU Make**](https://www.gnu.org/software/make/), open a [Git Bash](https://git-scm.com/) terminal and execute the following command:
 
@@ -546,6 +572,8 @@ The above command should now show that "*TCP Dynamic Port Range*" has been chang
 #### 4.9.2. Installation
 
 ##### 4.9.2.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
 
 This section describes the necessary steps to install [**Docker**](https://www.docker.com/) and [Docker Engine](https://docs.docker.com/engine/) on a [WSL](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) distribution. The following steps are based on the [official documentation for installing Docker on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) with some adaptations provided by [Paul Knulst](https://www.paulsblog.dev/how-to-install-docker-without-docker-desktop-on-windows/).
 
@@ -635,6 +663,8 @@ Upon success of the GPG key initialization, edit the [**Docker**](https://www.do
 
 ##### 4.9.2.1. Installation on the Windows Native File System with Rancher Desktop
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 [**Rancher Desktop**](https://rancherdesktop.io/) is an app that provides container management and Kubernetes on the desktop. It is available for Mac (both on Intel and Apple Silicon), Windows, and Linux.
 
 [**Rancher Desktop**](https://rancherdesktop.io/) installation is only necessary if you're going to do your development work on the Windows Native File System because, if you're going to do all you development work on the [WSL](https://learn.microsoft.com/windows/wsl/) file system, you should utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
@@ -651,7 +681,7 @@ To install [**Rancher Desktop**](https://rancherdesktop.io/), take the following
 
 Once the installation is completed, go through [**Rancher Desktop**](https://rancherdesktop.io/) preferences and set it as desired. It is recommended to enable *Automatically start at login* and also *Start in the background*.
 
-To verify that the installation was sucssefull, make sure [**Rancher Desktop**](https://rancherdesktop.io/) is running, then open a new PowerShell console and execute:
+To verify that the installation was successful, make sure [**Rancher Desktop**](https://rancherdesktop.io/) is running, then open a new PowerShell console and execute:
 
     wsl --list --verbose
 
@@ -714,6 +744,8 @@ The [**Rancher Desktop**](https://rancherdesktop.io/) installation and usage fil
 
 ##### 4.10.1.1. Installation on the WSL File System
 
+![WSL](https://img.shields.io/badge/WSL-purple)
+
 The easiest way to install and manage multiple versions of [**Terraform**](https://www.terraform.io/) on the `WSL File System` is to use [TFSwitch](https://tfswitch.warrensbox.com/). This is a command line tool that lets you switch between different versions of [**Terraform**](https://www.terraform.io/).
 
 Create a folder to [store the user's binaries](https://unix.stackexchange.com/a/36874) executing the following command:
@@ -754,6 +786,8 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 
 ##### 4.10.1.2. Installation on the Windows Native File System
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 To install [**Terraform**](https://www.terraform.io/) on the `Windows Native File System`, open a [Git Bash](https://git-scm.com/) terminal and execute the below command and execute the following command:
 
     scoop install main/terraform
@@ -779,6 +813,8 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 The most pratical way to install [**Node.js**](https://nodejs.org/) is via a Node version manager because it allows you to easily install and switch between numerous versions of [**Node.js**](https://nodejs.org/). This is useful when a project you’re working on requires a different version of [**Node.js**](https://nodejs.org/) than what you currently have installed.
 
 ##### 4.11.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
 
 The Node version manager that I use on Linux is [`nvm`](https://github.com/nvm-sh/nvm), which cam also be used  on the `WSL File System`. [`nvm`](https://github.com/nvm-sh/nvm) is a version manager for [**Node.js**](https://nodejs.org/), designed to be installed per-user, and invoked per-shell. It works on any POSIX-compliant shell (sh, dash, ksh, zsh, bash), in particular on these platforms: unix, macOS, and [WSL](https://github.com/nvm-sh/nvm#important-notes). [`nvm`](https://github.com/nvm-sh/nvm) is also recommended on [`npm`](https://www.npmjs.com/)'s [Official Documentation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
@@ -829,6 +865,8 @@ When [**Node.js**](https://nodejs.org/) is installed, [`npm`](https://www.npmjs.
     nvm install-latest-npm
 
 ##### 4.11.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 My go to Node version manager on on the `Windows Native File System` used to be [NVS](https://github.com/jasongin/nvs) but, it has seen very little activity recently, with the last major release being in 2023. Therefore, I'm now starting to use [fnm (Fast Node Manager)](https://github.com/Schniz/fnm).
 
@@ -980,6 +1018,8 @@ If everything is correct, the above commands will output the **node** version an
 
 #### 4.12.1. Installation
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 The [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) is the [recommended process](https://www.jetbrains.com/help/idea/installation-guide.html#toolbox) to install JetBrain products. Download the latest installation file from the [official download page](https://www.jetbrains.com/toolbox-app/). Then, execute the downloaded file to install [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/).
 
 Execute the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) and then login in the JetBrains account. Then, on the `Toolbox App Menu`choose the `Settings` option and uncheck the checkbox `Launch Toolbox App at system startup`.  
@@ -1096,6 +1136,8 @@ From the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) main menu, select 
 
 #### 4.13.1. Installation
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 Download the [**Visual Studio Code**](https://code.visualstudio.com) *User Installer* file from the [official download page](https://code.visualstudio.com/download). Then, execute the downloaded file to install [**Visual Studio Code**](https://code.visualstudio.com).
 
 Execute [**Visual Studio Code**](https://code.visualstudio.com) and to enable the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sync) option, click on te gear menu (on the bottom left of the application screen) and select the [`Setting Sync...`](https://code.visualstudio.com/docs/editor/settings-sync) option. When asked to sign in, choose the *GitHub* option and then insert the needed credentials. When asked what preferences to sync, select the checkboxes listed next:
@@ -1158,6 +1200,8 @@ TODO
 
 #### 4.15.1. Installation
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 Download [**DBeaver**](https://dbeaver.io/) installer latest version from [official downloads page](https://dbeaver.io/download/). Then, execute the downloaded file and when prompted, choose to install [**DBeaver**](https://dbeaver.io/) only for the current user. When asked to select the components to install, check the following checkboxes:
 
 + DBeaver Community;
@@ -1188,5 +1232,7 @@ To confirm that the certificate was added to the JRE keystore, replace the **{LA
 [**Postman**](https://www.postman.com/) helps you be more efficient while working with APIs. Using Postman, you can construct complex HTTP requests quickly, organize them in collections.
 
 #### 4.16.1. Installation
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 Download [**Postman**](https://www.postman.com/) installer latest version from [official downloads page](https://www.postman.com/downloads/). Then, execute the downloaded file and when prompted, sign in into the [**Postman**](https://www.postman.com/) account.

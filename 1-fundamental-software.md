@@ -24,6 +24,8 @@ With [Lubuntu](https://lubuntu.me) I use [Firefox](https://www.mozilla.org/firef
 
 ##### 1.1.1.1. Installation
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 To install [**Firefox**](https://www.mozilla.org/firefox/new/), download the latest version from the [official downloads page](https://www.mozilla.org/firefox/new/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
 
 ##### 1.1.1.2. Configuration
@@ -51,6 +53,8 @@ Set the desired options for all the above extensions. The folder `root/home/user
 
 ##### 1.1.2.1. Installation
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 To install [**Google Chrome**](https://www.google.com/chrome/), download the latest version from the [official downloads page](https://www.google.com/chrome/). Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
 
 ##### 1.1.2.2. Configuration
@@ -74,6 +78,8 @@ Set the desired options for all the above extensions. The folder `root/home/user
 [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/windows/wsl/) lets developers run a GNU/Linux environment directly on Windows.
 
 #### 1.2.1. Installation
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue) ![WSL](https://img.shields.io/badge/WSL-purple)
 
 Follow the [Official instructions](https://learn.microsoft.com/windows/wsl/install-manual) to manually [enable](https://learn.microsoft.com/windows/wsl/install-manual#step-1---enable-the-windows-subsystem-for-linux) [**WSL**](https://learn.microsoft.com/windows/wsl/), executing the upcoming command on a PowerShell console with *administrator privileges*.
 
@@ -173,6 +179,8 @@ The [**Windows Terminal**](https://apps.microsoft.com/store/detail/windows-termi
 
 #### 1.3.1. Installation
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 Open the [Microsoft Store](https://aka.ms/wslstore) and install the [**Windows Terminal**](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701).
 
 ### 1.4. Package Manager
@@ -180,6 +188,8 @@ Open the [Microsoft Store](https://aka.ms/wslstore) and install the [**Windows T
 A package manager is a software that easily automates the installation, upgradation, and configuration of third-party software or dependencies. [**Chocolatey**](https://chocolatey.org/) and [**winget**](https://github.com/microsoft/winget-cli) are both package managers for Windows software. Nowadays, I prefer [**winget**](https://github.com/microsoft/winget-cli) over [**Chocolatey**](https://chocolatey.org/) because [**winget**](https://github.com/microsoft/winget-cli) can be used to install software from the [Microsoft Store](https://apps.microsoft.com/home).
 
 #### 1.4.1. Install winget
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 Windows Package Manager [**winget**](https://github.com/microsoft/winget-cli) command-line tool is available on Windows 11 and modern versions of Windows 10 as a part of the [App Installer](https://apps.microsoft.com/detail/9NBLGGH4NNS1). To check if [**winget**](https://github.com/microsoft/winget-cli) is available, open a PowerShell console and execute the following command:
 
@@ -202,6 +212,8 @@ When running [**winget**](https://github.com/microsoft/winget-cli) without admin
 Check the [official documentation](https://learn.microsoft.com/windows/package-manager/winget/) to know the full potential of [**winget**](https://github.com/microsoft/winget-cli).
 
 #### 1.4.2. Install Scoop
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 [**Scoop**](https://scoop.sh/) installs programs from the command line with a minimal amount of friction as it doesn't require Admin privileges.
 
@@ -231,6 +243,8 @@ To list all apps installed with [**Scoop**](https://scoop.sh/), execute the foll
     scoop list
 
 #### 1.4.3. Install Chocolatey
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 If you are going to do your development work on the `Windows Native File System` (instead of doing it exclusively on the `WSL File System`) you should also install [**Chocolatey**](https://chocolatey.org/).
 
@@ -262,9 +276,13 @@ To list the installed chocolatey packages, execute the following command on a Po
 
 ##### 1.5.1.1. Installation on the WSL File System
 
+![WSL](https://img.shields.io/badge/WSL-purple)
+
 [**Git**](https://git-scm.com/) is included on the [Ubuntu](https://ubuntu.com/) submodule of [WSL](https://learn.microsoft.com/windows/wsl/), therefore, it's not necessary to install it on the `WSL File System`.
 
 ##### 1.5.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 **Git Bash** comes included as part of the [Git's Windows package](https://git-scm.com/install/windows) and is an application for Microsoft Windows environments which provides an emulation layer for a [**Git**](https://git-scm.com/) command line experience.
 
@@ -325,6 +343,8 @@ Instructions for a more detailed Git global configuration can be found in the [G
 
 ##### 1.5.3.1. Bash prompt customization on the WSL File System
 
+![WSL](https://img.shields.io/badge/WSL-purple)
+
 The customization of the bash prompt is very personal and the files used to accomplish my personal customization on the `WSL File System` are stored at the folder `root/home/user/.bash_USER` in the [**system-configuration-files**](https://github.com/EnduranceCode/system-configuration-files) repository. The easiest way to use the files on the referred repository is to start by cloning it to your local machine. Do it with the execution of the following command:
 
     git clone https://github.com/EnduranceCode/system-configuration-files.git
@@ -364,6 +384,8 @@ Make the changes effective with the following command:
     source ~/.bashrc
 
 ##### 1.5.3.2. Bash prompt customization on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 The files used to accomplish my personal customization on the `Windows Native File System` are stored at the folder `root/home/user/.bash_USER` in the [**system-configuration-files**](https://github.com/EnduranceCode/system-configuration-files) repository. The easiest way to use the files on the referred repository is to start by cloning it to your local machine. Do it with the execution of the following command:
 
@@ -476,6 +498,8 @@ Copy the output of the above command and then add the public SSH key to the remo
 [**KeePassXC**](https://keepassxc.org/) is a cross-platform community-driven port of the Windows application [Keepass Password Safe](https://keepass.info/) that I choose to use precisely because it's cross-platform and it allows me to use it on every operating system that I work with.
 
 #### 1.6.1. Installation
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 To install [**KeePassXC**](https://keepassxc.org/), execute the upcoming commands on a PowerShell console.
 

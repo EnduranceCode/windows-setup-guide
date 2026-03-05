@@ -21,6 +21,8 @@ This file contains the **Desktop Software** section of my [Setup guide for a dev
 
 #### 3.1.1. Installation
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 Download the [**Autenticação.gov App**](https://www.autenticacao.gov.pt/) from the [official downloads page](https://www.autenticacao.gov.pt/web/guest/cc-aplicacao).
 Then, execute the downloaded file (there will be a prompt for elevated permissions that must be accepted).
 
@@ -38,6 +40,8 @@ Go through the [**Autenticação.gov App**](https://www.autenticacao.gov.pt/) co
 
 #### 3.2.1. Installation
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 To install [**GIMP**](https://www.gimp.org/), open a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/XPDM27W10192Q0).
 
     scoop bucket add extras
@@ -48,6 +52,8 @@ To install [**GIMP**](https://www.gimp.org/), open a PowerShell console and exec
 [**Inkscape**](https://inkscape.org/) is a Free and open source vector graphics multi-platform editor that uses the standardized SVG file format as its main format, which is supported by many other applications including web browsers.
 
 #### 3.3.1. Installation
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 To install [**Inkscape**](https://inkscape.org/), open a PowerShell console and execute the following command:
 
@@ -60,6 +66,8 @@ To install [**Inkscape**](https://inkscape.org/), open a PowerShell console and 
 
 #### 3.4.1. Installation
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 To install [**PDFsam Basic**](https://pdfsam.org/pdfsam-basic/), execute the upcoming commands on a PowerShell console.
 
     scoop bucket add extras
@@ -70,6 +78,8 @@ To install [**PDFsam Basic**](https://pdfsam.org/pdfsam-basic/), execute the upc
 [**SpeedCrunch**](http://www.speedcrunch.org) is a high-precision scientific calculator featuring a fast, keyboard-driven user interface. It is free and open-source software, licensed under the GPL.
 
 #### 3.5.1. Installation
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 To install [**SpeedCrunch**](http://www.speedcrunch.org), execute the upcoming commands on a PowerShell console.
 
@@ -82,6 +92,8 @@ To install [**SpeedCrunch**](http://www.speedcrunch.org), execute the upcoming c
 
 #### 3.6.1. Installation
 
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
 To install [**Spotify**](https://open.spotify.com/), open a PowerShell console and execute the following commands:
 
     scoop bucket add extras
@@ -92,6 +104,8 @@ To install [**Spotify**](https://open.spotify.com/), open a PowerShell console a
 VLC is a free and open source cross-platform multimedia player and framework that plays most multimedia files as well as DVDs, Audio CDs, VCDs, and various streaming protocols.
 
 #### 3.7.1. Installation
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 To install [**VLC**](https://www.videolan.org/), open a PowerShell console and execute the following commands:
 
