@@ -641,54 +641,70 @@ Upon success of the GPG key initialization, edit the [**Docker**](https://www.do
 
 [Windows Linux Subsystem (WSL)](https://learn.microsoft.com/en-us/windows/wsl/) is required to run [**Rancher Desktop**](https://rancherdesktop.io/). If it isn't installed, follow the [instructions on this repository](./1-fundamental-software.md#13-windows-subsystem-for-linux) to install it.
 
-To [install](https://docs.rancherdesktop.io/getting-started/installation/) the software [Rancher Desktop](https://rancherdesktop.io/), download the latest version from the [releases page on GitHub](https://github.com/rancher-sandbox/rancher-desktop/releases) and then execute the downloaded executable.
+To install [**Rancher Desktop**](https://rancherdesktop.io/), take the following steps:
 
-When prompted, choose the option *Install for all users of this machine* (there will be a prompt for elevated permissions that must be accepted) and when the installation is finished, uncheck the checkbox *Run Rancher Desktop* and click Finish to close the installation wizard. After closing the installation wizard, start the [Rancher Desktop](https://rancherdesktop.io/) application from the Windows Start Menu.
+1. **Download:** Get the latest version from the [releases page on GitHub](https://github.com/rancher-sandbox/rancher-desktop/releases) and execute the installer.
+2. **Install:** When prompted, choose *Install for all users of this machine* (accept the elevated permissions prompt).
+3. **Finish:** When the installation is finished, uncheck *Run Rancher Desktop* and click **Finish**.
+4. **Launch:** Start Rancher Desktop from the Windows Start Menu.
+5. **Configure:** On the welcome screen, uncheck `Enable Kubernetes` and select `dockerd` as the Container Engine.
 
-On the [**Rancher Desktop**](https://rancherdesktop.io/) welcome screen, uncheck the option `Enable Kubernetes` and select `dockerd` as the *Container Engine*.
+Once the installation is completed, go through [**Rancher Desktop**](https://rancherdesktop.io/) preferences and set it as desired. It is recommended to enable *Automatically start at login* and also *Start in the background*.
 
-It's now necessary to re-start Windows to enable all the previous changes.
-
-Make sure that [**Rancher Desktop**](https://rancherdesktop.io/) is running (launch it if necessary) and, on a PowerShell console, execute the following command:
+To verify that the installation was sucssefull, make sure [**Rancher Desktop**](https://rancherdesktop.io/) is running, then open a new PowerShell console and execute:
 
     wsl --list --verbose
 
-If everything is correct, the output of the previous command will show the **rancher-desktop** distros running on [WSL](https://learn.microsoft.com/windows/wsl/).
+You should see the [**Rancher Desktop**](https://rancherdesktop.io/) distros running. Next, test if the `docker` command is fully functional for your user:
+
+    docker info
+
+If you see detailed information about the Docker installation, you are done! No further action is necessary.
+
+If `docker info` returns a permission error (e.g., "Access is denied"), your Windows user lacks the privileges to interact with the Docker socket. You will need to add your user to the `docker-users` group and that can be done taking the following steps:
+
+1. On a PowerShell console, check if the group exists and your membership by running:
+
+    ```powershell
+    net localgroup docker-users
+    ```
+
+2. If the `docker-users` group doesn't exists yet, open a PowerShell console with *Administrator* privileges and [create it](https://stackoverflow.com/a/64293327) with the following commands:
+
+    ```powershell
+    New-LocalGroup -Name 'docker-users' -Description 'docker Users Group'
+    ```
+
+3. On a PowerShell console with *Administrator* privileges, add your Windows user to the group (replace `{YOUR_USER_ID}` with your exact Windows username, found by looking at the folder name under `C:\Users\`):
+
+    ```powershell
+    net localgroup docker-users "{YOUR_USER_ID}" /ADD
+    ```
+
+> **Security Note: Avoid the "Administrator" Workaround**
+>
+> You might find older tutorials or StackOverflow answers (like the one linked above) suggesting you run `Add-LocalGroupMember -Group 'Administrators' -Member ('docker-users')` to fix this issue. Do not do this. Adding the docker-users group to the Windows Administrators group is a severe security risk that grants full system control to anyone in the group.
+>
+> How it actually works: The Docker/Rancher background service runs with elevated privileges and listens for commands via a Windows "Named Pipe" (`//./pipe/docker_engine`). By default, the service is programmed to look for a local group called exactly `docker-users`. If this group exists, the service explicitly allows members of that group to send commands through the pipe.
+>
+> By simply creating the group, adding your user, and logging out/in (which refreshes your Windows security token), the Docker service will securely grant your user access to the pipe without needing to compromise your entire machine's security.
+
+4. Log out of Windows and log back in to apply the group membership changes.
+
+     + Click the Start button;
+     + Click your User Profile Icon;
+     + Select Sign out;
+     + Log back into Windows.
+
+5. Confirm that everything is correct, executing on a [Git Bash](https://git-scm.com/) terminal the following commands:
+
+    docker info
+    docker --version
+    kubectl version --client
 
 The [**Rancher Desktop**](https://rancherdesktop.io/) installation and usage files are stored in the following folder:
 
 + `%USERPROFILE%\AppData\Local\rancher-desktop` contains the distribution data, container images, logs, etc;
-
-To test if `docker` command is full functional by your user, execute the following command on a PowerShell console:
-
-    docker info
-
-If the output of the above command is detailed information about the Docker installation on your system, the docker command is fully functional and no further action is necessary. On the other hand, if you see a permission error (e.g., "Permission denied" or "Access is denied"), it means your user lacks the required privileges to run the `docker`command. On this situation, to be able to run the `docker` command on the terminal, it's necessary to add your Windows user to the `docker-users` group. On a PowerShell console, execute the below command to check if the `docker-users` group exists and if your user belongs to it.
-
-    net localgroup docker-users
-
-If the `docker-users` group doesn't exists yet, open a PowerShell console as *Administrator* and [create it](https://stackoverflow.com/a/64293327) with the following commands:
-
-    New-LocalGroup -Name 'docker-users' -Description 'docker Users Group'
-    Add-LocalGroupMember -Group 'Administrators' -Member ('docker-users') -Verbose
-
-To add your Windows user to the `docker-users` group, open a PowerShell console as *Administrator*, replace the ***{LABEL}*** in the below command as appropriate and then execute it.
-
-    net localgroup docker-users "{YOUR_USER_ID}" /ADD
-
-> **Label Definition**
->
-> + **{YOUR_USER_ID}** : Your local Windows user name that can be determines by looking at the folder name under `C:\Users\`.
-
-If, successful, the output of the previous command will be `The command completed successfully`.
-
-It's now necessary to re-start Windows to enable all the previous changes.
-
-To confirm that everything is correct, execute the below commands on a [Git Bash](https://git-scm.com/) terminal and check its output.
-
-    net localgroup docker-users
-    docker --version
-    kubectl version
 
 ### 4.10. Terraform
 
