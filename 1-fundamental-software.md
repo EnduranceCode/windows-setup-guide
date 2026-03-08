@@ -95,25 +95,31 @@ After rebooting your machine, set [**WSL 2**](https://learn.microsoft.com/window
 
     wsl --set-default-version 2
 
+To [update](https://learn.microsoft.com/windows/wsl/troubleshooting#updating-wsl) the [**WSL**](https://learn.microsoft.com/windows/wsl/) installation, execute the below command on a standard PowerShell console. The execution of the this command will [require elevation](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works). If you choose not to [elevate](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works#the-uac-user-experience), the [**WSL**](https://learn.microsoft.com/windows/wsl/) update will fail.
+
+    wsl --update
+
+#### 1.2.2. WSL distribution installation & configuration
+
 [List all available Linux distributions](https://learn.microsoft.com/windows/wsl/basic-commands#list-available-linux-distributions) executing the bellow command on a standard PowerShell console.
 
     wsl --list --online
 
-From the output of the above command, get the latest available [Ubuntu LTS version](https://ubuntu.com/about/release-cycle) and use it to replace the label **{DISTRO_NAME}** in the upcoming command. Then, execute it on a standard PowerShell console to set the [default distribution](https://learn.microsoft.com/windows/wsl/basic-commands#set-default-linux-distribution).
+[Ubuntu](https://ubuntu.com/) will be one of the distributions displayed on the output of the above command. To install [Ubuntu](https://ubuntu.com/) on [**WSL**](https://learn.microsoft.com/windows/wsl/), execute the following command on a standard PowerShell console.
+
+     wsl --install -d Ubuntu
+
+The distro named "**Ubuntu**" is [Canonical](https://canonical.com/)’s flagship/default **Ubuntu** distro for [**WSL**](https://learn.microsoft.com/windows/wsl/). It is intended to track the latest stable [Ubuntu LTS](https://ubuntu.com/about/release-cycle) available for [**WSL**](https://learn.microsoft.com/windows/wsl/). When a new LTS comes out, this "**Ubuntu**" distro can be upgraded to it (typically once Canonical considers upgrades ready—commonly after the first point release).
+
+If a *version-pinned* distro is required, replace "**Ubuntu**" in the above command with the the desired [Ubuntu LTS](https://ubuntu.com/about/release-cycle) version. The *version-pinned* will only be updated if you explicitly enable/do a release upgrade. By default, *version-pinned* releases do not auto-upgrade to the next LTS.
+
+With the execution of the command to install a [**WSL**](https://learn.microsoft.com/windows/wsl/) distro, you will be prompted to create a default Unix user account and to set a password for this user.
+
+Replace the label **{DISTRO_NAME}**, in the upcoming command, as appropriate and execute it on a standard PowerShell console to set the [default distribution](https://learn.microsoft.com/windows/wsl/basic-commands#set-default-linux-distribution).
 
     wsl --set-default {DISTRO_NAME}
 
-Replace the label **{DISTRO_NAME}**, in the upcoming command, with the name of the latest available [Ubuntu LTS version](https://ubuntu.com/about/release-cycle) and then execute it on a standard PowerShell console to [install](https://learn.microsoft.com/windows/wsl/install#install-wsl-command) the latest available [Ubuntu LTS version](https://ubuntu.com/about/release-cycle).
-
-    wsl --install -d {DISTRO_NAME}
-
-The execution of the above command will [require elevation](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works), and therefore, Windows will prompt you to [elevate](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works#the-uac-user-experience). If you choose not to [elevate](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works#the-uac-user-experience), the [**WSL**](https://learn.microsoft.com/windows/wsl/) installation will fail.
-
-To [update](https://learn.microsoft.com/windows/wsl/troubleshooting#updating-wsl) the [**WSL**](https://learn.microsoft.com/windows/wsl/) installation, execute the following command on a standard PowerShell console.
-
-    wsl --update
-
-The execution of the above command will also [require elevation](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works). On a regular PowerShell console, execute the below command to list the installed Linux distributions and check if everything is correct:
+On a regular PowerShell console, execute the below command to list the installed Linux distributions and check if everything is correct:
 
     wsl --list --verbose
 
@@ -125,13 +131,11 @@ If [Ubuntu](https://ubuntu.com/) is not running with [**WSL 2**](https://learn.m
 >
 > + **{DISTRO_NAME}** : Name of the Linux distribution to be executed with WSL 2
 
-#### 1.2.2. Configuration
-
-Once the process of installing [Ubuntu](https://ubuntu.com/) on [**WSL**](https://learn.microsoft.com/windows/wsl/) is complete, open the distribution using the *Start Menu*. You will be asked to [create a User and Password](https://learn.microsoft.com/windows/wsl/setup/environment#set-up-your-linux-username-and-password) for your [Ubuntu](https://ubuntu.com/) installation.
+Once the process of installing [Ubuntu](https://ubuntu.com/) on [**WSL**](https://learn.microsoft.com/windows/wsl/) is complete, open the distribution using the *Start Menu*.
 
 Configure the settings for your [Ubuntu](https://ubuntu.com/) installation by using the `wsl.conf` file that is stored on `/etc` folder of every [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution. Open the file `/etc/wsl.conf` with the [nano text editor](https://www.nano-editor.org/), executing the below command on a [Ubuntu](https://ubuntu.com/) terminal.
 
-    nano /etc/wsl.conf
+    sudo nano /etc/wsl.conf
 
 To change the [default mount location](https://learn.microsoft.com/windows/wsl/wsl-config#automount-settings) of the Windows `C:\` drive from the default `/mnt/c` to `/c`, add the upcoming code snippet to the `/etc/wsl.conf` file.
 
@@ -157,7 +161,7 @@ Further WSL configurations can be found on the Microsoft article [Advanced setti
 
 The article [Set up a WSL development environment](https://learn.microsoft.com/windows/wsl/setup/environment) has some good optional advices to setup a development environment with  [**WSL**](https://learn.microsoft.com/windows/wsl/), but one that is almost mandatory is the installation of the [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701).
 
-#### 1.2.3. Update, upgrade and install additional packages
+#### 1.2.2.1. Update, upgrade and install additional packages
 
 It's recommended to regularly update and upgrade your packages using [Ubuntu](https://ubuntu.com/)'s package manager. This is done with the following command:
 
