@@ -38,10 +38,11 @@ This is my personal guide to setup a development machine on Windows. Although th
     8. [Granted](./4-development-software-and-tools.md#48-GRANTED)
     9. [Make](./4-development-software-and-tools.md#49-make)
     10. [Docker](./4-development-software-and-tools.md#410-docker)
-    11. [Terraform](./4-development-software-and-tools.md#411-terraform)
-    12. [Node.js](./4-development-software-and-tools.md#412-nodejs)
-    13. [IntelliJ IDEA](./4-development-software-and-tools.md#413-intellij-idea)
-    14. [Visual Studio Code](./4-development-software-and-tools.md#414-visual-studio-code)
-    15. Eclipse
-    16. [DBeaver](./4-development-software-and-tools.md#416-dbeaver)
-    17. [Postman](./4-development-software-and-tools.md#417-postman)
+    11. [kubectx](./4-development-software-and-tools.md#411-kubectx)
+    12. [Terraform](./4-development-software-and-tools.md#412-terraform)
+    13. [Node.js](./4-development-software-and-tools.md#413-nodejs)
+    14. [IntelliJ IDEA](./4-development-software-and-tools.md#414-intellij-idea)
+    15. [Visual Studio Code](./4-development-software-and-tools.md#415-visual-studio-code)
+    16. Eclipse
+    17. [DBeaver](./4-development-software-and-tools.md#417-dbeaver)
+    18. [Postman](./4-development-software-and-tools.md#418-postman)
