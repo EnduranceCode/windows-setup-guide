@@ -446,7 +446,7 @@ To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) instal
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling), open a [Git Bash](https://git-scm.com/) terminal and execute the following command:
+To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling), open a PowerShell console and execute the following command:
 
     scoop install main/quarkus-cli
 
@@ -506,7 +506,7 @@ To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was pro
 
 If there's ant problem using the [**AWS CLI**](https://aws.amazon.com/cli/), follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
 
-To install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `Windows Native File System`, open a [Git Bash](https://git-scm.com/) terminal and execute the following commands:
+To install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `Windows Native File System`, open a PowerShell console and execute the following commands:
 
     scoop bucket add extras
     scoop install extras/aws-session-manager-plugin
@@ -595,7 +595,7 @@ To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-To install [**GNU Make**](https://www.gnu.org/software/make/), open a [Git Bash](https://git-scm.com/) terminal and execute the following command:
+To install [**GNU Make**](https://www.gnu.org/software/make/), open a PowerShell console and execute the following command:
 
     scoop install main/make
 
@@ -884,11 +884,11 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-To install [**Terraform**](https://www.terraform.io/) on the `Windows Native File System`, open a [Git Bash](https://git-scm.com/) terminal and execute the below command and execute the following command:
+To install [**Terraform**](https://www.terraform.io/) on the `Windows Native File System`, open a PowerShell console and execute the following command:
 
     scoop install main/terraform
 
-Using [Scoop](https://scoop.sh/), it's possible to [install a specific version](https://github.com/ScoopInstaller/Scoop/wiki/FAQ#how-do-i-install-a-specific-version-of-an-app) of an app. To do that for [**Terraform**](https://www.terraform.io/), replace the ***{LABEL}*** in the below command as appropriate and then execute it on a [Git Bash](https://git-scm.com/) terminal.
+Using [Scoop](https://scoop.sh/), it's possible to [install a specific version](https://github.com/ScoopInstaller/Scoop/wiki/FAQ#how-do-i-install-a-specific-version-of-an-app) of an app. To do that for [**Terraform**](https://www.terraform.io/), replace the ***{LABEL}*** in the below command as appropriate and then execute it on a PowerShell console.
 
     scoop install terraform@ {VERSION}
 
@@ -968,9 +968,9 @@ My go to Node version manager on on the `Windows Native File System` used to be 
 
 ###### 4.14.1.2.1. fnm (Fast Node Manager)
 
-[fnm](https://github.com/Schniz/fnm) can be installed with [scoop](https://scoop.sh/) executing, PowerShell console, the following command:
+[fnm](https://github.com/Schniz/fnm) can be installed with [scoop](https://scoop.sh/) executing, on PowerShell console, the following command:
 
-    scoop install fnm
+    scoop install main/fnm
 
 Before you can use [fnm](https://github.com/Schniz/fnm), you have to first set up your shell.
 
