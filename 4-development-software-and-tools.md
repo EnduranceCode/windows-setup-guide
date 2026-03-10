@@ -10,20 +10,21 @@ This file contains the **Development Software and Tools** section of my [Setup g
     3. [Java](#43-java)
     4. [Apache Maven](#44-apache-maven)
     5. [Apache Tomcat](#45-apache-tomcat)
-    6. [Quarkus CLI](#46-quarkus-cli)
-    7. [AWS CLI](#47-aws-cli)
-    8. [Granted](#48-granted)
-    9. [Make](#49-make)
-    10. [Docker](#410-docker)
-    11. [kubectx](#411-kubectx)
-    12. [K9s](#412-k9s)
-    13. [Terraform](#413-terraform)
-    14. [Node.js](#414-nodejs)
-    15. [IntelliJ IDEA](#415-intellij-idea)
-    16. [Visual Studio Code](#416-visual-studio-code)
-    17. Eclipse
-    18. [DBeaver](#418-dbeaver)
-    19. [Postman](#419-postman)
+    6. [Command Line Fuzzy Finder](#46-command-line-fuzzy-finder)
+    7. [Quarkus CLI](#47-quarkus-cli)
+    8. [AWS CLI](#48-aws-cli)
+    9. [Granted](#49-granted)
+    10. [Make](#410-make)
+    11. [Docker](#411-docker)
+    12. [kubectx](#412-kubectx)
+    13. [K9s](#413-k9s)
+    14. [Terraform](#414-terraform)
+    15. [Node.js](#415-nodejs)
+    16. [IntelliJ IDEA](#416-intellij-idea)
+    17. [Visual Studio Code](#417-visual-studio-code)
+    18. Eclipse
+    19. [DBeaver](#419-dbeaver)
+    20. [Postman](#420-postman)
 
 ## 4. Development Software & Tools
 
@@ -424,13 +425,49 @@ The different parts in the above name structure, shall be replaced as explained 
 >
 > With the above examples, the Tomcat folder name would be *tomcat-8.5.82-sa3*
 
-### 4.6. Quarkus CLI
+### 4.6. Command Line Fuzzy Finder
 
-The [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) lets you create Quarkus projects, manage extensions and do essential build and development tasks using the underlying project build tool.
+The [**Command-line Fuzzy Finder | fzf**](https://github.com/junegunn/fzf) is a general-purpose command-line fuzzy finder. It's an interactive filter program for any kind of list; files, command history, processes, hostnames, bookmarks, git commits, etc. It implements a "fuzzy" matching algorithm, so you can quickly type in patterns with omitted characters and still get the results you want.
 
 #### 4.6.1. Installation
 
-##### 4.6.1.1. Installation on the WSL File System
+##### 4.6.1.1. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**fzf**](https://github.com/junegunn/fzf), open a PowerShell console and execute the following command:
+
+    scoop install main/fzf
+
+To verify if the [**fzf**](https://github.com/junegunn/fzf) installation was properly made, check the output of the following command:
+
+    fzf --version
+    fzf --help
+
+To set up shell integration with [Git Bash](https://git-scm.com/), open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/), executing the below command on a [Git Bash](https://git-scm.com/) terminal.
+
+    nano ~/.bashrc
+
+Then, add the upcoming snippet to the `~/.bashrc` file.
+
+```bash
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
+```
+
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
+
+To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
+
+    source ~/.bashrc
+
+### 4.7. Quarkus CLI
+
+The [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) lets you create Quarkus projects, manage extensions and do essential build and development tasks using the underlying project build tool.
+
+#### 4.7.1. Installation
+
+##### 4.7.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -442,7 +479,7 @@ To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) instal
 
     quarkus --version
 
-##### 4.6.1.2. Installation on the Windows Native File System
+##### 4.7.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -454,13 +491,13 @@ To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) instal
 
     quarkus --version
 
-### 4.7. AWS CLI
+### 4.8. AWS CLI
 
 The [**AWS Command Line Interface (AWS CLI)**](https://aws.amazon.com/cli/) is a unified tool to manage your AWS services. With just one tool to download and configure, you can control multiple AWS services from the command line and automate them through scripts.
 
-#### 4.7.1. Installation
+#### 4.8.1. Installation
 
-##### 4.7.1.1. Installation on the WSL File System
+##### 4.8.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -492,7 +529,7 @@ If the installation was successful, the following message is returned.
 
     The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
 
-##### 4.7.1.2. Installation on the Windows Native File System
+##### 4.8.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -519,13 +556,13 @@ If the installation was successful, the following message is returned.
 
     The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
 
-### 4.8. Granted
+### 4.9. Granted
 
 [**Granted**](https://github.com/fwdcloudsec/granted) is a command line interface (CLI) application which simplifies access to cloud roles and allows multiple cloud accounts to be opened in your web browser simultaneously.
 
-#### 4.8.1. Installation
+#### 4.9.1. Installation
 
-##### 4.8.1.1. Installation on the Windows Native File System
+##### 4.9.1.1. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -573,13 +610,13 @@ Now, after running `assume <profile>`, you can run AWS CLI commands without `--p
 
     aws configure list
 
-### 4.9. Make
+### 4.10. Make
 
 [**GNU Make**](https://www.gnu.org/software/make/) is a tool which controls the generation of executables and other non-source files of a program from the program's source files.
 
-#### 4.9.1. Installation
+#### 4.10.1. Installation
 
-##### 4.9.1.1. Installation on the WSL File System
+##### 4.10.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -591,7 +628,7 @@ To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation
 
     make --version
 
-##### 4.9.1.1. Installation on the Windows Native File System
+##### 4.10.1.1. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -603,7 +640,7 @@ To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation
 
     make --version
 
-### 4.10. Docker
+### 4.11. Docker
 
 [**Docker**](https://www.docker.com/) is an open-source containerization platform. It enables developers to package applications into containers, which are standardized, executable components combining application source code with the operating system libraries and dependencies required to run that code in any environment.
 
@@ -611,7 +648,7 @@ To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation
 
 If you're going to do your development work on the Windows native file system, you should choose [Rancher Desktop](https://rancherdesktop.io/) to replace [Docker Desktop](https://www.docker.com/products/docker-desktop/). But if you're planning to do all you development work on the [WSL](https://learn.microsoft.com/windows/wsl/) file system (taking advantage of the Linux tools), you should utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
 
-#### 4.10.1. Pre-Installation requirements
+#### 4.11.1. Pre-Installation requirements
 
 To avoid future conflicts between the ports reserved by ***Hyper-V*** and the ports used by the [**Docker**](https://www.docker.com/) containers, you should [reset the "*TCP Dynamic Port Range*"](https://medium.com/@sevenall/completely-solve-the-problem-of-docker-containers-not-starting-or-running-on-windows-10-due-to-port-57f16ed6143). That is achieved executing the upcoming commands from a PowerShell console with *Administrator* privileges:
 
@@ -626,9 +663,9 @@ After restarting the computer, check the output of the following command:
 
 The above command should now show that "*TCP Dynamic Port Range*" has been changed to 49152–65535. Now only the ports in this range may be reserved by ***Hyper-V***.
 
-#### 4.10.2. Installation
+#### 4.11.2. Installation
 
-##### 4.10.2.1. Installation on the WSL File System
+##### 4.11.2.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -718,7 +755,7 @@ Upon success of the GPG key initialization, edit the [**Docker**](https://www.do
         "credsStore": "pass"
     }' > ~/.docker/config.json
 
-##### 4.10.2.1. Installation on the Windows Native File System with Rancher Desktop
+##### 4.11.2.1. Installation on the Windows Native File System with Rancher Desktop
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -793,13 +830,13 @@ The [**Rancher Desktop**](https://rancherdesktop.io/) installation and usage fil
 
 + `%USERPROFILE%\AppData\Local\rancher-desktop` contains the distribution data, container images, logs, etc;
 
-### 4.11. kubectx
+### 4.12. kubectx
 
 [**kubectx**](https://github.com/ahmetb/kubectx/) is a tool to switch between contexts (clusters) on `kubectl` faster. It also includes`kubens`, which is a tool to switch between Kubernetes namespaces (and configure them for `kubectl`) easily.
 
-#### 4.11.1. Installation
+#### 4.12.1. Installation
 
-##### 4.11.1.1. Installation on the Windows Native File System
+##### 4.12.1.1. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -812,13 +849,13 @@ To verify if the [**kubectx**](https://github.com/ahmetb/kubectx/) installation 
     kubectx --version
     kubectx --help
 
-### 4.12. K9s
+### 4.13. K9s
 
 [**K9s**](https://github.com/derailed/k9s) provides a terminal UI to interact with your Kubernetes clusters. The aim of the project is to make it easier to navigate, observe and manage your applications in the wild. [**K9s**](https://github.com/derailed/k9s) continually watches Kubernetes for changes and offers subsequent commands to interact with your observed resources.
 
-#### 4.12.1. Installation
+#### 4.13.1. Installation
 
-##### 4.12.1.1. Installation on the Windows Native File System
+##### 4.13.1.1. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -832,13 +869,13 @@ To verify if the [**K9s**](https://github.com/derailed/k9s) installation was pro
     k9s info
     k9s help
 
-### 4.13. Terraform
+### 4.14. Terraform
 
 [**Terraform**](https://www.terraform.io/) is a tool for building, changing, and versioning infrastructure safely and efficiently.
 
-#### 4.13.1. Installation
+#### 4.14.1. Installation
 
-##### 4.13.1.1. Installation on the WSL File System
+##### 4.14.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -880,7 +917,7 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 
     terraform --version
 
-##### 4.13.1.2. Installation on the Windows Native File System
+##### 4.14.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -900,15 +937,15 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 
     terraform --version
 
-### 4.14. Node.js
+### 4.15. Node.js
 
 [**Node.js**](https://nodejs.org/) is a cross-platform, open-source JavaScript runtime environment that runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
 
-#### 4.14.1. Installation
+#### 4.15.1. Installation
 
 The most pratical way to install [**Node.js**](https://nodejs.org/) is via a Node version manager because it allows you to easily install and switch between numerous versions of [**Node.js**](https://nodejs.org/). This is useful when a project you’re working on requires a different version of [**Node.js**](https://nodejs.org/) than what you currently have installed.
 
-##### 4.14.1.1. Installation on the WSL File System
+##### 4.15.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -960,13 +997,13 @@ When [**Node.js**](https://nodejs.org/) is installed, [`npm`](https://www.npmjs.
 
     nvm install-latest-npm
 
-##### 4.14.1.2. Installation on the Windows Native File System
+##### 4.15.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 My go to Node version manager on on the `Windows Native File System` used to be [NVS](https://github.com/jasongin/nvs) but, it has seen very little activity recently, with the last major release being in 2023. Therefore, I'm now starting to use [fnm (Fast Node Manager)](https://github.com/Schniz/fnm).
 
-###### 4.14.1.2.1. fnm (Fast Node Manager)
+###### 4.15.1.2.1. fnm (Fast Node Manager)
 
 [fnm](https://github.com/Schniz/fnm) can be installed with [scoop](https://scoop.sh/) executing, on PowerShell console, the following command:
 
@@ -1029,7 +1066,7 @@ From now on, the latest [**Node.js**](https://nodejs.org/) LTS version will be a
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-###### 4.14.1.2.2. NVS (Node Version Switcher)
+###### 4.15.1.2.2. NVS (Node Version Switcher)
 
 Although I'm now using [fnm](https://github.com/Schniz/fnm) as my preferred Node Version Manager, I'm keeping here, for historical reference, my guide to install [NVS](https://github.com/jasongin/nvs).
 
@@ -1108,11 +1145,11 @@ From now on, the latest **node** lts version will be available on all shells of 
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-### 4.15. IntelliJ IDEA
+### 4.16. IntelliJ IDEA
 
 [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) is an integrated development environment written in Java for developing computer software written in Java, Kotlin, Groovy, and other JVM-based languages. It is developed by JetBrains and is available as an Apache 2 Licensed community edition, and in a proprietary commercial edition.
 
-#### 4.15.1. Installation
+#### 4.16.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1139,27 +1176,27 @@ It is also recommend to [exclude the IDE process from the antivirus](https://int
 + `idea64.exe`
 + `fsnotifier.exe`
 
-#### 4.15.2. Install plugins
+#### 4.16.2. Install plugins
 
-##### 4.15.2.1. Install SonarQube plugin
+##### 4.16.2.1. Install SonarQube plugin
 
 [SonarQube](https://plugins.jetbrains.com/plugin/7973-sonarqube-for-ide) is an IDE extension that helps to detect and fix quality issues as the code is written. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "SonarQube". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-##### 4.15.2.2. Install JPA Buddy
+##### 4.16.2.2. Install JPA Buddy
 
 [JPA Buddy](https://plugins.jetbrains.com/plugin/15075-jpa-buddy) is an IDE extension that helps developers work efficiently with Hibernate, EclipseLink, Spring Data JPA, Flyway, Liquibase, Lombok, MapStruct, and other related technologies in both Java and Kotlin. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "JPA Buddy". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-#### 4.15.3. Set code formatters
+#### 4.16.3. Set code formatters
 
-##### 4.15.3.1. Java
+##### 4.16.3.1. Java
 
 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) seems to be the most popular **Code Style Guide** for [Java](https://www.java.com/en/). This style guide is licensed under the [CC-By 3.0 License](https://creativecommons.org/licenses/by/3.0/) and a there's a [repository](https://github.com/google/styleguide) where a formatter configuration file for [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) is available.
 
 To add the above mentioned Code Style Formatter settings, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Editor->Code Style->Java`. On this tab, click the `settings` icon choose `Import Scheme/IntelliJ IDEA code style XML` and pick the file(s) with the desired settings.
 
-#### 4.15.4. Configure Version Control
+#### 4.16.4. Configure Version Control
 
-##### 4.15.4.1. Commit
+##### 4.16.4.1. Commit
 
 Modern IntelliJ IDEA versions uses a **non-modal Commit tool window** (accessible via `Alt + 0` or the checkmark icon on the left sidebar). The **Shelf** tab is contextual; it only appears in the Commit tool window when you have at least one shelved change. To manage your shelf:
 
@@ -1173,9 +1210,9 @@ To move changes to the shelf instead of committing them, take the following step
 2.  Select **Shelf Changes...** from the context menu.
 3.  Provide a name for the shelf and click **Shelf Changes**. The **Shelf** tab will now become visible.
 
-#### 4.15.5. Configure Build Tools
+#### 4.16.5. Configure Build Tools
 
-##### 4.15.5.1. Maven
+##### 4.16.5.1. Maven
 
 To customize *Maven*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Maven`. On this tab, change the input boxes listed below as described:
 
@@ -1185,9 +1222,9 @@ To customize *Maven*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/
 
 Beware that you must choose the [Apache Maven](https://maven.apache.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.15.6. Configure Tools
+#### 4.16.6. Configure Tools
 
-##### 4.15.6.1. Terminal
+##### 4.16.6.1. Terminal
 
 To customize the *Terminal* in use with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Tools->Terminal`. On this tab, take in consideration the file system you're working on and change the input boxes listed below as described:
 
@@ -1206,7 +1243,7 @@ This settings will only take effect when starting a new terminal. Therefore, cre
 
 This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.15.7. Run/Debug Configurations
+#### 4.16.7. Run/Debug Configurations
 
 To ensure that the building of a project on the `WSL File System` [works properly](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html#debugging_system_settings) you need to adapt the Windows Firewall configuration. Open a PowerShell console with *Administrator* privileges and execute the following command to allow connections using WSL:
 
@@ -1218,7 +1255,7 @@ Then execute the command to renew the firewall rules:
 
 After starting a debugger session, the Windows Firewall popup might appears and them, select the *Public networks* checkbox and click the `Allow access` button.
 
-##### 4.15.7.1 Shorten command line method
+##### 4.16.7.1 Shorten command line method
 
 To avoid the error "*Command line is too long*" when running tests it's necessary to set the "*Shorten command line*" method in the Run/Debug configuration to "*JAR manifest*". That can be done for the specific method or class, but it's better to [set it as default](https://stackoverflow.com/a/47927544) on [run/debug configuration templates](https://www.jetbrains.com/help/idea/run-debug-configuration.html#templates).
 
@@ -1226,11 +1263,11 @@ From the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) main menu, select 
 
 [Then](https://stackoverflow.com/a/65639857), click on the `Modify options` link (`ALT+M`) and set/select the `Shorten command line` option. Back on the `JUnit` tab, there will be a new dropdown input box named `Shorten command line`. In this new dropdown, choose the *Jar manifest* option. Click the button `OK` (once to close the `Select configuration templates` pop up and again to close the  `Run->Edit Configurations` pop up screen) and from now on all the new `JUnit` Run/Debug configurations will use this template.
 
-### 4.16. Visual Studio Code
+### 4.17. Visual Studio Code
 
 [**Visual Studio Code**](https://code.visualstudio.com/), also commonly referred to as **VS Code**, is a source-code editor made by Microsoft with the Electron Framework, for Windows, Linux and macOS. Features include support for debugging, syntax highlighting, intelligent code completion, snippets, code refactoring, and embedded Git.
 
-#### 4.16.1. Installation
+#### 4.17.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1244,7 +1281,7 @@ Execute [**Visual Studio Code**](https://code.visualstudio.com) and to enable th
 + Extensions
 + UI State
 
-#### 4.16.2. Install extensions
+#### 4.17.2. Install extensions
 
 With the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sync) option on, [**Visual Studio Code**](https://code.visualstudio.com) will installed all the synced extensions. Wait for while to allow the full synchronization and then check if all of the following extensions were properly installed:
 
@@ -1286,15 +1323,15 @@ With the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sy
 + [WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl);
 + [XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml).
 
-### 4.17. Eclipse
+### 4.18. Eclipse
 
 TODO
 
-### 4.18. DBeaver
+### 4.19. DBeaver
 
 [**DBeaver**](https://dbeaver.io/) is free and open source universal database tool for developers and database administrators.
 
-#### 4.18.1. Installation
+#### 4.19.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1323,11 +1360,11 @@ To confirm that the certificate was added to the JRE keystore, replace the **{LA
 >
 > + **{CERTIFICATE_ALIAS}** : The chosen certificate alias
 
-### 4.19. Postman
+### 4.20. Postman
 
 [**Postman**](https://www.postman.com/) helps you be more efficient while working with APIs. Using Postman, you can construct complex HTTP requests quickly, organize them in collections.
 
-#### 4.19.1. Installation
+#### 4.20.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
