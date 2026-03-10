@@ -549,6 +549,30 @@ Following the above command, you will be prompted a few times:
 + **Confirm [addon](https://addons.mozilla.org/en-GB/firefox/addon/granted/) installation**: yes when installation is complete
 + **Default browser for SSO login**: No to use Firefox
 
+When using [Git Bash](https://git-scm.com/), the `assume` command installed by [Scoop](https://scoop.sh/) runs a PowerShell script (`assume.ps1`). PowerShell cannot modify the environment variables of your current [Git Bash](https://git-scm.com/) session, so AWS variables such as `AWS_PROFILE`, `AWS_ACCESS_KEY_ID`, and `AWS_SESSION_TOKEN` will not persist for subsequent `aws ...` commands.
+
+To make `assume` behave in [Git Bash](https://git-scm.com/) like it does in PowerShell (i.e., set AWS environment variables in the current shell), add the following function to your `~/.bashrc`:
+
+```bash
+# Use Granted's bash wrapper so AWS_* variables persist in this bash session
+assume() {
+    local granted_folder="$HOME/scoop/apps/granted/current"
+
+    # Temporarily add Granted's install folder to PATH so the bash wrapper can find `assumego.exe`
+    # and source the Granted’s bash script so exports persist in the current shell.
+    PATH="$granted_folder:$PATH" \
+        . "$granted_folder/assume" "$@"
+}
+```
+
+To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
+
+    source ~/.bashrc
+
+Now, after running `assume <profile>`, you can run AWS CLI commands without `--profile` because the AWS environment variables are set in your current [Git Bash](https://git-scm.com/) session. To confirm that `assume` is executed as expected, execute `assume <profile>` and then check the output of the following command:
+
+    aws configure list
+
 ### 4.9. Make
 
 [**GNU Make**](https://www.gnu.org/software/make/) is a tool which controls the generation of executables and other non-source files of a program from the program's source files.
