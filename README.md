@@ -52,3 +52,4 @@ This is my personal guide to setup a development machine on Windows. Although th
     22. [Zed](./4-development-software-and-tools.md#422-zed)
     23. [DBeaver](./4-development-software-and-tools.md#423-dbeaver)
     24. [Postman](./4-development-software-and-tools.md#424-postman)
+    25. [Bruno](./4-development-software-and-tools.md#425-bruno)
