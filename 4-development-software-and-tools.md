@@ -671,89 +671,151 @@ The above command should now show that "*TCP Dynamic Port Range*" has been chang
 
 This section describes the necessary steps to install [**Docker**](https://www.docker.com/) and [Docker Engine](https://docs.docker.com/engine/) on a [WSL](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) distribution. The following steps are based on the [official documentation for installing Docker on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) with some adaptations provided by [Paul Knulst](https://www.paulsblog.dev/how-to-install-docker-without-docker-desktop-on-windows/).
 
+As per [**Docker**](https://www.docker.com/) [documentation](https://docs.docker.com/engine/install/ubuntu/#uninstall-old-versions), before you can install Docker Engine, you need to uninstall any conflicting packages. Do it executing the following command:
+
+```sh
+sudo apt remove docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc
+sudo apt autoremove
+```
+
 On your [Ubuntu](https://ubuntu.com/) submodule of [WSL](https://learn.microsoft.com/windows/wsl/), install the required dependencies with the following commands:
 
-    sudo apt update
-    sudo apt -y install apt-transport-https ca-certificates curl gnupg lsb-release
+```sh
+sudo apt update
+sudo apt install ca-certificates curl
+```
 
-Then, add [**Docker**](https://www.docker.com/)'s official GPG key with the following commands:
+To add the [**Docker**](https://www.docker.com/) stable repository, execute the following commands:
 
-    sudo install -m 0755 -d /etc/apt/keyrings
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    sudo chmod a+r /etc/apt/keyrings/docker.gpg
+```sh
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-To add the [**Docker**](https://www.docker.com/) stable repository, execute the following command:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Architectures: $(dpkg --print-architecture)
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
 
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt update
+sudo apt update
+```
 
 Install the latest version of the [**Docker**](https://www.docker.com/)'s packages with the following command:
 
-    sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```sh
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
 
 Add you user to the `docker` group with the following command
 
-    sudo usermod -aG docker $USER
+```sh
+sudo usermod -aG docker $USER
+```
 
 Log out and log back in so that your group membership is re-evaluated, or run the following command to activate the changes to groups:
 
-    newgrp docker
+```sh
+newgrp docker
+```
 
 Check the installed versions using the following commands
 
-    docker --version
-    dockerd --version
-    docker compose version
+```sh
+docker --version
+dockerd --version
+docker compose version
+docker info
+```
 
-On [Ubuntu](https://ubuntu.com/), the Docker service starts on boot by default, therefore, it won't be necessary to enable it. To verify that `docker` and `containerd` were started by *systemd*, run the following commands:
+On a standard [Ubuntu](https://ubuntu.com/) install, Docker is started by `systemd` automatically after installation. On [WSL](https://learn.microsoft.com/windows/wsl/), this depends on `systemd=true` being enabled (as in `/etc/wsl.conf`) and on the [WSL](https://learn.microsoft.com/windows/wsl/) distro session actually starting `systemd`.
 
-    sudo systemctl status docker.service
-    sudo systemctl status containerd.service
+```sh
+sudo systemctl status docker.service
+sudo systemctl status containerd.service
+```
 
-The `iptables` used by [Ubuntu](https://ubuntu.com/) is the `nftables` version and this might stop [**Docker**](https://www.docker.com/)'s interaction with the firewall because using `nftables` natively requires Linux Kernel 5.8 but the latest Kernel version for the [WSL](https://learn.microsoft.com/windows/wsl/) is 5.4. Luckily, [Ubuntu](https://ubuntu.com/) still has the possibility to use a legacy version of `iptables` by simply executing upcoming command and choosing, when prompted, the option `1`.
+If [**Docker**](https://www.docker.com/) isn’t running, start it manually with the following commands:
 
-    sudo update-alternatives --config iptables
+```sh
+sudo systemctl start docker
+sudo systemctl enable docker
+```
 
-After updating the `iptables` just restart the Docker daemon with the following command:
+The default `iptables` frontend on [Ubuntu](https://ubuntu.com/) is usually `iptables-nft`. [**Docker**](https://www.docker.com/) works with `iptables-nft` and `iptables-legacy`, but if you experience Docker networking issues (for example, containers can’t reach the internet, port publishing doesn’t work, or firewall rules look wrong), you can try switching to the legacy backend as a troubleshooting step:
 
-    sudo systemctl restart docker.service
+```sh
+sudo update-alternatives --config iptables
+sudo update-alternatives --config ip6tables
+sudo systemctl restart docker.service
+```
 
 Then, verify if everything is running properly by checking the output of the following commands:
 
-    sudo systemctl status docker.service
-    sudo systemctl status containerd.service
-    docker run hello-world
+```sh
+sudo systemctl status docker.service
+sudo systemctl status containerd.service
+docker run hello-world
+```
 
-By default, [**Docker**](https://www.docker.com/) tries to retrieve credentials using `docker-credential-secretservice`, which relies on the Secret Service API via DBus, but typically it isn’t available within WSL, which may not have full integration with system services like secret stores. An alternative to the Secret Service API is [`pass`](https://www.passwordstore.org/), which can be installed with the following command:
+When you run `docker login`, [**Docker**](https://www.docker.com/) may use a credential helper to store credentials. On Linux, `secretservice` requires a running DBus session *and* a Secret Service provider (commonly GNOME Keyring or KWallet). On a headless [WSL](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) (no desktop environment), this is often not available, so using [`pass`](https://www.passwordstore.org/) is a practical alternative, which can be installed with the following command:
 
-    sudo apt install pass
+```sh
+sudo apt install pass
+```
 
 When it's necessary to manage credentials with [**Docker**](https://www.docker.com/), [`pass`](https://www.passwordstore.org/) requires a GPG key to encrypt passwords and it can be created with the following command:
 
-    gpg --full-generate-key
+```sh
+gpg --full-generate-key
+```
 
 Following the above command, when prompted, set the following options:
 
-    Kind of key:    RSA and RSA
-    Key expiration: {KEY_EXPIRATION}
-    Real name:      {REAL_NAME}
-    Email address:  {EMAIL}
-    Passphrase:     {PASSPHRASE}
-
-Once the GPG key is created, it is necessary to initialize it. Do it by replacing the ***{LABEL}*** in the below command as appropriate and then execute it.
-
-    pass init {EMAIL_ADDRESS}
+```sh
+Kind of key:    {KEY_TYPE}
+Key expiration: {KEY_EXPIRATION}
+Real name:      {REAL_NAME}
+Email address:  {EMAIL}
+Passphrase:     {PASSPHRASE}
+```
 
 > **Label Definition**
 >
-> + **{EMAIL_ADDRESS}** : The e-mail address to be used as label for the GPG key
+> + **{KEY_TYPE}**: The cryptographic algorithm and usage for your keypair. Recommended for `pass`: `RSA and RSA` (creates a primary key for signing/certifying + a subkey for encryption).
+> + **{KEY_SIZE}**: The size of the RSA key, in bits (security vs performance trade-off). Common choices: `3072` (good default) or `4096` (stronger, slightly slower).
+> + **{KEY_EXPIRATION}**: When the key should expire. Examples: `0` (never expires), `1y` (expires in one year), `2y`, `6m`, etc.  
+> + **{REAL_NAME}**: A human-readable name embedded in the key’s user ID (UID).
+> + **{EMAIL}**: The email address embedded in the key’s UID. It does not have to be “real” for cryptographic purposes, but you should use something you’ll recognize.
+> + **{PASSPHRASE}**: The passphrase that protects your private key on disk, if you forget it, you effectively lose the ability to decrypt previously stored secrets.
+
+After generating the key, you can discover the Key ID with the following command:
+
+```sh
+gpg --list-secret-keys --keyid-format=long
+```
+
+Once the GPG key is created, replace the ***{LABEL}*** in the below command as appropriate and then execute it to initialize [`pass`](https://www.passwordstore.org/) with the GPG identity you want to use:
+
+```sh
+pass init {GPG_IDENTITY}
+```
+
+> **Label Definition**
+>
+> + **{GPG_IDENTITY}** : The email used when generating the key, or the key ID
 
 Upon success of the GPG key initialization, edit the [**Docker**](https://www.docker.com/) configuration to use the [`pass`](https://www.passwordstore.org/) credentials helper executing the following commands:
 
-    mkdir -p ~/.docker
-    echo '{
-        "credsStore": "pass"
-    }' > ~/.docker/config.json
+```sh
+mkdir -p ~/.docker
+echo '{
+    "credsStore": "pass"
+}' > ~/.docker/config.json
+```
 
 ##### 4.11.2.1. Installation on the Windows Native File System with Rancher Desktop
 
