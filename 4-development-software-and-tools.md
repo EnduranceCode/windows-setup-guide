@@ -16,15 +16,16 @@ This file contains the **Development Software and Tools** section of my [Setup g
     9. [Granted](#49-granted)
     10. [Make](#410-make)
     11. [Docker](#411-docker)
-    12. [kubectx](#412-kubectx)
-    13. [K9s](#413-k9s)
-    14. [Terraform](#414-terraform)
-    15. [Node.js](#415-nodejs)
-    16. [IntelliJ IDEA](#416-intellij-idea)
-    17. [Visual Studio Code](#417-visual-studio-code)
-    18. Eclipse
-    19. [DBeaver](#419-dbeaver)
-    20. [Postman](#420-postman)
+    12. [kubectl](#412-kubectl)
+    13. [kubectx](#413-kubectx)
+    14. [K9s](#414-k9s)
+    15. [Terraform](#415-terraform)
+    16. [Node.js](#416-nodejs)
+    17. [IntelliJ IDEA](#417-intellij-idea)
+    18. [Visual Studio Code](#418-visual-studio-code)
+    19. Eclipse
+    20. [DBeaver](#420-dbeaver)
+    21. [Postman](#421-postman)
 
 ## 4. Development Software & Tools
 
@@ -892,13 +893,69 @@ The [**Rancher Desktop**](https://rancherdesktop.io/) installation and usage fil
 
 + `%USERPROFILE%\AppData\Local\rancher-desktop` contains the distribution data, container images, logs, etc;
 
-### 4.12. kubectx
+### 4.12. kubectl
 
-[**kubectx**](https://github.com/ahmetb/kubectx/) is a tool to switch between contexts (clusters) on `kubectl` faster. It also includes`kubens`, which is a tool to switch between Kubernetes namespaces (and configure them for `kubectl`) easily.
+[**kubectl**](https://kubernetes.io/docs/reference/kubectl/) is the command line tool for controlling Kubernetes clusters. It allows you to deploy applications, inspect and manage cluster resources, and view logs.
 
 #### 4.12.1. Installation
 
-##### 4.12.1.1. Installation on the Windows Native File System
+##### 4.12.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+Following the [official instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management), install the [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) dependencies with the following commands:
+
+```sh
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl gnupg
+```
+
+Download the public signing key for the [Kubernetes](https://kubernetes.io/) package repositories. The same signing key is used for all repositories so you can disregard the version in the URL:
+
+```sh
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.35/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+```
+
+Add the appropriate Kubernetes apt repository. If you want to use Kubernetes version different than *v1.35*, replace *v1.35* with the desired version (check the [official instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management)) in the command below:
+
+```sh
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.35/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+```
+
+Install [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) with the following command:
+
+```sh
+sudo apt update
+sudo apt install kubectl
+```
+
+Verify the installation:
+
+```sh
+kubectl version --client
+```
+
+> **Note**
+>
+> If you want to prevent [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) from being automatically updated by `apt upgrade`, you can hold the package:
+>
+> ```sh
+> sudo apt-mark hold kubectl
+> ```
+
+> **Note**
+>
+> To upgrade [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) to another minor release, you'll need to bump the version in `/etc/apt/sources.list.d/kubernetes.list` before running `apt update` and `apt-get upgrade`. This procedure is described in more detail in [Changing The Kubernetes Package Repository](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
+
+### 4.13. kubectx
+
+[**kubectx**](https://github.com/ahmetb/kubectx/) is a tool to switch between contexts (clusters) on `kubectl` faster. It also includes`kubens`, which is a tool to switch between Kubernetes namespaces (and configure them for `kubectl`) easily.
+
+#### 4.13.1. Installation
+
+##### 4.13.1.1. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -911,13 +968,13 @@ To verify if the [**kubectx**](https://github.com/ahmetb/kubectx/) installation 
     kubectx --version
     kubectx --help
 
-### 4.13. K9s
+### 4.14. K9s
 
 [**K9s**](https://github.com/derailed/k9s) provides a terminal UI to interact with your Kubernetes clusters. The aim of the project is to make it easier to navigate, observe and manage your applications in the wild. [**K9s**](https://github.com/derailed/k9s) continually watches Kubernetes for changes and offers subsequent commands to interact with your observed resources.
 
-#### 4.13.1. Installation
+#### 4.14.1. Installation
 
-##### 4.13.1.1. Installation on the Windows Native File System
+##### 4.14.1.1. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -931,13 +988,13 @@ To verify if the [**K9s**](https://github.com/derailed/k9s) installation was pro
     k9s info
     k9s help
 
-### 4.14. Terraform
+### 4.15. Terraform
 
 [**Terraform**](https://www.terraform.io/) is a tool for building, changing, and versioning infrastructure safely and efficiently.
 
-#### 4.14.1. Installation
+#### 4.15.1. Installation
 
-##### 4.14.1.1. Installation on the WSL File System
+##### 4.15.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -979,7 +1036,7 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 
     terraform --version
 
-##### 4.14.1.2. Installation on the Windows Native File System
+##### 4.15.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -999,15 +1056,15 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 
     terraform --version
 
-### 4.15. Node.js
+### 4.16. Node.js
 
 [**Node.js**](https://nodejs.org/) is a cross-platform, open-source JavaScript runtime environment that runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
 
-#### 4.15.1. Installation
+#### 4.16.1. Installation
 
 The most pratical way to install [**Node.js**](https://nodejs.org/) is via a Node version manager because it allows you to easily install and switch between numerous versions of [**Node.js**](https://nodejs.org/). This is useful when a project you’re working on requires a different version of [**Node.js**](https://nodejs.org/) than what you currently have installed.
 
-##### 4.15.1.1. Installation on the WSL File System
+##### 4.16.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -1059,13 +1116,13 @@ When [**Node.js**](https://nodejs.org/) is installed, [`npm`](https://www.npmjs.
 
     nvm install-latest-npm
 
-##### 4.15.1.2. Installation on the Windows Native File System
+##### 4.16.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 My go to Node version manager on on the `Windows Native File System` used to be [NVS](https://github.com/jasongin/nvs) but, it has seen very little activity recently, with the last major release being in 2023. Therefore, I'm now starting to use [fnm (Fast Node Manager)](https://github.com/Schniz/fnm).
 
-###### 4.15.1.2.1. fnm (Fast Node Manager)
+###### 4.16.1.2.1. fnm (Fast Node Manager)
 
 [fnm](https://github.com/Schniz/fnm) can be installed with [scoop](https://scoop.sh/) executing, on PowerShell console, the following command:
 
@@ -1128,7 +1185,7 @@ From now on, the latest [**Node.js**](https://nodejs.org/) LTS version will be a
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-###### 4.15.1.2.2. NVS (Node Version Switcher)
+###### 4.16.1.2.2. NVS (Node Version Switcher)
 
 Although I'm now using [fnm](https://github.com/Schniz/fnm) as my preferred Node Version Manager, I'm keeping here, for historical reference, my guide to install [NVS](https://github.com/jasongin/nvs).
 
@@ -1207,11 +1264,11 @@ From now on, the latest **node** lts version will be available on all shells of 
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-### 4.16. IntelliJ IDEA
+### 4.17. IntelliJ IDEA
 
 [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) is an integrated development environment written in Java for developing computer software written in Java, Kotlin, Groovy, and other JVM-based languages. It is developed by JetBrains and is available as an Apache 2 Licensed community edition, and in a proprietary commercial edition.
 
-#### 4.16.1. Installation
+#### 4.17.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1238,27 +1295,27 @@ It is also recommend to [exclude the IDE process from the antivirus](https://int
 + `idea64.exe`
 + `fsnotifier.exe`
 
-#### 4.16.2. Install plugins
+#### 4.17.2. Install plugins
 
-##### 4.16.2.1. Install SonarQube plugin
+##### 4.17.2.1. Install SonarQube plugin
 
 [SonarQube](https://plugins.jetbrains.com/plugin/7973-sonarqube-for-ide) is an IDE extension that helps to detect and fix quality issues as the code is written. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "SonarQube". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-##### 4.16.2.2. Install JPA Buddy
+##### 4.17.2.2. Install JPA Buddy
 
 [JPA Buddy](https://plugins.jetbrains.com/plugin/15075-jpa-buddy) is an IDE extension that helps developers work efficiently with Hibernate, EclipseLink, Spring Data JPA, Flyway, Liquibase, Lombok, MapStruct, and other related technologies in both Java and Kotlin. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "JPA Buddy". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-#### 4.16.3. Set code formatters
+#### 4.17.3. Set code formatters
 
-##### 4.16.3.1. Java
+##### 4.17.3.1. Java
 
 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) seems to be the most popular **Code Style Guide** for [Java](https://www.java.com/en/). This style guide is licensed under the [CC-By 3.0 License](https://creativecommons.org/licenses/by/3.0/) and a there's a [repository](https://github.com/google/styleguide) where a formatter configuration file for [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) is available.
 
 To add the above mentioned Code Style Formatter settings, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Editor->Code Style->Java`. On this tab, click the `settings` icon choose `Import Scheme/IntelliJ IDEA code style XML` and pick the file(s) with the desired settings.
 
-#### 4.16.4. Configure Version Control
+#### 4.17.4. Configure Version Control
 
-##### 4.16.4.1. Commit
+##### 4.17.4.1. Commit
 
 Modern IntelliJ IDEA versions uses a **non-modal Commit tool window** (accessible via `Alt + 0` or the checkmark icon on the left sidebar). The **Shelf** tab is contextual; it only appears in the Commit tool window when you have at least one shelved change. To manage your shelf:
 
@@ -1272,9 +1329,9 @@ To move changes to the shelf instead of committing them, take the following step
 2.  Select **Shelf Changes...** from the context menu.
 3.  Provide a name for the shelf and click **Shelf Changes**. The **Shelf** tab will now become visible.
 
-#### 4.16.5. Configure Build Tools
+#### 4.17.5. Configure Build Tools
 
-##### 4.16.5.1. Maven
+##### 4.17.5.1. Maven
 
 To customize *Maven*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Maven`. On this tab, change the input boxes listed below as described:
 
@@ -1284,9 +1341,9 @@ To customize *Maven*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/
 
 Beware that you must choose the [Apache Maven](https://maven.apache.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.16.6. Configure Tools
+#### 4.17.6. Configure Tools
 
-##### 4.16.6.1. Terminal
+##### 4.17.6.1. Terminal
 
 To customize the *Terminal* in use with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Tools->Terminal`. On this tab, take in consideration the file system you're working on and change the input boxes listed below as described:
 
@@ -1305,7 +1362,7 @@ This settings will only take effect when starting a new terminal. Therefore, cre
 
 This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.16.7. Run/Debug Configurations
+#### 4.17.7. Run/Debug Configurations
 
 To ensure that the building of a project on the `WSL File System` [works properly](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html#debugging_system_settings) you need to adapt the Windows Firewall configuration. Open a PowerShell console with *Administrator* privileges and execute the following command to allow connections using WSL:
 
@@ -1317,7 +1374,7 @@ Then execute the command to renew the firewall rules:
 
 After starting a debugger session, the Windows Firewall popup might appears and them, select the *Public networks* checkbox and click the `Allow access` button.
 
-##### 4.16.7.1 Shorten command line method
+##### 4.17.7.1 Shorten command line method
 
 To avoid the error "*Command line is too long*" when running tests it's necessary to set the "*Shorten command line*" method in the Run/Debug configuration to "*JAR manifest*". That can be done for the specific method or class, but it's better to [set it as default](https://stackoverflow.com/a/47927544) on [run/debug configuration templates](https://www.jetbrains.com/help/idea/run-debug-configuration.html#templates).
 
@@ -1325,11 +1382,11 @@ From the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) main menu, select 
 
 [Then](https://stackoverflow.com/a/65639857), click on the `Modify options` link (`ALT+M`) and set/select the `Shorten command line` option. Back on the `JUnit` tab, there will be a new dropdown input box named `Shorten command line`. In this new dropdown, choose the *Jar manifest* option. Click the button `OK` (once to close the `Select configuration templates` pop up and again to close the  `Run->Edit Configurations` pop up screen) and from now on all the new `JUnit` Run/Debug configurations will use this template.
 
-### 4.17. Visual Studio Code
+### 4.18. Visual Studio Code
 
 [**Visual Studio Code**](https://code.visualstudio.com/), also commonly referred to as **VS Code**, is a source-code editor made by Microsoft with the Electron Framework, for Windows, Linux and macOS. Features include support for debugging, syntax highlighting, intelligent code completion, snippets, code refactoring, and embedded Git.
 
-#### 4.17.1. Installation
+#### 4.18.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1343,7 +1400,7 @@ Execute [**Visual Studio Code**](https://code.visualstudio.com) and to enable th
 + Extensions
 + UI State
 
-#### 4.17.2. Install extensions
+#### 4.18.2. Install extensions
 
 With the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sync) option on, [**Visual Studio Code**](https://code.visualstudio.com) will installed all the synced extensions. Wait for while to allow the full synchronization and then check if all of the following extensions were properly installed:
 
@@ -1385,15 +1442,15 @@ With the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sy
 + [WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl);
 + [XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml).
 
-### 4.18. Eclipse
+### 4.19. Eclipse
 
 TODO
 
-### 4.19. DBeaver
+### 4.20. DBeaver
 
 [**DBeaver**](https://dbeaver.io/) is free and open source universal database tool for developers and database administrators.
 
-#### 4.19.1. Installation
+#### 4.20.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1422,11 +1479,11 @@ To confirm that the certificate was added to the JRE keystore, replace the **{LA
 >
 > + **{CERTIFICATE_ALIAS}** : The chosen certificate alias
 
-### 4.20. Postman
+### 4.21. Postman
 
 [**Postman**](https://www.postman.com/) helps you be more efficient while working with APIs. Using Postman, you can construct complex HTTP requests quickly, organize them in collections.
 
-#### 4.20.1. Installation
+#### 4.21.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
