@@ -432,7 +432,45 @@ The [**Command-line Fuzzy Finder | fzf**](https://github.com/junegunn/fzf) is a 
 
 #### 4.6.1. Installation
 
-##### 4.6.1.1. Installation on the Windows Native File System
+##### 4.6.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**Command-line Fuzzy Finder | fzf**](https://github.com/junegunn/fzf) on the `WSL File System`, as recommended on the [official instructions](https://github.com/junegunn/fzf#linux-packages), execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```sh
+sudo apt install fzf
+```
+
+To verify if the [**fzf**](https://github.com/junegunn/fzf) installation was properly made, check the output of the following command:
+
+```sh
+fzf --version
+fzf --help
+```
+
+Check the output of the previous command `fzf --help` to verify if the installed version supports [shell integration](https://github.com/junegunn/fzf#setting-up-shell-integration) and if it does, open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/) and execute the following command:
+
+```sh
+nano ~/.bashrc
+```
+
+Then, add the upcoming snippet to the `~/.bashrc` file.
+
+```sh
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
+```
+
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
+
+To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
+
+```sh
+source ~/.bashrc
+```
+
+##### 4.6.2.1. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
