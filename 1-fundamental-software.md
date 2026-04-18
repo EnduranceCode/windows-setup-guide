@@ -83,31 +83,86 @@ Set the desired options for all the above extensions. The folder `root/home/user
 
 Follow the [Official instructions](https://learn.microsoft.com/windows/wsl/install-manual) to manually [enable](https://learn.microsoft.com/windows/wsl/install-manual#step-1---enable-the-windows-subsystem-for-linux) [**WSL**](https://learn.microsoft.com/windows/wsl/), executing the upcoming command on a PowerShell console with *administrator privileges*.
 
-    dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+```powershell
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+```
 
 Before restarting the machine, execute the below command on the same PowerShell console to [enable the Virtual Machine feature](https://learn.microsoft.com/windows/wsl/install-manual#step-3---enable-virtual-machine-feature).
 
-    dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```powershell
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
 
 Reboot the machine to be able to proceed with the [**WSL**](https://learn.microsoft.com/windows/wsl/) installation.
 
 After rebooting your machine, set [**WSL 2**](https://learn.microsoft.com/windows/wsl/basic-commands#set-wsl-version-to-1-or-2) as your default version. executing the below command on a standard PowerShell console.
 
-    wsl --set-default-version 2
+```powershell
+wsl --set-default-version 2
+```
 
 To [update](https://learn.microsoft.com/windows/wsl/troubleshooting#updating-wsl) the [**WSL**](https://learn.microsoft.com/windows/wsl/) installation, execute the below command on a standard PowerShell console. The execution of the this command will [require elevation](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works). If you choose not to [elevate](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works#the-uac-user-experience), the [**WSL**](https://learn.microsoft.com/windows/wsl/) update will fail.
 
-    wsl --update
+```powershell
+wsl --update
+```
 
-#### 1.2.2. WSL distribution installation & configuration
+#### 1.2.2. Configuration
+
+As per [Microsoft official documentation](https://learn.microsoft.com/windows/wsl/wsl-config#wslconfig) it is recommended to modify WSL configurations directly in **WSL Settings**, rather than manually editing the `.wslconfig` file. **WSL Settings** can be found in the Windows *Start menu* and is a graphical application that comes with WSL, allowing you to manage general settings that apply to all WSL 2 instances. It is analogous to the `.wslconfig` file.
+
+On the **WSL Settings** *Memory and processor* tab check, and if necessary, adjust the following parameters:
+
++ **Processor Count** - Total available logical processors can be obtained with the Powershell command `Get-Ciminstance Win32_Processor | Select NumberOfLogicalProcessors`
++ **Memory Size**
++ **Swap Size**
+
+On the *File System* tab check, and if necessary, adjust the following parameter:
+
++ **Default VHD Size**
+
+On the *Networking* tab check, and if necessary, adjust the following parameters:
+
++ **Networking mode**: Set to `mirrored`
++ **Auto Proxy enabled**: Set to `On`
++ **DNS Proxy enabled**: Set to `On`
+
+On the *Optional Features* tab check, and if necessary, adjust the following parameter:
+
++ **Auto memory reclaim**: Set to `DropCache`
+
+By default, the `.wslconfig` file does not exist, and it will be created by the **WSL Settings** app if any of the default parameters are modified. After adjusting the general settings for all WSL 2 instances, the content of the `.wslconfig` file might be similar to the following snippet:
+
+```txt
+[wsl2]
+processors=12
+memory=32490MB
+swap=8192MB
+
+networkingMode=mirrored
+autoProxy=true
+dnsTunneling=true
+
+autoMemoryReclaim=dropcache
+```
+
+Beware that the ideal values for **Processor Count**, **Memory Size** and **Swap Size** are hardware dependent.
+
+For changes to apply, you may need to run `wsl --shutdown` from PowerShell to shut down the WSL 2 VM. Then "you must wait until the subsystem running your Linux distribution completely stops running and restarts for configuration setting updates to appear. This typically takes about 8 seconds after closing ALL instances of the distribution shell".
+
+#### 1.2.3. WSL distribution installation & configuration
 
 [List all available Linux distributions](https://learn.microsoft.com/windows/wsl/basic-commands#list-available-linux-distributions) executing the bellow command on a standard PowerShell console.
 
-    wsl --list --online
+```powershell
+wsl --list --online
+```
 
 [Ubuntu](https://ubuntu.com/) will be one of the distributions displayed on the output of the above command. To install [Ubuntu](https://ubuntu.com/) on [**WSL**](https://learn.microsoft.com/windows/wsl/), execute the following command on a standard PowerShell console.
 
-     wsl --install -d Ubuntu
+```powershell
+wsl --install -d Ubuntu
+```
 
 The distro named "**Ubuntu**" is [Canonical](https://canonical.com/)’s flagship/default **Ubuntu** distro for [**WSL**](https://learn.microsoft.com/windows/wsl/). It is intended to track the latest stable [Ubuntu LTS](https://ubuntu.com/about/release-cycle) available for [**WSL**](https://learn.microsoft.com/windows/wsl/). When a new LTS comes out, this "**Ubuntu**" distro can be upgraded to it (typically once Canonical considers upgrades ready—commonly after the first point release).
 
@@ -117,15 +172,21 @@ With the execution of the command to install a [**WSL**](https://learn.microsoft
 
 Replace the label **{DISTRO_NAME}**, in the upcoming command, as appropriate and execute it on a standard PowerShell console to set the [default distribution](https://learn.microsoft.com/windows/wsl/basic-commands#set-default-linux-distribution).
 
-    wsl --set-default {DISTRO_NAME}
+```powershell
+wsl --set-default {DISTRO_NAME}
+```
 
 On a regular PowerShell console, execute the below command to list the installed Linux distributions and check if everything is correct:
 
-    wsl --list --verbose
+```powershell
+wsl --list --verbose
+```
 
 If [Ubuntu](https://ubuntu.com/) is not running with [**WSL 2**](https://learn.microsoft.com/windows/wsl/), replace the **{LABEL}** in the below command as appropriate and execute it on a standard PowerShell console.
 
-    wsl --set-version {DISTRO_NAME} 2
+```powershell
+wsl --set-version {DISTRO_NAME} 2
+```
 
 > **Label Definition**
 >
@@ -135,47 +196,160 @@ Once the process of installing [Ubuntu](https://ubuntu.com/) on [**WSL**](https:
 
 Configure the settings for your [Ubuntu](https://ubuntu.com/) installation by using the `wsl.conf` file that is stored on `/etc` folder of every [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution. Open the file `/etc/wsl.conf` with the [nano text editor](https://www.nano-editor.org/), executing the below command on a [Ubuntu](https://ubuntu.com/) terminal.
 
-    sudo nano /etc/wsl.conf
+```sh
+sudo nano /etc/wsl.conf
+```
 
 To change the [default mount location](https://learn.microsoft.com/windows/wsl/wsl-config#automount-settings) of the Windows `C:\` drive from the default `/mnt/c` to `/c`, add the upcoming code snippet to the `/etc/wsl.conf` file.
 
-    [automount]
-    root=/
+```txt
+[automount]
+root=/
+options="metadata,umask=22,fmask=11"
+```
 
 Then, to [enable systemd support](https://learn.microsoft.com/windows/wsl/wsl-config#systemd-support), add the upcoming code snippet to the same `/etc/wsl.conf` file.
 
-    [boot]
-    systemd=true
+```txt
+[boot]
+systemd=true
+```
+
+Then, for the [interop settings](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#interop-settings), add the upcoming code snippet to the same `/etc/wsl.conf` file.
+
+```txt
+[interop]
+enabled=true
+appendWindowsPath=false
+```
+
+Finally, for the [network settings](https://learn.microsoft.com/windows/wsl/wsl-config#network-settings), add the upcoming code snippet to the same `/etc/wsl.conf` file.
+
+```txt
+[network]
+generateHosts=true
+generateResolvConf=true
+```
 
 Save the changes with the command `CTRL + O` and then exit the [nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
 
 To enable the changes made on the `wsl.conf` file, you will need to to restart your [**WSL**](https://learn.microsoft.com/windows/wsl/) instances. It can be done with the execution of the bellow command on a standard PowerShell console.
 
-    wsl --shutdown
+```powershell
+wsl --shutdown
+```
 
  You must wait until the subsystem running your Linux distribution completely stops running and restarts for configuration setting updates to appear. This typically takes about 8 seconds after closing ALL instances of the distribution shell. Once [Ubuntu](https://ubuntu.com/) restarts, *systemd* should be running. You can confirm executing the below command on a [Ubuntu](https://ubuntu.com/) terminal, which will show the status of your services.
 
-    systemctl list-unit-files --type=service
+```sh
+systemctl list-unit-files --type=service
+```
 
-Further WSL configurations can be found on the Microsoft article [Advanced settings configuration in WSL](https://learn.microsoft.com/en-us/windows/wsl/wsl-config).
+Further WSL configurations can be found on the Microsoft article [Advanced settings configuration in WSL](https://learn.microsoft.com/windows/wsl/wsl-config).
+
+By default, the [**WSL**](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) environment doesn't naturally know how to talk to the Windows browser because the `BROWSER` environment variable isn't set, and the `xdg-open` command doesn't have a default handler. The cleanest way to solve this is to use the built-in ***PowerShell interop**. Windows allows you to call `.exe` files directly from the Linux terminal.
+
+Since we've set `appendWindowsPath=false`, the WSL environment is isolated from the Windows System32 folder where `powershell.exe` lives. Instead of re-enabling the entire Windows `PATH`, replace the **{LABEL}** in the below command as appropriate and then execute it to create a specific symbolic link to PowerShell. This keeps your path clean but gives you the one tool you need.
+
+```sh
+mkdir -p ~/.local/bin
+ln -s {PATH_TO_POWERSHELL}/powershell.exe ~/.local/bin/pwsh
+```
+
+> **Label Definition**
+>
+> + **{PATH_TO_POWERSHELL}** : Path to the Windows PowerShell executable folder
+
+Ensure your `.local/bin` folder ins in your `PATH` by checking your `~/.bashrc` and make sure this line exists:
+
+```sh
+# Add the ~/.local/bin to the PATH
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+To create a real `xdg-open` executable wrapper, execute the following command:
+
+```sh
+nano ~/.local/bin/xdg-open
+```
+
+Then, paste the below snippet on the newly created file.
+
+```sh
+#!/usr/bin/env bash
+set -euo pipefail
+
+target="${1:-}"
+if [[ -z "$target" ]]; then
+  echo "Usage: xdg-open <url-or-path>" >&2
+  exit 2
+fi
+
+# If it's a Linux absolute path, convert it to a Windows path for Start.
+if [[ "$target" == /* ]]; then
+  target="$(wslpath -w "$target")"
+fi
+
+# Use Windows PowerShell (through the pwsh symlink) to open the target
+# Start-Process handles URLs and file paths.
+pwsh -NoProfile -Command "Start-Process '$target'" >/dev/null 2>&1
+```
+
+Save the changes with the command `CTRL + O` and then exit the [nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. Then make the `xdg-open` wrapper executable with the following commands:
+
+```sh
+chmod +x ~/.local/bin/xdg-open
+hash -r
+```
+
+Check if the `xdg-open` wrapper is working as expected with the following commands:
+
+```sh
+which xdg-open
+xdg-open "https://example.com"
+```
+
+To complete the process, it's necessary to edit the file `.bashrc` located in the home folder and add the following line to set the `BROWSER` environment variable.
+
+```sh
+export BROWSER="$HOME/.local/bin/xdg-open"
+```
+
+Open the file `.bashrc` with [*nano text editor*](https://www.nano-editor.org/) executing the following command:
+
+```sh
+nano ~/.bashrc
+```
+
+After adding the necessary modifications, save the file with the command `CTRL + O` and then exit [*nano text editor*](https://www.nano-editor.org/) with the command `CTRL + X`. Make the changes effective with the following command:
+
+```sh
+source ~/.bashrc
+```
 
 The article [Set up a WSL development environment](https://learn.microsoft.com/windows/wsl/setup/environment) has some good optional advices to setup a development environment with  [**WSL**](https://learn.microsoft.com/windows/wsl/), but one that is almost mandatory is the installation of the [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701).
 
-#### 1.2.2.1. Update, upgrade and install additional packages
+#### 1.2.3.1. Update, upgrade and install additional packages
 
 It's recommended to regularly update and upgrade your packages using [Ubuntu](https://ubuntu.com/)'s package manager. This is done with the following command:
 
-    sudo apt update && sudo apt full-upgrade
+```sh
+sudo apt update && sudo apt full-upgrade
+```
 
 Additional software can be installed using [Ubuntu](https://ubuntu.com/)'s package manager, exactly as in any other [Ubuntu](https://ubuntu.com/) installation.
 
 To be able to install software from its source code, you need to make sure your system has a C++ compiler. The `build-essentials` packages are meta-packages that include all the necessary tools for compiling software. You can install it with the following command:
 
-    sudo apt install build-essential
+```sh
+sudo apt install build-essential
+```
 
 To verify if the `build-essentials` installation was properly made, check the output of the following command:
 
-    gcc --version
+```sh
+gcc --version
+```
 
 ### 1.3. Windows Terminal
 
