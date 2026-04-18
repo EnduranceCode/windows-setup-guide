@@ -1116,19 +1116,45 @@ To verify if the [**kubectx**](https://github.com/ahmetb/kubectx/) installation 
 
 #### 4.14.1. Installation
 
-##### 4.14.1.1. Installation on the Windows Native File System
+##### 4.14.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**K9s**](https://github.com/derailed/k9s)) on the `WSL File System`, as recommended on the [official instructions](https://github.com/derailed/k9s#installation), execute the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```sh
+wget -P /tmp https://github.com/derailed/k9s/releases/latest/download/k9s_linux_amd64.deb
+sudo apt install /tmp/k9s_linux_amd64.deb
+rm /tmp/k9s_linux_amd64.deb
+```
+
+To verify if the [**K9s**](https://github.com/derailed/k9s) installation was properly made, check the output of the following commands:
+
+```sh
+k9s version
+k9s info
+k9s help
+```
+
+If the command `k9s info` shows a warning/error stating "*ERROR Unable to reads k9s config file*", that's because it was just installed and haven't actually been launched yet. By design, [**K9s**](https://github.com/derailed/k9s) does not create its configuration files or folders during the apt install process. Instead, it generates them dynamically the very first time you start the program. All you need to do is launch [**K9s**](https://github.com/derailed/k9s) once to initialize your environment.
+
+##### 4.14.2.1. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 To install [**K9s**](https://github.com/derailed/k9s) on the `Windows Native File System`, open a PowerShell console and execute the following command:
 
-    scoop install main/k9s
+```powershell
+scoop install main/k9s
+```
 
 To verify if the [**K9s**](https://github.com/derailed/k9s) installation was properly made, check the output of the following commands:
 
-    k9s version
-    k9s info
-    k9s help
+```powershell
+k9s version
+k9s info
+k9s help
+```
 
 ### 4.15. Terraform
 
