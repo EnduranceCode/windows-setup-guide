@@ -480,6 +480,12 @@ To ensure ensure that the PATH environment is adjusted for [**Git**](https://git
 + `%LocalAppData%\Programs\Git\mingw64\bin`
 + `%LocalAppData%\Programs\Git\usr\bin`
 
+To add the above listed paths to your Windows `Path` Environment Variable, take the following steps:
+
+1. Press `WIN + R`, type `rundll32.exe sysdm.cpl,EditEnvironmentVariables` and then press `Enter`
+2. Under **User variables** (top section), select the `Path` variable and then click **Edit**
+3. On the new window that is shown, for each path, click **New** and insert the required path
+
 Enabling Windows ***Developer Mode*** is a prerequisite for [**Git**](https://git-scm.com/) to actually create symbolic links without requiring you to run every terminal as an Administrator. To enable *Windows Developer Mode*, follow the [Advanced Windows Settings](./2-windows-configuration.md#21-advanced-windows-settings) of this guide.
 
 Configure the **Git Bash** profile on the [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701), executing the following steps:

@@ -156,9 +156,9 @@ The instructions shown here describe how to manually install [**Java**](https://
 
 Start by creating the folder where [**Java**](https://openjdk.org/) will be installed, executing, on a **Git Bash** terminal the following commands:
 
-    mkdir -p /c/dev/java
+    mkdir -p /c/dev/java/candidates
 
-Download the *.zip* option of the desired [JDK version and vendor](https://javaalmanac.io/). Then, unpack it to a folder inside `C:\dev\java`. Rename the extracted folder taking in consideration the following structure:
+Download the *.zip* option of the desired [JDK version and vendor](https://javaalmanac.io/). Then, unpack it to a folder inside `C:\dev\java\candidates`. Rename the extracted folder taking in consideration the following structure:
 
     {VENDOR}-{VERSION}-{PROJECT}
 
@@ -170,9 +170,27 @@ The different parts in the above name structure, shall be replaced as explained 
 >
 > With the above examples, the JDK folder name would be *oracle-jdk1.8.0.231-sa3*
 
-To set `JAVA_HOME` as environment variable for the current *user account*, go to `Control Panel -> User Accounts -> User Accounts` and choose the option ***Change my environment variables***.
+To have more control over [**Java**](https://openjdk.org/) versions and updates, you will create a symbolic link named`current` that will target the desired [**Java**](https://openjdk.org/) candidate folder. But, to be able to do so without Administrator priviliges, you need to enable Windows **Developer Mode** which can be done following the [Advanced Windows Settings](./2-windows-configuration.md#21-advanced-windows-settings) of this guide.
 
-On the ***User variables*** section, click the **New** button and fill the *Variable name* input box with `JAVA_HOME` and *Variable value* input box with the path to the JDK folder. If a `JAVA_HOME` already exists, select it and click the **Edit** button, then fill the *Variable value* input box with the path to the desired JDK folder.
+With **Developer Mode** enabled, replace the **{LABEL}** in the upcoming command as appropriate and then execute it, on a Windows Command Prompt, to create a symbolic link named `current` that targets the the desired [**Java**](https://openjdk.org/) candidate folder:
+
+    mklink /J C:\dev\java\candidates\{JAVA_CANDIDATE} C:\dev\java\current
+
+> + **{JAVA_CANDIDATE}** : The folder's name that contains the desired Java candidate, e.g. *oracle-jdk1.8.0.231-sa3*
+
+Check the output of the upcoming commands to confirm that the the symlink was created as desired:
+
+    dir C:\dev\java\candidates\
+    dir C:\dev\java\candidates\current
+
+Later if you want to upgrade and/or change the [**Java**](https://openjdk.org/) version in use, you can simply unpack the newer version and change the symlink to point to the latest version.
+
+    del C:\dev\java\candidates\current
+    mklink /J C:\dev\java\candidates\{JAVA_CANDIDATE} C:\dev\java\current
+
+To set `JAVA_HOME` as environment variable for the current *user account*, press `WIN + R`, type `rundll32.exe sysdm.cpl,EditEnvironmentVariables` and then press `Enter`.
+
+On the ***User variables*** section, click the **New** button and fill the *Variable name* input box with `JAVA_HOME` and *Variable value* input box with the path `C:\dev\java\current` . If a `JAVA_HOME` already exists, select it and click the **Edit** button, then fill the *Variable value* input box with the path `C:\dev\java\current`.
 
 Still on the ***User variables*** section, select the `Path` variable and click the **Edit** button. Then, click the **New** button and fill the input box with the following value:
 
@@ -289,7 +307,7 @@ To set the `MAVEN_HOME` environment variable for your [WSL](https://learn.micros
 Then, add the upcoming snippet to the `~/.bashrc` immediately before sourcing the file to customize the bash prompt.
 
     # User's environment variables
-    export export MAVEN_HOME=/opt/maven/current
+    export MAVEN_HOME=/opt/maven/current
 
     # User's path customization
     export PATH=${MAVEN_HOME}/bin:${PATH}
@@ -318,7 +336,7 @@ If everything is correct, the above command will output the **Apache Maven** ver
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-To install [**Apache Maven**](https://maven.apache.org/), download the desired [Binary zip archive](https://maven.apache.org/download.cgi) and unpack it to the folder `C:\dev\apache-maven`. Rename the extracted folder taking in consideration the following structure:
+To install [**Apache Maven**](https://maven.apache.org/), download the desired [Binary zip archive](https://maven.apache.org/download.cgi) and unpack it to the folder `C:\dev\apache-maven\candidates`. Rename the extracted folder taking in consideration the following structure:
 
     apache-maven-{VERSION}-{PROJECT}
 
@@ -329,7 +347,25 @@ The different parts in the above name structure, shall be replaced as explained 
 >
 > With the above examples, the Maven folder name would be *apache-maven-3.8.6-sa3*
 
-To set the `MAVEN_HOME` environment variable for the current *user account* go to `Control Panel -> User Accounts` and choose the option ***Change my environment variables***.
+To have more control over [**Apache Maven**](https://maven.apache.org/) versions and updates, you will create a symbolic link named `current` that will target the desired [**Apache Maven**](https://maven.apache.org/) candidate folder. But, to be able to do so without Administrator priviliges, you need to enable Windows **Developer Mode** which can be done following the [Advanced Windows Settings](./2-windows-configuration.md#21-advanced-windows-settings) of this guide.
+
+With **Developer Mode** enabled, replace the **{LABEL}** in the upcoming command as appropriate and then execute it, on a Windows Command Prompt, to create a symbolic link named `current` that targets the the desired [**Apache Maven**](https://maven.apache.org/) candidate folder:
+
+    mklink /J C:\dev\maven\candidates\{MAVEN_CANDIDATE} C:\dev\maven\current
+
+> + **{MAVEN_CANDIDATE}** : The folder's name that contains the desired Maven candidate, e.g. *apache-maven-3.8.6-sa3*
+
+Check the output of the upcoming commands to confirm that the the symlink was created as desired:
+
+    dir C:\dev\maven\candidates\
+    dir C:\dev\maven\candidates\current
+
+Later if you want to upgrade and/or change the [**Apache Maven**](https://maven.apache.org/) version in use, you can simply unpack the newer version and change the symlink to point to the desired candidate.
+
+    del C:\dev\maven\candidates\current
+    mklink /J C:\dev\maven\candidates\{MAVEN_CANDIDATE} C:\dev\maven\current
+
+To set the `MAVEN_HOME` environment variable for the current *user account*, press `WIN + R`, type `rundll32.exe sysdm.cpl,EditEnvironmentVariables` and then press `Enter`.
 
 On the ***User variables*** section, click the **New** button and fill the *Variable name* input box with **MAVEN_HOME** and the *Variable value* input box with the path to the **Apache Maven** folder. If a `MAVEN_HOME` already exists, select it and click the **Edit** button, then fill the *Variable value* input box with the path to the **Apache Maven** installation folder.
 
@@ -415,7 +451,7 @@ To switch to a different project or update to a new version, you must first dele
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-To install [**Apache Tomcat**](http://tomcat.apache.org/) application server on the `Windows Native File System`, download the desired [release zip archive](http://tomcat.apache.org/) and unpack it to the folder `C:\dev\apache-tomcat`. Rename the extracted folder taking in consideration the following structure:
+To install [**Apache Tomcat**](http://tomcat.apache.org/) application server on the `Windows Native File System`, download the desired [release zip archive](http://tomcat.apache.org/) and unpack it to the folder `C:\dev\apache-tomcat\candidates`. Rename the extracted folder taking in consideration the following structure:
 
     tomcat-{VERSION}-{PROJECT}
 
@@ -1359,7 +1395,7 @@ Although I'm now using [fnm](https://github.com/Schniz/fnm) as my preferred Node
 
 The instructions to install [NVS](https://github.com/jasongin/nvs) shown here are following the official instructions for the [manual setup from a Command Prompt](https://github.com/jasongin/nvs/blob/master/doc/SETUP.md#manual-setup---command-prompt).
 
-To set `NVS_HOME` as environment variable for the current *user account* go to `Control Panel -> User Accounts` and choose the option ***Change my environment variables***.
+To set `NVS_HOME` as environment variable for the current *user account*, press `WIN + R`, type `rundll32.exe sysdm.cpl,EditEnvironmentVariables` and then press `Enter`.
 
 On the ***User variables*** section, click the **New** button and fill the *Variable name* input box with `NVS_HOME` and the *Variable value* input box with `%LOCALAPPDATA%\nvs`.
 
@@ -1377,7 +1413,7 @@ Then, on the same Windows Command Prompt, install the application executing the 
 
     "%NVS_HOME%\nvs.cmd" install
 
-To check if the folder `%LOCALAPPDATA%\nvs` was properly added to the current *user account* path variable, go to `Control Panel -> User Accounts` and choose the option ***Change my environment variables***.
+To check if the folder `%LOCALAPPDATA%\nvs` was properly added to the current *user account* path variable, press `WIN + R`, type `rundll32.exe sysdm.cpl,EditEnvironmentVariables` and then press `Enter`.
 
 On the ***User variables*** section, select the `Path` variable and click the **Edit** button. Then check if the folder `%LOCALAPPDATA%\nvs` is one of the `Path` variable entries. If it isn't, edit or create it.
 
@@ -1419,7 +1455,7 @@ The above command will **only** set the **node** version in use for the current 
 
     nvs link lts
 
-To check if the folder `%LOCALAPPDATA%\nvs\default` was properly added to the current *user account* path variable, go to `Control Panel -> User Accounts` and choose the option ***Change my environment variables***.
+To check if the folder `%LOCALAPPDATA%\nvs\default` was properly added to the current *user account* path variable, press `WIN + R`, type `rundll32.exe sysdm.cpl,EditEnvironmentVariables` and then press `Enter`.
 
 On the ***User variables*** section, select the `Path` variable and click the **Edit** button. Then check if the folder `%LOCALAPPDATA%\nvs\default` is one of the `Path` variable entries. If it isn't, edit or create it.
 
@@ -1444,7 +1480,7 @@ The [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) is the [
 
 Execute the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) and then login in the JetBrains account. Then, on the `Toolbox App Menu`choose the `Settings` option and uncheck the checkbox `Launch Toolbox App at system startup`.  
 
-To install [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) and then choose the desired [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) version to install and follow the instructions prompted.
+To install [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), launch the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) and then choose the desired [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) version to install and follow the instructions prompted.
 
 Some antivirus software can interfere with the IDE build process, [causing builds to run dramatically slower](https://intellij-support.jetbrains.com/hc/en-us/articles/360006298560). To prevent this, the folders where the IDE writes a lot of files should be excluded from the antivirus software real-time scanning. That can be done following the following steps:
 
