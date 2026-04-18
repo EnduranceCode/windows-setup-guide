@@ -563,35 +563,118 @@ If the installation was successful, the following message is returned.
 
 #### 4.9.1. Installation
 
-##### 4.9.1.1. Installation on the Windows Native File System
+##### 4.9.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**Granted**](https://github.com/fwdcloudsec/granted) on the `WSL File System`, take in consideration the [official Linux (APT) instructions](https://docs.commonfate.io/granted/getting-started) and execute the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```sh
+sudo apt update
+sudo apt install gpg wget ca-certificates
+wget -O- https://apt.releases.commonfate.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/common-fate-linux.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/common-fate-linux.gpg] https://apt.releases.commonfate.io stable main" | sudo tee /etc/apt/sources.list.d/common-fate.list
+sudo apt update
+sudo apt install granted
+```
+
+To verify if the [**Granted**](https://github.com/fwdcloudsec/granted) installation was properly made, check the output of the following command:
+
+```sh
+granted --version
+granted --help
+```
+
+To pin [**Granted**](https://github.com/fwdcloudsec/granted) backend to `file` execute the following commands:
+
+```sh
+mkdir -p ~/.granted/keyring
+chmod 700 ~/.granted ~/.granted/keyring
+granted settings set --setting Keyring.Backend --value file
+granted settings set --setting Keyring.FileDir --value "${HOME}/.granted/keyring"
+```
+To set the browser opener unified to Windows default browser via the `XDG-OPEN` wrapper, execute the following commands:
+
+```sh
+granted settings set --setting DefaultBrowser --value CUSTOM
+granted settings set --setting CustomBrowserPath --value "${HOME}/.local/bin/xdg-open"
+granted settings set --setting CustomSSOBrowserPath --value "${HOME}/.local/bin/xdg-open"
+```
+
+This makes [**Granted**](https://github.com/fwdcloudsec/granted) write SSO tokens to AWS’s standard cache location (`~/.aws/sso/cache`), which AWS CLI v2 reads, execute the following command:
+
+```sh
+granted settings set --setting ExportSSOToken --value true
+```
+
+To set up [**Granted**](https://github.com/fwdcloudsec/granted) shell alias, open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/), executing the following command:
+
+```sh
+nano ~/.bashrc
+```
+
+Then, add the upcoming snippet to the `~/.bashrc` file.
+
+```sh
+# Set Granted shell alias
+#
+# + https://docs.commonfate.io/granted/internals/shell-alias
+# + https://docs.commonfate.io/granted/troubleshooting#manually-configuring-your-shell-profile
+alias assume="source assume"
+```
+
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
+
+```sh
+source ~/.bashrc
+```
+
+Now, after running `assume <profile>`, you can run AWS CLI commands without `--profile` because the AWS environment variables are set in your current shell session. To confirm that `assume` is executed as expected, execute `assume <profile>` and then check the output of the following command:
+
+    aws configure list
+
+##### 4.9.2.1. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 To install [**Granted**](https://github.com/fwdcloudsec/granted) on the `Windows Native File System`, open a PowerShell console and execute the following command:
 
-    scoop install main/granted
+```powershell
+scoop install main/granted
+```
 
 To verify if the [**Granted**](https://github.com/fwdcloudsec/granted) installation was properly made, check the output of the following command:
 
-    granted --version
-    granted --help
+```powershell
+granted --version
+granted --help
+```
 
-For the first time setup, on a PowerShell console, execute the following command:
+To pin [**Granted**](https://github.com/fwdcloudsec/granted) backend to `file` execute, on a [Git Bash](https://git-scm.com/) terminal, the following commands:
 
-    assume
+```sh
+mkdir -p ~/.granted/keyring
+chmod 700 ~/.granted ~/.granted/keyring
+granted settings set --setting Keyring.Backend --value file
+granted settings set --setting Keyring.FileDir --value "${HOME}/.granted/keyring"
+```
+To set the browser opener unified to Windows default browser via the `XDG-OPEN` wrapper, execute, on a [Git Bash](https://git-scm.com/) terminal, the following commands:
 
-Following the above command, you will be prompted a few times:
+```sh
+granted settings set --setting DefaultBrowser --value CUSTOM
+granted settings set --setting CustomBrowserPath --value "${HOME}/.local/bin/xdg-open"
+granted settings set --setting CustomSSOBrowserPath --value "${HOME}/.local/bin/xdg-open"
+```
 
-+ **Choose the default Granted browser**: set [Firefox](https://www.mozilla.org/firefox/new/) as the default browser;
-+ **Open Firefox to install Firefox [addon](https://addons.mozilla.org/en-GB/firefox/addon/granted/)**: Yes
-+ **Confirm [addon](https://addons.mozilla.org/en-GB/firefox/addon/granted/) installation**: yes when installation is complete
-+ **Default browser for SSO login**: No to use Firefox
+This makes [**Granted**](https://github.com/fwdcloudsec/granted) write SSO tokens to AWS’s standard cache location (`~/.aws/sso/cache`), which AWS CLI v2 reads, execute, on a [Git Bash](https://git-scm.com/) terminal, the following command:
 
-When using [Git Bash](https://git-scm.com/), the `assume` command installed by [Scoop](https://scoop.sh/) runs a PowerShell script (`assume.ps1`). PowerShell cannot modify the environment variables of your current [Git Bash](https://git-scm.com/) session, so AWS variables such as `AWS_PROFILE`, `AWS_ACCESS_KEY_ID`, and `AWS_SESSION_TOKEN` will not persist for subsequent `aws ...` commands.
+```sh
+granted settings set --setting ExportSSOToken --value true
+```
 
 To make `assume` behave in [Git Bash](https://git-scm.com/) like it does in PowerShell (i.e., set AWS environment variables in the current shell), add the following function to your `~/.bashrc`:
 
-```bash
+```sh
 # Use Granted's bash wrapper so AWS_* variables persist in this bash session
 assume() {
     local granted_folder="$HOME/scoop/apps/granted/current"
@@ -605,11 +688,15 @@ assume() {
 
 To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
 
-    source ~/.bashrc
+```sh
+source ~/.bashrc
+```
 
 Now, after running `assume <profile>`, you can run AWS CLI commands without `--profile` because the AWS environment variables are set in your current [Git Bash](https://git-scm.com/) session. To confirm that `assume` is executed as expected, execute `assume <profile>` and then check the output of the following command:
 
-    aws configure list
+```sh
+aws configure list
+```
 
 ### 4.10. Make
 
