@@ -1080,7 +1080,24 @@ kubectl version --client
 
 #### 4.13.1. Installation
 
-##### 4.13.1.1. Installation on the Windows Native File System
+##### 4.13.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**kubectx**](https://github.com/ahmetb/kubectx/) on the `WSL File System`, as recommended on the [official instructions](https://github.com/ahmetb/kubectx/#installation), execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```sh
+sudo apt install kubectx
+```
+
+To verify if the [**kubectx**](https://github.com/ahmetb/kubectx/) installation was properly made, check the output of the following command:
+
+```sh
+kubectx --version
+kubectx --help
+```
+
+##### 4.13.2.1. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
