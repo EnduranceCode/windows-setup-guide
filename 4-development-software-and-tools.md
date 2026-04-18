@@ -1451,13 +1451,27 @@ This is a per project setting, therefore it might be necessary to set it for eve
 
 #### 4.17.7. Run/Debug Configurations
 
-To ensure that the building of a project on the `WSL File System` [works properly](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html#debugging_system_settings) you need to adapt the Windows Firewall configuration. Open a PowerShell console with *Administrator* privileges and execute the following command to allow connections using WSL:
+When `networkingMode=mirrored` is not enabled the Windows firewall configuration needs to be adapted to ensure the building of a project on the `WSL File System` [works properly](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html#debugging_system_settings). Open a PowerShell console with *Administrator* privileges and execute the following command to get the exact network interface name:
 
-    New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "vEthernet (WSL)"  -Action Allow
+```powershell
+Get-NetAdapter
+```
 
-Then execute the command to renew the firewall rules:
+Replace the **{LABEL}** in the upcoming command as appropriate and execute it from an a PowerShell console with *Administrator* privileges to allow connections using WSL.
 
-    Get-NetFirewallProfile -Name Public | Get-NetFirewallRule | where DisplayName -ILike "IntelliJ IDEA*" | Disable-NetFirewallRule
+```powershel
+New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "{ADAPTER_NAME}"  -Action Allow
+```
+
+> **Label Definition**
+>
+> + **{ADAPTER_NAME}** : The Hyper-V Virtual Ethernet Adapter for WSL name obtained with the Powershell command `Get-NetAdapter`
+
+Then, to renew the firewall rules, execute the following command:
+
+```powershel
+Get-NetFirewallProfile -Name Public | Get-NetFirewallRule | where DisplayName -ILike "IntelliJ IDEA*" | Disable-NetFirewallRule
+```
 
 After starting a debugger session, the Windows Firewall popup might appears and them, select the *Public networks* checkbox and click the `Allow access` button.
 
