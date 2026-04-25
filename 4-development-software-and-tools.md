@@ -7,20 +7,20 @@ This file contains the **Development Software and Tools** section of my [Setup g
 4. [Development Software & Tools](#4-development-software--tools)
     1. [Notepad++](#41-notepad)
     2. [Meld](#42-meld)
-    3. [Java](#43-java)
-    4. [Apache Maven](#44-apache-maven)
-    5. [Apache Tomcat](#45-apache-tomcat)
-    6. [Command Line Fuzzy Finder](#46-command-line-fuzzy-finder)
-    7. [Quarkus CLI](#47-quarkus-cli)
-    8. [AWS CLI](#48-aws-cli)
-    9. [Granted](#49-granted)
-    10. [Make](#410-make)
-    11. [Docker](#411-docker)
-    12. [kubectl](#412-kubectl)
-    13. [kubectx](#413-kubectx)
-    14. [K9s](#414-k9s)
-    15. [Terraform](#415-terraform)
-    16. [Node.js](#416-nodejs)
+    3. [Command Line Fuzzy Finder](#43-command-line-fuzzy-finder)
+    4. [Make](#44-make)
+    5. [AWS CLI](#45-aws-cli)
+    6. [Granted](#46-granted)
+    7. [Docker](#47-docker)
+    8. [kubectl](#48-kubectl)
+    9. [kubectx](#49-kubectx)
+    10. [K9s](#410-k9s)
+    11. [Java](#411-java)
+    12. [Apache Maven](#412-apache-maven)
+    13. [Apache Tomcat](#413-apache-tomcat)
+    14. [Quarkus CLI](#414-quarkus-cli)
+    15. [Node.js](#415-nodejs)
+    16. [Terraform](#416-terraform)
     17. [IntelliJ IDEA](#417-intellij-idea)
     18. [Visual Studio Code](#418-visual-studio-code)
     19. Eclipse
@@ -39,8 +39,10 @@ This file contains the **Development Software and Tools** section of my [Setup g
 
 To install [**Notepad++**](https://notepad-plus-plus.org/), open a PowerShell console and execute the following commands:
 
-    scoop bucket add extras
-    scoop install extras/notepadplusplus
+```powershell
+scoop bucket add extras
+scoop install extras/notepadplusplus
+```
 
 #### 4.1.2. Configuration
 
@@ -58,16 +60,788 @@ On the menu option `Settings->Plugins Admin...`, install the plugins [**BetterMu
 
 To install [**Meld**](https://meld.app/), open a PowerShell console and execute the following commands:
 
-    scoop bucket add extras
-    scoop install extras/meld
+```powershell
+scoop bucket add extras
+scoop install extras/meld
+```
 
-### 4.3. Java
+### 4.3. Command Line Fuzzy Finder
 
-[**Java**](https://openjdk.org/) is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let programmers write once, run anywhere, meaning that compiled Java code can run on all platforms that support Java without the need to recompile.
+The [**Command-line Fuzzy Finder | fzf**](https://github.com/junegunn/fzf) is a general-purpose command-line fuzzy finder. It's an interactive filter program for any kind of list; files, command history, processes, hostnames, bookmarks, git commits, etc. It implements a "fuzzy" matching algorithm, so you can quickly type in patterns with omitted characters and still get the results you want.
 
 #### 4.3.1. Installation
 
-##### 4.3.1.1. Installation the WSL File System
+##### 4.3.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**Command-line Fuzzy Finder | fzf**](https://github.com/junegunn/fzf) on the `WSL File System`, as recommended on the [official instructions](https://github.com/junegunn/fzf#linux-packages), execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```bash
+sudo apt install fzf
+```
+
+To verify if the [**fzf**](https://github.com/junegunn/fzf) installation was properly made, check the output of the following command:
+
+```bash
+fzf --version
+fzf --help
+```
+
+Check the output of the previous command `fzf --help` to verify if the installed version supports [shell integration](https://github.com/junegunn/fzf#setting-up-shell-integration) and if it does, open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/) and execute the following command:
+
+```bash
+nano ~/.bashrc
+```
+
+Then, add the upcoming snippet to the `~/.bashrc` file.
+
+```bash
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
+```
+
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
+
+To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
+
+```bash
+source ~/.bashrc
+```
+
+##### 4.3.2.1. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**fzf**](https://github.com/junegunn/fzf), open a PowerShell console and execute the following command:
+
+```powershell
+scoop install main/fzf
+```
+
+To verify if the [**fzf**](https://github.com/junegunn/fzf) installation was properly made, check the output of the following command:
+
+```powershell
+fzf --version
+fzf --help
+```
+
+To set up shell integration with [Git Bash](https://git-scm.com/), open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/), executing the below command on a [Git Bash](https://git-scm.com/) terminal.
+
+```bash
+nano ~/.bashrc
+```
+
+Then, add the upcoming snippet to the `~/.bashrc` file.
+
+```bash
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
+```
+
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
+
+To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
+
+```bash
+source ~/.bashrc
+```
+
+### 4.4. Make
+
+[**GNU Make**](https://www.gnu.org/software/make/) is a tool which controls the generation of executables and other non-source files of a program from the program's source files.
+
+#### 4.4.1. Installation
+
+##### 4.4.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**GNU Make**](https://www.gnu.org/software/make/) on the `WSL File System`, execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```bash
+sudo apt install make
+```
+
+To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation was properly made, check the output of the following command:
+
+```bash
+make --version
+```
+
+##### 4.4.1.1. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**GNU Make**](https://www.gnu.org/software/make/), open a PowerShell console and execute the following command:
+
+```powershell
+scoop install main/make
+```
+
+To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation was properly made, check the output of the following command:
+
+```powershell
+make --version
+```
+
+### 4.5. AWS CLI
+
+The [**AWS Command Line Interface (AWS CLI)**](https://aws.amazon.com/cli/) is a unified tool to manage your AWS services. With just one tool to download and configure, you can control multiple AWS services from the command line and automate them through scripts.
+
+#### 4.5.1. Installation
+
+##### 4.5.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `WSL File System`, take in consideration Linux's [AWS official instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and execute the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```bash
+curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscliv2.zip
+unzip /tmp/awscliv2.zip -d /tmp/
+sudo /tmp/aws/install
+```
+
+To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was properly made, check the output of the following command:
+
+```bash
+aws --version
+```
+
+If the `aws` command cannot be found, you might need to restart your terminal or follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
+
+[AWS](https://aws.amazon.com/) also provides a [Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) that "enables you to establish secure connections to your Amazon Elastic Compute Cloud (EC2) instances, edge devices, on-premises servers, and virtual machines (VMs)". Follow the Debian and Ubuntu [official instructions](https://docs.aws.amazon.com/systems-manager/latest/userguide/install-plugin-debian-and-ubuntu.html) to install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `WSL File System` and download the `.deb` package executing the following command:
+
+```bash
+curl https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb -o /tmp/session-manager-plugin.deb
+```
+
+To install the downloaded `.deb` package executing the following command:
+
+```bash
+sudo dpkg -i /tmp/session-manager-plugin.deb
+```
+
+Run the following commands to verify that the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installed successfully.
+
+```bash
+session-manager-plugin
+```
+
+If the installation was successful, the following message is returned.
+
+```bash
+The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
+```
+
+##### 4.5.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `Windows Native File System`, open a PowerShell console and execute the following command:
+
+```powershell
+scoop install main/aws
+```
+
+To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was properly made, check the output of the following command:
+
+```powershell
+aws --version
+```
+
+If there's ant problem using the [**AWS CLI**](https://aws.amazon.com/cli/), follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
+
+To install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `Windows Native File System`, open a PowerShell console and execute the following commands:
+
+```powershell
+scoop bucket add extras
+scoop install extras/aws-session-manager-plugin
+```
+
+Run the following commands to verify that the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installed successfully.
+
+```powershell
+session-manager-plugin
+```
+
+If the installation was successful, the following message is returned.
+
+```powershell
+The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
+```
+
+### 4.6. Granted
+
+[**Granted**](https://github.com/fwdcloudsec/granted) is a command line interface (CLI) application which simplifies access to cloud roles and allows multiple cloud accounts to be opened in your web browser simultaneously.
+
+#### 4.6.1. Installation
+
+##### 4.6.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**Granted**](https://github.com/fwdcloudsec/granted) on the `WSL File System`, take in consideration the [official Linux (APT) instructions](https://docs.commonfate.io/granted/getting-started) and execute the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```bash
+sudo apt update
+sudo apt install gpg wget ca-certificates
+wget -O- https://apt.releases.commonfate.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/common-fate-linux.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/common-fate-linux.gpg] https://apt.releases.commonfate.io stable main" | sudo tee /etc/apt/sources.list.d/common-fate.list
+sudo apt update
+sudo apt install granted
+```
+
+To verify if the [**Granted**](https://github.com/fwdcloudsec/granted) installation was properly made, check the output of the following command:
+
+```bash
+granted --version
+granted --help
+```
+
+To pin [**Granted**](https://github.com/fwdcloudsec/granted) backend to `file` execute the following commands:
+
+```bash
+mkdir -p ~/.granted/keyring
+chmod 700 ~/.granted ~/.granted/keyring
+granted settings set --setting Keyring.Backend --value file
+granted settings set --setting Keyring.FileDir --value "${HOME}/.granted/keyring"
+```
+To set the browser opener unified to Windows default browser via the `XDG-OPEN` wrapper, execute the following commands:
+
+```bash
+granted settings set --setting DefaultBrowser --value CUSTOM
+granted settings set --setting CustomBrowserPath --value "${HOME}/.local/bin/xdg-open"
+granted settings set --setting CustomSSOBrowserPath --value "${HOME}/.local/bin/xdg-open"
+```
+
+To make [**Granted**](https://github.com/fwdcloudsec/granted) write SSO tokens to AWS’s standard cache location (`~/.aws/sso/cache`), which AWS CLI v2 reads, execute the following command:
+
+```bash
+granted settings set --setting ExportSSOToken --value true
+```
+
+To list all [**Granted**](https://github.com/fwdcloudsec/granted) settings execute the following command:
+
+```bash
+granted settings list
+```
+
+To set up [**Granted**](https://github.com/fwdcloudsec/granted) shell alias, open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/), executing the following command:
+
+```bash
+nano ~/.bashrc
+```
+
+Then, add the upcoming snippet to the `~/.bashrc` file.
+
+```bash
+# Set Granted shell alias
+#
+# + https://docs.commonfate.io/granted/internals/shell-alias
+# + https://docs.commonfate.io/granted/troubleshooting#manually-configuring-your-shell-profile
+alias assume="source assume"
+```
+
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
+
+```bash
+source ~/.bashrc
+```
+
+Now, after running `assume <profile>`, you can run AWS CLI commands without `--profile` because the AWS environment variables are set in your current shell session. To confirm that `assume` is executed as expected, execute `assume <profile>` and then check the output of the following command:
+
+```bash
+aws configure list
+```
+
+##### 4.6.2.1. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**Granted**](https://github.com/fwdcloudsec/granted) on the `Windows Native File System`, open a PowerShell console and execute the following command:
+
+```powershell
+scoop install main/granted
+```
+
+To verify if the [**Granted**](https://github.com/fwdcloudsec/granted) installation was properly made, check the output of the following command:
+
+```powershell
+granted --version
+granted --help
+```
+
+To pin [**Granted**](https://github.com/fwdcloudsec/granted) backend to `file` execute, on a [Git Bash](https://git-scm.com/) terminal, the following commands:
+
+```bash
+mkdir -p ~/.granted/keyring
+chmod 700 ~/.granted ~/.granted/keyring
+granted settings set --setting Keyring.Backend --value file
+granted settings set --setting Keyring.FileDir --value "${HOME}/.granted/keyring"
+```
+
+To set the browser opener unified to Windows default browser via the `XDG-OPEN` wrapper, replace the ***{LABEL}*** in the below commands as appropriate and then execute it, on a [Git Bash](https://git-scm.com/) terminal.
+
+```bash
+granted settings set --setting DefaultBrowser --value FIREFOX
+granted settings set --setting CustomSSOBrowserPath --value "{PATH_TO_DEFAULT_BROWSER}"
+```
+
+> **Label Definition**
+>
+> + **{PATH_TO_DEFAULT_BROWSER}**: The full path to the default browser executable file, e.g. *C:/Program Files/Mozilla Firefox/firefox.exe*
+
+To make [**Granted**](https://github.com/fwdcloudsec/granted) write SSO tokens to AWS’s standard cache location (`~/.aws/sso/cache`), which AWS CLI v2 reads, execute, on a [Git Bash](https://git-scm.com/) terminal, the following command:
+
+```bash
+granted settings set --setting ExportSSOToken --value true
+```
+
+To list all [**Granted**](https://github.com/fwdcloudsec/granted) settings execute the following command:
+
+```bash
+granted settings list
+```
+
+To make `assume` behave in [Git Bash](https://git-scm.com/) like it does in PowerShell (i.e., set AWS environment variables in the current shell), add the following function to your `~/.bashrc`:
+
+```bash
+# Use Granted's bash wrapper so AWS_* variables persist in this bash session
+assume() {
+    local granted_folder="$HOME/scoop/apps/granted/current"
+
+    # Temporarily add Granted's install folder to PATH so the bash wrapper can find `assumego.exe`
+    # and source the Granted’s bash script so exports persist in the current shell.
+    PATH="$granted_folder:$PATH" \
+        . "$granted_folder/assume" "$@"
+}
+```
+
+To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
+
+```bash
+source ~/.bashrc
+```
+
+Now, after running `assume <profile>`, you can run AWS CLI commands without `--profile` because the AWS environment variables are set in your current [Git Bash](https://git-scm.com/) session. To confirm that `assume` is executed as expected, execute `assume <profile>` and then check the output of the following command:
+
+```bash
+aws configure list
+```
+
+### 4.7. Docker
+
+[**Docker**](https://www.docker.com/) is an open-source containerization platform. It enables developers to package applications into containers, which are standardized, executable components combining application source code with the operating system libraries and dependencies required to run that code in any environment.
+
+[**Docker**](https://www.docker.com/) updated its [Docker Desktop License Agreement](https://docs.docker.com/subscription/?ref=paulsblog.dev#docker-desktop-license-agreement) and this change means that on companies with more than 250 employees or more than $10 million in annual revenue you will not be able to use [Docker Desktop](https://www.docker.com/products/docker-desktop/) without a paid subscription. A possible alternative is [Rancher Desktop](https://rancherdesktop.io/) but, as the license update is only related to [Docker Desktop](https://www.docker.com/products/docker-desktop/), it's also possible to utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
+
+If you're going to do your development work on the Windows native file system, you should choose [Rancher Desktop](https://rancherdesktop.io/) to replace [Docker Desktop](https://www.docker.com/products/docker-desktop/). But if you're planning to do all you development work on the [WSL](https://learn.microsoft.com/windows/wsl/) file system (taking advantage of the Linux tools), you should utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
+
+#### 4.7.1. Pre-Installation requirements
+
+To avoid future conflicts between the ports reserved by ***Hyper-V*** and the ports used by the [**Docker**](https://www.docker.com/) containers, you should [reset the "*TCP Dynamic Port Range*"](https://medium.com/@sevenall/completely-solve-the-problem-of-docker-containers-not-starting-or-running-on-windows-10-due-to-port-57f16ed6143). That is achieved executing the upcoming commands from a PowerShell console with *Administrator* privileges:
+
+```powershell
+netsh int ipv4 set dynamic tcp start=49152 num=16384
+netsh int ipv6 set dynamic tcp start=49152 num=16384
+```
+
+Following the execution of the above commands, reboot the computer to apply the changes made.
+
+After restarting the computer, check the output of the following command:
+
+```powershell
+netsh int ipv4 show dynamicport tcp
+```
+
+The above command should now show that "*TCP Dynamic Port Range*" has been changed to 49152–65535. Now only the ports in this range may be reserved by ***Hyper-V***.
+
+#### 4.7.2. Installation
+
+##### 4.7.2.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+This section describes the necessary steps to install [**Docker**](https://www.docker.com/) and [Docker Engine](https://docs.docker.com/engine/) on a [WSL](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) distribution. The following steps are based on the [official documentation for installing Docker on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) with some adaptations provided by [Paul Knulst](https://www.paulsblog.dev/how-to-install-docker-without-docker-desktop-on-windows/).
+
+As per [**Docker**](https://www.docker.com/) [documentation](https://docs.docker.com/engine/install/ubuntu/#uninstall-old-versions), before you can install Docker Engine, you need to uninstall any conflicting packages. Do it executing the following command:
+
+```bash
+sudo apt remove docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc
+sudo apt autoremove
+```
+
+On your [Ubuntu](https://ubuntu.com/) submodule of [WSL](https://learn.microsoft.com/windows/wsl/), install the required dependencies with the following commands:
+
+```bash
+sudo apt update
+sudo apt install ca-certificates curl
+```
+
+To add the [**Docker**](https://www.docker.com/) stable repository, execute the following commands:
+
+```bash
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Architectures: $(dpkg --print-architecture)
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+sudo apt update
+```
+
+Install the latest version of the [**Docker**](https://www.docker.com/)'s packages with the following command:
+
+```bash
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+Add you user to the `docker` group with the following command
+
+```bash
+sudo usermod -aG docker $USER
+```
+
+Log out and log back in so that your group membership is re-evaluated, or run the following command to activate the changes to groups:
+
+```bash
+newgrp docker
+```
+
+Check the installed versions using the following commands
+
+```bash
+docker --version
+dockerd --version
+docker compose version
+docker info
+```
+
+On a standard [Ubuntu](https://ubuntu.com/) install, Docker is started by `systemd` automatically after installation. On [WSL](https://learn.microsoft.com/windows/wsl/), this depends on `systemd=true` being enabled (as in `/etc/wsl.conf`) and on the [WSL](https://learn.microsoft.com/windows/wsl/) distro session actually starting `systemd`.
+
+```bash
+sudo systemctl status docker.service
+sudo systemctl status containerd.service
+```
+
+If [**Docker**](https://www.docker.com/) isn’t running, start it manually with the following commands:
+
+```bash
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+
+The default `iptables` frontend on [Ubuntu](https://ubuntu.com/) is usually `iptables-nft`. [**Docker**](https://www.docker.com/) works with `iptables-nft` and `iptables-legacy`, but if you experience Docker networking issues (for example, containers can’t reach the internet, port publishing doesn’t work, or firewall rules look wrong), you can try switching to the legacy backend as a troubleshooting step:
+
+```bash
+sudo update-alternatives --config iptables
+sudo update-alternatives --config ip6tables
+sudo systemctl restart docker.service
+```
+
+Then, verify if everything is running properly by checking the output of the following commands:
+
+```bash
+sudo systemctl status docker.service
+sudo systemctl status containerd.service
+docker run hello-world
+```
+
+When you run `docker login`, [**Docker**](https://www.docker.com/) may use a credential helper to store credentials. On Linux, `secretservice` requires a running DBus session *and* a Secret Service provider (commonly GNOME Keyring or KWallet). On a headless [WSL](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) (no desktop environment), this is often not available, so using [`pass`](https://www.passwordstore.org/) is a practical alternative, which can be installed with the following command:
+
+```bash
+sudo apt install pass
+```
+
+When it's necessary to manage credentials with [**Docker**](https://www.docker.com/), [`pass`](https://www.passwordstore.org/) requires a GPG key to encrypt passwords and it can be created with the following command:
+
+```bash
+gpg --full-generate-key
+```
+
+Following the above command, when prompted, set the following options:
+
+```bash
+Kind of key:    {KEY_TYPE}
+Key expiration: {KEY_EXPIRATION}
+Real name:      {REAL_NAME}
+Email address:  {EMAIL}
+Passphrase:     {PASSPHRASE}
+```
+
+> **Label Definition**
+>
+> + **{KEY_TYPE}**: The cryptographic algorithm and usage for your keypair. Recommended for `pass`: `RSA and RSA` (creates a primary key for signing/certifying + a subkey for encryption).
+> + **{KEY_SIZE}**: The size of the RSA key, in bits (security vs performance trade-off). Common choices: `3072` (good default) or `4096` (stronger, slightly slower).
+> + **{KEY_EXPIRATION}**: When the key should expire. Examples: `0` (never expires), `1y` (expires in one year), `2y`, `6m`, etc.  
+> + **{REAL_NAME}**: A human-readable name embedded in the key’s user ID (UID).
+> + **{EMAIL}**: The email address embedded in the key’s UID. It does not have to be “real” for cryptographic purposes, but you should use something you’ll recognize.
+> + **{PASSPHRASE}**: The passphrase that protects your private key on disk, if you forget it, you effectively lose the ability to decrypt previously stored secrets.
+
+After generating the key, you can discover the Key ID with the following command:
+
+```bash
+gpg --list-secret-keys --keyid-format=long
+```
+
+Once the GPG key is created, replace the ***{LABEL}*** in the below command as appropriate and then execute it to initialize [`pass`](https://www.passwordstore.org/) with the GPG identity you want to use:
+
+```bash
+pass init {GPG_IDENTITY}
+```
+
+> **Label Definition**
+>
+> + **{GPG_IDENTITY}** : The email used when generating the key, or the key ID
+
+Upon success of the GPG key initialization, edit the [**Docker**](https://www.docker.com/) configuration to use the [`pass`](https://www.passwordstore.org/) credentials helper executing the following commands:
+
+```bash
+mkdir -p ~/.docker
+echo '{
+    "credsStore": "pass"
+}' > ~/.docker/config.json
+```
+
+##### 4.7.2.1. Installation on the Windows Native File System with Rancher Desktop
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+[**Rancher Desktop**](https://rancherdesktop.io/) is an app that provides container management and Kubernetes on the desktop. It is available for Mac (both on Intel and Apple Silicon), Windows, and Linux.
+
+[**Rancher Desktop**](https://rancherdesktop.io/) installation is only necessary if you're going to do your development work on the Windows Native File System because, if you're going to do all you development work on the [WSL](https://learn.microsoft.com/windows/wsl/) file system, you should utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
+
+[Windows Linux Subsystem (WSL)](https://learn.microsoft.com/en-us/windows/wsl/) is required to run [**Rancher Desktop**](https://rancherdesktop.io/). If it isn't installed, follow the [instructions on this repository](./1-fundamental-software.md#13-windows-subsystem-for-linux) to install it.
+
+To install [**Rancher Desktop**](https://rancherdesktop.io/), take the following steps:
+
+1. **Download:** Get the latest version from the [releases page on GitHub](https://github.com/rancher-sandbox/rancher-desktop/releases) and execute the installer.
+2. **Install:** When prompted, choose *Install for all users of this machine* (accept the elevated permissions prompt).
+3. **Finish:** When the installation is finished, uncheck *Run Rancher Desktop* and click **Finish**.
+4. **Launch:** Start Rancher Desktop from the Windows Start Menu.
+5. **Configure:** On the welcome screen, uncheck `Enable Kubernetes` and select `dockerd` as the Container Engine.
+
+Once the installation is completed, go through [**Rancher Desktop**](https://rancherdesktop.io/) preferences and set it as desired. It is recommended to enable *Automatically start at login* and also *Start in the background*.
+
+To verify that the installation was successful, make sure [**Rancher Desktop**](https://rancherdesktop.io/) is running, then open a new PowerShell console and execute:
+
+```powershell
+wsl --list --verbose
+```
+
+You should see the [**Rancher Desktop**](https://rancherdesktop.io/) distros running. Next, test if the `docker` command is fully functional for your user:
+
+```powershell
+docker info
+```
+
+If you see detailed information about the Docker installation, you are done! No further action is necessary.
+
+If `docker info` returns a permission error (e.g., "Access is denied"), your Windows user lacks the privileges to interact with the Docker socket. You will need to add your user to the `docker-users` group and that can be done taking the following steps:
+
+1. On a PowerShell console, check if the group exists and your membership by running:
+
+```powershell
+net localgroup docker-users
+```
+
+2. If the `docker-users` group doesn't exists yet, open a PowerShell console with *Administrator* privileges and [create it](https://stackoverflow.com/a/64293327) with the following commands:
+
+```powershell
+New-LocalGroup -Name 'docker-users' -Description 'docker Users Group'
+```
+
+3. On a PowerShell console with *Administrator* privileges, add your Windows user to the group (replace `{YOUR_USER_ID}` with your exact Windows username, found by looking at the folder name under `C:\Users\`):
+
+```powershell
+net localgroup docker-users "{YOUR_USER_ID}" /ADD
+```
+
+> **Security Note: Avoid the "Administrator" Workaround**
+>
+> You might find older tutorials or StackOverflow answers (like the one linked above) suggesting you run `Add-LocalGroupMember -Group 'Administrators' -Member ('docker-users')` to fix this issue. Do not do this. Adding the docker-users group to the Windows Administrators group is a severe security risk that grants full system control to anyone in the group.
+>
+> How it actually works: The Docker/Rancher background service runs with elevated privileges and listens for commands via a Windows "Named Pipe" (`//./pipe/docker_engine`). By default, the service is programmed to look for a local group called exactly `docker-users`. If this group exists, the service explicitly allows members of that group to send commands through the pipe.
+>
+> By simply creating the group, adding your user, and logging out/in (which refreshes your Windows security token), the Docker service will securely grant your user access to the pipe without needing to compromise your entire machine's security.
+
+4. Log out of Windows and log back in to apply the group membership changes.
+
+     + Click the Start button;
+     + Click your User Profile Icon;
+     + Select Sign out;
+     + Log back into Windows.
+
+5. Confirm that everything is correct, executing on a [Git Bash](https://git-scm.com/) terminal the following commands:
+
+```bash
+docker info
+docker --version
+kubectl version --client
+```
+
+The [**Rancher Desktop**](https://rancherdesktop.io/) installation and usage files are stored in the following folder:
+
++ `%USERPROFILE%\AppData\Local\rancher-desktop` contains the distribution data, container images, logs, etc;
+
+### 4.8. kubectl
+
+[**kubectl**](https://kubernetes.io/docs/reference/kubectl/) is the command line tool for controlling Kubernetes clusters. It allows you to deploy applications, inspect and manage cluster resources, and view logs.
+
+#### 4.8.1. Installation
+
+##### 4.8.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+Following the [official instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management), install the [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) dependencies with the following commands:
+
+```bash
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl gnupg
+```
+
+Download the public signing key for the [Kubernetes](https://kubernetes.io/) package repositories. The same signing key is used for all repositories so you can disregard the version in the URL:
+
+```bash
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.35/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+```
+
+Add the appropriate Kubernetes apt repository. If you want to use Kubernetes version different than *v1.35*, replace *v1.35* with the desired version (check the [official instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management)) in the command below:
+
+```bash
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.35/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+```
+
+Install [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) with the following command:
+
+```bash
+sudo apt update
+sudo apt install kubectl
+```
+
+Verify the installation:
+
+```bash
+kubectl version --client
+```
+
+> **Note**
+>
+> If you want to prevent [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) from being automatically updated by `apt upgrade`, you can hold the package:
+>
+> ```bash
+> sudo apt-mark hold kubectl
+> ```
+
+> **Note**
+>
+> To upgrade [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) to another minor release, you'll need to bump the version in `/etc/apt/sources.list.d/kubernetes.list` before running `apt update` and `apt-get upgrade`. This procedure is described in more detail in [Changing The Kubernetes Package Repository](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
+
+### 4.9. kubectx
+
+[**kubectx**](https://github.com/ahmetb/kubectx/) is a tool to switch between contexts (clusters) on `kubectl` faster. It also includes`kubens`, which is a tool to switch between Kubernetes namespaces (and configure them for `kubectl`) easily.
+
+#### 4.9.1. Installation
+
+##### 4.9.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**kubectx**](https://github.com/ahmetb/kubectx/) on the `WSL File System`, as recommended on the [official instructions](https://github.com/ahmetb/kubectx/#installation), execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```bash
+sudo apt install kubectx
+```
+
+To verify if the [**kubectx**](https://github.com/ahmetb/kubectx/) installation was properly made, check the output of the following command:
+
+```bash
+kubectx --version
+kubectx --help
+```
+
+##### 4.9.2.1. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**kubectx**](https://github.com/ahmetb/kubectx/) on the `Windows Native File System`, open a PowerShell console and execute the following command:
+
+```powershell
+scoop install main/kubectx
+```
+
+To verify if the [**kubectx**](https://github.com/ahmetb/kubectx/) installation was properly made, check the output of the following command:
+
+```powershell
+kubectx --version
+kubectx --help
+```
+
+### 4.10. K9s
+
+[**K9s**](https://github.com/derailed/k9s) provides a terminal UI to interact with your Kubernetes clusters. The aim of the project is to make it easier to navigate, observe and manage your applications in the wild. [**K9s**](https://github.com/derailed/k9s) continually watches Kubernetes for changes and offers subsequent commands to interact with your observed resources.
+
+#### 4.10.1. Installation
+
+##### 4.10.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**K9s**](https://github.com/derailed/k9s)) on the `WSL File System`, as recommended on the [official instructions](https://github.com/derailed/k9s#installation), execute the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```bash
+wget -P /tmp https://github.com/derailed/k9s/releases/latest/download/k9s_linux_amd64.deb
+sudo apt install /tmp/k9s_linux_amd64.deb
+rm /tmp/k9s_linux_amd64.deb
+```
+
+To verify if the [**K9s**](https://github.com/derailed/k9s) installation was properly made, check the output of the following commands:
+
+```bash
+k9s version
+k9s info
+k9s help
+```
+
+If the command `k9s info` shows a warning/error stating "*ERROR Unable to reads k9s config file*", that's because it was just installed and haven't actually been launched yet. By design, [**K9s**](https://github.com/derailed/k9s) does not create its configuration files or folders during the apt install process. Instead, it generates them dynamically the very first time you start the program. All you need to do is launch [**K9s**](https://github.com/derailed/k9s) once to initialize your environment.
+
+##### 4.10.2.1. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**K9s**](https://github.com/derailed/k9s) on the `Windows Native File System`, open a PowerShell console and execute the following command:
+
+```powershell
+scoop install main/k9s
+```
+
+To verify if the [**K9s**](https://github.com/derailed/k9s) installation was properly made, check the output of the following commands:
+
+```powershell
+k9s version
+k9s info
+k9s help
+```
+
+### 4.11. Java
+
+[**Java**](https://openjdk.org/) is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let programmers write once, run anywhere, meaning that compiled Java code can run on all platforms that support Java without the need to recompile.
+
+#### 4.11.1. Installation
+
+##### 4.11.1.1. Installation the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -75,25 +849,35 @@ The easiest way to install and manage multiple versions of [**Java**](https://op
 
 Following the [official instructions](https://sdkman.io/install), install [SDKMAN](https://sdkman.io/) and the necessary dependencies executing the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal:
 
-    sudo apt update
-    sudo apt install zip unzip
-    curl -s "https://get.sdkman.io" | bash
+```bash
+sudo apt update
+sudo apt install zip unzip
+curl -s "https://get.sdkman.io" | bash
+```
 
 After completing the installation process, open a new terminal or run the following command in the same shell:
 
-    source "$HOME/.sdkman/bin/sdkman-init.sh"
+```bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+```
 
 To confirm the installation's success, execute the following command:
 
-    sdk version
+```bash
+sdk version
+```
 
 To list the available [**Java**](https://openjdk.org/) versions, execute the following command:
 
-    sdk list java
+```bash
+sdk list java
+```
 
 To install a specific version of [**Java**](https://openjdk.org/), replace the **{LABEL}** in the upcoming command as appropriate and then execute it:
 
-    sdk install java {IDENTIFIER}
+```bash
+sdk install java {IDENTIFIER}
+```
 
 > **Label Definition**
 >
@@ -101,7 +885,9 @@ To install a specific version of [**Java**](https://openjdk.org/), replace the *
 
 To set a specific version of [**Java**](https://openjdk.org/) as the default, replace the **{LABEL}** in the upcoming command as appropriate and then execute it:
 
-    sdk default java {IDENTIFIER}
+```bash
+sdk default java {IDENTIFIER}
+```
 
 > **Label Definition**
 >
@@ -109,31 +895,43 @@ To set a specific version of [**Java**](https://openjdk.org/) as the default, re
 
 Restart the *bash* section with the [following command](https://unix.stackexchange.com/a/217907):
 
-    exec "$SHELL"
+```bash
+exec "$SHELL"
+```
 
 To check if the `JAVA_HOME` value was properly set, check the output of the following command:
 
-    echo $JAVA_HOME
+```bash
+echo $JAVA_HOME
+```
 
 To check if the Windows `PATH` value was properly set, check the output of the following command:
 
-    echo $PATH
+```bash
+echo $PATH
+```
 
 To check if [**Java**](https://openjdk.org/) was properly installed, check the output of the following command:
 
-    java -version
+```bash
+java -version
+```
 
 If everything is correct, the above command will output **Java Runtime Environment** version.
 
 Finally, to check if the **Java Compiler** was properly installed, check the output of the following command:
 
-    javac -version
+```bash
+javac -version
+```
 
 If everything is correct, the above command will output the **Java Compiler** version.
 
 When using applications like [Zscaler](https://www.zscaler.com/), it might be necessary to import security certificate to the [**Java**](https://openjdk.org/) Keystore. Do it by replacing the **{LABELS}** in the upcoming command as appropriate and then execute it:
 
-    keytool -importcert -trustcacerts -alias {CERTIFICATE_ALIAS} -file {PATH_TO_DER_CERTIFICATE} -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
+```bash
+keytool -importcert -trustcacerts -alias {CERTIFICATE_ALIAS} -file {PATH_TO_DER_CERTIFICATE} -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
+```
 
 > **Label Definition**
 >
@@ -142,13 +940,15 @@ When using applications like [Zscaler](https://www.zscaler.com/), it might be ne
 
 To confirm that the certificate was added to the JRE keystore, replace the **{LABELS}** in the upcoming command as appropriate and then execute it:
 
-    keytool -v -list -keystore $JAVA_HOME/lib/security/cacerts -alias {CERTIFICATE_ALIAS} -storepass changeit -noprompt
+```bash
+keytool -v -list -keystore $JAVA_HOME/lib/security/cacerts -alias {CERTIFICATE_ALIAS} -storepass changeit -noprompt
+```
 
 > **Label Definition**
 >
 > + **{CERTIFICATE_ALIAS}** : The chosen certificate alias
 
-##### 4.3.1.2. Installation on the Windows Native File System
+##### 4.11.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -156,7 +956,9 @@ The instructions shown here describe how to manually install [**Java**](https://
 
 Start by creating the folder where [**Java**](https://openjdk.org/) will be installed, executing, on a **Git Bash** terminal the following commands:
 
-    mkdir -p /c/dev/java/candidates
+```bash
+mkdir -p /c/dev/java/candidates
+```
 
 Download the *.zip* option of the desired [JDK version and vendor](https://javaalmanac.io/). Then, unpack it to a folder inside `C:\dev\java\candidates`. Rename the extracted folder taking in consideration the following structure:
 
@@ -174,19 +976,25 @@ To have more control over [**Java**](https://openjdk.org/) versions and updates,
 
 With **Developer Mode** enabled, replace the **{LABEL}** in the upcoming command as appropriate and then execute it, on a Windows Command Prompt, to create a symbolic link named `current` that targets the the desired [**Java**](https://openjdk.org/) candidate folder:
 
-    mklink /J C:\dev\java\candidates\{JAVA_CANDIDATE} C:\dev\java\current
+```cmd
+mklink /J C:\dev\java\candidates\{JAVA_CANDIDATE} C:\dev\java\current
+```
 
 > + **{JAVA_CANDIDATE}** : The folder's name that contains the desired Java candidate, e.g. *oracle-jdk1.8.0.231-sa3*
 
 Check the output of the upcoming commands to confirm that the the symlink was created as desired:
 
-    dir C:\dev\java\candidates\
-    dir C:\dev\java\candidates\current
+```cmd
+dir C:\dev\java\candidates\
+dir C:\dev\java\candidates\current\
+```
 
 Later if you want to upgrade and/or change the [**Java**](https://openjdk.org/) version in use, you can simply unpack the newer version and change the symlink to point to the latest version.
 
-    del C:\dev\java\candidates\current
-    mklink /J C:\dev\java\candidates\{JAVA_CANDIDATE} C:\dev\java\current
+```cmd
+del C:\dev\java\candidates\current
+mklink /J C:\dev\java\candidates\{JAVA_CANDIDATE} C:\dev\java\current
+```
 
 To set `JAVA_HOME` as environment variable for the current *user account*, press `WIN + R`, type `rundll32.exe sysdm.cpl,EditEnvironmentVariables` and then press `Enter`.
 
@@ -194,33 +1002,43 @@ On the ***User variables*** section, click the **New** button and fill the *Vari
 
 Still on the ***User variables*** section, select the `Path` variable and click the **Edit** button. Then, click the **New** button and fill the input box with the following value:
 
-    %JAVA_HOME%\bin
+  %JAVA_HOME%\bin
 
 Click the **OK** button to close the window used to edit the `PATH` variable and then click the **OK** button on the *environment variables* window to close it.
 
 To check if the Windows `JAVA_HOME` value was properly set, open a Windows Command Prompt and check the output of the following command:
 
-    echo %JAVA_HOME%
+```cmd
+echo %JAVA_HOME%
+```
 
 To check if the Windows `PATH` value was properly set, on the same Windows Command Prompt, check the output of the following command:
 
-    echo %PATH%
+```cmd
+echo %PATH%
+```
 
 To check if [**Java**](https://openjdk.org/) was properly installed, on the same Windows Command Prompt, check the output of the following command:
 
-    java -version
+```cmd
+java -version
+```
 
 If everything is correct, the above command will output **Java Runtime Environment** version.
 
 Finally, to check if the **Java Compiler** was properly installed, on the same Windows Command Prompt, check the output of the following command:
 
-    javac -version
+```cmd
+javac -version
+```
 
 If everything is correct, the above command will output the **Java Compiler** version.
 
 When using applications like [Zscaler](https://www.zscaler.com/), it might be necessary to import security certificate to the [**Java**](https://openjdk.org/) Keystore. On a **Git Bash** terminal, replace the **{LABELS}** in the upcoming command as appropriate and then execute it:
 
-    keytool -importcert -trustcacerts -alias {CERTIFICATE_ALIAS} -file {PATH_TO_DER_CERTIFICATE} -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
+```bash
+keytool -importcert -trustcacerts -alias {CERTIFICATE_ALIAS} -file {PATH_TO_DER_CERTIFICATE} -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
+```
 
 > **Label Definition**
 >
@@ -229,19 +1047,21 @@ When using applications like [Zscaler](https://www.zscaler.com/), it might be ne
 
 To confirm that the certificate was added to the JRE keystore, replace the **{LABELS}** in the upcoming command as appropriate and then execute it:
 
-    keytool -v -list -keystore $JAVA_HOME/lib/security/cacerts -alias {CERTIFICATE_ALIAS} -storepass changeit -noprompt
+```bash
+keytool -v -list -keystore $JAVA_HOME/lib/security/cacerts -alias {CERTIFICATE_ALIAS} -storepass changeit -noprompt
+```
 
 > **Label Definition**
 >
 > + **{CERTIFICATE_ALIAS}** : The chosen certificate alias
 
-### 4.4. Apache Maven
+### 4.12. Apache Maven
 
 [**Apache Maven**](https://maven.apache.org/) is a build automation tool used primarily for Java projects. It can also be used to build and manage projects written in C#, Ruby, Scala, and other languages and it is hosted by the [Apache Software Foundation](https://en.wikipedia.org/wiki/Apache_Software_Foundation).
 
-#### 4.4.1. Installation
+#### 4.12.1. Installation
 
-##### 4.4.1.1. Installation on the WSL File System
+##### 4.12.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -249,16 +1069,22 @@ To be able to install a specific [**Apache Maven**](https://maven.apache.org/) v
 
 Start by creating the folder where [**Apache Maven**](https://maven.apache.org/) will be installed, executing the following commands:
 
-    sudo mkdir -p /opt/maven/candidates
-    sudo chown -R $USER:$USER /opt/maven/
+```bash
+sudo mkdir -p /opt/maven/candidates
+sudo chown -R $USER:$USER /opt/maven/
+```
 
 Check the output of the upcoming command to confirm that the folder was created as desired:
 
-    ls -la --group-directories-first /opt
+```bash
+ls -la --group-directories-first /opt
+```
 
 To download the desired [**Apache Maven**](https://maven.apache.org/) version in the `/tmp` directory, replace the **{LABEL}** in the upcoming command as appropriate and then execute it:
 
-    wget {DOWNLOAD_LINK} -P /tmp
+```bash
+wget {DOWNLOAD_LINK} -P /tmp
+```
 
 > **Label Definition**
 >
@@ -266,15 +1092,21 @@ To download the desired [**Apache Maven**](https://maven.apache.org/) version in
 
 Once the download is completed, extract the archive in the `/opt/candidates` directory with the following command:
 
-    tar xf /tmp/apache-maven-*.tar.gz -C /opt/maven/candidates/
+```bash
+tar xf /tmp/apache-maven-*.tar.gz -C /opt/maven/candidates/
+```
 
 Check the output of the upcoming command to confirm that the folder was created as desired:
 
-    ls -la --group-directories-first /opt/maven/candidates
+```bash
+ls -la --group-directories-first /opt/maven/candidates
+```
 
 Then, rename the extracted folder taking in consideration the following structure:
 
-    apache-maven-{VERSION}-{PROJECT}
+```bash
+apache-maven-{VERSION}-{PROJECT}
+```
 
 The different parts in the above name structure, shall be replaced as explained next:
 
@@ -285,54 +1117,72 @@ The different parts in the above name structure, shall be replaced as explained 
 
 Check the output of the upcoming command to confirm that the folder was renamed as desired:
 
-    ls -la --group-directories-first /opt/maven/candidates
+```bash
+ls -la --group-directories-first /opt/maven/candidates
+```
 
 To have more control over [**Apache Maven**](https://maven.apache.org/) versions and updates, replace the **{LABEL}** in the upcoming command as appropriate and then execute it to create a symbolic link `current` that will point to the [**Apache Maven**](https://maven.apache.org/) installation folder:
 
-    ln -s /opt/maven/candidates/{MAVEN_FOLDER} /opt/maven/current
+```bash
+ln -s /opt/maven/candidates/{MAVEN_FOLDER} /opt/maven/current
+```
 
 > + **{MAVEN_FOLDER}** : The folder's name that contains the desired version, e.g. *apache-maven-3.8.6-sa3*
 
 Check the output of the upcoming commands to confirm that the the symlink was created as desired:
 
-    ls -la --group-directories-first /opt/maven/
-    ls -la --group-directories-first /opt/maven/current/
+```bash
+ls -la --group-directories-first /opt/maven/
+ls -la --group-directories-first /opt/maven/current/
+```
 
 Later if you want to upgrade your [**Apache Maven**](https://maven.apache.org/) installation you can simply unpack the newer version and change the symlink to point to the latest version.
 
 To set the `MAVEN_HOME` environment variable for your [WSL](https://learn.microsoft.com/windows/wsl/) user, open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/), executing the below command on a [Ubuntu](https://ubuntu.com/) terminal.
 
-    nano ~/.bashrc
+```bash
+nano ~/.bashrc
+```
 
 Then, add the upcoming snippet to the `~/.bashrc` immediately before sourcing the file to customize the bash prompt.
 
-    # User's environment variables
-    export MAVEN_HOME=/opt/maven/current
+```bash
+# User's environment variables
+export MAVEN_HOME=/opt/maven/current
 
-    # User's path customization
-    export PATH=${MAVEN_HOME}/bin:${PATH}
+# User's path customization
+export PATH=${MAVEN_HOME}/bin:${PATH}
+```
 
 Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
 
 To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
 
-    source ~/.bashrc
+```bash
+source ~/.bashrc
+```
 
 To check if the `MAVEN_HOME` environment variable was properly set, check the output of the following command:
 
-    echo $MAVEN_HOME
+```bash
+echo $MAVEN_HOME
+```
 
 To check if the users's `PATH` was properly set, check the output of the following command:
 
-    echo $PATH
+```bash
+echo $PATH
+```
 
 To check if **Apache Maven** was properly installed, check the output of the following command:
 
-    mvn -version
+```bash
+mvn -version
+```
 
 If everything is correct, the above command will output the **Apache Maven** version.
 
-##### 4.4.1.2. Installation on the Windows Native File System
+##### 4.12.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -351,19 +1201,25 @@ To have more control over [**Apache Maven**](https://maven.apache.org/) versions
 
 With **Developer Mode** enabled, replace the **{LABEL}** in the upcoming command as appropriate and then execute it, on a Windows Command Prompt, to create a symbolic link named `current` that targets the the desired [**Apache Maven**](https://maven.apache.org/) candidate folder:
 
-    mklink /J C:\dev\maven\candidates\{MAVEN_CANDIDATE} C:\dev\maven\current
+```cmd
+mklink /J C:\dev\maven\candidates\{MAVEN_CANDIDATE} C:\dev\maven\current
+```
 
 > + **{MAVEN_CANDIDATE}** : The folder's name that contains the desired Maven candidate, e.g. *apache-maven-3.8.6-sa3*
 
 Check the output of the upcoming commands to confirm that the the symlink was created as desired:
 
-    dir C:\dev\maven\candidates\
-    dir C:\dev\maven\candidates\current
+```cmd
+dir C:\dev\maven\candidates\
+dir C:\dev\maven\candidates\current\
+```
 
 Later if you want to upgrade and/or change the [**Apache Maven**](https://maven.apache.org/) version in use, you can simply unpack the newer version and change the symlink to point to the desired candidate.
 
-    del C:\dev\maven\candidates\current
-    mklink /J C:\dev\maven\candidates\{MAVEN_CANDIDATE} C:\dev\maven\current
+```cmd
+del C:\dev\maven\candidates\current
+mklink /J C:\dev\maven\candidates\{MAVEN_CANDIDATE} C:\dev\maven\current
+```
 
 To set the `MAVEN_HOME` environment variable for the current *user account*, press `WIN + R`, type `rundll32.exe sysdm.cpl,EditEnvironmentVariables` and then press `Enter`.
 
@@ -377,27 +1233,37 @@ Click the **OK** button to close the window used to edit the `PATH` variable and
 
 To check if the Windows `MAVEN_HOME` value was properly set, open a Windows Command Prompt and check the output of the following command:
 
-    echo %MAVEN_HOME%
+```cmd
+echo %MAVEN_HOME%
+```
 
 To check if the Windows `PATH` value was properly set, on the same Windows Command Prompt, check the output of the following command:
 
-    echo %PATH%
+```cmd
+echo %PATH%
+```
 
 To check if **Apache Maven** was properly installed, on the same Windows Command Prompt, check the output of the following command:
 
-    mvn -version
+```cmd
+mvn -version
+```
 
 If everything is correct, the above command will output the **Apache Maven** version.
 
-#### 4.4.2. Configuration
+#### 4.12.2. Configuration
 
-The default location for the user's settings file and for the *Maven Local Repository* is the `.m2` folder at the user's *Home Folder*. Check it it already exists and if it doesn't create it with the upcoming command. If [**Apache Maven**](https://maven.apache.org/) is installed on the `WSL File System`, use a [Ubuntu](https://ubuntu.com/) terminal and if it is installed on the `Windows Native File System`. use a  [Git Bash](https://git-scm.com/) terminal.
+The default location for the user's settings file and for the *Maven Local Repository* is the `.m2` folder at the user's *Home Folder*. Check it it already exists and if it doesn't create it with the upcoming command. If [**Apache Maven**](https://maven.apache.org/) is installed on the `WSL File System`, use a [Ubuntu](https://ubuntu.com/) terminal and if it is installed on the `Windows Native File System` use a  [Git Bash](https://git-scm.com/) terminal.
 
-    mkdir -p ~/.m2
+```bash
+mkdir -p ~/.m2
+```
 
-The development environment will better contained if a *Maven Local Repository* is set for each project. Therefore, replace the **{LABEL}** in the upcoming command as appropriate and execute it. If [**Apache Maven**](https://maven.apache.org/) is installed on the `WSL File System`, use a [Ubuntu](https://ubuntu.com/) terminal and if it is installed on the `Windows Native File System`. use a [Git Bash](https://git-scm.com/) terminal.
+The development environment will better contained if a *Maven Local Repository* is set for each project. Therefore, replace the **{LABEL}** in the upcoming command as appropriate and execute it. If [**Apache Maven**](https://maven.apache.org/) is installed on the `WSL File System`, use a [Ubuntu](https://ubuntu.com/) terminal and if it is installed on the `Windows Native File System` use a [Git Bash](https://git-scm.com/) terminal.
 
-    mkdir -p ~/.m2/repository-{PROJECT}
+```bash
+mkdir -p ~/.m2/repository-{PROJECT}
+```
 
 > **Label Definition**
 >
@@ -411,7 +1277,7 @@ To set the folder created with the above command as the custom location for the 
 >
 > + **{PROJECT}** : The label that identifies the project name
 
-#### 4.4.3. Usage & Maintenance
+#### 4.12.11. Usage & Maintenance
 
 To maintain a transparent development environment, each project version uses a dedicated settings file. These are linked to the default Maven location (`~/.m2/settings.xml`) using **Symbolic Links** (Windows Developer mode must be enabled). This allows IDEs and the CLI to work without additional flags or admin permissions, while providing a clear visual indication of which configuration is currently active.
 
@@ -436,18 +1302,27 @@ If a project requires no specific configuration, create an "empty" settings file
 </settings>
 ```
 
-To switch to a different project or update to a new version, you must first delete the existing link and then create the new one. Replace the placeholders in the below command as necessary and then execute it on a Windows Command Prompt console to create/update the `~/.m2/settings.xml` symbolic link.
+To switch to a different project or update to a new version, you must first delete the existing `~/.m2/settings.xml` symlink and then create the new one. If [**Apache Maven**](https://maven.apache.org/) is installed on the `WSL File System`, replace the placeholders in the below command as necessary and then execute it on a [Ubuntu](https://ubuntu.com/) terminal to get it done.
 
-    del %USERPROFILE%\.m2\settings.xml
-    mklink %USERPROFILE%\.m2\settings.xml %USERPROFILE%\.m2\settings-{PROJECT}-{DATE}.xml
+```bash
+rm ~/.m2/settings.xml
+ln ~/.m2/settings-{PROJECT}-{DATE}.xml ~/.m2/settings.xml
+```
 
-### 4.5. Apache Tomcat
+When [**Apache Maven**](https://maven.apache.org/) is installed on the `Windows Native File System`, to delete the existing `~/.m2/settings.xml` symlink and then create the new one when switching to a different project or update to a new version, replace the placeholders in the below command as necessary and then execute it on a Windows Command Prompt.
+
+```cmd
+del %USERPROFILE%\.m2\settings.xml
+mklink %USERPROFILE%\.m2\settings.xml %USERPROFILE%\.m2\settings-{PROJECT}-{DATE}.xml
+```
+
+### 4.13. Apache Tomcat
 
 [**Apache Tomcat**](http://tomcat.apache.org/) is an open source implementation of the [Jakarta Servlet](https://projects.eclipse.org/projects/ee4j.servlet), [Jakarta Server Pages](https://projects.eclipse.org/projects/ee4j.jsp), [Jakarta Expression Language](https://projects.eclipse.org/projects/ee4j.el), [Jakarta WebSocket](https://projects.eclipse.org/projects/ee4j.websocket), [Jakarta Annotations](https://projects.eclipse.org/projects/ee4j.cahttps://projects.eclipse.org/projects/ee4j.authentication) specifications. These specifications are part of the [Jakarta EE platform](https://projects.eclipse.org/projects/ee4j.jakartaee-platform).
 
-#### 4.5.1. Installation
+#### 4.13.1. Installation
 
-##### 4.5.1.1. Installation on the Windows Native File System
+##### 4.13.1.1. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -462,693 +1337,9 @@ The different parts in the above name structure, shall be replaced as explained 
 >
 > With the above examples, the Tomcat folder name would be *tomcat-8.5.82-sa3*
 
-### 4.6. Command Line Fuzzy Finder
-
-The [**Command-line Fuzzy Finder | fzf**](https://github.com/junegunn/fzf) is a general-purpose command-line fuzzy finder. It's an interactive filter program for any kind of list; files, command history, processes, hostnames, bookmarks, git commits, etc. It implements a "fuzzy" matching algorithm, so you can quickly type in patterns with omitted characters and still get the results you want.
-
-#### 4.6.1. Installation
-
-##### 4.6.1.1. Installation on the WSL File System
-
-![WSL](https://img.shields.io/badge/WSL-purple)
-
-To install [**Command-line Fuzzy Finder | fzf**](https://github.com/junegunn/fzf) on the `WSL File System`, as recommended on the [official instructions](https://github.com/junegunn/fzf#linux-packages), execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
-
-```sh
-sudo apt install fzf
-```
-
-To verify if the [**fzf**](https://github.com/junegunn/fzf) installation was properly made, check the output of the following command:
-
-```sh
-fzf --version
-fzf --help
-```
-
-Check the output of the previous command `fzf --help` to verify if the installed version supports [shell integration](https://github.com/junegunn/fzf#setting-up-shell-integration) and if it does, open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/) and execute the following command:
-
-```sh
-nano ~/.bashrc
-```
-
-Then, add the upcoming snippet to the `~/.bashrc` file.
-
-```sh
-# Set up fzf key bindings and fuzzy completion
-eval "$(fzf --bash)"
-```
-
-Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
-
-To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
-
-```sh
-source ~/.bashrc
-```
-
-##### 4.6.2.1. Installation on the Windows Native File System
-
-![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
-
-To install [**fzf**](https://github.com/junegunn/fzf), open a PowerShell console and execute the following command:
-
-    scoop install main/fzf
-
-To verify if the [**fzf**](https://github.com/junegunn/fzf) installation was properly made, check the output of the following command:
-
-    fzf --version
-    fzf --help
-
-To set up shell integration with [Git Bash](https://git-scm.com/), open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/), executing the below command on a [Git Bash](https://git-scm.com/) terminal.
-
-    nano ~/.bashrc
-
-Then, add the upcoming snippet to the `~/.bashrc` file.
-
-```bash
-# Set up fzf key bindings and fuzzy completion
-eval "$(fzf --bash)"
-```
-
-Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
-
-To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
-
-    source ~/.bashrc
-
-### 4.7. Quarkus CLI
+### 4.14. Quarkus CLI
 
 The [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) lets you create Quarkus projects, manage extensions and do essential build and development tasks using the underlying project build tool.
-
-#### 4.7.1. Installation
-
-##### 4.7.1.1. Installation on the WSL File System
-
-![WSL](https://img.shields.io/badge/WSL-purple)
-
-To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) on the `WSL File System`, as recommended on the [Quarkus documentation](https://quarkus.io/guides/cli-tooling), use [SDKMAN](https://sdkman.io/), execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
-
-    sdk install quarkus
-
-To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) installation was properly made, check the output of the following command:
-
-    quarkus --version
-
-##### 4.7.1.2. Installation on the Windows Native File System
-
-![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
-
-To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling), open a PowerShell console and execute the following command:
-
-    scoop install main/quarkus-cli
-
-To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) installation was properly made, check the output of the following command:
-
-    quarkus --version
-
-### 4.8. AWS CLI
-
-The [**AWS Command Line Interface (AWS CLI)**](https://aws.amazon.com/cli/) is a unified tool to manage your AWS services. With just one tool to download and configure, you can control multiple AWS services from the command line and automate them through scripts.
-
-#### 4.8.1. Installation
-
-##### 4.8.1.1. Installation on the WSL File System
-
-![WSL](https://img.shields.io/badge/WSL-purple)
-
-To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `WSL File System`, take in consideration Linux's [AWS official instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and execute the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
-
-    curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscliv2.zip
-    unzip /tmp/awscliv2.zip -d /tmp/
-    sudo /tmp/aws/install
-
-To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was properly made, check the output of the following command:
-
-    aws --version
-
-If the `aws` command cannot be found, you might need to restart your terminal or follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
-
-[AWS](https://aws.amazon.com/) also provides a [Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) that "enables you to establish secure connections to your Amazon Elastic Compute Cloud (EC2) instances, edge devices, on-premises servers, and virtual machines (VMs)". Follow the Debian and Ubuntu [official instructions](https://docs.aws.amazon.com/systems-manager/latest/userguide/install-plugin-debian-and-ubuntu.html) to install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `WSL File System` and download the `.deb` package executing the following command:
-
-    curl https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb -o /tmp/session-manager-plugin.deb
-
-To install the downloaded `.deb` package executing the following command:
-
-    sudo dpkg -i /tmp/session-manager-plugin.deb
-
-Run the following commands to verify that the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installed successfully.
-
-    session-manager-plugin
-
-If the installation was successful, the following message is returned.
-
-    The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
-
-##### 4.8.1.2. Installation on the Windows Native File System
-
-![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
-
-To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `Windows Native File System`, open a PowerShell console and execute the following command:
-
-    scoop install main/aws
-
-To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was properly made, check the output of the following command:
-
-    aws --version
-
-If there's ant problem using the [**AWS CLI**](https://aws.amazon.com/cli/), follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
-
-To install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `Windows Native File System`, open a PowerShell console and execute the following commands:
-
-    scoop bucket add extras
-    scoop install extras/aws-session-manager-plugin
-
-Run the following commands to verify that the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installed successfully.
-
-    session-manager-plugin
-
-If the installation was successful, the following message is returned.
-
-    The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
-
-### 4.9. Granted
-
-[**Granted**](https://github.com/fwdcloudsec/granted) is a command line interface (CLI) application which simplifies access to cloud roles and allows multiple cloud accounts to be opened in your web browser simultaneously.
-
-#### 4.9.1. Installation
-
-##### 4.9.1.1. Installation on the WSL File System
-
-![WSL](https://img.shields.io/badge/WSL-purple)
-
-To install [**Granted**](https://github.com/fwdcloudsec/granted) on the `WSL File System`, take in consideration the [official Linux (APT) instructions](https://docs.commonfate.io/granted/getting-started) and execute the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
-
-```sh
-sudo apt update
-sudo apt install gpg wget ca-certificates
-wget -O- https://apt.releases.commonfate.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/common-fate-linux.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/common-fate-linux.gpg] https://apt.releases.commonfate.io stable main" | sudo tee /etc/apt/sources.list.d/common-fate.list
-sudo apt update
-sudo apt install granted
-```
-
-To verify if the [**Granted**](https://github.com/fwdcloudsec/granted) installation was properly made, check the output of the following command:
-
-```sh
-granted --version
-granted --help
-```
-
-To pin [**Granted**](https://github.com/fwdcloudsec/granted) backend to `file` execute the following commands:
-
-```sh
-mkdir -p ~/.granted/keyring
-chmod 700 ~/.granted ~/.granted/keyring
-granted settings set --setting Keyring.Backend --value file
-granted settings set --setting Keyring.FileDir --value "${HOME}/.granted/keyring"
-```
-To set the browser opener unified to Windows default browser via the `XDG-OPEN` wrapper, execute the following commands:
-
-```sh
-granted settings set --setting DefaultBrowser --value CUSTOM
-granted settings set --setting CustomBrowserPath --value "${HOME}/.local/bin/xdg-open"
-granted settings set --setting CustomSSOBrowserPath --value "${HOME}/.local/bin/xdg-open"
-```
-
-This makes [**Granted**](https://github.com/fwdcloudsec/granted) write SSO tokens to AWS’s standard cache location (`~/.aws/sso/cache`), which AWS CLI v2 reads, execute the following command:
-
-```sh
-granted settings set --setting ExportSSOToken --value true
-```
-
-To set up [**Granted**](https://github.com/fwdcloudsec/granted) shell alias, open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/), executing the following command:
-
-```sh
-nano ~/.bashrc
-```
-
-Then, add the upcoming snippet to the `~/.bashrc` file.
-
-```sh
-# Set Granted shell alias
-#
-# + https://docs.commonfate.io/granted/internals/shell-alias
-# + https://docs.commonfate.io/granted/troubleshooting#manually-configuring-your-shell-profile
-alias assume="source assume"
-```
-
-Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
-
-```sh
-source ~/.bashrc
-```
-
-Now, after running `assume <profile>`, you can run AWS CLI commands without `--profile` because the AWS environment variables are set in your current shell session. To confirm that `assume` is executed as expected, execute `assume <profile>` and then check the output of the following command:
-
-    aws configure list
-
-##### 4.9.2.1. Installation on the Windows Native File System
-
-![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
-
-To install [**Granted**](https://github.com/fwdcloudsec/granted) on the `Windows Native File System`, open a PowerShell console and execute the following command:
-
-```powershell
-scoop install main/granted
-```
-
-To verify if the [**Granted**](https://github.com/fwdcloudsec/granted) installation was properly made, check the output of the following command:
-
-```powershell
-granted --version
-granted --help
-```
-
-To pin [**Granted**](https://github.com/fwdcloudsec/granted) backend to `file` execute, on a [Git Bash](https://git-scm.com/) terminal, the following commands:
-
-```sh
-mkdir -p ~/.granted/keyring
-chmod 700 ~/.granted ~/.granted/keyring
-granted settings set --setting Keyring.Backend --value file
-granted settings set --setting Keyring.FileDir --value "${HOME}/.granted/keyring"
-```
-To set the browser opener unified to Windows default browser via the `XDG-OPEN` wrapper, execute, on a [Git Bash](https://git-scm.com/) terminal, the following commands:
-
-```sh
-granted settings set --setting DefaultBrowser --value CUSTOM
-granted settings set --setting CustomBrowserPath --value "${HOME}/.local/bin/xdg-open"
-granted settings set --setting CustomSSOBrowserPath --value "${HOME}/.local/bin/xdg-open"
-```
-
-This makes [**Granted**](https://github.com/fwdcloudsec/granted) write SSO tokens to AWS’s standard cache location (`~/.aws/sso/cache`), which AWS CLI v2 reads, execute, on a [Git Bash](https://git-scm.com/) terminal, the following command:
-
-```sh
-granted settings set --setting ExportSSOToken --value true
-```
-
-To make `assume` behave in [Git Bash](https://git-scm.com/) like it does in PowerShell (i.e., set AWS environment variables in the current shell), add the following function to your `~/.bashrc`:
-
-```sh
-# Use Granted's bash wrapper so AWS_* variables persist in this bash session
-assume() {
-    local granted_folder="$HOME/scoop/apps/granted/current"
-
-    # Temporarily add Granted's install folder to PATH so the bash wrapper can find `assumego.exe`
-    # and source the Granted’s bash script so exports persist in the current shell.
-    PATH="$granted_folder:$PATH" \
-        . "$granted_folder/assume" "$@"
-}
-```
-
-To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
-
-```sh
-source ~/.bashrc
-```
-
-Now, after running `assume <profile>`, you can run AWS CLI commands without `--profile` because the AWS environment variables are set in your current [Git Bash](https://git-scm.com/) session. To confirm that `assume` is executed as expected, execute `assume <profile>` and then check the output of the following command:
-
-```sh
-aws configure list
-```
-
-### 4.10. Make
-
-[**GNU Make**](https://www.gnu.org/software/make/) is a tool which controls the generation of executables and other non-source files of a program from the program's source files.
-
-#### 4.10.1. Installation
-
-##### 4.10.1.1. Installation on the WSL File System
-
-![WSL](https://img.shields.io/badge/WSL-purple)
-
-To install [**GNU Make**](https://www.gnu.org/software/make/) on the `WSL File System`, execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
-
-    sudo apt install make
-
-To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation was properly made, check the output of the following command:
-
-    make --version
-
-##### 4.10.1.1. Installation on the Windows Native File System
-
-![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
-
-To install [**GNU Make**](https://www.gnu.org/software/make/), open a PowerShell console and execute the following command:
-
-    scoop install main/make
-
-To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation was properly made, check the output of the following command:
-
-    make --version
-
-### 4.11. Docker
-
-[**Docker**](https://www.docker.com/) is an open-source containerization platform. It enables developers to package applications into containers, which are standardized, executable components combining application source code with the operating system libraries and dependencies required to run that code in any environment.
-
-[**Docker**](https://www.docker.com/) updated its [Docker Desktop License Agreement](https://docs.docker.com/subscription/?ref=paulsblog.dev#docker-desktop-license-agreement) and this change means that on companies with more than 250 employees or more than $10 million in annual revenue you will not be able to use [Docker Desktop](https://www.docker.com/products/docker-desktop/) without a paid subscription. A possible alternative is [Rancher Desktop](https://rancherdesktop.io/) but, as the license update is only related to [Docker Desktop](https://www.docker.com/products/docker-desktop/), it's also possible to utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
-
-If you're going to do your development work on the Windows native file system, you should choose [Rancher Desktop](https://rancherdesktop.io/) to replace [Docker Desktop](https://www.docker.com/products/docker-desktop/). But if you're planning to do all you development work on the [WSL](https://learn.microsoft.com/windows/wsl/) file system (taking advantage of the Linux tools), you should utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
-
-#### 4.11.1. Pre-Installation requirements
-
-To avoid future conflicts between the ports reserved by ***Hyper-V*** and the ports used by the [**Docker**](https://www.docker.com/) containers, you should [reset the "*TCP Dynamic Port Range*"](https://medium.com/@sevenall/completely-solve-the-problem-of-docker-containers-not-starting-or-running-on-windows-10-due-to-port-57f16ed6143). That is achieved executing the upcoming commands from a PowerShell console with *Administrator* privileges:
-
-    netsh int ipv4 set dynamic tcp start=49152 num=16384
-    netsh int ipv6 set dynamic tcp start=49152 num=16384
-
-Following the execution of the above commands, reboot the computer to apply the changes made.
-
-After restarting the computer, check the output of the following command:
-
-    netsh int ipv4 show dynamicport tcp
-
-The above command should now show that "*TCP Dynamic Port Range*" has been changed to 49152–65535. Now only the ports in this range may be reserved by ***Hyper-V***.
-
-#### 4.11.2. Installation
-
-##### 4.11.2.1. Installation on the WSL File System
-
-![WSL](https://img.shields.io/badge/WSL-purple)
-
-This section describes the necessary steps to install [**Docker**](https://www.docker.com/) and [Docker Engine](https://docs.docker.com/engine/) on a [WSL](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) distribution. The following steps are based on the [official documentation for installing Docker on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) with some adaptations provided by [Paul Knulst](https://www.paulsblog.dev/how-to-install-docker-without-docker-desktop-on-windows/).
-
-As per [**Docker**](https://www.docker.com/) [documentation](https://docs.docker.com/engine/install/ubuntu/#uninstall-old-versions), before you can install Docker Engine, you need to uninstall any conflicting packages. Do it executing the following command:
-
-```sh
-sudo apt remove docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc
-sudo apt autoremove
-```
-
-On your [Ubuntu](https://ubuntu.com/) submodule of [WSL](https://learn.microsoft.com/windows/wsl/), install the required dependencies with the following commands:
-
-```sh
-sudo apt update
-sudo apt install ca-certificates curl
-```
-
-To add the [**Docker**](https://www.docker.com/) stable repository, execute the following commands:
-
-```sh
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
-Types: deb
-URIs: https://download.docker.com/linux/ubuntu
-Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
-Components: stable
-Architectures: $(dpkg --print-architecture)
-Signed-By: /etc/apt/keyrings/docker.asc
-EOF
-
-sudo apt update
-```
-
-Install the latest version of the [**Docker**](https://www.docker.com/)'s packages with the following command:
-
-```sh
-sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-```
-
-Add you user to the `docker` group with the following command
-
-```sh
-sudo usermod -aG docker $USER
-```
-
-Log out and log back in so that your group membership is re-evaluated, or run the following command to activate the changes to groups:
-
-```sh
-newgrp docker
-```
-
-Check the installed versions using the following commands
-
-```sh
-docker --version
-dockerd --version
-docker compose version
-docker info
-```
-
-On a standard [Ubuntu](https://ubuntu.com/) install, Docker is started by `systemd` automatically after installation. On [WSL](https://learn.microsoft.com/windows/wsl/), this depends on `systemd=true` being enabled (as in `/etc/wsl.conf`) and on the [WSL](https://learn.microsoft.com/windows/wsl/) distro session actually starting `systemd`.
-
-```sh
-sudo systemctl status docker.service
-sudo systemctl status containerd.service
-```
-
-If [**Docker**](https://www.docker.com/) isn’t running, start it manually with the following commands:
-
-```sh
-sudo systemctl start docker
-sudo systemctl enable docker
-```
-
-The default `iptables` frontend on [Ubuntu](https://ubuntu.com/) is usually `iptables-nft`. [**Docker**](https://www.docker.com/) works with `iptables-nft` and `iptables-legacy`, but if you experience Docker networking issues (for example, containers can’t reach the internet, port publishing doesn’t work, or firewall rules look wrong), you can try switching to the legacy backend as a troubleshooting step:
-
-```sh
-sudo update-alternatives --config iptables
-sudo update-alternatives --config ip6tables
-sudo systemctl restart docker.service
-```
-
-Then, verify if everything is running properly by checking the output of the following commands:
-
-```sh
-sudo systemctl status docker.service
-sudo systemctl status containerd.service
-docker run hello-world
-```
-
-When you run `docker login`, [**Docker**](https://www.docker.com/) may use a credential helper to store credentials. On Linux, `secretservice` requires a running DBus session *and* a Secret Service provider (commonly GNOME Keyring or KWallet). On a headless [WSL](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) (no desktop environment), this is often not available, so using [`pass`](https://www.passwordstore.org/) is a practical alternative, which can be installed with the following command:
-
-```sh
-sudo apt install pass
-```
-
-When it's necessary to manage credentials with [**Docker**](https://www.docker.com/), [`pass`](https://www.passwordstore.org/) requires a GPG key to encrypt passwords and it can be created with the following command:
-
-```sh
-gpg --full-generate-key
-```
-
-Following the above command, when prompted, set the following options:
-
-```sh
-Kind of key:    {KEY_TYPE}
-Key expiration: {KEY_EXPIRATION}
-Real name:      {REAL_NAME}
-Email address:  {EMAIL}
-Passphrase:     {PASSPHRASE}
-```
-
-> **Label Definition**
->
-> + **{KEY_TYPE}**: The cryptographic algorithm and usage for your keypair. Recommended for `pass`: `RSA and RSA` (creates a primary key for signing/certifying + a subkey for encryption).
-> + **{KEY_SIZE}**: The size of the RSA key, in bits (security vs performance trade-off). Common choices: `3072` (good default) or `4096` (stronger, slightly slower).
-> + **{KEY_EXPIRATION}**: When the key should expire. Examples: `0` (never expires), `1y` (expires in one year), `2y`, `6m`, etc.  
-> + **{REAL_NAME}**: A human-readable name embedded in the key’s user ID (UID).
-> + **{EMAIL}**: The email address embedded in the key’s UID. It does not have to be “real” for cryptographic purposes, but you should use something you’ll recognize.
-> + **{PASSPHRASE}**: The passphrase that protects your private key on disk, if you forget it, you effectively lose the ability to decrypt previously stored secrets.
-
-After generating the key, you can discover the Key ID with the following command:
-
-```sh
-gpg --list-secret-keys --keyid-format=long
-```
-
-Once the GPG key is created, replace the ***{LABEL}*** in the below command as appropriate and then execute it to initialize [`pass`](https://www.passwordstore.org/) with the GPG identity you want to use:
-
-```sh
-pass init {GPG_IDENTITY}
-```
-
-> **Label Definition**
->
-> + **{GPG_IDENTITY}** : The email used when generating the key, or the key ID
-
-Upon success of the GPG key initialization, edit the [**Docker**](https://www.docker.com/) configuration to use the [`pass`](https://www.passwordstore.org/) credentials helper executing the following commands:
-
-```sh
-mkdir -p ~/.docker
-echo '{
-    "credsStore": "pass"
-}' > ~/.docker/config.json
-```
-
-##### 4.11.2.1. Installation on the Windows Native File System with Rancher Desktop
-
-![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
-
-[**Rancher Desktop**](https://rancherdesktop.io/) is an app that provides container management and Kubernetes on the desktop. It is available for Mac (both on Intel and Apple Silicon), Windows, and Linux.
-
-[**Rancher Desktop**](https://rancherdesktop.io/) installation is only necessary if you're going to do your development work on the Windows Native File System because, if you're going to do all you development work on the [WSL](https://learn.microsoft.com/windows/wsl/) file system, you should utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
-
-[Windows Linux Subsystem (WSL)](https://learn.microsoft.com/en-us/windows/wsl/) is required to run [**Rancher Desktop**](https://rancherdesktop.io/). If it isn't installed, follow the [instructions on this repository](./1-fundamental-software.md#13-windows-subsystem-for-linux) to install it.
-
-To install [**Rancher Desktop**](https://rancherdesktop.io/), take the following steps:
-
-1. **Download:** Get the latest version from the [releases page on GitHub](https://github.com/rancher-sandbox/rancher-desktop/releases) and execute the installer.
-2. **Install:** When prompted, choose *Install for all users of this machine* (accept the elevated permissions prompt).
-3. **Finish:** When the installation is finished, uncheck *Run Rancher Desktop* and click **Finish**.
-4. **Launch:** Start Rancher Desktop from the Windows Start Menu.
-5. **Configure:** On the welcome screen, uncheck `Enable Kubernetes` and select `dockerd` as the Container Engine.
-
-Once the installation is completed, go through [**Rancher Desktop**](https://rancherdesktop.io/) preferences and set it as desired. It is recommended to enable *Automatically start at login* and also *Start in the background*.
-
-To verify that the installation was successful, make sure [**Rancher Desktop**](https://rancherdesktop.io/) is running, then open a new PowerShell console and execute:
-
-    wsl --list --verbose
-
-You should see the [**Rancher Desktop**](https://rancherdesktop.io/) distros running. Next, test if the `docker` command is fully functional for your user:
-
-    docker info
-
-If you see detailed information about the Docker installation, you are done! No further action is necessary.
-
-If `docker info` returns a permission error (e.g., "Access is denied"), your Windows user lacks the privileges to interact with the Docker socket. You will need to add your user to the `docker-users` group and that can be done taking the following steps:
-
-1. On a PowerShell console, check if the group exists and your membership by running:
-
-    ```powershell
-    net localgroup docker-users
-    ```
-
-2. If the `docker-users` group doesn't exists yet, open a PowerShell console with *Administrator* privileges and [create it](https://stackoverflow.com/a/64293327) with the following commands:
-
-    ```powershell
-    New-LocalGroup -Name 'docker-users' -Description 'docker Users Group'
-    ```
-
-3. On a PowerShell console with *Administrator* privileges, add your Windows user to the group (replace `{YOUR_USER_ID}` with your exact Windows username, found by looking at the folder name under `C:\Users\`):
-
-    ```powershell
-    net localgroup docker-users "{YOUR_USER_ID}" /ADD
-    ```
-
-> **Security Note: Avoid the "Administrator" Workaround**
->
-> You might find older tutorials or StackOverflow answers (like the one linked above) suggesting you run `Add-LocalGroupMember -Group 'Administrators' -Member ('docker-users')` to fix this issue. Do not do this. Adding the docker-users group to the Windows Administrators group is a severe security risk that grants full system control to anyone in the group.
->
-> How it actually works: The Docker/Rancher background service runs with elevated privileges and listens for commands via a Windows "Named Pipe" (`//./pipe/docker_engine`). By default, the service is programmed to look for a local group called exactly `docker-users`. If this group exists, the service explicitly allows members of that group to send commands through the pipe.
->
-> By simply creating the group, adding your user, and logging out/in (which refreshes your Windows security token), the Docker service will securely grant your user access to the pipe without needing to compromise your entire machine's security.
-
-4. Log out of Windows and log back in to apply the group membership changes.
-
-     + Click the Start button;
-     + Click your User Profile Icon;
-     + Select Sign out;
-     + Log back into Windows.
-
-5. Confirm that everything is correct, executing on a [Git Bash](https://git-scm.com/) terminal the following commands:
-
-    docker info
-    docker --version
-    kubectl version --client
-
-The [**Rancher Desktop**](https://rancherdesktop.io/) installation and usage files are stored in the following folder:
-
-+ `%USERPROFILE%\AppData\Local\rancher-desktop` contains the distribution data, container images, logs, etc;
-
-### 4.12. kubectl
-
-[**kubectl**](https://kubernetes.io/docs/reference/kubectl/) is the command line tool for controlling Kubernetes clusters. It allows you to deploy applications, inspect and manage cluster resources, and view logs.
-
-#### 4.12.1. Installation
-
-##### 4.12.1.1. Installation on the WSL File System
-
-![WSL](https://img.shields.io/badge/WSL-purple)
-
-Following the [official instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management), install the [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) dependencies with the following commands:
-
-```sh
-sudo apt update
-sudo apt install apt-transport-https ca-certificates curl gnupg
-```
-
-Download the public signing key for the [Kubernetes](https://kubernetes.io/) package repositories. The same signing key is used for all repositories so you can disregard the version in the URL:
-
-```sh
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.35/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-```
-
-Add the appropriate Kubernetes apt repository. If you want to use Kubernetes version different than *v1.35*, replace *v1.35* with the desired version (check the [official instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management)) in the command below:
-
-```sh
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.35/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
-```
-
-Install [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) with the following command:
-
-```sh
-sudo apt update
-sudo apt install kubectl
-```
-
-Verify the installation:
-
-```sh
-kubectl version --client
-```
-
-> **Note**
->
-> If you want to prevent [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) from being automatically updated by `apt upgrade`, you can hold the package:
->
-> ```sh
-> sudo apt-mark hold kubectl
-> ```
-
-> **Note**
->
-> To upgrade [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) to another minor release, you'll need to bump the version in `/etc/apt/sources.list.d/kubernetes.list` before running `apt update` and `apt-get upgrade`. This procedure is described in more detail in [Changing The Kubernetes Package Repository](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
-
-### 4.13. kubectx
-
-[**kubectx**](https://github.com/ahmetb/kubectx/) is a tool to switch between contexts (clusters) on `kubectl` faster. It also includes`kubens`, which is a tool to switch between Kubernetes namespaces (and configure them for `kubectl`) easily.
-
-#### 4.13.1. Installation
-
-##### 4.13.1.1. Installation on the WSL File System
-
-![WSL](https://img.shields.io/badge/WSL-purple)
-
-To install [**kubectx**](https://github.com/ahmetb/kubectx/) on the `WSL File System`, as recommended on the [official instructions](https://github.com/ahmetb/kubectx/#installation), execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
-
-```sh
-sudo apt install kubectx
-```
-
-To verify if the [**kubectx**](https://github.com/ahmetb/kubectx/) installation was properly made, check the output of the following command:
-
-```sh
-kubectx --version
-kubectx --help
-```
-
-##### 4.13.2.1. Installation on the Windows Native File System
-
-![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
-
-To install [**kubectx**](https://github.com/ahmetb/kubectx/) on the `Windows Native File System`, open a PowerShell console and execute the following command:
-
-    scoop install main/kubectx
-
-To verify if the [**kubectx**](https://github.com/ahmetb/kubectx/) installation was properly made, check the output of the following command:
-
-    kubectx --version
-    kubectx --help
-
-### 4.14. K9s
-
-[**K9s**](https://github.com/derailed/k9s) provides a terminal UI to interact with your Kubernetes clusters. The aim of the project is to make it easier to navigate, observe and manage your applications in the wild. [**K9s**](https://github.com/derailed/k9s) continually watches Kubernetes for changes and offers subsequent commands to interact with your observed resources.
 
 #### 4.14.1. Installation
 
@@ -1156,119 +1347,43 @@ To verify if the [**kubectx**](https://github.com/ahmetb/kubectx/) installation 
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-To install [**K9s**](https://github.com/derailed/k9s)) on the `WSL File System`, as recommended on the [official instructions](https://github.com/derailed/k9s#installation), execute the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
+To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) on the `WSL File System`, as recommended on the [Quarkus documentation](https://quarkus.io/guides/cli-tooling), use [SDKMAN](https://sdkman.io/), execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
 
-```sh
-wget -P /tmp https://github.com/derailed/k9s/releases/latest/download/k9s_linux_amd64.deb
-sudo apt install /tmp/k9s_linux_amd64.deb
-rm /tmp/k9s_linux_amd64.deb
+```bash
+sdk install quarkus
 ```
 
-To verify if the [**K9s**](https://github.com/derailed/k9s) installation was properly made, check the output of the following commands:
+To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) installation was properly made, check the output of the following command:
 
-```sh
-k9s version
-k9s info
-k9s help
+```bash
+quarkus --version
 ```
 
-If the command `k9s info` shows a warning/error stating "*ERROR Unable to reads k9s config file*", that's because it was just installed and haven't actually been launched yet. By design, [**K9s**](https://github.com/derailed/k9s) does not create its configuration files or folders during the apt install process. Instead, it generates them dynamically the very first time you start the program. All you need to do is launch [**K9s**](https://github.com/derailed/k9s) once to initialize your environment.
-
-##### 4.14.2.1. Installation on the Windows Native File System
+##### 4.14.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-To install [**K9s**](https://github.com/derailed/k9s) on the `Windows Native File System`, open a PowerShell console and execute the following command:
+To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling), open a PowerShell console and execute the following command:
 
 ```powershell
-scoop install main/k9s
+scoop install main/quarkus-cli
 ```
 
-To verify if the [**K9s**](https://github.com/derailed/k9s) installation was properly made, check the output of the following commands:
+To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) installation was properly made, check the output of the following command:
 
 ```powershell
-k9s version
-k9s info
-k9s help
+quarkus --version
 ```
 
-### 4.15. Terraform
-
-[**Terraform**](https://www.terraform.io/) is a tool for building, changing, and versioning infrastructure safely and efficiently.
-
-#### 4.15.1. Installation
-
-##### 4.15.1.1. Installation on the WSL File System
-
-![WSL](https://img.shields.io/badge/WSL-purple)
-
-The easiest way to install and manage multiple versions of [**Terraform**](https://www.terraform.io/) on the `WSL File System` is to use [TFSwitch](https://tfswitch.warrensbox.com/). This is a command line tool that lets you switch between different versions of [**Terraform**](https://www.terraform.io/).
-
-Create a folder to [store the user's binaries](https://unix.stackexchange.com/a/36874) executing the following command:
-
-    mkdir -p ~/.local/bin
-
-It's necessary that the folder `~/.local/bin` is included on the `PATH` and, on [Ubuntu](https://ubuntu.com/), that is normally done by the `~/.profile` script. Close the terminal and on a new [Ubuntu](https://ubuntu.com/) terminal and then check the output of the following command to confirm that `~/.local/bin` is included on the `PATH`.
-
-    echo $PATH
-
-Following the [official instructions](https://tfswitch.warrensbox.com/Install/), download [TFSwitch](https://tfswitch.warrensbox.com/) installation script to the folder `/tmp` executing the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal:
-
-    wget https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh -P /tmp
-
-Make the [TFSwitch](https://tfswitch.warrensbox.com/) installation script executable with the following command:
-
-    chmod 755 /tmp/install.sh
-
-Install [TFSwitch](https://tfswitch.warrensbox.com/) on the `~/.local/bin` executing the following command:
-
-    /tmp/install.sh -b ~/.local/bin/
-
-To verify if the [TFSwitch](https://tfswitch.warrensbox.com/) installation was properly made, check the output of the following command:
-
-    tfswitch --version
-
-To install a specific [**Terraform**](https://www.terraform.io/) on the `WSL File System`, replace the ***{LABEL}*** in the below command as appropriate and then execute it on a [Ubuntu](https://ubuntu.com/) terminal.
-
-    tfswitch -b ~/.local/bin/terraform {VERSION}
-
-> **Label Definition**
->
-> + **{VERSION}** : The desired [**Terraform**](https://www.terraform.io/) version
-
-To verify if the [**Terraform**](https://www.terraform.io/) installation was properly made, check the output of the following command:
-
-    terraform --version
-
-##### 4.15.1.2. Installation on the Windows Native File System
-
-![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
-
-To install [**Terraform**](https://www.terraform.io/) on the `Windows Native File System`, open a PowerShell console and execute the following command:
-
-    scoop install main/terraform
-
-Using [Scoop](https://scoop.sh/), it's possible to [install a specific version](https://github.com/ScoopInstaller/Scoop/wiki/FAQ#how-do-i-install-a-specific-version-of-an-app) of an app. To do that for [**Terraform**](https://www.terraform.io/), replace the ***{LABEL}*** in the below command as appropriate and then execute it on a PowerShell console.
-
-    scoop install terraform@ {VERSION}
-
-> **Label Definition**
->
-> + **{VERSION}** : The desired [**Terraform**](https://www.terraform.io/) version
-
-To verify if the [**Terraform**](https://www.terraform.io/) installation was properly made, check the output of the following command:
-
-    terraform --version
-
-### 4.16. Node.js
+### 4.15. Node.js
 
 [**Node.js**](https://nodejs.org/) is a cross-platform, open-source JavaScript runtime environment that runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
 
-#### 4.16.1. Installation
+#### 4.15.1. Installation
 
 The most pratical way to install [**Node.js**](https://nodejs.org/) is via a Node version manager because it allows you to easily install and switch between numerous versions of [**Node.js**](https://nodejs.org/). This is useful when a project you’re working on requires a different version of [**Node.js**](https://nodejs.org/) than what you currently have installed.
 
-##### 4.16.1.1. Installation on the WSL File System
+##### 4.15.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -1276,7 +1391,9 @@ The Node version manager that I use on Linux is [`nvm`](https://github.com/nvm-s
 
 Make sure that you have the `build-essentials` package already installed and then, to install [`nvm`](https://github.com/nvm-sh/nvm), replace the **{LABEL}** in the upcoming command as appropriate and execute it from an [Ubuntu](https://ubuntu.com/) terminal.
 
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{VERSION_NUMBER}/install.sh | bash
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{VERSION_NUMBER}/install.sh | bash
+```
 
 > **Label Definition**
 >
@@ -1284,112 +1401,152 @@ Make sure that you have the `build-essentials` package already installed and the
 
 Running the above command downloads a script and runs it. The script clones the [`nvm`](https://github.com/nvm-sh/nvm) repository to `~/.nvm` and adds a code snippet to the end of the `~/.bashrc` file. To add proper context to this new code snippet, start editing the `~/.bashrc` file, execute the following command to be able to edit with the [Nano text editor](https://www.nano-editor.org/).
 
-    nano ~/.bashrc
+```bash
+nano ~/.bashrc
+```
 
 and add the below comments above the mentioned new code snippet.
 
-    # Sets the environment for nvm (Node Version Manager)
+```bash
+# Sets the environment for nvm (Node Version Manager)
+```
 
 After completing the edition of the `.bashrc file`, save and close it. In order for the changes to take effect, run the following command:
 
-    source ~/.bashrc
+```bash
+source ~/.bashrc
+```
 
 To check that [`nvm`](https://github.com/nvm-sh/nvm) is properly installed, run the following command:
 
-    nvm --version
+```bash
+nvm --version
+```
 
 To have a list of default global packages installed with every new version of [**Node.js**](https://nodejs.org/), start editing the file `~/.config/nvm/default-packages` with the below command.
 
-    nano ~/.config/nvm/default-packages
+```bash
+nano ~/.config/nvm/default-packages
+```
 
 and add the desired packages names, one per line, to the file. After completing the edition of the file `~/.config/nvm/default-packages`, save and close it.
 
 To check if the edition of the file was successful, run the following command:
 
-    cat ~/.config/nvm/default-packages
+```bash
+cat ~/.config/nvm/default-packages
+```
 
 To install the latest available LTS version of [**Node.js**](https://nodejs.org/), run the following command:
 
-    nvm install --lts
+```bash
+nvm install --lts
+```
 
 To check if node is correctly installed, run the following command
 
-    node --version
+```bash
+node --version
+```
 
 When [**Node.js**](https://nodejs.org/) is installed, [`npm`](https://www.npmjs.com/) is automatically installed with it. However, according to [`npm`](https://www.npmjs.com/)'s documentation [`npm`](https://www.npmjs.com/) is released more frequently than[**Node.js**](https://nodejs.org/), so to install the latest stable version of [`npm`](https://www.npmjs.com/), run the following command:
 
-    nvm install-latest-npm
+```bash
+nvm install-latest-npm
+```
 
-##### 4.16.1.2. Installation on the Windows Native File System
+##### 4.15.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 My go to Node version manager on on the `Windows Native File System` used to be [NVS](https://github.com/jasongin/nvs) but, it has seen very little activity recently, with the last major release being in 2023. Therefore, I'm now starting to use [fnm (Fast Node Manager)](https://github.com/Schniz/fnm).
 
-###### 4.16.1.2.1. fnm (Fast Node Manager)
+###### 4.15.1.2.1. fnm (Fast Node Manager)
 
 [fnm](https://github.com/Schniz/fnm) can be installed with [scoop](https://scoop.sh/) executing, on PowerShell console, the following command:
 
-    scoop install main/fnm
+```powershell
+scoop install main/fnm
+```
 
 Before you can use [fnm](https://github.com/Schniz/fnm), you have to first set up your shell.
 
 To be able to use [fnm](https://github.com/Schniz/fnm) with Git Bash, edit the `~/.bashrc` file and add the bellow snippet.
 
-    # fnm shel setup
-    eval "$(fnm env --use-on-cd --shell bash --version-file-strategy=recursive)"
+```bash
+# fnm shel setup
+eval "$(fnm env --use-on-cd --shell bash --version-file-strategy=recursive)"
+```
 
 Check out also the [Official Configuration](https://github.com/Schniz/fnm/blob/master/docs/configuration.md) section to enable other highly recommended features.
 
 To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
 
-    source ~/.bashrc
+```bash
+source ~/.bashrc
+```
 
 At this stage, you will probably be prompt to install the default [**Node.js**](https://nodejs.org/) version and you should refuse to install it. To check if [fnm](https://github.com/Schniz/fnm) was properly installed, execute the following commands:
 
-    fnm -V
-    fnm -h
+```bash
+fnm -V
+fnm -h
+```
 
 To install and use the latest [**Node.js**](https://nodejs.org/) LTS version, on Git Bash, execute the following command:
 
-    fnm install --lts
-    fnm use lts-latest
-    fnm list
+```bash
+fnm install --lts
+fnm use lts-latest
+fnm list
+```
 
 To be able to use [fnm](https://github.com/Schniz/fnm) with PowerShell, you will need add the bellow snippet to you profile file.
 
-    # fnm shel setup
-    fnm env --use-on-cd --shell powershell --version-file-strategy=recursive | Out-String | Invoke-Expression
+```powershel
+# fnm shel setup
+fnm env --use-on-cd --shell powershell --version-file-strategy=recursive | Out-String | Invoke-Expression
+```
 
 To create a PowerShell profile, if it doesn't exists yet, execute the below command on a PowerShell console.
 
-    if (-not (Test-Path $profile)) { New-Item $profile -Force }
+```powershell
+if (-not (Test-Path $profile)) { New-Item $profile -Force }
+```
 
 To edit you PowerShell profile, execute, on a PowerShell console, the following command:
 
-    Invoke-Item $profile
+```powershell
+Invoke-Item $profile
+```
 
 To check if [fnm](https://github.com/Schniz/fnm) was properly installed, execute the following commands:
 
-    fnm -V
-    fnm -h
+```powershell
+fnm -V
+fnm -h
+```
 
 To install and use the latest [**Node.js**](https://nodejs.org/) LTS version, on PowerShell, execute the following command:
 
-    fnm install --lts
-    fnm use lts-latest
-    fnm list
+```powershell
+fnm install --lts
+fnm use lts-latest
+fnm list
+```
 
 For an extended usage documentation, check the [official documentation](https://github.com/Schniz/fnm/blob/master/docs/commands.md)
 
 From now on, the latest [**Node.js**](https://nodejs.org/) LTS version will be available on Git Bash and PowerShell. To set up other shells, check the [official documentation](https://github.com/Schniz/fnm?tab=readme-ov-file#shell-setup). To confirm that everything is properly set, check the output of the below commands executed from a from a PowerShell console and from a [Git Bash](https://git-scm.com/) terminal.
 
-    node --version
-    npm --version
+```powershell
+node --version
+npm --version
+```
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-###### 4.16.1.2.2. NVS (Node Version Switcher)
+###### 4.15.1.2.2. NVS (Node Version Switcher)
 
 Although I'm now using [fnm](https://github.com/Schniz/fnm) as my preferred Node Version Manager, I'm keeping here, for historical reference, my guide to install [NVS](https://github.com/jasongin/nvs).
 
@@ -1403,7 +1560,9 @@ Click the **OK** button to close the window used to create the new environment v
 
 To check if the Windows `NVS_HOME` value was properly set, open a Windows Command Prompt and check the output of the following command:
 
-    echo %NVS_HOME%
+```cmd
+echo %NVS_HOME%
+```
 
 On the same Windows Command Prompt, clone the [nvs repository](https://github.com/jasongin/nvs) with the following command:
 
@@ -1411,7 +1570,9 @@ On the same Windows Command Prompt, clone the [nvs repository](https://github.co
 
 Then, on the same Windows Command Prompt, install the application executing the following command:
 
-    "%NVS_HOME%\nvs.cmd" install
+```cmd
+"%NVS_HOME%\nvs.cmd" install
+```
 
 To check if the folder `%LOCALAPPDATA%\nvs` was properly added to the current *user account* path variable, press `WIN + R`, type `rundll32.exe sysdm.cpl,EditEnvironmentVariables` and then press `Enter`.
 
@@ -1421,39 +1582,53 @@ Click the **OK** button to close the window used to edit the `PATH` variable and
 
 To check if [NVS](https://github.com/jasongin/nvs) was properly installed, on the same Windows Command Prompt, check the output of the following command:
 
-    nvs --version
+```cmd
+nvs --version
+```
 
 To be able to use [NVS](https://github.com/jasongin/nvs) with [Git Bash](https://github.com/jasongin/nvs/blob/master/doc/SETUP.md#git-bash-on-windows), open a [Git Bash](https://git-scm.com/) terminal and execute the below command to source the `install` command:
 
-    . "$NVS_HOME/nvs.sh" install
+```bash
+. "$NVS_HOME/nvs.sh" install
+```
 
 The `install` command adds a snippet to the `~/.bashrc` file to source `nvs.sh`, so that the `nvs` function is available in future shells. The `nvs.sh` script adds an `nvs` shell function to the environment.
 
 Edit the `~/.bashrc` file and add the bellow comment above the code added by the `install` command.
 
-    # Adds an nvs shell function to the environment to enable the tool to be invoked as just nvs without any path
+```bash
+# Adds an nvs shell function to the environment to enable the tool to be invoked as just nvs without any path
+```
 
 After adding the above snippet, the new code on the `~/.bashrc` will be similar to the following snippet:
 
-    # Adds an nvs shell function to the environment to enable the tool to be invoked as just nvs without any path
-    function setupNvs {
-            export NVS_HOME="$HOME\AppData\Local\nvs";
-            [ -s "$NVS_HOME/nvs.sh" ] && source "$NVS_HOME/nvs.sh" >> /dev/null;
-            return 0;
-    }
-    setupNvs
+```bash
+# Adds an nvs shell function to the environment to enable the tool to be invoked as just nvs without any path
+function setupNvs {
+    export NVS_HOME="$HOME\AppData\Local\nvs";
+    [ -s "$NVS_HOME/nvs.sh" ] && source "$NVS_HOME/nvs.sh" >> /dev/null;
+    return 0;
+}
+setupNvs
+```
 
 To add the latest version of **node** run the below command from a Windows Command Prompt.
 
-    nvs add lts
+```cmd
+nvs add lts
+```
 
 Then execute the bellow command to add a version of node to PATH for the current shell:
 
-    nvs use lts
+```cmd
+nvs use lts
+```
 
 The above command will **only** set the **node** version in use for the current shell/terminal and it will **not** be permanent. To add it to PATH permanently, execute the following command:
 
-    nvs link lts
+```cmd
+nvs link lts
+```
 
 To check if the folder `%LOCALAPPDATA%\nvs\default` was properly added to the current *user account* path variable, press `WIN + R`, type `rundll32.exe sysdm.cpl,EditEnvironmentVariables` and then press `Enter`.
 
@@ -1463,10 +1638,102 @@ Click the **OK** button to close the window used to edit the `PATH` variable and
 
 From now on, the latest **node** lts version will be available on all shells of the system. To confirm that everything is properly set, check the output of the below commands executed from a Windows Command Prompt, from a PowerShell console and from a [Git Bash](https://git-scm.com/) terminal.
 
-    node --version
-    npm --version
+```bash
+node --version
+npm --version
+```
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
+
+### 4.16. Terraform
+
+[**Terraform**](https://www.terraform.io/) is a tool for building, changing, and versioning infrastructure safely and efficiently.
+
+#### 4.16.1. Installation
+
+##### 4.16.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+The easiest way to install and manage multiple versions of [**Terraform**](https://www.terraform.io/) on the `WSL File System` is to use [TFSwitch](https://tfswitch.warrensbox.com/). This is a command line tool that lets you switch between different versions of [**Terraform**](https://www.terraform.io/).
+
+Create a folder to [store the user's binaries](https://unix.stackexchange.com/a/36874) executing the following command:
+
+```bash
+mkdir -p ~/.local/bin
+```
+
+It's necessary that the folder `~/.local/bin` is included on the `PATH` and, on [Ubuntu](https://ubuntu.com/), that is normally done by the `~/.profile` script. Close the terminal and on a new [Ubuntu](https://ubuntu.com/) terminal and then check the output of the following command to confirm that `~/.local/bin` is included on the `PATH`.
+
+```bash
+echo $PATH
+```
+
+Following the [official instructions](https://tfswitch.warrensbox.com/Install/), download [TFSwitch](https://tfswitch.warrensbox.com/) installation script to the folder `/tmp` executing the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal:
+
+```bash
+wget https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh -P /tmp
+```
+
+Make the [TFSwitch](https://tfswitch.warrensbox.com/) installation script executable with the following command:
+
+```bash
+chmod 755 /tmp/install.sh
+```
+
+Install [TFSwitch](https://tfswitch.warrensbox.com/) on the `~/.local/bin` executing the following command:
+
+```bash
+/tmp/install.sh -b ~/.local/bin/
+```
+
+To verify if the [TFSwitch](https://tfswitch.warrensbox.com/) installation was properly made, check the output of the following command:
+
+```bash
+tfswitch --version
+```
+
+To install a specific [**Terraform**](https://www.terraform.io/) on the `WSL File System`, replace the ***{LABEL}*** in the below command as appropriate and then execute it on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```bash
+tfswitch -b ~/.local/bin/terraform {VERSION}
+```
+
+> **Label Definition**
+>
+> + **{VERSION}** : The desired [**Terraform**](https://www.terraform.io/) version
+
+To verify if the [**Terraform**](https://www.terraform.io/) installation was properly made, check the output of the following command:
+
+```bash
+terraform --version
+```
+
+##### 4.16.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**Terraform**](https://www.terraform.io/) on the `Windows Native File System`, open a PowerShell console and execute the following command:
+
+```powershell
+scoop install main/terraform
+```
+
+Using [Scoop](https://scoop.sh/), it's possible to [install a specific version](https://github.com/ScoopInstaller/Scoop/wiki/FAQ#how-do-i-install-a-specific-version-of-an-app) of an app. To do that for [**Terraform**](https://www.terraform.io/), replace the ***{LABEL}*** in the below command as appropriate and then execute it on a PowerShell console.
+
+```powershell
+scoop install terraform@ {VERSION}
+```
+
+> **Label Definition**
+>
+> + **{VERSION}** : The desired [**Terraform**](https://www.terraform.io/) version
+
+To verify if the [**Terraform**](https://www.terraform.io/) installation was properly made, check the output of the following command:
+
+```powershell
+terraform --version
+```
 
 ### 4.17. IntelliJ IDEA
 
@@ -1682,7 +1949,9 @@ Download [**DBeaver**](https://dbeaver.io/) installer latest version from [offic
 
 When using applications like [Zscaler](https://www.zscaler.com/), it might be necessary to import security certificate to the [**DBeaver**](https://dbeaver.io/) JRE Keystore. On a **Git Bash** terminal, navigate to the folder `%USERPROFILE%\AppData\Local\DBeaver\jre\lib\security`, replace the **{LABELS}** in the upcoming command as appropriate and then execute it:
 
-    keytool -importcert -trustcacerts -alias {CERTIFICATE_ALIAS} -file {PATH_TO_DER_CERTIFICATE} -keystore cacerts -storepass changeit -noprompt
+```bash
+keytool -importcert -trustcacerts -alias {CERTIFICATE_ALIAS} -file {PATH_TO_DER_CERTIFICATE} -keystore cacerts -storepass changeit -noprompt
+```
 
 > **Label Definition**
 >
@@ -1691,7 +1960,9 @@ When using applications like [Zscaler](https://www.zscaler.com/), it might be ne
 
 To confirm that the certificate was added to the JRE keystore, replace the **{LABELS}** in the upcoming command as appropriate and then execute it:
 
-    keytool -v -list -keystore cacerts -alias {CERTIFICATE_ALIAS} -storepass changeit -noprompt
+```bash
+keytool -v -list -keystore cacerts -alias {CERTIFICATE_ALIAS} -storepass changeit -noprompt
+```
 
 > **Label Definition**
 >
