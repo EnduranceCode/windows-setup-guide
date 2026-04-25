@@ -26,7 +26,7 @@ This file contains the **Development Software and Tools** section of my [Setup g
     19. [Terraform](#419-terraform)
     20. [IntelliJ IDEA](#420-intellij-idea)
     21. [Visual Studio Code](#421-visual-studio-code)
-    22. Eclipse
+    22. [Zed](#422-zed)
     23. [DBeaver](#423-dbeaver)
     24. [Postman](#424-postman)
 
@@ -2063,9 +2063,20 @@ With the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sy
 + [WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl);
 + [XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml).
 
-### 4.22. Eclipse
+### 4.22. Zed
 
-TODO
+[**Zed**](https://zed.dev/) is a minimal code editor crafted for speed and collaboration with humans and AI.
+
+#### 4.1.1. Installation
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**Zed**](https://zed.dev/), open a PowerShell console and execute the following commands:
+
+```powershell
+scoop bucket add extras
+scoop install extras/zed
+```
 
 ### 4.23. DBeaver
 

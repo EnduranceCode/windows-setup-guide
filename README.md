@@ -4,7 +4,7 @@
 
 My [operating system (OS)](https://en.wikipedia.org/wiki/Operating_system) of choice is [Linux](https://en.wikipedia.org/wiki/Linux) and the distribution that I like to use is [Lubuntu](https://lubuntu.me). But, the majority of my professional work is done on [Windows](https://www.microsoft.com/en-us/windows) and I often need to setup a new machine or setup my machine to work on a new project. Therefore, I've created this guide to help me every time I need to perform such task.
 
-This is my personal guide to setup a development machine on Windows. Although this is a very opiniated guide, I've decided to share it because it might be useful to somebody and, maybe, there will be someone out there that might be willing to help me improve the methodology that I normally follow. Please feel free to use this guide and make a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) to suggest any improvement that you find important.
+This is my personal guide to setup a development machine on Windows. Although this is a very opinionated guide, I've decided to share it because it might be useful to somebody and, maybe, there will be someone out there that might be willing to help me improve the methodology that I normally follow. Please feel free to use this guide and make a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) to suggest any improvement that you find important.
 
 ## Table of Contents
 
@@ -49,6 +49,6 @@ This is my personal guide to setup a development machine on Windows. Although th
     19. [Terraform](./4-development-software-and-tools.md#419-terraform)
     20. [IntelliJ IDEA](./4-development-software-and-tools.md#420-intellij-idea)
     21. [Visual Studio Code](./4-development-software-and-tools.md#421-visual-studio-code)
-    22. Eclipse
+    22. [Zed](./4-development-software-and-tools.md#422-zed)
     23. [DBeaver](./4-development-software-and-tools.md#423-dbeaver)
     24. [Postman](./4-development-software-and-tools.md#424-postman)
