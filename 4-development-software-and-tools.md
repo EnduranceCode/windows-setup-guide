@@ -29,6 +29,7 @@ This file contains the **Development Software and Tools** section of my [Setup g
     22. [Zed](#422-zed)
     23. [DBeaver](#423-dbeaver)
     24. [Postman](#424-postman)
+    25. [Bruno](#425-bruno)
 
 ## 4. Development Software & Tools
 
@@ -2138,3 +2139,18 @@ keytool -v -list -keystore cacerts -alias {CERTIFICATE_ALIAS} -storepass changei
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 Download [**Postman**](https://www.postman.com/) installer latest version from [official downloads page](https://www.postman.com/downloads/). Then, execute the downloaded file and when prompted, sign in into the [**Postman**](https://www.postman.com/) account.
+
+### 4.25. Bruno
+
+[**Bruno**](https://www.usebruno.com/) is an open source IDE for exploring and testing APIs. It is a lightweight, Git-native, local-first alternative to [Postman](https://www.postman.com/).
+
+#### 4.25.1. Installation
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**Bruno**](https://www.usebruno.com/), open a PowerShell console and execute the following commands:
+
+```powershell
+scoop bucket add extras
+scoop install extras/bruno
+```
