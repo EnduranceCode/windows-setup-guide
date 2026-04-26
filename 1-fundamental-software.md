@@ -81,13 +81,13 @@ Set the desired options for all the above extensions. The folder `root/home/user
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue) ![WSL](https://img.shields.io/badge/WSL-purple)
 
-Follow the [Official instructions](https://learn.microsoft.com/windows/wsl/install-manual) to manually [enable](https://learn.microsoft.com/windows/wsl/install-manual#step-1---enable-the-windows-subsystem-for-linux) [**WSL**](https://learn.microsoft.com/windows/wsl/), executing the upcoming command on a PowerShell console with *administrator privileges*.
+Follow the [official instructions](https://learn.microsoft.com/windows/wsl/install-manual) to manually [enable](https://learn.microsoft.com/windows/wsl/install-manual#step-1---enable-the-windows-subsystem-for-linux) [**WSL**](https://learn.microsoft.com/windows/wsl/), executing the following command on a PowerShell console with *administrator privileges*.
 
 ```powershell
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
 
-Before restarting the machine, execute the below command on the same PowerShell console to [enable the Virtual Machine feature](https://learn.microsoft.com/windows/wsl/install-manual#step-3---enable-virtual-machine-feature).
+Before restarting the machine, execute the following command on the same PowerShell console to [enable the Virtual Machine feature](https://learn.microsoft.com/windows/wsl/install-manual#step-3---enable-virtual-machine-feature).
 
 ```powershell
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
@@ -95,13 +95,13 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 Reboot the machine to be able to proceed with the [**WSL**](https://learn.microsoft.com/windows/wsl/) installation.
 
-After rebooting your machine, set [**WSL 2**](https://learn.microsoft.com/windows/wsl/basic-commands#set-wsl-version-to-1-or-2) as your default version. executing the below command on a standard PowerShell console.
+After rebooting your machine, set [**WSL 2**](https://learn.microsoft.com/windows/wsl/basic-commands#set-wsl-version-to-1-or-2) as your default version, executing the following command on a standard PowerShell console.
 
 ```powershell
 wsl --set-default-version 2
 ```
 
-To [update](https://learn.microsoft.com/windows/wsl/troubleshooting#updating-wsl) the [**WSL**](https://learn.microsoft.com/windows/wsl/) installation, execute the below command on a standard PowerShell console. The execution of the this command will [require elevation](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works). If you choose not to [elevate](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works#the-uac-user-experience), the [**WSL**](https://learn.microsoft.com/windows/wsl/) update will fail.
+To [update](https://learn.microsoft.com/windows/wsl/troubleshooting#updating-wsl) the [**WSL**](https://learn.microsoft.com/windows/wsl/) installation, execute the following command on a standard PowerShell console. The execution of this command will [require elevation](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works). If you choose not to [elevate](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works#the-uac-user-experience), the [**WSL**](https://learn.microsoft.com/windows/wsl/) update will fail.
 
 ```powershell
 wsl --update
@@ -152,7 +152,7 @@ For changes to apply, you may need to run `wsl --shutdown` from PowerShell to sh
 
 #### 1.2.3. WSL distribution installation & configuration
 
-[List all available Linux distributions](https://learn.microsoft.com/windows/wsl/basic-commands#list-available-linux-distributions) executing the bellow command on a standard PowerShell console.
+[List all available Linux distributions](https://learn.microsoft.com/windows/wsl/basic-commands#list-available-linux-distributions) executing the following command on a standard PowerShell console.
 
 ```powershell
 wsl --list --online
@@ -170,19 +170,19 @@ If a *version-pinned* distro is required, replace "**Ubuntu**" in the above comm
 
 With the execution of the command to install a [**WSL**](https://learn.microsoft.com/windows/wsl/) distro, you will be prompted to create a default Unix user account and to set a password for this user.
 
-Replace the label **{DISTRO_NAME}**, in the upcoming command, as appropriate and execute it on a standard PowerShell console to set the [default distribution](https://learn.microsoft.com/windows/wsl/basic-commands#set-default-linux-distribution).
+Replace the label **{DISTRO_NAME}**, in the following command, as appropriate and execute it on a standard PowerShell console to set the [default distribution](https://learn.microsoft.com/windows/wsl/basic-commands#set-default-linux-distribution).
 
 ```powershell
 wsl --set-default {DISTRO_NAME}
 ```
 
-On a regular PowerShell console, execute the below command to list the installed Linux distributions and check if everything is correct:
+On a regular PowerShell console, execute the following command to list the installed Linux distributions and check if everything is correct:
 
 ```powershell
 wsl --list --verbose
 ```
 
-If [Ubuntu](https://ubuntu.com/) is not running with [**WSL 2**](https://learn.microsoft.com/windows/wsl/), replace the **{LABEL}** in the below command as appropriate and execute it on a standard PowerShell console.
+If [Ubuntu](https://ubuntu.com/) is not running with [**WSL 2**](https://learn.microsoft.com/windows/wsl/), replace the **{LABEL}** in the following command as appropriate and execute it on a standard PowerShell console.
 
 ```powershell
 wsl --set-version {DISTRO_NAME} 2
@@ -194,13 +194,13 @@ wsl --set-version {DISTRO_NAME} 2
 
 Once the process of installing [Ubuntu](https://ubuntu.com/) on [**WSL**](https://learn.microsoft.com/windows/wsl/) is complete, open the distribution using the *Start Menu*.
 
-Configure the settings for your [Ubuntu](https://ubuntu.com/) installation by using the `wsl.conf` file that is stored on `/etc` folder of every [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution. Open the file `/etc/wsl.conf` with the [nano text editor](https://www.nano-editor.org/), executing the below command on a [Ubuntu](https://ubuntu.com/) terminal.
+Configure the settings for your [Ubuntu](https://ubuntu.com/) installation by using the `wsl.conf` file that is stored on `/etc` folder of every [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution. Open the file `/etc/wsl.conf` with the [Nano text editor](https://www.nano-editor.org/), executing the following command on a [Ubuntu](https://ubuntu.com/) terminal.
 
-```sh
+```bash
 sudo nano /etc/wsl.conf
 ```
 
-To change the [default mount location](https://learn.microsoft.com/windows/wsl/wsl-config#automount-settings) of the Windows `C:\` drive from the default `/mnt/c` to `/c`, add the upcoming code snippet to the `/etc/wsl.conf` file.
+To change the [default mount location](https://learn.microsoft.com/windows/wsl/wsl-config#automount-settings) of the Windows `C:\` drive from the default `/mnt/c` to `/c`, add the following code snippet to the `/etc/wsl.conf` file.
 
 ```txt
 [automount]
@@ -208,14 +208,14 @@ root=/
 options="metadata,umask=22,fmask=11"
 ```
 
-Then, to [enable systemd support](https://learn.microsoft.com/windows/wsl/wsl-config#systemd-support), add the upcoming code snippet to the same `/etc/wsl.conf` file.
+Then, to [enable systemd support](https://learn.microsoft.com/windows/wsl/wsl-config#systemd-support), add the following code snippet to the same `/etc/wsl.conf` file.
 
 ```txt
 [boot]
 systemd=true
 ```
 
-Then, for the [interop settings](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#interop-settings), add the upcoming code snippet to the same `/etc/wsl.conf` file.
+Then, for the [interop settings](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#interop-settings), add the following code snippet to the same `/etc/wsl.conf` file.
 
 ```txt
 [interop]
@@ -223,7 +223,7 @@ enabled=true
 appendWindowsPath=false
 ```
 
-Finally, for the [network settings](https://learn.microsoft.com/windows/wsl/wsl-config#network-settings), add the upcoming code snippet to the same `/etc/wsl.conf` file.
+Finally, for the [network settings](https://learn.microsoft.com/windows/wsl/wsl-config#network-settings), add the following code snippet to the same `/etc/wsl.conf` file.
 
 ```txt
 [network]
@@ -231,17 +231,17 @@ generateHosts=true
 generateResolvConf=true
 ```
 
-Save the changes with the command `CTRL + O` and then exit the [nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
 
-To enable the changes made on the `wsl.conf` file, you will need to to restart your [**WSL**](https://learn.microsoft.com/windows/wsl/) instances. It can be done with the execution of the bellow command on a standard PowerShell console.
+To enable the changes made, you will need to restart your [**WSL**](https://learn.microsoft.com/windows/wsl/) instances. It can be done with the execution of the following command on a standard PowerShell console.
 
 ```powershell
 wsl --shutdown
 ```
 
- You must wait until the subsystem running your Linux distribution completely stops running and restarts for configuration setting updates to appear. This typically takes about 8 seconds after closing ALL instances of the distribution shell. Once [Ubuntu](https://ubuntu.com/) restarts, *systemd* should be running. You can confirm executing the below command on a [Ubuntu](https://ubuntu.com/) terminal, which will show the status of your services.
+ You must wait until the subsystem running your Linux distribution completely stops running and restarts for configuration setting updates to appear. This typically takes about 8 seconds after closing ALL instances of the distribution shell. Once [Ubuntu](https://ubuntu.com/) restarts, *systemd* should be running. You can confirm executing the following command on a [Ubuntu](https://ubuntu.com/) terminal, which will show the status of your services.
 
-```sh
+```bash
 systemctl list-unit-files --type=service
 ```
 
@@ -249,9 +249,9 @@ Further WSL configurations can be found on the Microsoft article [Advanced setti
 
 By default, the [**WSL**](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) environment doesn't naturally know how to talk to the Windows browser because the `BROWSER` environment variable isn't set, and the `xdg-open` command doesn't have a default handler. The cleanest way to solve this is to use the built-in ***PowerShell interop**. Windows allows you to call `.exe` files directly from the Linux terminal.
 
-Since we've set `appendWindowsPath=false`, the WSL environment is isolated from the Windows System32 folder where `powershell.exe` lives. Instead of re-enabling the entire Windows `PATH`, replace the **{LABEL}** in the below command as appropriate and then execute it to create a specific symbolic link to PowerShell. This keeps your path clean but gives you the one tool you need.
+Since we've set `appendWindowsPath=false`, the WSL environment is isolated from the Windows System32 folder where `powershell.exe` lives. Instead of re-enabling the entire Windows `PATH`, replace the **{LABEL}** in the following command as appropriate and then execute it to create a specific symbolic link to PowerShell. This keeps your path clean but gives you the one tool you need.
 
-```sh
+```bash
 mkdir -p ~/.local/bin
 ln -s {PATH_TO_POWERSHELL}/powershell.exe ~/.local/bin/pwsh
 ```
@@ -262,20 +262,20 @@ ln -s {PATH_TO_POWERSHELL}/powershell.exe ~/.local/bin/pwsh
 
 Ensure your `.local/bin` folder ins in your `PATH` by checking your `~/.bashrc` and make sure this line exists:
 
-```sh
+```bash
 # Add the ~/.local/bin to the PATH
 export PATH="$HOME/.local/bin:$PATH"
 ```
 
 To create a real `xdg-open` executable wrapper, execute the following command:
 
-```sh
+```bash
 nano ~/.local/bin/xdg-open
 ```
 
-Then, paste the below snippet on the newly created file.
+Then, paste the following snippet on the newly created file.
 
-```sh
+```bash
 #!/usr/bin/env bash
 set -euo pipefail
 
@@ -295,35 +295,35 @@ fi
 pwsh -NoProfile -Command "Start-Process '$target'" >/dev/null 2>&1
 ```
 
-Save the changes with the command `CTRL + O` and then exit the [nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. Then make the `xdg-open` wrapper executable with the following commands:
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. Then make the `xdg-open` wrapper executable with the following commands:
 
-```sh
+```bash
 chmod +x ~/.local/bin/xdg-open
 hash -r
 ```
 
 Check if the `xdg-open` wrapper is working as expected with the following commands:
 
-```sh
+```bash
 which xdg-open
 xdg-open "https://example.com"
 ```
 
 To complete the process, it's necessary to edit the file `.bashrc` located in the home folder and add the following line to set the `BROWSER` environment variable.
 
-```sh
+```bash
 export BROWSER="$HOME/.local/bin/xdg-open"
 ```
 
-Open the file `.bashrc` with [*nano text editor*](https://www.nano-editor.org/) executing the following command:
+Open the file `.bashrc` with the [Nano text editor](https://www.nano-editor.org/) executing the following command:
 
-```sh
+```bash
 nano ~/.bashrc
 ```
 
-After adding the necessary modifications, save the file with the command `CTRL + O` and then exit [*nano text editor*](https://www.nano-editor.org/) with the command `CTRL + X`. Make the changes effective with the following command:
+After adding the necessary modifications, save the file with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. Make the changes effective with the following command:
 
-```sh
+```bash
 source ~/.bashrc
 ```
 
@@ -333,7 +333,7 @@ The article [Set up a WSL development environment](https://learn.microsoft.com/w
 
 It's recommended to regularly update and upgrade your packages using [Ubuntu](https://ubuntu.com/)'s package manager. This is done with the following command:
 
-```sh
+```bash
 sudo apt update && sudo apt full-upgrade
 ```
 
@@ -341,13 +341,13 @@ Additional software can be installed using [Ubuntu](https://ubuntu.com/)'s packa
 
 To be able to install software from its source code, you need to make sure your system has a C++ compiler. The `build-essentials` packages are meta-packages that include all the necessary tools for compiling software. You can install it with the following command:
 
-```sh
+```bash
 sudo apt install build-essential
 ```
 
 To verify if the `build-essentials` installation was properly made, check the output of the following command:
 
-```sh
+```bash
 gcc --version
 ```
 
@@ -371,7 +371,9 @@ A package manager is a software that easily automates the installation, upgradat
 
 Windows Package Manager [**winget**](https://github.com/microsoft/winget-cli) command-line tool is available on Windows 11 and modern versions of Windows 10 as a part of the [App Installer](https://apps.microsoft.com/detail/9NBLGGH4NNS1). To check if [**winget**](https://github.com/microsoft/winget-cli) is available, open a PowerShell console and execute the following command:
 
-    winget --version
+```powershell
+winget --version
+```
 
 If [**winget**](https://github.com/microsoft/winget-cli) is already available on your system, the current version of the software will be displayed and now you should make sure it is updated with the latest version.
 
@@ -379,11 +381,15 @@ If you need to install [**winget**](https://github.com/microsoft/winget-cli), op
 
 Upgrading applications with [**winget**](https://github.com/microsoft/winget-cli) is very easy. To identify which apps are in need of an update, open a PowerShell console and execute the following command:
 
-    winget upgrade
+```powershell
+winget upgrade
+```
 
 The above command will output a list of which app (if any) have an available update. To upgrade all applications with an available update, open a PowerShell console and execute the following command:
 
-    winget upgrade --all
+```powershell
+winget upgrade --all
+```
 
 When running [**winget**](https://github.com/microsoft/winget-cli) without administrator privileges, some applications may [require elevation](https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/how-it-works) to install. On those cases, Windows will prompt you to elevate. If you choose not to elevate, the application will fail to install/upgrade.
 
@@ -397,12 +403,16 @@ Check the [official documentation](https://learn.microsoft.com/windows/package-m
 
 To install [**Scoop**](https://scoop.sh/), open a PowerShell console and execute the following commands:
 
-    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+```
 
 To check if everything was properly installed and if further actions are necessary, execute the following command:
 
-    scoop checkup
+```powershell
+scoop checkup
+```
 
 If the above command outputs a warning stating that *Windows Developer Mode* is not enabled, you should consider enabling it because operations relevant to [symlinks](https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/) may fail without proper rights. It is also recommended to enable *Long Paths* option on the **Advanced Windows Settings**.
 
@@ -412,13 +422,17 @@ The output of the command `scoop checkup`, might show some recommendations to in
 
 To check if all issues were solved with the previous actions, re-run the following command:
 
-    scoop checkup
+```powershell
+scoop checkup
+```
 
 The output of the above command, should now be `No problems identified!`.
 
 To list all apps installed with [**Scoop**](https://scoop.sh/), execute the following command:
 
-    scoop list
+```powershell
+scoop list
+```
 
 #### 1.4.3. Install Chocolatey
 
@@ -426,25 +440,35 @@ To list all apps installed with [**Scoop**](https://scoop.sh/), execute the foll
 
 If you are going to do your development work on the `Windows Native File System` (instead of doing it exclusively on the `WSL File System`) you should also install [**Chocolatey**](https://chocolatey.org/).
 
-Before proceeding with the installation of [**Chocolatey**](https://chocolatey.org/), you must ensure **Get-ExecutionPolicy** is not ***Restricted***. The upcoming command, executed on a PowerShell console with *Administrator* privileges. will output the current [execution policy](https://go.microsoft.com/fwlink/?LinkID=135170).
+Before proceeding with the installation of [**Chocolatey**](https://chocolatey.org/), you must ensure **Get-ExecutionPolicy** is not ***Restricted***. The following command, executed on a PowerShell console with *Administrator* privileges, will output the current [execution policy](https://go.microsoft.com/fwlink/?LinkID=135170).
 
-    Get-ExecutionPolicy
+```powershell
+Get-ExecutionPolicy
+```
 
 If the output of the above command shows ***Restricted***, then run the following command on the same PowerShell console:
 
-    Set-ExecutionPolicy Bypass -Scope Process
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process
+```
 
-Or the preferable upcoming command, for quite a [bit more security](https://chocolatey.org/install).
+Or the following command, for quite a [bit more security](https://chocolatey.org/install):
 
-    Set-ExecutionPolicy AllSigned
+```powershell
+Set-ExecutionPolicy AllSigned
+```
 
-Then, on the same PowerShell console, execute the below command to install [**Chocolatey**](https://chocolatey.org/).
+Then, on the same PowerShell console, execute the following command to install [**Chocolatey**](https://chocolatey.org/).
 
-    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
 
 To list the installed chocolatey packages, execute the following command on a PowerShell console:
 
-    choco list
+```powershell
+choco list
+```
 
 ### 1.5. Git & Git Bash
 
@@ -464,15 +488,19 @@ To list the installed chocolatey packages, execute the following command on a Po
 
 **Git Bash** comes included as part of the [Git's Windows package](https://git-scm.com/install/windows) and is an application for Microsoft Windows environments which provides an emulation layer for a [**Git**](https://git-scm.com/) command line experience.
 
-[**Git**](https://git-scm.com/), as stated on the [official downloads page](https://git-scm.com/install/windows), can be installed on the `Windows Native File System` with [**winget**](https://github.com/microsoft/winget-cli). To install [**Git Bash**](https://git-scm.com/install/windows), open a PowerShell console and execute the following commands:
+[**Git**](https://git-scm.com/), as stated on the [official downloads page](https://git-scm.com/install/windows), can be installed on the `Windows Native File System` with [**winget**](https://github.com/microsoft/winget-cli). To install [**Git Bash**](https://git-scm.com/install/windows), open a PowerShell console and execute the following command:
 
-    winget install --id Git.Git -e --source winget
+```powershell
+winget install --id Git.Git -e --source winget
+```
 
 The above command will start the [**Git**](https://git-scm.com/) installation. As the `-e` flag is used, it defaults to a "silent" or "headless" installation. It essentially skips the UI wizard and applies the default settings and doesn't requires _administrator privileges_ to perform the installation.
 
 After the completion of the installation, to ensure LFS is initialized, execute the following command:
 
-    git lfs install
+```powershell
+git lfs install
+```
 
 To ensure ensure that the PATH environment is adjusted for [**Git**](https://git-scm.com/) from the command line and also from 3rd-party software add, in necessary, the following paths to your Windows User `Path` Environment Variable:
 
@@ -502,19 +530,21 @@ Configure the **Git Bash** profile on the [Windows Terminal](https://apps.micros
 
 #### 1.5.2. Git configuration
 
-To set [Git's global configuration](https://www.learnenough.com/git-tutorial#sec-installation_and_setup), replace the **{LABELS}** in the below commands as appropriate and then execute it in an [Git Bash](https://git-scm.com/) terminal window.
+To set [Git's global configuration](https://www.learnenough.com/git-tutorial#sec-installation_and_setup), replace the **{LABELS}** in the following commands as appropriate and then execute them in a [Git Bash](https://git-scm.com/) terminal window.
 
-    git config --global core.autocrlf true
-    git config --global core.editor nano
-    git config --global core.fscache true
-    git config --global core.symlinks true
-    git config --global credential.helper manager
-    git config --global http.sslBackend openssl
-    git config --global init.defaultBranch master
-    git config --global pull.rebase true
-    git config --global user.name "{USER_NAME}"
-    git config --global user.email {USER_EMAIL}
-    git config --list
+```bash
+git config --global core.autocrlf true
+git config --global core.editor nano
+git config --global core.fscache true
+git config --global core.symlinks true
+git config --global credential.helper manager
+git config --global http.sslBackend openssl
+git config --global init.defaultBranch master
+git config --global pull.rebase true
+git config --global user.name "{USER_NAME}"
+git config --global user.email {USER_EMAIL}
+git config --list
+```
 
 > **Label Definition**
 >
@@ -531,11 +561,15 @@ Instructions for a more detailed Git global configuration can be found in the [G
 
 The customization of the bash prompt is very personal and the files used to accomplish my personal customization on the `WSL File System` are stored at the folder `root/home/user/.bash_USER` in the [**system-configuration-files**](https://github.com/EnduranceCode/system-configuration-files) repository. The easiest way to use the files on the referred repository is to start by cloning it to your local machine. Do it with the execution of the following command:
 
-    git clone https://github.com/EnduranceCode/system-configuration-files.git
+```bash
+git clone https://github.com/EnduranceCode/system-configuration-files.git
+```
 
-To [copy](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/) the mentioned folder (and files) to your local machine `home` folder, replace the ***{LABELS}*** in the below commands as appropriate and execute it.
+To [copy](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/) the mentioned folder (and files) to your local machine `home` folder, replace the ***{LABELS}*** in the following command as appropriate and execute it.
 
-    cp -r {SYSTEM_CONFIGURATION_FILES_REPOSITORY_ROOT_FOLDER}/root/home/user/.bash_USER ~/
+```bash
+cp -r {SYSTEM_CONFIGURATION_FILES_REPOSITORY_ROOT_FOLDER}/root/home/user/.bash_USER ~/
+```
 
 > **Label Definition**
 >
@@ -543,29 +577,37 @@ To [copy](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-
 
 To be able to use the files copied in the previous step for the bash environment customization, execute the following commands:
 
-    mv ~/.bash_USER ~/.bash_"${USER}"
-    mv ~/.bash_"${USER}"/bash_USER.sh ~/.bash_"${USER}"/bash_"${USER}".sh
-    chown -R "${USER}":"${USER}" ~/.bash_"${USER}"
-    chmod -R 700 ~/.bash_"${USER}"
+```bash
+mv ~/.bash_USER ~/.bash_"${USER}"
+mv ~/.bash_"${USER}"/bash_USER.sh ~/.bash_"${USER}"/bash_"${USER}".sh
+chown -R "${USER}":"${USER}" ~/.bash_"${USER}"
+chmod -R 700 ~/.bash_"${USER}"
+```
 
 To complete the process, it's necessary to edit the file `.bashrc` located in the home folder and add the lines below to the end of the mentioned file.
 
-    # Source the file that enables personal prompt customization and implements custom alias
-    # All prompt customization alias implementation must be done in the file sourced below
-    #
-    if [ -f ~/.bash_"${USER}"/bash_"${USER}".sh ]; then
-        . ~/.bash_"${USER}"/bash_"${USER}".sh
-    fi
+```bash
+# Source the file that enables personal prompt customization and implements custom alias
+# All prompt customization alias implementation must be done in the file sourced below
+#
+if [ -f ~/.bash_"${USER}"/bash_"${USER}".sh ]; then
+    . ~/.bash_"${USER}"/bash_"${USER}".sh
+fi
+```
 
-Open the file `.bashrc` with [*nano text editor*](https://www.nano-editor.org/) executing the following command:
+Open the file `.bashrc` with the [Nano text editor](https://www.nano-editor.org/) executing the following command:
 
-    nano ~/.bashrc
+```bash
+nano ~/.bashrc
+```
 
-After adding the necessary modifications, save the file with the command `CTRL + O` and then exit [*nano text editor*](https://www.nano-editor.org/) with the command `CTRL + X`.
+After adding the necessary modifications, save the file with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
 
 Make the changes effective with the following command:
 
-    source ~/.bashrc
+```bash
+source ~/.bashrc
+```
 
 ##### 1.5.3.2. Bash prompt customization on the Windows Native File System
 
@@ -573,11 +615,15 @@ Make the changes effective with the following command:
 
 The files used to accomplish my personal customization on the `Windows Native File System` are stored at the folder `root/home/user/.bash_USER` in the [**system-configuration-files**](https://github.com/EnduranceCode/system-configuration-files) repository. The easiest way to use the files on the referred repository is to start by cloning it to your local machine. Do it with the execution of the following command:
 
-    git clone https://github.com/EnduranceCode/system-configuration-files.git
+```bash
+git clone https://github.com/EnduranceCode/system-configuration-files.git
+```
 
-To [copy](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/) the mentioned folder (and files) to your local machine `home` folder, replace the ***{LABELS}*** in the below commands as appropriate and execute it.
+To [copy](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/) the mentioned folder (and files) to your local machine `home` folder, replace the ***{LABELS}*** in the following command as appropriate and execute it.
 
-    cp -r {SYSTEM_CONFIGURATION_FILES_REPOSITORY_ROOT_FOLDER}/root/home/user/.bash_USER ~/
+```bash
+cp -r {SYSTEM_CONFIGURATION_FILES_REPOSITORY_ROOT_FOLDER}/root/home/user/.bash_USER ~/
+```
 
 > **Label Definition**
 >
@@ -585,44 +631,60 @@ To [copy](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-
 
 The bash prompt customization provided by the files copied in the previous step depends on the existence of the environment variable `USER`. Check if the variable is set with the following command:
 
-    echo $USER
+```bash
+echo $USER
+```
 
 If the output of the above command is empty, it's necessary to edit the file `.bashrc` located in the home folder and add the snippet below to the end of the mentioned file.
 
-    # Match the Git Bash and Windows login
-    export USER="$USERNAME"
+```bash
+# Match the Git Bash and Windows login
+export USER="$USERNAME"
+```
 
-Open the file `.bashrc` with [*nano text editor*](https://www.nano-editor.org/) executing the following command:
+Open the file `.bashrc` with the [Nano text editor](https://www.nano-editor.org/) executing the following command:
 
-    nano ~/.bashrc
+```bash
+nano ~/.bashrc
+```
 
-After adding the required snippet, save the file with the command `CTRL + O` and then exit [*nano text editor*](https://www.nano-editor.org/) with the command `CTRL + X`. Make the changes effective with the following command:
+After adding the required snippet, save the file with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. Make the changes effective with the following command:
 
-    source ~/.bashrc
+```bash
+source ~/.bashrc
+```
 
 Then, execute the following commands:
 
-    mv ~/.bash_USER ~/.bash_"${USER}"
-    mv ~/.bash_"${USER}"/bash_USER.sh ~/.bash_"${USER}"/bash_"${USER}".sh
+```bash
+mv ~/.bash_USER ~/.bash_"${USER}"
+mv ~/.bash_"${USER}"/bash_USER.sh ~/.bash_"${USER}"/bash_"${USER}".sh
+```
 
 To complete the process, it's necessary to edit the file `.bashrc` located in the home folder and add the lines below to the end of the mentioned file.
 
-    # Source the file that enables personal prompt customization and implements custom alias
-    # All prompt customization alias implementation must be done in the file sourced below
-    #
-    if [ -f ~/.bash_"${USER}"/bash_"${USER}".sh ]; then
-        . ~/.bash_"${USER}"/bash_"${USER}".sh
-    fi
+```bash
+# Source the file that enables personal prompt customization and implements custom alias
+# All prompt customization alias implementation must be done in the file sourced below
+#
+if [ -f ~/.bash_"${USER}"/bash_"${USER}".sh ]; then
+    . ~/.bash_"${USER}"/bash_"${USER}".sh
+fi
+```
 
-Open the file `.bashrc` with [*nano text editor*](https://www.nano-editor.org/) executing the following command:
+Open the file `.bashrc` with the [Nano text editor](https://www.nano-editor.org/) executing the following command:
 
-    nano ~/.bashrc
+```bash
+nano ~/.bashrc
+```
 
-After adding the necessary modifications, save the file with the command `CTRL + O` and then exit [*nano text editor*](https://www.nano-editor.org/) with the command `CTRL + X`.
+After adding the necessary modifications, save the file with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
 
 Make the changes effective with the following command:
 
-    source ~/.bashrc
+```bash
+source ~/.bashrc
+```
 
 #### 1.5.4. SSH Keys
 
@@ -632,15 +694,19 @@ The [SSH Protocol](https://en.wikipedia.org/wiki/Secure_Shell) is very useful to
 
 To check if the system already has an SSH key set, type the following command:
 
-    ls -al ~/.ssh
+```bash
+ls -al ~/.ssh
+```
 
 If the output of the above command contains a list of files (by default, the filenames of the public keys are *id_dsa.pub*, *id_ecdsa.pub*, *id_ed25519.pub* or *id_rsa.pub*), the system already has a SSH key and it can be used.
 
 ##### 1.5.4.2. Generating a new SSH key
 
-To create a new SSH key, replace the **{LABEL}** in the below command as appropriate and then execute it in an [Git Bash](https://git-scm.com/) terminal window.
+To create a new SSH key, replace the **{LABEL}** in the following command as appropriate and then execute it in a [Git Bash](https://git-scm.com/) terminal window.
 
-    ssh-keygen -t rsa -b 4096 -C "{EMAIL_ADDRESS}"
+```bash
+ssh-keygen -t rsa -b 4096 -C "{EMAIL_ADDRESS}"
+```
 
 > **Label Definition**
 >
@@ -648,32 +714,44 @@ To create a new SSH key, replace the **{LABEL}** in the below command as appropr
 
 The above command creates a new SSH key, using the provided email as a label.
 
-    > Generating public/private rsa key pair.
+```
+> Generating public/private rsa key pair.
+```
 
 When prompted to "Enter a file in which to save the key," press Enter to accept the default file location.
 
-    > Enter a file in which to save the key (/home/you/.ssh/id_rsa): [Press enter]
+```
+> Enter a file in which to save the key (/home/you/.ssh/id_rsa): [Press enter]
+```
 
 Type a secure passphrase when prompted. GitHub has further instructions on [working with SSH key passphrases](https://help.github.com/en/articles/working-with-ssh-key-passphrases).
 
-    > Enter passphrase (empty for no passphrase): [Type a passphrase]
-    > Enter same passphrase again: [Type passphrase again]
+```
+> Enter passphrase (empty for no passphrase): [Type a passphrase]
+> Enter same passphrase again: [Type passphrase again]
+```
 
 ##### 1.5.4.3. Adding the SSH key to the ssh-agent
 
-To add the new SSH key to the `ssh-agent`, start it in the background with the command below.
+To add the new SSH key to the `ssh-agent`, start it in the background with the following command:
 
-    eval "$(ssh-agent -s)"
+```bash
+eval "$(ssh-agent -s)"
+```
 
-The command below will add the private key to the `ssh-agent`.
+The following command will add the private key to the `ssh-agent`:
 
-    ssh-add ~/.ssh/id_rsa
+```bash
+ssh-add ~/.ssh/id_rsa
+```
 
 ##### 1.5.4.4. Adding a new SSH key to the remote servers
 
 To be able to copy the public SSH key to the clipboard, display it in a bash terminal window with the following command:
 
-    cat ~/.ssh/id_rsa.pub
+```bash
+cat ~/.ssh/id_rsa.pub
+```
 
 Copy the output of the above command and then add the public SSH key to the remote servers in use ([GitHub](https://github.com/settings/keys), [Bitbucket](https://bitbucket.org/account/user/ssh-keys), etc.).
 
@@ -685,18 +763,24 @@ Copy the output of the above command and then add the public SSH key to the remo
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-To install [**KeePassXC**](https://keepassxc.org/), execute the upcoming commands on a PowerShell console.
+To install [**KeePassXC**](https://keepassxc.org/), execute the following commands on a PowerShell console:
 
-    scoop bucket add extras
-    scoop install extras/keepassxc
+```powershell
+scoop bucket add extras
+scoop install extras/keepassxc
+```
 
 Check if the output of the above last command shows a suggestion to install `vcredist2022`. If it does, install it executing the following command on a PowerShell console:
 
-    scoop install extras/vcredist2022
+```powershell
+scoop install extras/vcredist2022
+```
 
-Following the execution of the above command, there will be several prompts for elevated permissions which must all be be accepted to complete the installation. A restart of the machine will be necessary to complete the installation but before restarting the machine, check if the output of the installation command states that the `vcredist2022` installer can be removed. If it does, after the restart of the machine, execute the following command on a PowerShell console:
+Following the execution of the above command, there will be several prompts for elevated permissions which must all be accepted to complete the installation. A restart of the machine will be necessary to complete the installation but before restarting the machine, check if the output of the installation command states that the `vcredist2022` installer can be removed. If it does, after the restart of the machine, execute the following command on a PowerShell console:
 
-    scoop uninstall extras/vcredist2022
+```powershell
+scoop uninstall extras/vcredist2022
+```
 
 #### 1.6.2. Configuration
 

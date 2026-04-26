@@ -16,7 +16,7 @@ This file contains the **Development Software and Tools** section of my [Setup g
     9. [Granted](#49-granted)
     10. [Docker](#410-docker)
     11. [kubectl](#411-kubectl)
-    12. [kubectx](#12-kubectx)
+    12. [kubectx](#412-kubectx)
     13. [K9s](#413-k9s)
     14. [Java](#414-java)
     15. [Apache Maven](#415-apache-maven)
@@ -32,7 +32,7 @@ This file contains the **Development Software and Tools** section of my [Setup g
 
 ## 4. Development Software & Tools
 
-### 4.1 Notepad++
+### 4.1. Notepad++
 
 [**Notepad++**](https://notepad-plus-plus.org/) is a free and open-source text and source code editor for use with Microsoft Windows. It supports tabbed editing, which allows working with multiple open files in a single window.
 
@@ -51,7 +51,7 @@ scoop install extras/notepadplusplus
 
 On the menu option `Settings->Plugins Admin...`, install the plugins [**BetterMultiSelection**](https://github.com/dail8859/BetterMultiSelection), [**DSpellCheck**](https://github.com/Predelnik/DSpellCheck), [Json Tools](https://github.com/molsonkiko/JsonToolsNppPlugin) and [**XML Tools**](https://github.com/morbac/xmltools).
 
-### 4.2 Meld
+### 4.2. Meld
 
 [**Meld**](https://meld.app/) is the visual diff and merge tool, targeted at developers. It allows users to compare two or three files or directories visually, color-coding the different lines.
 
@@ -78,7 +78,7 @@ The [**Command-line Fuzzy Finder | fzf**](https://github.com/junegunn/fzf) is a 
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-To install [**Command-line Fuzzy Finder | fzf**](https://github.com/junegunn/fzf) on the `WSL File System`, as recommended on the [official instructions](https://github.com/junegunn/fzf#linux-packages), execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
+To install [**Command-line Fuzzy Finder | fzf**](https://github.com/junegunn/fzf) on the `WSL File System`, following the [official instructions](https://github.com/junegunn/fzf#linux-packages), execute the following command on a [Ubuntu](https://ubuntu.com/) terminal.
 
 ```bash
 sudo apt install fzf
@@ -106,13 +106,13 @@ eval "$(fzf --bash)"
 
 Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
 
-To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
+To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
 
 ```bash
 source ~/.bashrc
 ```
 
-##### 4.3.2.1. Installation on the Windows Native File System
+##### 4.3.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -144,7 +144,7 @@ eval "$(fzf --bash)"
 
 Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
 
-To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
+To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
 
 ```bash
 source ~/.bashrc
@@ -160,7 +160,7 @@ source ~/.bashrc
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-To install [**GNU Make**](https://www.gnu.org/software/make/) on the `WSL File System`, execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
+To install [**GNU Make**](https://www.gnu.org/software/make/) on the `WSL File System`, execute the following command on a [Ubuntu](https://ubuntu.com/) terminal.
 
 ```bash
 sudo apt install make
@@ -172,7 +172,7 @@ To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation
 make --version
 ```
 
-##### 4.4.1.1. Installation on the Windows Native File System
+##### 4.4.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -198,7 +198,7 @@ make --version
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-To install [**jq**](https://jqlang.org/) on the `WSL File System`, execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
+To install [**jq**](https://jqlang.org/) on the `WSL File System`, execute the following command on a [Ubuntu](https://ubuntu.com/) terminal.
 
 ```bash
 sudo apt-get install jq
@@ -211,7 +211,7 @@ jq --version
 jq --help
 ```
 
-##### 4.5.1.1. Installation on the Windows Native File System
+##### 4.5.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -238,12 +238,12 @@ jq --help
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-To install [**ripgrep**](https://github.com/BurntSushi/ripgrep) on the `WSL File System`, following the [official instructions](https://github.com/BurntSushi/ripgrep#installation), replace the ***{LABEL}*** in the below commands as appropriate and then execute it on a [Ubuntu](https://ubuntu.com/) terminal.
+To install [**ripgrep**](https://github.com/BurntSushi/ripgrep) on the `WSL File System`, following the [official instructions](https://github.com/BurntSushi/ripgrep#installation), replace the ***{LABEL}*** in the below commands as appropriate and then execute them on a [Ubuntu](https://ubuntu.com/) terminal.
 
 ```bash
 curl -LO https://github.com/BurntSushi/ripgrep/releases/download/{VERSION}/{DEBIAN_RELEASE_ASSET}
-sudo dpkg -i {DEBIAN_RELEEASE_ASSET}
-rm {DEBIAN_RELEEASE_ASSET}
+sudo dpkg -i {DEBIAN_RELEASE_ASSET}
+rm {DEBIAN_RELEASE_ASSET}
 ```
 
 > **Label Definition**
@@ -258,7 +258,7 @@ rg --version
 rg --help
 ```
 
-##### 4.6.1.1. Installation on the Windows Native File System
+##### 4.6.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -285,7 +285,7 @@ rg --help
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-To install [**OpenCode**](https://opencode.ai/) on the `WSL File System`, following the [official instructions](https://opencode.ai/docs#install), execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
+To install [**OpenCode**](https://opencode.ai/) on the `WSL File System`, following the [official instructions](https://opencode.ai/docs#install), execute the following command on a [Ubuntu](https://ubuntu.com/) terminal.
 
 ```bash
 curl -fsSL https://opencode.ai/install | bash
@@ -304,7 +304,7 @@ opencode --version
 opencode --help
 ```
 
-##### 4.7.1.1. Installation on the Windows Native File System
+##### 4.7.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -331,7 +331,7 @@ The [**AWS Command Line Interface (AWS CLI)**](https://aws.amazon.com/cli/) is a
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `WSL File System`, take in consideration Linux's [AWS official instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and execute the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
+To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `WSL File System`, following the [official instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), execute the following commands on a [Ubuntu](https://ubuntu.com/) terminal.
 
 ```bash
 curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscliv2.zip
@@ -359,7 +359,7 @@ To install the downloaded `.deb` package executing the following command:
 sudo dpkg -i /tmp/session-manager-plugin.deb
 ```
 
-Run the following commands to verify that the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installed successfully.
+To verify the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installation, check the output of the following command:
 
 ```bash
 session-manager-plugin
@@ -387,7 +387,7 @@ To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was pro
 aws --version
 ```
 
-If there's ant problem using the [**AWS CLI**](https://aws.amazon.com/cli/), follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
+If there is any problem using the [**AWS CLI**](https://aws.amazon.com/cli/), follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
 
 To install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `Windows Native File System`, open a PowerShell console and execute the following commands:
 
@@ -396,7 +396,7 @@ scoop bucket add extras
 scoop install extras/aws-session-manager-plugin
 ```
 
-Run the following commands to verify that the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installed successfully.
+To verify the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installation, check the output of the following command:
 
 ```powershell
 session-manager-plugin
@@ -418,7 +418,7 @@ The Session Manager plugin is installed successfully. Use the AWS CLI to start a
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-To install [**Granted**](https://github.com/fwdcloudsec/granted) on the `WSL File System`, take in consideration the [official Linux (APT) instructions](https://docs.commonfate.io/granted/getting-started) and execute the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
+To install [**Granted**](https://github.com/fwdcloudsec/granted) on the `WSL File System`, following the [official Linux (APT) instructions](https://docs.commonfate.io/granted/getting-started), execute the following commands on a [Ubuntu](https://ubuntu.com/) terminal.
 
 ```bash
 sudo apt update
@@ -492,7 +492,7 @@ Now, after running `assume <profile>`, you can run AWS CLI commands without `--p
 aws configure list
 ```
 
-##### 4.9.2.1. Installation on the Windows Native File System
+##### 4.9.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -555,7 +555,7 @@ assume() {
 }
 ```
 
-To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
+To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
 
 ```bash
 source ~/.bashrc
@@ -748,7 +748,7 @@ echo '{
 }' > ~/.docker/config.json
 ```
 
-##### 4.10.2.1. Installation on the Windows Native File System with Rancher Desktop
+##### 4.10.2.2. Installation on the Windows Native File System with Rancher Desktop
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -839,7 +839,9 @@ The [**Rancher Desktop**](https://rancherdesktop.io/) installation and usage fil
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-Following the [official instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management), install the [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) dependencies with the following commands:
+To install [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) on the `WSL File System`, following the [official instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management), execute the following commands on a [Ubuntu](https://ubuntu.com/) terminal.
+
+Start by installing the required dependencies:
 
 ```bash
 sudo apt update
@@ -867,7 +869,7 @@ sudo apt update
 sudo apt install kubectl
 ```
 
-Verify the installation:
+To verify the [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) installation, check the output of the following command:
 
 ```bash
 kubectl version --client
@@ -885,6 +887,18 @@ kubectl version --client
 >
 > To upgrade [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) to another minor release, you'll need to bump the version in `/etc/apt/sources.list.d/kubernetes.list` before running `apt update` and `apt-get upgrade`. This procedure is described in more detail in [Changing The Kubernetes Package Repository](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
 
+##### 4.11.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+When doing development work on the `Windows Native File System`, [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) is automatically provided by [**Rancher Desktop**](https://rancherdesktop.io/). If [**Rancher Desktop**](https://rancherdesktop.io/) is installed, no additional steps are required. Refer to the [Rancher Desktop installation instructions](#41022-installation-on-the-windows-native-file-system-with-rancher-desktop) in this guide for details.
+
+To verify the [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) installation, check the output of the following command:
+
+```powershell
+kubectl version --client
+```
+
 ### 4.12. kubectx
 
 [**kubectx**](https://github.com/ahmetb/kubectx/) is a tool to switch between contexts (clusters) on `kubectl` faster. It also includes`kubens`, which is a tool to switch between Kubernetes namespaces (and configure them for `kubectl`) easily.
@@ -895,7 +909,7 @@ kubectl version --client
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-To install [**kubectx**](https://github.com/ahmetb/kubectx/) on the `WSL File System`, as recommended on the [official instructions](https://github.com/ahmetb/kubectx/#installation), execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
+To install [**kubectx**](https://github.com/ahmetb/kubectx/) on the `WSL File System`, following the [official instructions](https://github.com/ahmetb/kubectx/#installation), execute the following command on a [Ubuntu](https://ubuntu.com/) terminal.
 
 ```bash
 sudo apt install kubectx
@@ -908,7 +922,7 @@ kubectx --version
 kubectx --help
 ```
 
-##### 4.12.2.1. Installation on the Windows Native File System
+##### 4.12.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -935,7 +949,7 @@ kubectx --help
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-To install [**K9s**](https://github.com/derailed/k9s)) on the `WSL File System`, as recommended on the [official instructions](https://github.com/derailed/k9s#installation), execute the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal.
+To install [**K9s**](https://github.com/derailed/k9s) on the `WSL File System`, following the [official instructions](https://github.com/derailed/k9s#installation), execute the following commands on a [Ubuntu](https://ubuntu.com/) terminal.
 
 ```bash
 wget -P /tmp https://github.com/derailed/k9s/releases/latest/download/k9s_linux_amd64.deb
@@ -953,7 +967,7 @@ k9s help
 
 If the command `k9s info` shows a warning/error stating "*ERROR Unable to reads k9s config file*", that's because it was just installed and haven't actually been launched yet. By design, [**K9s**](https://github.com/derailed/k9s) does not create its configuration files or folders during the apt install process. Instead, it generates them dynamically the very first time you start the program. All you need to do is launch [**K9s**](https://github.com/derailed/k9s) once to initialize your environment.
 
-##### 4.13.2.1. Installation on the Windows Native File System
+##### 4.13.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -977,7 +991,7 @@ k9s help
 
 #### 4.14.1. Installation
 
-##### 4.14.1.1. Installation the WSL File System
+##### 4.14.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -1047,7 +1061,7 @@ To check if the Windows `PATH` value was properly set, check the output of the f
 echo $PATH
 ```
 
-To check if [**Java**](https://openjdk.org/) was properly installed, check the output of the following command:
+To verify the [**Java**](https://openjdk.org/) installation, check the output of the following command:
 
 ```bash
 java -version
@@ -1055,7 +1069,7 @@ java -version
 
 If everything is correct, the above command will output **Java Runtime Environment** version.
 
-Finally, to check if the **Java Compiler** was properly installed, check the output of the following command:
+Finally, to verify the **Java Compiler** installation, check the output of the following command:
 
 ```bash
 javac -version
@@ -1154,7 +1168,7 @@ To check if the Windows `PATH` value was properly set, on the same Windows Comma
 echo %PATH%
 ```
 
-To check if [**Java**](https://openjdk.org/) was properly installed, on the same Windows Command Prompt, check the output of the following command:
+To verify the [**Java**](https://openjdk.org/) installation, on the same Windows Command Prompt, check the output of the following command:
 
 ```cmd
 java -version
@@ -1162,7 +1176,7 @@ java -version
 
 If everything is correct, the above command will output **Java Runtime Environment** version.
 
-Finally, to check if the **Java Compiler** was properly installed, on the same Windows Command Prompt, check the output of the following command:
+Finally, to verify the **Java Compiler** installation, on the same Windows Command Prompt, check the output of the following command:
 
 ```cmd
 javac -version
@@ -1292,7 +1306,7 @@ export PATH=${MAVEN_HOME}/bin:${PATH}
 
 Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
 
-To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
+To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
 
 ```bash
 source ~/.bashrc
@@ -1310,7 +1324,7 @@ To check if the users's `PATH` was properly set, check the output of the followi
 echo $PATH
 ```
 
-To check if **Apache Maven** was properly installed, check the output of the following command:
+To verify the **Apache Maven** installation, check the output of the following command:
 
 ```bash
 mvn -version
@@ -1379,7 +1393,7 @@ To check if the Windows `PATH` value was properly set, on the same Windows Comma
 echo %PATH%
 ```
 
-To check if **Apache Maven** was properly installed, on the same Windows Command Prompt, check the output of the following command:
+To verify the **Apache Maven** installation, on the same Windows Command Prompt, check the output of the following command:
 
 ```cmd
 mvn -version
@@ -1413,7 +1427,7 @@ To set the folder created with the above command as the custom location for the 
 >
 > + **{PROJECT}** : The label that identifies the project name
 
-#### 4.15.11. Usage & Maintenance
+#### 4.15.3. Usage & Maintenance
 
 To maintain a transparent development environment, each project version uses a dedicated settings file. These are linked to the default Maven location (`~/.m2/settings.xml`) using **Symbolic Links** (Windows Developer mode must be enabled). This allows IDEs and the CLI to work without additional flags or admin permissions, while providing a clear visual indication of which configuration is currently active.
 
@@ -1483,7 +1497,7 @@ The [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) lets you create Qua
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) on the `WSL File System`, as recommended on the [Quarkus documentation](https://quarkus.io/guides/cli-tooling), use [SDKMAN](https://sdkman.io/), execute the upcoming command on a [Ubuntu](https://ubuntu.com/) terminal.
+To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) on the `WSL File System`, following the [official instructions](https://quarkus.io/guides/cli-tooling), execute the following command on a [Ubuntu](https://ubuntu.com/) terminal.
 
 ```bash
 sdk install quarkus
@@ -1523,7 +1537,7 @@ The most pratical way to install [**Node.js**](https://nodejs.org/) is via a Nod
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-The Node version manager that I use on Linux is [`nvm`](https://github.com/nvm-sh/nvm), which cam also be used  on the `WSL File System`. [`nvm`](https://github.com/nvm-sh/nvm) is a version manager for [**Node.js**](https://nodejs.org/), designed to be installed per-user, and invoked per-shell. It works on any POSIX-compliant shell (sh, dash, ksh, zsh, bash), in particular on these platforms: unix, macOS, and [WSL](https://github.com/nvm-sh/nvm#important-notes). [`nvm`](https://github.com/nvm-sh/nvm) is also recommended on [`npm`](https://www.npmjs.com/)'s [Official Documentation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+The Node version manager that I use on Linux is [`nvm`](https://github.com/nvm-sh/nvm), which can also be used  on the `WSL File System`. [`nvm`](https://github.com/nvm-sh/nvm) is a version manager for [**Node.js**](https://nodejs.org/), designed to be installed per-user, and invoked per-shell. It works on any POSIX-compliant shell (sh, dash, ksh, zsh, bash), in particular on these platforms: unix, macOS, and [WSL](https://github.com/nvm-sh/nvm#important-notes). [`nvm`](https://github.com/nvm-sh/nvm) is also recommended on [`npm`](https://www.npmjs.com/)'s [Official Documentation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
 Make sure that you have the `build-essentials` package already installed and then, to install [`nvm`](https://github.com/nvm-sh/nvm), replace the **{LABEL}** in the upcoming command as appropriate and execute it from an [Ubuntu](https://ubuntu.com/) terminal.
 
@@ -1607,16 +1621,16 @@ scoop install main/fnm
 
 Before you can use [fnm](https://github.com/Schniz/fnm), you have to first set up your shell.
 
-To be able to use [fnm](https://github.com/Schniz/fnm) with Git Bash, edit the `~/.bashrc` file and add the bellow snippet.
+To be able to use [fnm](https://github.com/Schniz/fnm) with Git Bash, edit the `~/.bashrc` file and add the below snippet.
 
 ```bash
-# fnm shel setup
+# fnm shell setup
 eval "$(fnm env --use-on-cd --shell bash --version-file-strategy=recursive)"
 ```
 
 Check out also the [Official Configuration](https://github.com/Schniz/fnm/blob/master/docs/configuration.md) section to enable other highly recommended features.
 
-To enable the changes made, you will need to source the`~/.bashrc` file, executing the following command:
+To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
 
 ```bash
 source ~/.bashrc
@@ -1639,8 +1653,8 @@ fnm list
 
 To be able to use [fnm](https://github.com/Schniz/fnm) with PowerShell, you will need add the bellow snippet to you profile file.
 
-```powershel
-# fnm shel setup
+```powershell
+# fnm shell setup
 fnm env --use-on-cd --shell powershell --version-file-strategy=recursive | Out-String | Invoke-Expression
 ```
 
@@ -1979,7 +1993,7 @@ Get-NetAdapter
 
 Replace the **{LABEL}** in the upcoming command as appropriate and execute it from an a PowerShell console with *Administrator* privileges to allow connections using WSL.
 
-```powershel
+```powershell
 New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "{ADAPTER_NAME}"  -Action Allow
 ```
 
@@ -1989,7 +2003,7 @@ New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "{ADA
 
 Then, to renew the firewall rules, execute the following command:
 
-```powershel
+```powershell
 Get-NetFirewallProfile -Name Public | Get-NetFirewallRule | where DisplayName -ILike "IntelliJ IDEA*" | Disable-NetFirewallRule
 ```
 
@@ -2067,7 +2081,7 @@ With the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sy
 
 [**Zed**](https://zed.dev/) is a minimal code editor crafted for speed and collaboration with humans and AI.
 
-#### 4.1.1. Installation
+#### 4.22.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 

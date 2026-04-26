@@ -42,10 +42,12 @@ Go through the [**Autenticação.gov App**](https://www.autenticacao.gov.pt/) co
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-To install [**GIMP**](https://www.gimp.org/), open a PowerShell console and execute the upcoming command to execute the installation from the [Microsoft Store](https://apps.microsoft.com/detail/XPDM27W10192Q0).
+To install [**GIMP**](https://www.gimp.org/), open a PowerShell console and execute the following commands:
 
-    scoop bucket add extras
-    scoop install extras/gimp
+```powershell
+scoop bucket add extras
+scoop install extras/gimp
+```
 
 ### 3.3. Inkscape
 
@@ -55,10 +57,12 @@ To install [**GIMP**](https://www.gimp.org/), open a PowerShell console and exec
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-To install [**Inkscape**](https://inkscape.org/), open a PowerShell console and execute the following command:
+To install [**Inkscape**](https://inkscape.org/), open a PowerShell console and execute the following commands:
 
-    scoop bucket add extras
-    scoop install extras/inkscape
+```powershell
+scoop bucket add extras
+scoop install extras/inkscape
+```
 
 ### 3.4. PDFsam
 
@@ -68,10 +72,12 @@ To install [**Inkscape**](https://inkscape.org/), open a PowerShell console and 
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-To install [**PDFsam Basic**](https://pdfsam.org/pdfsam-basic/), execute the upcoming commands on a PowerShell console.
+To install [**PDFsam Basic**](https://pdfsam.org/pdfsam-basic/), open a PowerShell console and execute the following commands:
 
-    scoop bucket add extras
-    scoop install extras/pdfsam
+```powershell
+scoop bucket add extras
+scoop install extras/pdfsam
+```
 
 ### 3.5. SpeedCrunch
 
@@ -81,10 +87,12 @@ To install [**PDFsam Basic**](https://pdfsam.org/pdfsam-basic/), execute the upc
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-To install [**SpeedCrunch**](http://www.speedcrunch.org), execute the upcoming commands on a PowerShell console.
+To install [**SpeedCrunch**](http://www.speedcrunch.org), open a PowerShell console and execute the following commands:
 
-    scoop bucket add extras
-    scoop install extras/speedcrunch
+```powershell
+scoop bucket add extras
+scoop install extras/speedcrunch
+```
 
 ### 3.6. Spotify
 
@@ -96,12 +104,14 @@ To install [**SpeedCrunch**](http://www.speedcrunch.org), execute the upcoming c
 
 To install [**Spotify**](https://open.spotify.com/), open a PowerShell console and execute the following commands:
 
-    scoop bucket add extras
-    scoop install extras/spotify
+```powershell
+scoop bucket add extras
+scoop install extras/spotify
+```
 
 ### 3.7. VLC
 
-VLC is a free and open source cross-platform multimedia player and framework that plays most multimedia files as well as DVDs, Audio CDs, VCDs, and various streaming protocols.
+[**VLC**](https://www.videolan.org/) is a free and open source cross-platform multimedia player and framework that plays most multimedia files as well as DVDs, Audio CDs, VCDs, and various streaming protocols.
 
 #### 3.7.1. Installation
 
@@ -109,5 +119,7 @@ VLC is a free and open source cross-platform multimedia player and framework tha
 
 To install [**VLC**](https://www.videolan.org/), open a PowerShell console and execute the following commands:
 
-    scoop bucket add extras
-    scoop install extras/vlc
+```powershell
+scoop bucket add extras
+scoop install extras/vlc
+```
