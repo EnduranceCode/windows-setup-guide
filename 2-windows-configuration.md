@@ -94,5 +94,5 @@ Windows has a habit of treating the `Documents` folder like a digital junk drawe
 Therefore, I prefer to store all my personal work files in a folder, under the `Documents` folder, named `Workspace`. This folder needs to be created, using the below command in a Windows Command Prompt:
 
 ```cmd
-mkdir %USERPROFILE%\Documents\Workspace
+mkdir %USERPROFILE%\Workspace
 ```
