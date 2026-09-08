@@ -81,16 +81,10 @@ Set the desired options for all the above extensions. The folder `root/home/user
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue) ![WSL](https://img.shields.io/badge/WSL-purple)
 
-Follow the [official instructions](https://learn.microsoft.com/windows/wsl/install-manual) to manually [enable](https://learn.microsoft.com/windows/wsl/install-manual#step-1---enable-the-windows-subsystem-for-linux) [**WSL**](https://learn.microsoft.com/windows/wsl/), executing the following command on a PowerShell console with *administrator privileges*.
+Follow the [official instructions](https://learn.microsoft.com/windows/wsl/install) to [install](https://learn.microsoft.com/windows/wsl/install#install-wsl-command) [**WSL**](https://learn.microsoft.com/windows/wsl/), executing the following command on a PowerShell console with *administrator privileges*.
 
 ```powershell
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-```
-
-Before restarting the machine, execute the following command on the same PowerShell console to [enable the Virtual Machine feature](https://learn.microsoft.com/windows/wsl/install-manual#step-3---enable-virtual-machine-feature).
-
-```powershell
-dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+wsl --install
 ```
 
 Reboot the machine to be able to proceed with the [**WSL**](https://learn.microsoft.com/windows/wsl/) installation.
@@ -258,9 +252,9 @@ ln -s {PATH_TO_POWERSHELL}/powershell.exe ~/.local/bin/pwsh
 
 > **Label Definition**
 >
-> + **{PATH_TO_POWERSHELL}** : Path to the Windows PowerShell executable folder
+> + **{PATH_TO_POWERSHELL}** : Path to the Windows PowerShell executable folder obtained by executing `$PSHOME`
 
-Ensure your `.local/bin` folder ins in your `PATH` by checking your `~/.bashrc` and make sure this line exists:
+Ensure your `.local/bin` folder is in your `PATH` by checking your `~/.bashrc` and make sure this line exists:
 
 ```bash
 # Add the ~/.local/bin to the PATH
