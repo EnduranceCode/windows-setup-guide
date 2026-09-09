@@ -20,16 +20,17 @@ This file contains the **Development Software and Tools** section of my [Setup g
     13. [K9s](#413-k9s)
     14. [Java](#414-java)
     15. [Apache Maven](#415-apache-maven)
-    16. [Apache Tomcat](#416-apache-tomcat)
-    17. [Quarkus CLI](#417-quarkus-cli)
-    18. [Node.js](#418-nodejs)
-    19. [Terraform](#419-terraform)
-    20. [IntelliJ IDEA](#420-intellij-idea)
-    21. [Visual Studio Code](#421-visual-studio-code)
-    22. [Zed](#422-zed)
-    23. [DBeaver](#423-dbeaver)
-    24. [Postman](#424-postman)
-    25. [Bruno](#425-bruno)
+    16. [Gradle](#416-gradle)
+    17. [Apache Tomcat](#417-apache-tomcat)
+    18. [Quarkus CLI](#418-quarkus-cli)
+    19. [Node.js](#419-nodejs)
+    20. [Terraform](#420-terraform)
+    21. [IntelliJ IDEA](#421-intellij-idea)
+    22. [Visual Studio Code](#422-visual-studio-code)
+    23. [Zed](#423-zed)
+    24. [DBeaver](#424-dbeaver)
+    25. [Postman](#425-postman)
+    26. [Bruno](#426-bruno)
 
 ## 4. Development Software & Tools
 
@@ -1353,7 +1354,7 @@ To have more control over [**Apache Maven**](https://maven.apache.org/) versions
 With **Developer Mode** enabled, replace the **{LABEL}** in the upcoming command as appropriate and then execute it, on a Windows Command Prompt, to create a symbolic link named `current` that targets the the desired [**Apache Maven**](https://maven.apache.org/) candidate folder:
 
 ```cmd
-mklink /J C:\dev\maven\candidates\{MAVEN_CANDIDATE} C:\dev\maven\current
+mklink /J C:\dev\apache-maven\candidates\{MAVEN_CANDIDATE} C:\dev\apache-maven\current
 ```
 
 > + **{MAVEN_CANDIDATE}** : The folder's name that contains the desired Maven candidate, e.g. *apache-maven-3.8.6-sa3*
@@ -1361,15 +1362,15 @@ mklink /J C:\dev\maven\candidates\{MAVEN_CANDIDATE} C:\dev\maven\current
 Check the output of the upcoming commands to confirm that the the symlink was created as desired:
 
 ```cmd
-dir C:\dev\maven\candidates\
-dir C:\dev\maven\candidates\current\
+dir C:\dev\apache-maven\candidates\
+dir C:\dev\apache-maven\candidates\current\
 ```
 
 Later if you want to upgrade and/or change the [**Apache Maven**](https://maven.apache.org/) version in use, you can simply unpack the newer version and change the symlink to point to the desired candidate.
 
 ```cmd
-del C:\dev\maven\candidates\current
-mklink /J C:\dev\maven\candidates\{MAVEN_CANDIDATE} C:\dev\maven\current
+del C:\dev\apache-maven\candidates\current
+mklink /J C:\dev\apache-maven\candidates\{MAVEN_CANDIDATE} C:\dev\apache-maven\current
 ```
 
 To set the `MAVEN_HOME` environment variable for the current *user account*, press `WIN + R`, type `rundll32.exe sysdm.cpl,EditEnvironmentVariables` and then press `Enter`.
@@ -1467,13 +1468,231 @@ del %USERPROFILE%\.m2\settings.xml
 mklink %USERPROFILE%\.m2\settings.xml %USERPROFILE%\.m2\settings-{PROJECT}-{DATE}.xml
 ```
 
-### 4.16. Apache Tomcat
+### 4.16. Gradle
 
-[**Apache Tomcat**](http://tomcat.apache.org/) is an open source implementation of the [Jakarta Servlet](https://projects.eclipse.org/projects/ee4j.servlet), [Jakarta Server Pages](https://projects.eclipse.org/projects/ee4j.jsp), [Jakarta Expression Language](https://projects.eclipse.org/projects/ee4j.el), [Jakarta WebSocket](https://projects.eclipse.org/projects/ee4j.websocket), [Jakarta Annotations](https://projects.eclipse.org/projects/ee4j.cahttps://projects.eclipse.org/projects/ee4j.authentication) specifications. These specifications are part of the [Jakarta EE platform](https://projects.eclipse.org/projects/ee4j.jakartaee-platform).
+[**Gradle**](https://gradle.org/) is a build automation tool used primarily for [Java](https://openjdk.org/) and [Kotlin](https://kotlinlang.org/) projects. It can also be used to build and manage projects written in C/C++, Python, and other languages, and it is the default build tool for [Android](https://www.android.com/) development.
 
 #### 4.16.1. Installation
 
-##### 4.16.1.1. Installation on the Windows Native File System
+##### 4.16.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To be able to install a specific [**Gradle**](https://gradle.org/) version on the `WSL File System`, I like to follow a procedure similar to the one used for [**Apache Maven**](#4151-installation).
+
+Start by creating the folder where [**Gradle**](https://gradle.org/) will be installed, executing the following commands:
+
+```bash
+sudo mkdir -p /opt/gradle/candidates
+sudo chown -R $USER:$USER /opt/gradle/
+```
+
+Check the output of the upcoming command to confirm that the folder was created as desired:
+
+```bash
+ls -la --group-directories-first /opt
+```
+
+To download the desired [**Gradle**](https://gradle.org/) version in the `/tmp` directory, replace the **{LABEL}** in the upcoming command as appropriate and then execute it:
+
+```bash
+wget {DOWNLOAD_LINK} -P /tmp
+```
+
+> **Label Definition**
+>
+> + **{DOWNLOAD_LINK}** : Download link to the *binary-only* `bin` zip archive taken from the [official download page](https://gradle.org/releases/), e.g. `https://services.gradle.org/distributions/gradle-8.14.3-bin.zip`
+
+The `unzip` utility was already installed as a dependency of the [**Java**](#414-java) installation (see [SDKMAN](https://sdkman.io/)).
+
+Once the download is completed, extract the archive in the `/opt/gradle/candidates` directory with the following command:
+
+```bash
+unzip /tmp/gradle-*.zip -d /opt/gradle/candidates/
+```
+
+Check the output of the upcoming command to confirm that the folder was created as desired:
+
+```bash
+ls -la --group-directories-first /opt/gradle/candidates
+```
+
+Then, rename the extracted folder taking in consideration the following structure:
+
+```bash
+gradle-{VERSION}-{PROJECT}
+```
+
+The different parts in the above name structure, shall be replaced as explained next:
+
+> + **{VERSION}** : The Gradle version number, e.g. *8.14.3*
+> + **{PROJECT}** : The name of the project where this instance of Gradle will be used, e.g. *sa3*
+>
+> With the above examples, the Gradle folder name would be *gradle-8.14.3-sa3*
+
+Check the output of the upcoming command to confirm that the folder was renamed as desired:
+
+```bash
+ls -la --group-directories-first /opt/gradle/candidates
+```
+
+To have more control over [**Gradle**](https://gradle.org/) versions and updates, replace the **{LABEL}** in the upcoming command as appropriate and then execute it to create a symbolic link `current` that will point to the [**Gradle**](https://gradle.org/) installation folder:
+
+```bash
+ln -s /opt/gradle/candidates/{GRADLE_FOLDER} /opt/gradle/current
+```
+
+> + **{GRADLE_FOLDER}** : The folder's name that contains the desired version, e.g. *gradle-8.14.3-sa3*
+
+Check the output of the upcoming commands to confirm that the the symlink was created as desired:
+
+```bash
+ls -la --group-directories-first /opt/gradle/
+ls -la --group-directories-first /opt/gradle/current/
+```
+
+Later if you want to upgrade your [**Gradle**](https://gradle.org/) installation you can simply unpack the newer version and change the symlink to point to the latest version.
+
+To set the `GRADLE_HOME` environment variable for your [WSL](https://learn.microsoft.com/windows/wsl/) user, open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/), executing the below command on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```bash
+nano ~/.bashrc
+```
+
+Then, add the upcoming snippet to the `~/.bashrc` immediately before sourcing the file to customize the bash prompt.
+
+```bash
+# User's environment variables
+export GRADLE_HOME=/opt/gradle/current
+
+# User's path customization
+export PATH=${GRADLE_HOME}/bin:${PATH}
+```
+
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
+
+To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
+
+```bash
+source ~/.bashrc
+```
+
+To check if the `GRADLE_HOME` environment variable was properly set, check the output of the following command:
+
+```bash
+echo $GRADLE_HOME
+```
+
+To check if the users's `PATH` was properly set, check the output of the following command:
+
+```bash
+echo $PATH
+```
+
+To verify the **Gradle** installation, check the output of the following command:
+
+```bash
+gradle --version
+```
+
+If everything is correct, the above command will output the **Gradle** version.
+
+##### 4.16.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**Gradle**](https://gradle.org/), download the desired *binary-only* `bin` zip archive from the [official download page](https://gradle.org/releases/) and unpack it to the folder `C:\dev\gradle\candidates`. Rename the extracted folder taking in consideration the following structure:
+
+    gradle-{VERSION}-{PROJECT}
+
+The different parts in the above name structure, shall be replaced as explained next:
+
+> + **{VERSION}** : The Gradle version number, e.g. *8.14.3*
+> + **{PROJECT}** : The name of the project where this instance of Gradle will be used, e.g. *sa3*
+>
+> With the above examples, the Gradle folder name would be *gradle-8.14.3-sa3*
+
+To have more control over [**Gradle**](https://gradle.org/) versions and updates, you will create a symbolic link named `current` that will target the desired [**Gradle**](https://gradle.org/) candidate folder. But, to be able to do so without Administrator priviliges, you need to enable Windows **Developer Mode** which can be done following the [Advanced Windows Settings](./2-windows-configuration.md#21-advanced-windows-settings) of this guide.
+
+With **Developer Mode** enabled, replace the **{LABEL}** in the upcoming command as appropriate and then execute it, on a Windows Command Prompt, to create a symbolic link named `current` that targets the the desired [**Gradle**](https://gradle.org/) candidate folder:
+
+```cmd
+mklink /J C:\dev\gradle\candidates\{GRADLE_CANDIDATE} C:\dev\gradle\current
+```
+
+> + **{GRADLE_CANDIDATE}** : The folder's name that contains the desired Gradle candidate, e.g. *gradle-8.14.3-sa3*
+
+Check the output of the upcoming commands to confirm that the the symlink was created as desired:
+
+```cmd
+dir C:\dev\gradle\candidates\
+dir C:\dev\gradle\candidates\current\
+```
+
+Later if you want to upgrade and/or change the [**Gradle**](https://gradle.org/) version in use, you can simply unpack the newer version and change the symlink to point to the desired candidate.
+
+```cmd
+del C:\dev\gradle\candidates\current
+mklink /J C:\dev\gradle\candidates\{GRADLE_CANDIDATE} C:\dev\gradle\current
+```
+
+To set the `GRADLE_HOME` environment variable for the current *user account*, press `WIN + R`, type `rundll32.exe sysdm.cpl,EditEnvironmentVariables` and then press `Enter`.
+
+On the ***User variables*** section, click the **New** button and fill the *Variable name* input box with **GRADLE_HOME** and the *Variable value* input box with the path to the **Gradle** folder. If a `GRADLE_HOME` already exists, select it and click the **Edit** button, then fill the *Variable value* input box with the path to the **Gradle** installation folder.
+
+Still on the ***User variables*** section, select the `Path` variable and click the **Edit** button. Then, click the **New** button and fill the input box with the following value:
+
+    %GRADLE_HOME%\bin
+
+Click the **OK** button to close the window used to edit the `PATH` variable and then click the **OK** button on the *environment variables* window to close it.
+
+To check if the Windows `GRADLE_HOME` value was properly set, open a Windows Command Prompt and check the output of the following command:
+
+```cmd
+echo %GRADLE_HOME%
+```
+
+To check if the Windows `PATH` value was properly set, on the same Windows Command Prompt, check the output of the following command:
+
+```cmd
+echo %PATH%
+```
+
+To verify the **Gradle** installation, on the same Windows Command Prompt, check the output of the following command:
+
+```cmd
+gradle --version
+```
+
+If everything is correct, the above command will output the **Gradle** version.
+
+#### 4.16.2. Configuration
+
+The default location for the user's *Gradle User Home* is the `.gradle` folder at the user's *Home Folder*. It stores the global caches, the daemon logs and the wrapper distributions. Check if it already exists and if it doesn't create it with the upcoming command. If [**Gradle**](https://gradle.org/) is installed on the `WSL File System`, use a [Ubuntu](https://ubuntu.com/) terminal and if it is installed on the `Windows Native File System` use a [Git Bash](https://git-scm.com/) terminal.
+
+```bash
+mkdir -p ~/.gradle
+```
+
+The development environment will better contained if a *Gradle User Home* is set for each project, mirroring the per project *Maven Local Repository* approach. Therefore, replace the **{LABEL}** in the upcoming command as appropriate and execute it. If [**Gradle**](https://gradle.org/) is installed on the `WSL File System`, use a [Ubuntu](https://ubuntu.com/) terminal and if it is installed on the `Windows Native File System` use a [Git Bash](https://git-scm.com/) terminal.
+
+```bash
+mkdir -p ~/.gradle-{PROJECT}
+```
+
+> **Label Definition**
+>
+> + **{PROJECT}** : The label that identifies the project name
+
+To set the folder created with the above command as the custom *Gradle User Home*, set the `GRADLE_USER_HOME` environment variable accordingly on the terminal that runs the build, or point the build tool of the IDE to it (see [Configure Build Tools](#4216-configure-build-tools)).
+
+### 4.17. Apache Tomcat
+
+[**Apache Tomcat**](http://tomcat.apache.org/) is an open source implementation of the [Jakarta Servlet](https://projects.eclipse.org/projects/ee4j.servlet), [Jakarta Server Pages](https://projects.eclipse.org/projects/ee4j.jsp), [Jakarta Expression Language](https://projects.eclipse.org/projects/ee4j.el), [Jakarta WebSocket](https://projects.eclipse.org/projects/ee4j.websocket), [Jakarta Annotations](https://projects.eclipse.org/projects/ee4j.cahttps://projects.eclipse.org/projects/ee4j.authentication) specifications. These specifications are part of the [Jakarta EE platform](https://projects.eclipse.org/projects/ee4j.jakartaee-platform).
+
+#### 4.17.1. Installation
+
+##### 4.17.1.1. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1488,13 +1707,13 @@ The different parts in the above name structure, shall be replaced as explained 
 >
 > With the above examples, the Tomcat folder name would be *tomcat-8.5.82-sa3*
 
-### 4.17. Quarkus CLI
+### 4.18. Quarkus CLI
 
 The [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) lets you create Quarkus projects, manage extensions and do essential build and development tasks using the underlying project build tool.
 
-#### 4.17.1. Installation
+#### 4.18.1. Installation
 
-##### 4.17.1.1. Installation on the WSL File System
+##### 4.18.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -1510,7 +1729,7 @@ To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) instal
 quarkus --version
 ```
 
-##### 4.17.1.2. Installation on the Windows Native File System
+##### 4.18.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1526,21 +1745,21 @@ To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) instal
 quarkus --version
 ```
 
-### 4.18. Node.js
+### 4.19. Node.js
 
 [**Node.js**](https://nodejs.org/) is a cross-platform, open-source JavaScript runtime environment that runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
 
-#### 4.18.1. Installation
+#### 4.19.1. Installation
 
 The most pratical way to install [**Node.js**](https://nodejs.org/) is via a Node version manager because it allows you to easily install and switch between numerous versions of [**Node.js**](https://nodejs.org/). This is useful when a project you’re working on requires a different version of [**Node.js**](https://nodejs.org/) than what you currently have installed.
 
-##### 4.18.1.1. Installation on the WSL File System
+##### 4.19.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
 My go to Node version manager on Linux used to be [`nvm`](https://github.com/nvm-sh/nvm) but,now I'm starting to use [fnm (Fast Node Manager)](https://github.com/Schniz/fnm) because it has better performance.
 
-###### 4.18.1.1.1. fnm (Fast Node Manager)
+###### 4.19.1.1.1. fnm (Fast Node Manager)
 
 [fnm](https://github.com/Schniz/fnm) can be installed, as per the [official instructions](https://github.com/Schniz/fnm#using-a-script-macoslinux), executing the following command on a [Ubuntu](https://ubuntu.com/) terminal:
 
@@ -1600,7 +1819,7 @@ npm --version
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-###### 4.18.1.2.2. NVS (Node Version Switcher)
+###### 4.19.1.1.2. NVS (Node Version Switcher)
 
 Although I'm now using [fnm](https://github.com/Schniz/fnm) as my preferred Node Version Manager, I'm keeping here, for historical reference, my guide to install [`nvm`](https://github.com/nvm-sh/nvm), which I used before getting to know [fnm](https://github.com/Schniz/fnm).
 
@@ -1672,13 +1891,13 @@ When [**Node.js**](https://nodejs.org/) is installed, [`npm`](https://www.npmjs.
 nvm install-latest-npm
 ```
 
-##### 4.18.1.2. Installation on the Windows Native File System
+##### 4.19.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 My go to Node version manager on on the `Windows Native File System` used to be [NVS](https://github.com/jasongin/nvs) but, it has seen very little activity recently, with the last major release being in 2023. Therefore, I'm now starting to use [fnm (Fast Node Manager)](https://github.com/Schniz/fnm).
 
-###### 4.18.1.2.1. fnm (Fast Node Manager)
+###### 4.19.1.2.1. fnm (Fast Node Manager)
 
 [fnm](https://github.com/Schniz/fnm) can be installed with [scoop](https://scoop.sh/) executing, on PowerShell console, the following command:
 
@@ -1763,7 +1982,7 @@ npm --version
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-###### 4.18.1.2.2. NVS (Node Version Switcher)
+###### 4.19.1.2.2. NVS (Node Version Switcher)
 
 Although I'm now using [fnm](https://github.com/Schniz/fnm) as my preferred Node Version Manager, I'm keeping here, for historical reference, my guide to install [NVS](https://github.com/jasongin/nvs).
 
@@ -1862,13 +2081,13 @@ npm --version
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-### 4.19. Terraform
+### 4.20. Terraform
 
 [**Terraform**](https://www.terraform.io/) is a tool for building, changing, and versioning infrastructure safely and efficiently.
 
-#### 4.19.1. Installation
+#### 4.20.1. Installation
 
-##### 4.19.1.1. Installation on the WSL File System
+##### 4.20.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -1926,7 +2145,7 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 terraform --version
 ```
 
-##### 4.19.1.2. Installation on the Windows Native File System
+##### 4.20.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1952,11 +2171,11 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 terraform --version
 ```
 
-### 4.20. IntelliJ IDEA
+### 4.21. IntelliJ IDEA
 
 [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) is an integrated development environment written in Java for developing computer software written in Java, Kotlin, Groovy, and other JVM-based languages. It is developed by JetBrains and is available as an Apache 2 Licensed community edition, and in a proprietary commercial edition.
 
-#### 4.20.1. Installation
+#### 4.21.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1990,7 +2209,7 @@ It is also recommend to [exclude the IDE process from the antivirus](https://int
 + `idea64.exe`
 + `fsnotifier.exe`
 
-#### 4.20.2. Configure the WSL development environment
+#### 4.21.2. Configure the WSL development environment
 
 [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) provides native support for developing projects stored on the [**WSL**](https://learn.microsoft.com/windows/wsl/) file system. You install and run the IDE on Windows as usual, but you create, open, build, run and debug the projects located on the `WSL File System` directly, without leaving the IDE.
 
@@ -2000,7 +2219,7 @@ When you open a project stored on the `WSL File System`, recent [**IntelliJ IDEA
 >
 > Do not run [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) *inside* [**WSL**](https://learn.microsoft.com/windows/wsl/) through [WSLg](https://learn.microsoft.com/windows/wsl/tutorials/gui-apps). That setup is slow, lacks desktop integration and is [not recommended by JetBrains](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html). The native integration described next is the preferred approach.
 
-##### 4.20.2.1. Create or open a project on the WSL file system
+##### 4.21.2.1. Create or open a project on the WSL file system
 
 All the projects are stored on the folder `code` on the [**WSL**](https://learn.microsoft.com/windows/wsl/) file system, i.e. `\\wsl.localhost\Ubuntu\home\{USER}\code`, mirroring the `C:\code` folder on the `Windows Native File System`.
 
@@ -2015,47 +2234,47 @@ To create a new project on the `WSL File System`, on the welcome screen choose `
 
 To make sure that the projects are created and opened on the [**WSL**](https://learn.microsoft.com/windows/wsl/) file system by default, on the welcome screen choose `All Settings` from the `Customize` tab and then the tab `Appearance & Behavior->System Settings`. On this tab, change the input box **Default project directory** to the folder `\\wsl.localhost\Ubuntu\home\{USER}\code`.
 
-##### 4.20.2.2. Select the JDK on the WSL file system
+##### 4.21.2.2. Select the JDK on the WSL file system
 
 When a project is opened or created on the `WSL File System`, [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) scans the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution for the installed [**Java**](https://openjdk.org/) versions and lists them on the *Project Structure* dialog (`Ctrl+Alt+Shift+S`). Choose the [**Java**](#414-java) version installed with [SDKMAN](https://sdkman.io/) on the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution (`~/.sdkman/candidates/java/current`). [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) must use a [**Java**](https://openjdk.org/) version installed on the `WSL File System`, otherwise the project will be built with the Windows one.
 
-##### 4.20.2.3. Enable the Remote Execution Agent plugin
+##### 4.21.2.3. Enable the Remote Execution Agent plugin
 
 To work with *Maven* and *Gradle* projects on the `WSL File System`, make sure the bundled **Remote Execution Agent** plugin is enabled. On the welcome screen choose `Plugins` and then, on the `Installed` tab, search for "Remote Execution Agent". If it is disabled, enable it and make sure its `Binary Files` support is also enabled, then restart the IDE.
 
-##### 4.20.2.4. Use the Git installation on the WSL file system
+##### 4.21.2.4. Use the Git installation on the WSL file system
 
 [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) automatically uses the *Git* installed on the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution for projects opened with a `\\wsl.localhost` path, provided `git` is available on the distribution (see [Git & Git Bash](./1-fundamental-software.md#15-git--git-bash)). Because `appendWindowsPath=false` is set on the `/etc/wsl.conf` file (see [WSL distribution installation & configuration](./1-fundamental-software.md#123-wsl-distribution-installation--configuration)), installing [Git](https://git-scm.com/) on the `WSL File System` guarantees that the IDE finds the Linux `git`.
 
-#### 4.20.3. Install plugins
+#### 4.21.3. Install plugins
 
-##### 4.20.3.1. Install SonarQube plugin
+##### 4.21.3.1. Install SonarQube plugin
 
 [SonarQube](https://plugins.jetbrains.com/plugin/7973-sonarqube-for-ide) is an IDE extension that helps to detect and fix quality issues as the code is written. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "SonarQube". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-##### 4.20.3.2. Install JPA Buddy
+##### 4.21.3.2. Install JPA Buddy
 
 [JPA Buddy](https://plugins.jetbrains.com/plugin/15075-jpa-buddy) is an IDE extension that helps developers work efficiently with Hibernate, EclipseLink, Spring Data JPA, Flyway, Liquibase, Lombok, MapStruct, and other related technologies in both Java and Kotlin. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "JPA Buddy". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-##### 4.20.3.3. Install Kotlin plugin
+##### 4.21.3.3. Install Kotlin plugin
 
 Unlike the *Ultimate* edition, where [Kotlin](https://kotlinlang.org/) support is bundled, the *Community* edition of [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) requires the [Kotlin plugin](https://plugins.jetbrains.com/plugin/6954-kotlin) to be installed. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "Kotlin". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it. The plugin also provides the *Kotlin code style* scheme based on the [official Kotlin style guide](https://kotlinlang.org/docs/coding-conventions.html).
 
-#### 4.20.4. Set code formatters
+#### 4.21.4. Set code formatters
 
-##### 4.20.4.1. Java
+##### 4.21.4.1. Java
 
 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) seems to be the most popular **Code Style Guide** for [Java](https://www.java.com/en/). This style guide is licensed under the [CC-By 3.0 License](https://creativecommons.org/licenses/by/3.0/) and a there's a [repository](https://github.com/google/styleguide) where a formatter configuration file for [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) is available.
 
 To add the above mentioned Code Style Formatter settings, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Editor->Code Style->Java`. On this tab, click the `settings` icon choose `Import Scheme/IntelliJ IDEA code style XML` and pick the file(s) with the desired settings.
 
-##### 4.20.4.2. Kotlin
+##### 4.21.4.2. Kotlin
 
-The [Kotlin plugin](#42033-install-kotlin-plugin) includes a *Kotlin code style* scheme based on the [official Kotlin style guide](https://kotlinlang.org/docs/coding-conventions.html). To make sure it is in use, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen choose `All Settings` from the `Customize` tab. Then choose the tab `Editor->Code Style->Kotlin`. On this tab, on the `Scheme` dropdown, select the `Kotlin style guide` scheme.
+The [Kotlin plugin](#42133-install-kotlin-plugin) includes a *Kotlin code style* scheme based on the [official Kotlin style guide](https://kotlinlang.org/docs/coding-conventions.html). To make sure it is in use, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen choose `All Settings` from the `Customize` tab. Then choose the tab `Editor->Code Style->Kotlin`. On this tab, on the `Scheme` dropdown, select the `Kotlin style guide` scheme.
 
-#### 4.20.5. Configure Version Control
+#### 4.21.5. Configure Version Control
 
-##### 4.20.5.1. Commit
+##### 4.21.5.1. Commit
 
 Modern IntelliJ IDEA versions uses a **non-modal Commit tool window** (accessible via `Alt + 0` or the checkmark icon on the left sidebar). The **Shelf** tab is contextual; it only appears in the Commit tool window when you have at least one shelved change. To manage your shelf:
 
@@ -2069,9 +2288,9 @@ To move changes to the shelf instead of committing them, take the following step
 2.  Select **Shelf Changes...** from the context menu.
 3.  Provide a name for the shelf and click **Shelf Changes**. The **Shelf** tab will now become visible.
 
-#### 4.20.6. Configure Build Tools
+#### 4.21.6. Configure Build Tools
 
-##### 4.20.6.1. Maven
+##### 4.21.6.1. Maven
 
 To customize *Maven*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Maven`. On this tab, change the input boxes listed below as described:
 
@@ -2081,25 +2300,20 @@ To customize *Maven*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/
 
 Beware that you must choose the [Apache Maven](https://maven.apache.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-##### 4.20.6.2. Gradle
+##### 4.21.6.2. Gradle
 
 To customize *Gradle*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Gradle`. On this tab, change the input boxes listed below as described:
 
 + **Use Gradle from** : Select the `Specified location` option;
-+ **Gradle home path** : The path to the chosen system *Gradle* instance. *Gradle* is managed with [SDKMAN](https://sdkman.io/), like [**Java**](#414-java), and it can be installed and updated on a [Ubuntu](https://ubuntu.com/) terminal with the command `sdk install gradle`. The installation folder is `$HOME/.sdkman/candidates/gradle/{VERSION}` and the `current` symbolic link points to the version in use, e.g. `$HOME/.sdkman/candidates/gradle/current`;
-+ **Gradle JVM** : The [**Java**](#414-java) version in use with the project, also managed with [SDKMAN](https://sdkman.io/), e.g. `$HOME/.sdkman/candidates/java/current`;
-+ **Gradle user home** : Check the `Override` checkbox and point to a per project *Gradle User Home*, e.g. `$HOME/.gradle-{PROJECT}`, to keep the development environment contained, mirroring the per project *Maven Local Repository* approach.
-
-> **Label Definition**
->
-> + **{VERSION}** : The SDKMAN *Identifier* of the desired [Gradle](https://gradle.org/) version, as shown on the output of the command `sdk list gradle`, e.g. *8.14.3*
-> + **{PROJECT}** : The label that identifies the project name
++ **Gradle home path** : The path to the chosen [system *Gradle* instance](#4161-installation);
++ **Gradle JVM** : The [**Java**](#414-java) version in use with the project, e.g. `$HOME/.sdkman/candidates/java/current` on the `WSL File System` or `C:\dev\java\current` on the `Windows Native File System`;
++ **Gradle user home** : Check the `Override` checkbox and point to the [custom project's *Gradle User Home*](#4162-configuration);
 
 Beware that you must choose the [Gradle](https://gradle.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.20.7. Configure Tools
+#### 4.21.7. Configure Tools
 
-##### 4.20.7.1. Terminal
+##### 4.21.7.1. Terminal
 
 To customize the *Terminal* in use with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Tools->Terminal`. On this tab, take in consideration the file system you're working on and change the input boxes listed below as described:
 
@@ -2120,7 +2334,7 @@ This is a per project setting, therefore it might be necessary to set it for eve
 
 When working on a project opened from the `WSL File System`, the integrated terminal opens a [**WSL**](https://learn.microsoft.com/windows/wsl/) shell automatically, therefore no additional configuration is required beyond the `Shell path` shown above.
 
-#### 4.20.8. Run/Debug Configurations
+#### 4.21.8. Run/Debug Configurations
 
 When `networkingMode=mirrored` is enabled on the `.wslconfig` file (as recommended on the [WSL configuration](./1-fundamental-software.md#122-configuration)), the [**WSL**](https://learn.microsoft.com/windows/wsl/) 2 network is shared with Windows, `localhost` works in both directions and **no firewall configuration is required** to build and debug a project on the `WSL File System`. In that case, skip the upcoming steps.
 
@@ -2148,7 +2362,7 @@ Get-NetFirewallProfile -Name Public | Get-NetFirewallRule | where DisplayName -I
 
 After starting a debugger session, the Windows Firewall popup might appears and them, select the *Public networks* checkbox and click the `Allow access` button.
 
-##### 4.20.8.1. Shorten command line method
+##### 4.21.8.1. Shorten command line method
 
 To avoid the error "*Command line is too long*" when running tests it's necessary to set the "*Shorten command line*" method in the Run/Debug configuration to "*JAR manifest*". That can be done for the specific method or class, but it's better to [set it as default](https://stackoverflow.com/a/47927544) on [run/debug configuration templates](https://www.jetbrains.com/help/idea/run-debug-configuration.html#templates).
 
@@ -2156,24 +2370,24 @@ From the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) main menu, select 
 
 [Then](https://stackoverflow.com/a/65639857), click on the `Modify options` link (`ALT+M`) and set/select the `Shorten command line` option. Back on the `JUnit` tab, there will be a new dropdown input box named `Shorten command line`. In this new dropdown, choose the *Jar manifest* option. Click the button `OK` (once to close the `Select configuration templates` pop up and again to close the  `Run->Edit Configurations` pop up screen) and from now on all the new `JUnit` Run/Debug configurations will use this template.
 
-#### 4.20.9. Performance tips & WSL gotchas
+#### 4.21.9. Performance tips & WSL gotchas
 
 To get the best possible performance out of the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) + [**WSL**](https://learn.microsoft.com/windows/wsl/) set up and to avoid the usual [**WSL**](https://learn.microsoft.com/windows/wsl/) pitfalls, keep in mind the upcoming tips.
 
 + **Keep the projects on the `WSL File System`** : Accessing the `Windows Native File System` from [**WSL**](https://learn.microsoft.com/windows/wsl/) through `/mnt/c/...` (DrvFs) is dramatically slower than working on the `WSL File System`. Store the projects and their build caches (`~/.m2` and `~/.gradle`) on the `WSL File System`.
 + **Do not store the projects on the `Windows Native File System`** : A project opened from `C:\` but built inside [**WSL**](https://learn.microsoft.com/windows/wsl/) crosses the file system boundary on every file operation, which is the single biggest performance killer.
-+ **Keep the antivirus exclusions up to date** : Keep the exclusions listed on the [Installation](#4201-installation) section, including the [**WSL**](https://learn.microsoft.com/windows/wsl/) virtual disk, otherwise *Microsoft Defender* real-time scanning will slow down the WSL file access and the builds.
++ **Keep the antivirus exclusions up to date** : Keep the exclusions listed on the [Installation](#4211-installation) section, including the [**WSL**](https://learn.microsoft.com/windows/wsl/) virtual disk, otherwise *Microsoft Defender* real-time scanning will slow down the WSL file access and the builds.
 + **Allocate enough memory to WSL** : The [**WSL**](https://learn.microsoft.com/windows/wsl/) virtual machine memory is bounded by the `.wslconfig` file (see [WSL configuration](./1-fundamental-software.md#122-configuration)). Make sure the memory size is adequate for the projects and the IDE indexing.
 
 > **Note**
 >
 > The *run targets* feature (running a `Windows Native File System` project inside [**WSL**](https://learn.microsoft.com/windows/wsl/)) is only available on the *Ultimate* edition. Since all the development work is done on the `WSL File System`, it is not needed.
 
-### 4.21. Visual Studio Code
+### 4.22. Visual Studio Code
 
 [**Visual Studio Code**](https://code.visualstudio.com/), also commonly referred to as **VS Code**, is a source-code editor made by Microsoft with the Electron Framework, for Windows, Linux and macOS. Features include support for debugging, syntax highlighting, intelligent code completion, snippets, code refactoring, and embedded Git.
 
-#### 4.21.1. Installation
+#### 4.22.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -2187,7 +2401,7 @@ Execute [**Visual Studio Code**](https://code.visualstudio.com) and to enable th
 + Extensions
 + UI State
 
-#### 4.21.2. Install extensions
+#### 4.22.2. Install extensions
 
 With the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sync) option on, [**Visual Studio Code**](https://code.visualstudio.com) will installed all the synced extensions. Wait for while to allow the full synchronization and then check if all of the following extensions were properly installed:
 
@@ -2229,11 +2443,11 @@ With the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sy
 + [WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl);
 + [XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml).
 
-### 4.22. Zed
+### 4.23. Zed
 
 [**Zed**](https://zed.dev/) is a minimal code editor crafted for speed and collaboration with humans and AI.
 
-#### 4.22.1. Installation
+#### 4.23.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -2244,11 +2458,11 @@ scoop bucket add extras
 scoop install extras/zed
 ```
 
-### 4.23. DBeaver
+### 4.24. DBeaver
 
 [**DBeaver**](https://dbeaver.io/) is free and open source universal database tool for developers and database administrators.
 
-#### 4.23.1. Installation
+#### 4.24.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -2281,21 +2495,21 @@ keytool -v -list -keystore cacerts -alias {CERTIFICATE_ALIAS} -storepass changei
 >
 > + **{CERTIFICATE_ALIAS}** : The chosen certificate alias
 
-### 4.24. Postman
+### 4.25. Postman
 
 [**Postman**](https://www.postman.com/) helps you be more efficient while working with APIs. Using Postman, you can construct complex HTTP requests quickly, organize them in collections.
 
-#### 4.24.1. Installation
+#### 4.25.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 Download [**Postman**](https://www.postman.com/) installer latest version from [official downloads page](https://www.postman.com/downloads/). Then, execute the downloaded file and when prompted, sign in into the [**Postman**](https://www.postman.com/) account.
 
-### 4.25. Bruno
+### 4.26. Bruno
 
 [**Bruno**](https://www.usebruno.com/) is an open source IDE for exploring and testing APIs. It is a lightweight, Git-native, local-first alternative to [Postman](https://www.postman.com/).
 
-#### 4.25.1. Installation
+#### 4.26.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
