@@ -2185,7 +2185,26 @@ Execute the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) 
 
 To install [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), launch the [**JetBrains Toolbox App**](https://www.jetbrains.com/toolbox-app/) and then choose the desired [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) version to install and follow the instructions prompted.
 
-Some antivirus software can interfere with the IDE build process, [causing builds to run dramatically slower](https://intellij-support.jetbrains.com/hc/en-us/articles/360006298560). To prevent this, the folders where the IDE writes a lot of files should be excluded from the antivirus software real-time scanning. That can be done following the following steps:
+Some antivirus software can interfere with the IDE build process, [causing builds to run dramatically slower](https://intellij-support.jetbrains.com/hc/en-us/articles/360006298560). To prevent this, the folders where the IDE writes a lot of files should be excluded from the antivirus software real-time scanning. The procedure depends on the antivirus software in use, as described on the following subsections:
+
+> **Label Definition**
+>
+> + **{USER}** : Windows username
+> + **{WSLGUID}** : The folder id of the [**WSL**](https://learn.microsoft.com/windows/wsl/) `Ubuntu` distribution `BasePath`, as shown by the command on the note below (a GUID, for example `8ee956c7-1790-48e1-886b-e26763330ad9`)
+
+> **Note**
+>
+> The folder where the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution stores its *Virtual Hard Disk* depends on the [**WSL**](https://learn.microsoft.com/windows/wsl/) version and on how the distro was installed. On recent [**WSL**](https://learn.microsoft.com/windows/wsl/) versions, distributions installed with `wsl --install` are not installed as Microsoft Store packages anymore, and store the `ext4.vhdx` file under `C:\Users\{USER}\AppData\Local\wsl\{WSLGUID}`. On systems where the distro was installed from the Microsoft Store as a package, the folder is `C:\Users\{USER}\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu*\LocalState` instead. To find that folder, execute the below command on a `PowerShell` prompt and note the `BasePath` of the `Ubuntu` distribution:
+>
+> ```powershell
+> Get-ChildItem 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss' |
+>   ForEach-Object { Get-ItemProperty $_.PSPath } |
+>   Select-Object DistributionName, BasePath
+> ```
+
+##### 4.21.1.1. Microsoft Defender exclusions
+
+The *Microsoft Defender* exclusions are added on the *Windows Security* application:
 
 + Click the Start button and search for “Windows Security”;
 + Start the *Windows Security* application;
@@ -2196,18 +2215,43 @@ Some antivirus software can interfere with the IDE build process, [causing build
   + `C:\code`
   + `%APPDATA%\JetBrains\`
   + `%LOCALAPPDATA%\JetBrains\`
-  + `C:\Users\{USER}\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu*\LocalState`
+  + `C:\Users\{USER}\AppData\Local\wsl\{WSLGUID}`
 
-> **Label Definition**
->
-> + **{USER}** : Windows username
-
-When working with projects on the `WSL File System`, excluding the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution *Virtual Hard Disk* from real-time scanning (the `LocalState` folder above, where the `ext4.vhdx` file is stored) also prevents *Microsoft Defender* from slowing down the access to the [**WSL**](https://learn.microsoft.com/windows/wsl/) files.
+When working with projects on the `WSL File System`, excluding the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution *Virtual Hard Disk* from real-time scanning (the folder above, where the `ext4.vhdx` file is stored) also prevents *Microsoft Defender* from slowing down the access to the [**WSL**](https://learn.microsoft.com/windows/wsl/) files.
 
 It is also recommend to [exclude the IDE process from the antivirus](https://intellij-support.jetbrains.com/hc/en-us/articles/360005028939-Slow-startup-on-Windows-splash-screen-appears-in-more-than-20-seconds) to improve the startup performance. To do that exclusion, on the on “Add or remove exclusions”, Click the button `+ Add an exclusion`, choose `Process` from the dropdown list and then add all (one by one) the following processes:
 
 + `idea64.exe`
 + `fsnotifier.exe`
+
+##### 4.21.1.2. ESET Security exclusions
+
+The [**ESET**](https://www.eset.com/) exclusions are added on a dedicated list inside the [**ESET**](https://www.eset.com/) application, and not on the *Windows Security* application. Unlike *Microsoft Defender*, [**ESET**](https://www.eset.com/) does not expand user-specific environment variables (like `%APPDATA%`), so the full paths must be used instead.
+
+To exclude the folders where the IDE writes a lot of files from the [**ESET**](https://www.eset.com/) real-time scanning, add them to the *Performance exclusions* list:
+
++ Open the [**ESET**](https://www.eset.com/) main program window and press `F5` to open the *Advanced setup*;
++ Click on `Scans` (or `Detection engine`, depending on the product version) and then, on the `Exclusions` section, click on `Edit` next to `Performance exclusions`;
++ Click on `Add`, browse to the folder (or paste the path directly) and confirm with `OK`;
++ Add all (one by one) the following folders (note the trailing `\*`, which is required by [**ESET**](https://www.eset.com/) to exclude the folder and all its contents):
+  + `C:\code\*`
+  + `C:\Users\{USER}\AppData\Roaming\JetBrains\*`
+  + `C:\Users\{USER}\AppData\Local\JetBrains\*`
+  + `C:\Users\{USER}\AppData\Local\wsl\{WSLGUID}\*`
+
+When working with projects on the `WSL File System`, excluding the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution *Virtual Hard Disk* from real-time scanning (the folder above, where the `ext4.vhdx` file is stored) also prevents [**ESET**](https://www.eset.com/) real-time scanning from slowing down the access to the [**WSL**](https://learn.microsoft.com/windows/wsl/) files.
+
+It is also recommend to [exclude the IDE process from the antivirus](https://intellij-support.jetbrains.com/hc/en-us/articles/360005028939-Slow-startup-on-Windows-splash-screen-appears-in-more-than-20-seconds) to improve the startup performance. On [**ESET**](https://www.eset.com/), that is done on the *Processes exclusions* list:
+
++ On the *Advanced setup*, click on `Protections`, expand `Real-time file system protection` and then expand `Real-time file system protection` again;
++ Click on `Edit` next to `Processes exclusions`;
++ Click on `Add`, browse to the `bin` folder of the installed [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) version inside the *Toolbox App* installation folder (`C:\Users\{USER}\AppData\Local\Programs\IntelliJ IDEA\bin`) and add the executable ones (one by one):
+  + `idea64.exe`
+  + `fsnotifier.exe`
+
+> **Note**
+>
+> [**ESET**](https://www.eset.com/) requires the full path to the executable for process exclusions to work correctly, so use the browse button to make sure the correct path is used (otherwise *HIPS* may report errors).
 
 #### 4.21.2. Configure the WSL development environment
 
