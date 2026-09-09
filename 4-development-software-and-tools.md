@@ -1538,7 +1538,73 @@ The most pratical way to install [**Node.js**](https://nodejs.org/) is via a Nod
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-The Node version manager that I use on Linux is [`nvm`](https://github.com/nvm-sh/nvm), which can also be used  on the `WSL File System`. [`nvm`](https://github.com/nvm-sh/nvm) is a version manager for [**Node.js**](https://nodejs.org/), designed to be installed per-user, and invoked per-shell. It works on any POSIX-compliant shell (sh, dash, ksh, zsh, bash), in particular on these platforms: unix, macOS, and [WSL](https://github.com/nvm-sh/nvm#important-notes). [`nvm`](https://github.com/nvm-sh/nvm) is also recommended on [`npm`](https://www.npmjs.com/)'s [Official Documentation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+My go to Node version manager on Linux used to be [`nvm`](https://github.com/nvm-sh/nvm) but,now I'm starting to use [fnm (Fast Node Manager)](https://github.com/Schniz/fnm) because it has better performance.
+
+###### 4.18.1.1.1. fnm (Fast Node Manager)
+
+[fnm](https://github.com/Schniz/fnm) can be installed, as per the [official instructions](https://github.com/Schniz/fnm#using-a-script-macoslinux), executing the following command on a [Ubuntu](https://ubuntu.com/) terminal:
+
+```bash
+curl -fsSL https://fnm.vercel.app/install | bash
+```
+
+The abovce command will install [fnm](https://github.com/Schniz/fnm) and add the below snippet to the `.bashrc` file:
+
+```bash
+# fnm
+FNM_PATH="/home/ricardo/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "$(fnm env --shell bash)"
+fi
+```
+
+To enhance the your shell set up, edit the `~/.bashrc` file and replace the `eval` line in the above snippet with the below code:
+
+```bash
+# fnm shell setup
+eval "$(fnm env --use-on-cd --shell bash --version-file-strategy=recursive)"
+```
+
+Check out also the [Official Configuration](https://github.com/Schniz/fnm/blob/master/docs/configuration.md) section to enable other highly recommended features.
+
+To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
+
+```bash
+source ~/.bashrc
+```
+
+At this stage, you will probably be prompt to install the default [**Node.js**](https://nodejs.org/) version and you should refuse to install it. To check if [fnm](https://github.com/Schniz/fnm) was properly installed, execute the following commands:
+
+```bash
+fnm -V
+fnm -h
+```
+
+To install and use the latest [**Node.js**](https://nodejs.org/) LTS version, on Git Bash, execute the following command:
+
+```bash
+fnm install --lts
+fnm use lts-latest
+fnm list
+```
+
+For an extended usage documentation, check the [official documentation](https://github.com/Schniz/fnm/blob/master/docs/commands.md)
+
+From now on, the latest [**Node.js**](https://nodejs.org/) LTS version will be available on Git Bash and PowerShell. To set up other shells, check the [official documentation](https://github.com/Schniz/fnm?tab=readme-ov-file#shell-setup). To confirm that everything is properly set, check the output of the below commands.
+
+```bash
+node --version
+npm --version
+```
+
+If everything is correct, the above commands will output the **node** version and the **npm** version.
+
+###### 4.18.1.2.2. NVS (Node Version Switcher)
+
+Although I'm now using [fnm](https://github.com/Schniz/fnm) as my preferred Node Version Manager, I'm keeping here, for historical reference, my guide to install [`nvm`](https://github.com/nvm-sh/nvm), which I used before getting to know [fnm](https://github.com/Schniz/fnm).
+
+[`nvm`](https://github.com/nvm-sh/nvm) is a version manager for [**Node.js**](https://nodejs.org/), designed to be installed per-user, and invoked per-shell. It works on any POSIX-compliant shell (sh, dash, ksh, zsh, bash), in particular on these platforms: unix, macOS, and [WSL](https://github.com/nvm-sh/nvm#important-notes). [`nvm`](https://github.com/nvm-sh/nvm) is also recommended on [`npm`](https://www.npmjs.com/)'s [Official Documentation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
 Make sure that you have the `build-essentials` package already installed and then, to install [`nvm`](https://github.com/nvm-sh/nvm), replace the **{LABEL}** in the upcoming command as appropriate and execute it from an [Ubuntu](https://ubuntu.com/) terminal.
 
