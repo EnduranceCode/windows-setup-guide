@@ -1977,33 +1977,85 @@ Some antivirus software can interfere with the IDE build process, [causing build
   + `C:\code`
   + `%APPDATA%\JetBrains\`
   + `%LOCALAPPDATA%\JetBrains\`
+  + `C:\Users\{USER}\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu*\LocalState`
+
+> **Label Definition**
+>
+> + **{USER}** : Windows username
+
+When working with projects on the `WSL File System`, excluding the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution *Virtual Hard Disk* from real-time scanning (the `LocalState` folder above, where the `ext4.vhdx` file is stored) also prevents *Microsoft Defender* from slowing down the access to the [**WSL**](https://learn.microsoft.com/windows/wsl/) files.
 
 It is also recommend to [exclude the IDE process from the antivirus](https://intellij-support.jetbrains.com/hc/en-us/articles/360005028939-Slow-startup-on-Windows-splash-screen-appears-in-more-than-20-seconds) to improve the startup performance. To do that exclusion, on the on “Add or remove exclusions”, Click the button `+ Add an exclusion`, choose `Process` from the dropdown list and then add all (one by one) the following processes:
 
 + `idea64.exe`
 + `fsnotifier.exe`
 
-#### 4.20.2. Install plugins
+#### 4.20.2. Configure the WSL development environment
 
-##### 4.20.2.1. Install SonarQube plugin
+[**IntelliJ IDEA**](https://www.jetbrains.com/idea/) provides native support for developing projects stored on the [**WSL**](https://learn.microsoft.com/windows/wsl/) file system. You install and run the IDE on Windows as usual, but you create, open, build, run and debug the projects located on the `WSL File System` directly, without leaving the IDE.
+
+When you open a project stored on the `WSL File System`, recent [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) versions (2026.2 and later) run it in *Native mode*: the IDE stays a Windows application while a small agent inside [**WSL**](https://learn.microsoft.com/windows/wsl/) handles the files and processes on its behalf. This avoids the slow `9P` file access used by older versions and provides correct *Linux symlink* handling.
+
+> **Note**
+>
+> Do not run [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) *inside* [**WSL**](https://learn.microsoft.com/windows/wsl/) through [WSLg](https://learn.microsoft.com/windows/wsl/tutorials/gui-apps). That setup is slow, lacks desktop integration and is [not recommended by JetBrains](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html). The native integration described next is the preferred approach.
+
+##### 4.20.2.1. Create or open a project on the WSL file system
+
+All the projects are stored on the folder `code` on the [**WSL**](https://learn.microsoft.com/windows/wsl/) file system, i.e. `\\wsl.localhost\Ubuntu\home\{USER}\code`, mirroring the `C:\code` folder on the `Windows Native File System`.
+
+To open a project stored on the `WSL File System`, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen choose `Open` and then navigate to the project folder under `\\wsl.localhost\Ubuntu\home\{USER}\code\{PROJECT}`. [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) automatically detects that the project lives in a [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution and uses its native support to interact with it.
+
+To create a new project on the `WSL File System`, on the welcome screen choose `New Project` and, on the `Location` input box, specify a path under `\\wsl.localhost\Ubuntu\home\{USER}\code\{PROJECT}`.
+
+> **Label Definition**
+>
+> + **{USER}** : The [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution user name
+> + **{PROJECT}** : The name of the project
+
+To make sure that the projects are created and opened on the [**WSL**](https://learn.microsoft.com/windows/wsl/) file system by default, on the welcome screen choose `All Settings` from the `Customize` tab and then the tab `Appearance & Behavior->System Settings`. On this tab, change the input box **Default project directory** to the folder `\\wsl.localhost\Ubuntu\home\{USER}\code`.
+
+##### 4.20.2.2. Select the JDK on the WSL file system
+
+When a project is opened or created on the `WSL File System`, [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) scans the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution for the installed [**Java**](https://openjdk.org/) versions and lists them on the *Project Structure* dialog (`Ctrl+Alt+Shift+S`). Choose the [**Java**](#414-java) version installed with [SDKMAN](https://sdkman.io/) on the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution (`~/.sdkman/candidates/java/current`). [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) must use a [**Java**](https://openjdk.org/) version installed on the `WSL File System`, otherwise the project will be built with the Windows one.
+
+##### 4.20.2.3. Enable the Remote Execution Agent plugin
+
+To work with *Maven* and *Gradle* projects on the `WSL File System`, make sure the bundled **Remote Execution Agent** plugin is enabled. On the welcome screen choose `Plugins` and then, on the `Installed` tab, search for "Remote Execution Agent". If it is disabled, enable it and make sure its `Binary Files` support is also enabled, then restart the IDE.
+
+##### 4.20.2.4. Use the Git installation on the WSL file system
+
+[**IntelliJ IDEA**](https://www.jetbrains.com/idea/) automatically uses the *Git* installed on the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution for projects opened with a `\\wsl.localhost` path, provided `git` is available on the distribution (see [Git & Git Bash](./1-fundamental-software.md#15-git--git-bash)). Because `appendWindowsPath=false` is set on the `/etc/wsl.conf` file (see [WSL distribution installation & configuration](./1-fundamental-software.md#123-wsl-distribution-installation--configuration)), installing [Git](https://git-scm.com/) on the `WSL File System` guarantees that the IDE finds the Linux `git`.
+
+#### 4.20.3. Install plugins
+
+##### 4.20.3.1. Install SonarQube plugin
 
 [SonarQube](https://plugins.jetbrains.com/plugin/7973-sonarqube-for-ide) is an IDE extension that helps to detect and fix quality issues as the code is written. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "SonarQube". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-##### 4.20.2.2. Install JPA Buddy
+##### 4.20.3.2. Install JPA Buddy
 
 [JPA Buddy](https://plugins.jetbrains.com/plugin/15075-jpa-buddy) is an IDE extension that helps developers work efficiently with Hibernate, EclipseLink, Spring Data JPA, Flyway, Liquibase, Lombok, MapStruct, and other related technologies in both Java and Kotlin. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "JPA Buddy". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-#### 4.20.3. Set code formatters
+##### 4.20.3.3. Install Kotlin plugin
 
-##### 4.20.3.1. Java
+Unlike the *Ultimate* edition, where [Kotlin](https://kotlinlang.org/) support is bundled, the *Community* edition of [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) requires the [Kotlin plugin](https://plugins.jetbrains.com/plugin/6954-kotlin) to be installed. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "Kotlin". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it. The plugin also provides the *Kotlin code style* scheme based on the [official Kotlin style guide](https://kotlinlang.org/docs/coding-conventions.html).
+
+#### 4.20.4. Set code formatters
+
+##### 4.20.4.1. Java
 
 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) seems to be the most popular **Code Style Guide** for [Java](https://www.java.com/en/). This style guide is licensed under the [CC-By 3.0 License](https://creativecommons.org/licenses/by/3.0/) and a there's a [repository](https://github.com/google/styleguide) where a formatter configuration file for [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) is available.
 
 To add the above mentioned Code Style Formatter settings, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Editor->Code Style->Java`. On this tab, click the `settings` icon choose `Import Scheme/IntelliJ IDEA code style XML` and pick the file(s) with the desired settings.
 
-#### 4.20.4. Configure Version Control
+##### 4.20.4.2. Kotlin
 
-##### 4.20.4.1. Commit
+The [Kotlin plugin](#42033-install-kotlin-plugin) includes a *Kotlin code style* scheme based on the [official Kotlin style guide](https://kotlinlang.org/docs/coding-conventions.html). To make sure it is in use, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen choose `All Settings` from the `Customize` tab. Then choose the tab `Editor->Code Style->Kotlin`. On this tab, on the `Scheme` dropdown, select the `Kotlin style guide` scheme.
+
+#### 4.20.5. Configure Version Control
+
+##### 4.20.5.1. Commit
 
 Modern IntelliJ IDEA versions uses a **non-modal Commit tool window** (accessible via `Alt + 0` or the checkmark icon on the left sidebar). The **Shelf** tab is contextual; it only appears in the Commit tool window when you have at least one shelved change. To manage your shelf:
 
@@ -2017,21 +2069,37 @@ To move changes to the shelf instead of committing them, take the following step
 2.  Select **Shelf Changes...** from the context menu.
 3.  Provide a name for the shelf and click **Shelf Changes**. The **Shelf** tab will now become visible.
 
-#### 4.20.5. Configure Build Tools
+#### 4.20.6. Configure Build Tools
 
-##### 4.20.5.1. Maven
+##### 4.20.6.1. Maven
 
 To customize *Maven*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Maven`. On this tab, change the input boxes listed below as described:
 
-+ **Maven home path** : The path to the chosen [system *Maven* instance](#451-installation);
-+ **User setting file** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#452-configuration);
-+ **Local repository** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#452-configuration);
++ **Maven home path** : The path to the chosen [system *Maven* instance](#4151-installation);
++ **User setting file** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#4152-configuration);
++ **Local repository** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#4152-configuration);
 
 Beware that you must choose the [Apache Maven](https://maven.apache.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.20.6. Configure Tools
+##### 4.20.6.2. Gradle
 
-##### 4.20.6.1. Terminal
+To customize *Gradle*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Gradle`. On this tab, change the input boxes listed below as described:
+
++ **Use Gradle from** : Select the `Specified location` option;
++ **Gradle home path** : The path to the chosen system *Gradle* instance. *Gradle* is managed with [SDKMAN](https://sdkman.io/), like [**Java**](#414-java), and it can be installed and updated on a [Ubuntu](https://ubuntu.com/) terminal with the command `sdk install gradle`. The installation folder is `$HOME/.sdkman/candidates/gradle/{VERSION}` and the `current` symbolic link points to the version in use, e.g. `$HOME/.sdkman/candidates/gradle/current`;
++ **Gradle JVM** : The [**Java**](#414-java) version in use with the project, also managed with [SDKMAN](https://sdkman.io/), e.g. `$HOME/.sdkman/candidates/java/current`;
++ **Gradle user home** : Check the `Override` checkbox and point to a per project *Gradle User Home*, e.g. `$HOME/.gradle-{PROJECT}`, to keep the development environment contained, mirroring the per project *Maven Local Repository* approach.
+
+> **Label Definition**
+>
+> + **{VERSION}** : The SDKMAN *Identifier* of the desired [Gradle](https://gradle.org/) version, as shown on the output of the command `sdk list gradle`, e.g. *8.14.3*
+> + **{PROJECT}** : The label that identifies the project name
+
+Beware that you must choose the [Gradle](https://gradle.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
+
+#### 4.20.7. Configure Tools
+
+##### 4.20.7.1. Terminal
 
 To customize the *Terminal* in use with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Tools->Terminal`. On this tab, take in consideration the file system you're working on and change the input boxes listed below as described:
 
@@ -2050,15 +2118,19 @@ This settings will only take effect when starting a new terminal. Therefore, cre
 
 This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.20.7. Run/Debug Configurations
+When working on a project opened from the `WSL File System`, the integrated terminal opens a [**WSL**](https://learn.microsoft.com/windows/wsl/) shell automatically, therefore no additional configuration is required beyond the `Shell path` shown above.
 
-When `networkingMode=mirrored` is not enabled the Windows firewall configuration needs to be adapted to ensure the building of a project on the `WSL File System` [works properly](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html#debugging_system_settings). Open a PowerShell console with *Administrator* privileges and execute the following command to get the exact network interface name:
+#### 4.20.8. Run/Debug Configurations
+
+When `networkingMode=mirrored` is enabled on the `.wslconfig` file (as recommended on the [WSL configuration](./1-fundamental-software.md#122-configuration)), the [**WSL**](https://learn.microsoft.com/windows/wsl/) 2 network is shared with Windows, `localhost` works in both directions and **no firewall configuration is required** to build and debug a project on the `WSL File System`. In that case, skip the upcoming steps.
+
+When `networkingMode=mirrored` is not enabled, the Windows firewall configuration needs to be adapted to ensure the building of a project on the `WSL File System` [works properly](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html#debugging_system_settings). Open a PowerShell console with *Administrator* privileges and execute the following command to get the exact network interface name:
 
 ```powershell
 Get-NetAdapter
 ```
 
-Replace the **{LABEL}** in the upcoming command as appropriate and execute it from an a PowerShell console with *Administrator* privileges to allow connections using WSL.
+Replace the **{LABEL}** in the upcoming command as appropriate and execute it from a PowerShell console with *Administrator* privileges to allow connections using WSL.
 
 ```powershell
 New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "{ADAPTER_NAME}"  -Action Allow
@@ -2076,13 +2148,26 @@ Get-NetFirewallProfile -Name Public | Get-NetFirewallRule | where DisplayName -I
 
 After starting a debugger session, the Windows Firewall popup might appears and them, select the *Public networks* checkbox and click the `Allow access` button.
 
-##### 4.20.7.1 Shorten command line method
+##### 4.20.8.1. Shorten command line method
 
 To avoid the error "*Command line is too long*" when running tests it's necessary to set the "*Shorten command line*" method in the Run/Debug configuration to "*JAR manifest*". That can be done for the specific method or class, but it's better to [set it as default](https://stackoverflow.com/a/47927544) on [run/debug configuration templates](https://www.jetbrains.com/help/idea/run-debug-configuration.html#templates).
 
 From the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) main menu, select `Run->Edit Configurations...`. On the screen that pop-up, click `Edit configuration templates...` (bottom left corner of the pop-up screen). On the following pop-up screen, select the `JUnit` tab.
 
 [Then](https://stackoverflow.com/a/65639857), click on the `Modify options` link (`ALT+M`) and set/select the `Shorten command line` option. Back on the `JUnit` tab, there will be a new dropdown input box named `Shorten command line`. In this new dropdown, choose the *Jar manifest* option. Click the button `OK` (once to close the `Select configuration templates` pop up and again to close the  `Run->Edit Configurations` pop up screen) and from now on all the new `JUnit` Run/Debug configurations will use this template.
+
+#### 4.20.9. Performance tips & WSL gotchas
+
+To get the best possible performance out of the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) + [**WSL**](https://learn.microsoft.com/windows/wsl/) set up and to avoid the usual [**WSL**](https://learn.microsoft.com/windows/wsl/) pitfalls, keep in mind the upcoming tips.
+
++ **Keep the projects on the `WSL File System`** : Accessing the `Windows Native File System` from [**WSL**](https://learn.microsoft.com/windows/wsl/) through `/mnt/c/...` (DrvFs) is dramatically slower than working on the `WSL File System`. Store the projects and their build caches (`~/.m2` and `~/.gradle`) on the `WSL File System`.
++ **Do not store the projects on the `Windows Native File System`** : A project opened from `C:\` but built inside [**WSL**](https://learn.microsoft.com/windows/wsl/) crosses the file system boundary on every file operation, which is the single biggest performance killer.
++ **Keep the antivirus exclusions up to date** : Keep the exclusions listed on the [Installation](#4201-installation) section, including the [**WSL**](https://learn.microsoft.com/windows/wsl/) virtual disk, otherwise *Microsoft Defender* real-time scanning will slow down the WSL file access and the builds.
++ **Allocate enough memory to WSL** : The [**WSL**](https://learn.microsoft.com/windows/wsl/) virtual machine memory is bounded by the `.wslconfig` file (see [WSL configuration](./1-fundamental-software.md#122-configuration)). Make sure the memory size is adequate for the projects and the IDE indexing.
+
+> **Note**
+>
+> The *run targets* feature (running a `Windows Native File System` project inside [**WSL**](https://learn.microsoft.com/windows/wsl/)) is only available on the *Ultimate* edition. Since all the development work is done on the `WSL File System`, it is not needed.
 
 ### 4.21. Visual Studio Code
 
