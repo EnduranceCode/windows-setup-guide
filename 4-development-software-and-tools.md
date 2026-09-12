@@ -1757,7 +1757,7 @@ The most pratical way to install [**Node.js**](https://nodejs.org/) is via a Nod
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-My go to Node version manager on Linux used to be [`nvm`](https://github.com/nvm-sh/nvm) but,now I'm starting to use [fnm (Fast Node Manager)](https://github.com/Schniz/fnm) because it has better performance.
+My go to Node version manager on Linux used to be [`nvm`](https://github.com/nvm-sh/nvm) but, now I'm starting to use [fnm (Fast Node Manager)](https://github.com/Schniz/fnm) because it has better performance.
 
 ###### 4.19.1.1.1. fnm (Fast Node Manager)
 
@@ -1767,7 +1767,7 @@ My go to Node version manager on Linux used to be [`nvm`](https://github.com/nvm
 curl -fsSL https://fnm.vercel.app/install | bash
 ```
 
-The abovce command will install [fnm](https://github.com/Schniz/fnm) and add the below snippet to the `.bashrc` file:
+The above command will install [fnm](https://github.com/Schniz/fnm) and add the below snippet to the `.bashrc` file:
 
 ```bash
 # fnm
@@ -1819,7 +1819,7 @@ npm --version
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-###### 4.19.1.1.2. NVS (Node Version Switcher)
+###### 4.19.1.1.2. nvm (Node Version Manager)
 
 Although I'm now using [fnm](https://github.com/Schniz/fnm) as my preferred Node Version Manager, I'm keeping here, for historical reference, my guide to install [`nvm`](https://github.com/nvm-sh/nvm), which I used before getting to know [fnm](https://github.com/Schniz/fnm).
 
