@@ -2540,15 +2540,14 @@ scoop install extras/zed
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-Download [**DBeaver**](https://dbeaver.io/) installer latest version from [official downloads page](https://dbeaver.io/download/). Then, execute the downloaded file and when prompted, choose to install [**DBeaver**](https://dbeaver.io/) only for the current user. When asked to select the components to install, check the following checkboxes:
+To install [**DBeaver**](https://dbeaver.io/), open a PowerShell console and execute the following commands:
 
-+ DBeaver Community;
-+ Include Java
-+ Associate .SQL files
+```powershell
+scoop bucket add extras
+scoop install extras/dbeaver
+```
 
-[**DBeaver**](https://dbeaver.io/) will store the drivers it uses in the folder `%USERPROFILE%\AppData\Roaming\DBeaverData\drivers`.
-
-When using applications like [Zscaler](https://www.zscaler.com/), it might be necessary to import security certificate to the [**DBeaver**](https://dbeaver.io/) JRE Keystore. On a **Git Bash** terminal, navigate to the folder `%USERPROFILE%\AppData\Local\DBeaver\jre\lib\security`, replace the **{LABELS}** in the upcoming command as appropriate and then execute it:
+When using applications like [Zscaler](https://www.zscaler.com/), it might be necessary to import security certificate to the [**DBeaver**](https://dbeaver.io/) JRE Keystore. On a **Git Bash** terminal, navigate to the folder `%USERPROFILE%\scoop\apps\dbeaver\current\jre\lib\security`, replace the **{LABELS}** in the upcoming command as appropriate and then execute it:
 
 ```bash
 keytool -importcert -trustcacerts -alias {CERTIFICATE_ALIAS} -file {PATH_TO_DER_CERTIFICATE} -keystore cacerts -storepass changeit -noprompt
