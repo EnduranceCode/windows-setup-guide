@@ -2355,9 +2355,39 @@ To customize *Gradle*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea
 
 Beware that you must choose the [Gradle](https://gradle.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.21.7. Configure Tools
+#### 4.21.7. Languages & Frameworks
 
-##### 4.21.7.1. Terminal
+##### 4.21.7.1. JavaScript Runtime
+
+Because [**Node.js**](https://nodejs.org/) is installed and managed with [fnm](https://github.com/Schniz/fnm) (see the [Node.js](#418-nodejs) section), it is not available on the system `PATH`, so [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) cannot detect it automatically and reports a "*Node.js not found*" popup. The JavaScript Runtime is always executed by the Windows [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) process, regardless of where the project files are stored (`WSL File System` or `Windows Native File System`), so pointing it to the [fnm](https://github.com/Schniz/fnm) installation on the `Windows Native File System` is enough.
+
+To set the JavaScript Runtime, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Languages & Frameworks->JavaScript Runtime`. On this tab, make sure `Node.js` is selected in the **Preferred runtime** field. Then, click the browse button next to the **Node runtime** input box, and on the *Node.js Runtimes* dialog that opens, click the add button and choose `Add Local`. Finally, point to the `node.exe` of the desired [**Node.js**](https://nodejs.org/) installation, using the [fnm](https://github.com/Schniz/fnm) `default` alias folder:
+
+```text
+%APPDATA%\fnm\aliases\default\node.exe
+```
+
+The `default` alias is a junction to the `installation` folder of the default [**Node.js**](https://nodejs.org/) version. It points to the first version installed with [fnm](https://github.com/Schniz/fnm) and can be changed with the command `fnm default {VERSION}`.
+
+Then, on the same `Languages & Frameworks->JavaScript Runtime` tab, set the **Package manager** input box. This input box does not point to the folder of the selected [**Node.js**](https://nodejs.org/) runtime; it only selects the package manager ([`npm`](https://www.npmjs.com/), Yarn, pnpm or bun) to be used by the IDE. Select the `npm` option, which uses the system default installation. Because [`npm`](https://www.npmjs.com/) is bundled with the selected [**Node.js**](https://nodejs.org/) runtime, [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) normally detects it from the same [fnm](https://github.com/Schniz/fnm) installation folder. Beware that, since [fnm](https://github.com/Schniz/fnm) does not put [`npm`](https://www.npmjs.com/) on the system `PATH`, the `npm` option may not be auto-detected and might need to be set manually with the `Select` button next to the **Package manager** input box, pointing again to the same [fnm](https://github.com/Schniz/fnm) installation folder (the one containing the `npm.cmd` file).
+
+To instead target a specific installed version, replace the ***{LABEL}*** in the below path as appropriate:
+
+```text
+%APPDATA%\fnm\node-versions\{VERSION}\installation\node.exe
+```
+
+> **Label Definition**
+>
+> + **{VERSION}** : The installed [**Node.js**](https://nodejs.org/) version, as shown by the command `fnm list`, e.g. *v22.14.0*
+
+To verify the configuration, check that the **Version** read-only field, on the `Languages & Frameworks->JavaScript Runtime` tab, shows the configured [**Node.js**](https://nodejs.org/) version and that the "*Node.js not found*" popup is no longer reported. Optionally, select the `Coding assistance for Node.js` checkbox to have code completion for the `fs`, `path`, `http` and other Node.js core modules.
+
+This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
+
+#### 4.21.8. Configure Tools
+
+##### 4.21.8.1. Terminal
 
 To customize the *Terminal* in use with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Tools->Terminal`. On this tab, take in consideration the file system you're working on and change the input boxes listed below as described:
 
@@ -2378,7 +2408,7 @@ This is a per project setting, therefore it might be necessary to set it for eve
 
 When working on a project opened from the `WSL File System`, the integrated terminal opens a [**WSL**](https://learn.microsoft.com/windows/wsl/) shell automatically, therefore no additional configuration is required beyond the `Shell path` shown above.
 
-#### 4.21.8. Run/Debug Configurations
+#### 4.21.9. Run/Debug Configurations
 
 When `networkingMode=mirrored` is enabled on the `.wslconfig` file (as recommended on the [WSL configuration](./1-fundamental-software.md#122-configuration)), the [**WSL**](https://learn.microsoft.com/windows/wsl/) 2 network is shared with Windows, `localhost` works in both directions and **no firewall configuration is required** to build and debug a project on the `WSL File System`. In that case, skip the upcoming steps.
 
@@ -2406,7 +2436,7 @@ Get-NetFirewallProfile -Name Public | Get-NetFirewallRule | where DisplayName -I
 
 After starting a debugger session, the Windows Firewall popup might appears and them, select the *Public networks* checkbox and click the `Allow access` button.
 
-##### 4.21.8.1. Shorten command line method
+##### 4.21.9.1. Shorten command line method
 
 To avoid the error "*Command line is too long*" when running tests it's necessary to set the "*Shorten command line*" method in the Run/Debug configuration to "*JAR manifest*". That can be done for the specific method or class, but it's better to [set it as default](https://stackoverflow.com/a/47927544) on [run/debug configuration templates](https://www.jetbrains.com/help/idea/run-debug-configuration.html#templates).
 
@@ -2414,7 +2444,7 @@ From the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) main menu, select 
 
 [Then](https://stackoverflow.com/a/65639857), click on the `Modify options` link (`ALT+M`) and set/select the `Shorten command line` option. Back on the `JUnit` tab, there will be a new dropdown input box named `Shorten command line`. In this new dropdown, choose the *Jar manifest* option. Click the button `OK` (once to close the `Select configuration templates` pop up and again to close the  `Run->Edit Configurations` pop up screen) and from now on all the new `JUnit` Run/Debug configurations will use this template.
 
-#### 4.21.9. Performance tips & WSL gotchas
+#### 4.21.10. Performance tips & WSL gotchas
 
 To get the best possible performance out of the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) + [**WSL**](https://learn.microsoft.com/windows/wsl/) set up and to avoid the usual [**WSL**](https://learn.microsoft.com/windows/wsl/) pitfalls, keep in mind the upcoming tips.
 
