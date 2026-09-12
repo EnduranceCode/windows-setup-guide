@@ -1299,11 +1299,11 @@ nano ~/.bashrc
 Then, add the upcoming snippet to the `~/.bashrc` immediately before sourcing the file to customize the bash prompt.
 
 ```bash
-# User's environment variables
-export MAVEN_HOME=/opt/maven/current
-
-# User's path customization
-export PATH=${MAVEN_HOME}/bin:${PATH}
+# Sets the environment for Maven
+if [ -d /opt/maven/current ]; then
+    export M2_HOME=/opt/maven/current
+    export PATH=$M2_HOME/bin:$PATH
+fi
 ```
 
 Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
@@ -1562,11 +1562,11 @@ nano ~/.bashrc
 Then, add the upcoming snippet to the `~/.bashrc` immediately before sourcing the file to customize the bash prompt.
 
 ```bash
-# User's environment variables
-export GRADLE_HOME=/opt/gradle/current
-
-# User's path customization
-export PATH=${GRADLE_HOME}/bin:${PATH}
+# Sets the environment for Gradle
+if [ -d /opt/gradle/current ]; then
+    export GRADLE_HOME=/opt/gradle/current
+    export PATH="$GRADLE_HOME/bin:$PATH"
+fi
 ```
 
 Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`.
@@ -1583,7 +1583,7 @@ To check if the `GRADLE_HOME` environment variable was properly set, check the o
 echo $GRADLE_HOME
 ```
 
-To check if the users's `PATH` was properly set, check the output of the following command:
+To check if the user's `PATH` was properly set, check the output of the following command:
 
 ```bash
 echo $PATH
