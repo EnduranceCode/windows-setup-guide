@@ -699,7 +699,7 @@ If the output of the above command contains a list of files (by default, the fil
 To create a new SSH key, replace the **{LABEL}** in the following command as appropriate and then execute it in a [Git Bash](https://git-scm.com/) terminal window.
 
 ```bash
-ssh-keygen -t rsa -b 4096 -C "{EMAIL_ADDRESS}"
+ssh-keygen -t ed25519 -C "{EMAIL_ADDRESS}"
 ```
 
 > **Label Definition**
@@ -715,7 +715,7 @@ The above command creates a new SSH key, using the provided email as a label.
 When prompted to "Enter a file in which to save the key," press Enter to accept the default file location.
 
 ```
-> Enter a file in which to save the key (/home/you/.ssh/id_rsa): [Press enter]
+> Enter a file in which to save the key (/home/you/.ssh/id_ed25519): [Press enter]
 ```
 
 Type a secure passphrase when prompted. GitHub has further instructions on [working with SSH key passphrases](https://help.github.com/en/articles/working-with-ssh-key-passphrases).
@@ -736,18 +736,29 @@ eval "$(ssh-agent -s)"
 The following command will add the private key to the `ssh-agent`:
 
 ```bash
-ssh-add ~/.ssh/id_rsa
+ssh-add ~/.ssh/id_ed25519
 ```
 
 ##### 1.5.4.4. Adding a new SSH key to the remote servers
 
-To be able to copy the public SSH key to the clipboard, display it in a bash terminal window with the following command:
+To display your public SSH key so that you can copy it, run the following command in a Git Bash terminal window:
 
 ```bash
-cat ~/.ssh/id_rsa.pub
+cat ~/.ssh/id_ed25519.pub
 ```
 
-Copy the output of the above command and then add the public SSH key to the remote servers in use ([GitHub](https://github.com/settings/keys), [Bitbucket](https://bitbucket.org/account/user/ssh-keys), etc.).
+Copy the output of the above command and then add the public SSH key to the remote servers you use ([GitHub](https://github.com/settings/keys), [Bitbucket](https://bitbucket.org/account/user/ssh-keys), etc.).
+
+You can use your personal SSH keys not only to access remote servers but also to sign your commits and tags. Execute the following commands to tell Git that you want to use an SSH key for signing, to specify the SSH key to sign commits and tags with, and to automatically sign every commit and tag:
+
+```bash
+git config --global gpg.format ssh
+git config --global user.signingkey ~/.ssh/id_ed25519.pub
+git config --global commit.gpgsign true
+git config --global tag.gpgsign true
+```
+
+To verify the signatures of the commits you push, you also need to add the public SSH key as a signing key to the remote servers you use ([GitHub](https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification#ssh-commit-signature-verification), [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/use-ssh-keys-to-sign-commits/), etc.).
 
 ### 1.6. KeePassXC
 
