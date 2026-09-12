@@ -12,19 +12,19 @@ This file contains the **Development Software and Tools** section of my [Setup g
     5. [jq](#45-jq)
     6. [ripgrep](#46-ripgrep)
     7. [OpenCode](#47-opencode)
-    8. [AWS CLI](#48-aws-cli)
-    9. [Granted](#49-granted)
-    10. [Docker](#410-docker)
-    11. [kubectl](#411-kubectl)
-    12. [kubectx](#412-kubectx)
-    13. [K9s](#413-k9s)
-    14. [Java](#414-java)
-    15. [Apache Maven](#415-apache-maven)
-    16. [Gradle](#416-gradle)
-    17. [Apache Tomcat](#417-apache-tomcat)
-    18. [Quarkus CLI](#418-quarkus-cli)
-    19. [Node.js](#419-nodejs)
-    20. [Terraform](#420-terraform)
+    8. [Docker](#48-docker)
+    9. [kubectl](#49-kubectl)
+    10. [kubectx](#410-kubectx)
+    11. [K9s](#411-k9s)
+    12. [AWS CLI](#412-aws-cli)
+    13. [Granted](#413-granted)
+    14. [Terraform](#414-terraform)
+    15. [Java](#415-java)
+    16. [Apache Maven](#416-apache-maven)
+    17. [Gradle](#417-gradle)
+    18. [Node.js](#418-nodejs)
+    19. [Apache Tomcat](#419-apache-tomcat)
+    20. [Quarkus CLI](#420-quarkus-cli)
     21. [IntelliJ IDEA](#421-intellij-idea)
     22. [Visual Studio Code](#422-visual-studio-code)
     23. [Zed](#423-zed)
@@ -323,253 +323,7 @@ opencode --version
 opencode --help
 ```
 
-### 4.8. AWS CLI
-
-The [**AWS Command Line Interface (AWS CLI)**](https://aws.amazon.com/cli/) is a unified tool to manage your AWS services. With just one tool to download and configure, you can control multiple AWS services from the command line and automate them through scripts.
-
-#### 4.8.1. Installation
-
-##### 4.8.1.1. Installation on the WSL File System
-
-![WSL](https://img.shields.io/badge/WSL-purple)
-
-To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `WSL File System`, following the [official instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), execute the following commands on a [Ubuntu](https://ubuntu.com/) terminal.
-
-```bash
-curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscliv2.zip
-unzip /tmp/awscliv2.zip -d /tmp/
-sudo /tmp/aws/install
-```
-
-To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was properly made, check the output of the following command:
-
-```bash
-aws --version
-```
-
-If the `aws` command cannot be found, you might need to restart your terminal or follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
-
-[AWS](https://aws.amazon.com/) also provides a [Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) that "enables you to establish secure connections to your Amazon Elastic Compute Cloud (EC2) instances, edge devices, on-premises servers, and virtual machines (VMs)". Follow the Debian and Ubuntu [official instructions](https://docs.aws.amazon.com/systems-manager/latest/userguide/install-plugin-debian-and-ubuntu.html) to install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `WSL File System` and download the `.deb` package executing the following command:
-
-```bash
-curl https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb -o /tmp/session-manager-plugin.deb
-```
-
-To install the downloaded `.deb` package executing the following command:
-
-```bash
-sudo dpkg -i /tmp/session-manager-plugin.deb
-```
-
-To verify the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installation, check the output of the following command:
-
-```bash
-session-manager-plugin
-```
-
-If the installation was successful, the following message is returned.
-
-```bash
-The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
-```
-
-##### 4.8.1.2. Installation on the Windows Native File System
-
-![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
-
-To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `Windows Native File System`, open a PowerShell console and execute the following command:
-
-```powershell
-scoop install main/aws
-```
-
-To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was properly made, check the output of the following command:
-
-```powershell
-aws --version
-```
-
-If there is any problem using the [**AWS CLI**](https://aws.amazon.com/cli/), follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
-
-To install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `Windows Native File System`, open a PowerShell console and execute the following commands:
-
-```powershell
-scoop bucket add extras
-scoop install extras/aws-session-manager-plugin
-```
-
-To verify the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installation, check the output of the following command:
-
-```powershell
-session-manager-plugin
-```
-
-If the installation was successful, the following message is returned.
-
-```powershell
-The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
-```
-
-### 4.9. Granted
-
-[**Granted**](https://github.com/fwdcloudsec/granted) is a command line interface (CLI) application which simplifies access to cloud roles and allows multiple cloud accounts to be opened in your web browser simultaneously.
-
-#### 4.9.1. Installation
-
-##### 4.9.1.1. Installation on the WSL File System
-
-![WSL](https://img.shields.io/badge/WSL-purple)
-
-To install [**Granted**](https://github.com/fwdcloudsec/granted) on the `WSL File System`, following the [official Linux (APT) instructions](https://docs.commonfate.io/granted/getting-started), execute the following commands on a [Ubuntu](https://ubuntu.com/) terminal.
-
-```bash
-sudo apt update
-sudo apt install gpg wget ca-certificates
-wget -O- https://apt.releases.commonfate.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/common-fate-linux.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/common-fate-linux.gpg] https://apt.releases.commonfate.io stable main" | sudo tee /etc/apt/sources.list.d/common-fate.list
-sudo apt update
-sudo apt install granted
-```
-
-To verify if the [**Granted**](https://github.com/fwdcloudsec/granted) installation was properly made, check the output of the following command:
-
-```bash
-granted --version
-granted --help
-```
-
-To pin [**Granted**](https://github.com/fwdcloudsec/granted) backend to `file` execute the following commands:
-
-```bash
-mkdir -p ~/.granted/keyring
-chmod 700 ~/.granted ~/.granted/keyring
-granted settings set --setting Keyring.Backend --value file
-granted settings set --setting Keyring.FileDir --value "${HOME}/.granted/keyring"
-```
-To set the browser opener unified to Windows default browser via the `XDG-OPEN` wrapper, execute the following commands:
-
-```bash
-granted settings set --setting DefaultBrowser --value CUSTOM
-granted settings set --setting CustomBrowserPath --value "${HOME}/.local/bin/xdg-open"
-granted settings set --setting CustomSSOBrowserPath --value "${HOME}/.local/bin/xdg-open"
-```
-
-To make [**Granted**](https://github.com/fwdcloudsec/granted) write SSO tokens to AWS’s standard cache location (`~/.aws/sso/cache`), which AWS CLI v2 reads, execute the following command:
-
-```bash
-granted settings set --setting ExportSSOToken --value true
-```
-
-To list all [**Granted**](https://github.com/fwdcloudsec/granted) settings execute the following command:
-
-```bash
-granted settings list
-```
-
-To set up [**Granted**](https://github.com/fwdcloudsec/granted) shell alias, open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/), executing the following command:
-
-```bash
-nano ~/.bashrc
-```
-
-Then, add the upcoming snippet to the `~/.bashrc` file.
-
-```bash
-# Set Granted shell alias
-#
-# + https://docs.commonfate.io/granted/internals/shell-alias
-# + https://docs.commonfate.io/granted/troubleshooting#manually-configuring-your-shell-profile
-alias assume="source assume"
-```
-
-Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
-
-```bash
-source ~/.bashrc
-```
-
-Now, after running `assume <profile>`, you can run AWS CLI commands without `--profile` because the AWS environment variables are set in your current shell session. To confirm that `assume` is executed as expected, execute `assume <profile>` and then check the output of the following command:
-
-```bash
-aws configure list
-```
-
-##### 4.9.1.2. Installation on the Windows Native File System
-
-![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
-
-To install [**Granted**](https://github.com/fwdcloudsec/granted) on the `Windows Native File System`, open a PowerShell console and execute the following command:
-
-```powershell
-scoop install main/granted
-```
-
-To verify if the [**Granted**](https://github.com/fwdcloudsec/granted) installation was properly made, check the output of the following command:
-
-```powershell
-granted --version
-granted --help
-```
-
-To pin [**Granted**](https://github.com/fwdcloudsec/granted) backend to `file` execute, on a [Git Bash](https://git-scm.com/) terminal, the following commands:
-
-```bash
-mkdir -p ~/.granted/keyring
-chmod 700 ~/.granted ~/.granted/keyring
-granted settings set --setting Keyring.Backend --value file
-granted settings set --setting Keyring.FileDir --value "${HOME}/.granted/keyring"
-```
-
-To set the browser opener unified to Windows default browser via the `XDG-OPEN` wrapper, replace the ***{LABEL}*** in the below commands as appropriate and then execute it, on a [Git Bash](https://git-scm.com/) terminal.
-
-```bash
-granted settings set --setting DefaultBrowser --value FIREFOX
-granted settings set --setting CustomSSOBrowserPath --value "{PATH_TO_DEFAULT_BROWSER}"
-```
-
-> **Label Definition**
->
-> + **{PATH_TO_DEFAULT_BROWSER}**: The full path to the default browser executable file, e.g. *C:/Program Files/Mozilla Firefox/firefox.exe*
-
-To make [**Granted**](https://github.com/fwdcloudsec/granted) write SSO tokens to AWS’s standard cache location (`~/.aws/sso/cache`), which AWS CLI v2 reads, execute, on a [Git Bash](https://git-scm.com/) terminal, the following command:
-
-```bash
-granted settings set --setting ExportSSOToken --value true
-```
-
-To list all [**Granted**](https://github.com/fwdcloudsec/granted) settings execute the following command:
-
-```bash
-granted settings list
-```
-
-To make `assume` behave in [Git Bash](https://git-scm.com/) like it does in PowerShell (i.e., set AWS environment variables in the current shell), add the following function to your `~/.bashrc`:
-
-```bash
-# Use Granted's bash wrapper so AWS_* variables persist in this bash session
-assume() {
-    local granted_folder="$HOME/scoop/apps/granted/current"
-
-    # Temporarily add Granted's install folder to PATH so the bash wrapper can find `assumego.exe`
-    # and source the Granted’s bash script so exports persist in the current shell.
-    PATH="$granted_folder:$PATH" \
-        . "$granted_folder/assume" "$@"
-}
-```
-
-To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
-
-```bash
-source ~/.bashrc
-```
-
-Now, after running `assume <profile>`, you can run AWS CLI commands without `--profile` because the AWS environment variables are set in your current [Git Bash](https://git-scm.com/) session. To confirm that `assume` is executed as expected, execute `assume <profile>` and then check the output of the following command:
-
-```bash
-aws configure list
-```
-
-### 4.10. Docker
+### 4.8. Docker
 
 [**Docker**](https://www.docker.com/) is an open-source containerization platform. It enables developers to package applications into containers, which are standardized, executable components combining application source code with the operating system libraries and dependencies required to run that code in any environment.
 
@@ -577,7 +331,7 @@ aws configure list
 
 If you're going to do your development work on the Windows native file system, you should choose [Rancher Desktop](https://rancherdesktop.io/) to replace [Docker Desktop](https://www.docker.com/products/docker-desktop/). But if you're planning to do all you development work on the [WSL](https://learn.microsoft.com/windows/wsl/) file system (taking advantage of the Linux tools), you should utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
 
-#### 4.10.1. Pre-Installation requirements
+#### 4.8.1. Pre-Installation requirements
 
 To avoid future conflicts between the ports reserved by ***Hyper-V*** and the ports used by the [**Docker**](https://www.docker.com/) containers, you should [reset the "*TCP Dynamic Port Range*"](https://medium.com/@sevenall/completely-solve-the-problem-of-docker-containers-not-starting-or-running-on-windows-10-due-to-port-57f16ed6143). That is achieved executing the upcoming commands from a PowerShell console with *Administrator* privileges:
 
@@ -596,9 +350,9 @@ netsh int ipv4 show dynamicport tcp
 
 The above command should now show that "*TCP Dynamic Port Range*" has been changed to 49152–65535. Now only the ports in this range may be reserved by ***Hyper-V***.
 
-#### 4.10.2. Installation
+#### 4.8.2. Installation
 
-##### 4.10.2.1. Installation on the WSL File System
+##### 4.8.2.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -750,7 +504,7 @@ echo '{
 }' > ~/.docker/config.json
 ```
 
-##### 4.10.2.2. Installation on the Windows Native File System with Rancher Desktop
+##### 4.8.2.2. Installation on the Windows Native File System with Rancher Desktop
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -831,13 +585,13 @@ The [**Rancher Desktop**](https://rancherdesktop.io/) installation and usage fil
 
 + `%USERPROFILE%\AppData\Local\rancher-desktop` contains the distribution data, container images, logs, etc;
 
-### 4.11. kubectl
+### 4.9. kubectl
 
 [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) is the command line tool for controlling Kubernetes clusters. It allows you to deploy applications, inspect and manage cluster resources, and view logs.
 
-#### 4.11.1. Installation
+#### 4.9.1. Installation
 
-##### 4.11.1.1. Installation on the WSL File System
+##### 4.9.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -889,11 +643,11 @@ kubectl version --client
 >
 > To upgrade [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) to another minor release, you'll need to bump the version in `/etc/apt/sources.list.d/kubernetes.list` before running `apt update` and `apt-get upgrade`. This procedure is described in more detail in [Changing The Kubernetes Package Repository](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
 
-##### 4.11.1.2. Installation on the Windows Native File System
+##### 4.9.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-When doing development work on the `Windows Native File System`, [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) is automatically provided by [**Rancher Desktop**](https://rancherdesktop.io/). If [**Rancher Desktop**](https://rancherdesktop.io/) is installed, no additional steps are required. Refer to the [Rancher Desktop installation instructions](#41022-installation-on-the-windows-native-file-system-with-rancher-desktop) in this guide for details.
+When doing development work on the `Windows Native File System`, [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) is automatically provided by [**Rancher Desktop**](https://rancherdesktop.io/). If [**Rancher Desktop**](https://rancherdesktop.io/) is installed, no additional steps are required. Refer to the [Rancher Desktop installation instructions](#4822-installation-on-the-windows-native-file-system-with-rancher-desktop) in this guide for details.
 
 To verify the [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) installation, check the output of the following command:
 
@@ -901,13 +655,13 @@ To verify the [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) insta
 kubectl version --client
 ```
 
-### 4.12. kubectx
+### 4.10. kubectx
 
 [**kubectx**](https://github.com/ahmetb/kubectx/) is a tool to switch between contexts (clusters) on `kubectl` faster. It also includes`kubens`, which is a tool to switch between Kubernetes namespaces (and configure them for `kubectl`) easily.
 
-#### 4.12.1. Installation
+#### 4.10.1. Installation
 
-##### 4.12.1.1. Installation on the WSL File System
+##### 4.10.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -924,7 +678,7 @@ kubectx --version
 kubectx --help
 ```
 
-##### 4.12.1.2. Installation on the Windows Native File System
+##### 4.10.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -941,13 +695,13 @@ kubectx --version
 kubectx --help
 ```
 
-### 4.13. K9s
+### 4.11. K9s
 
 [**K9s**](https://github.com/derailed/k9s) provides a terminal UI to interact with your Kubernetes clusters. The aim of the project is to make it easier to navigate, observe and manage your applications in the wild. [**K9s**](https://github.com/derailed/k9s) continually watches Kubernetes for changes and offers subsequent commands to interact with your observed resources.
 
-#### 4.13.1. Installation
+#### 4.11.1. Installation
 
-##### 4.13.1.1. Installation on the WSL File System
+##### 4.11.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -969,7 +723,7 @@ k9s help
 
 If the command `k9s info` shows a warning/error stating "*ERROR Unable to reads k9s config file*", that's because it was just installed and haven't actually been launched yet. By design, [**K9s**](https://github.com/derailed/k9s) does not create its configuration files or folders during the apt install process. Instead, it generates them dynamically the very first time you start the program. All you need to do is launch [**K9s**](https://github.com/derailed/k9s) once to initialize your environment.
 
-##### 4.13.1.2. Installation on the Windows Native File System
+##### 4.11.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -987,13 +741,349 @@ k9s info
 k9s help
 ```
 
-### 4.14. Java
+### 4.12. AWS CLI
 
-[**Java**](https://openjdk.org/) is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let programmers write once, run anywhere, meaning that compiled Java code can run on all platforms that support Java without the need to recompile.
+The [**AWS Command Line Interface (AWS CLI)**](https://aws.amazon.com/cli/) is a unified tool to manage your AWS services. With just one tool to download and configure, you can control multiple AWS services from the command line and automate them through scripts.
+
+#### 4.12.1. Installation
+
+##### 4.12.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `WSL File System`, following the [official instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), execute the following commands on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```bash
+curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscliv2.zip
+unzip /tmp/awscliv2.zip -d /tmp/
+sudo /tmp/aws/install
+```
+
+To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was properly made, check the output of the following command:
+
+```bash
+aws --version
+```
+
+If the `aws` command cannot be found, you might need to restart your terminal or follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
+
+[AWS](https://aws.amazon.com/) also provides a [Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) that "enables you to establish secure connections to your Amazon Elastic Compute Cloud (EC2) instances, edge devices, on-premises servers, and virtual machines (VMs)". Follow the Debian and Ubuntu [official instructions](https://docs.aws.amazon.com/systems-manager/latest/userguide/install-plugin-debian-and-ubuntu.html) to install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `WSL File System` and download the `.deb` package executing the following command:
+
+```bash
+curl https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb -o /tmp/session-manager-plugin.deb
+```
+
+To install the downloaded `.deb` package executing the following command:
+
+```bash
+sudo dpkg -i /tmp/session-manager-plugin.deb
+```
+
+To verify the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installation, check the output of the following command:
+
+```bash
+session-manager-plugin
+```
+
+If the installation was successful, the following message is returned.
+
+```bash
+The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
+```
+
+##### 4.12.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**AWS CLI**](https://aws.amazon.com/cli/) on the `Windows Native File System`, open a PowerShell console and execute the following command:
+
+```powershell
+scoop install main/aws
+```
+
+To verify if the [**AWS CLI**](https://aws.amazon.com/cli/) installation was properly made, check the output of the following command:
+
+```powershell
+aws --version
+```
+
+If there is any problem using the [**AWS CLI**](https://aws.amazon.com/cli/), follow the troubleshooting in [Troubleshoot AWS CLI errors](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html).
+
+To install the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) on the `Windows Native File System`, open a PowerShell console and execute the following commands:
+
+```powershell
+scoop bucket add extras
+scoop install extras/aws-session-manager-plugin
+```
+
+To verify the [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) installation, check the output of the following command:
+
+```powershell
+session-manager-plugin
+```
+
+If the installation was successful, the following message is returned.
+
+```powershell
+The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
+```
+
+### 4.13. Granted
+
+[**Granted**](https://github.com/fwdcloudsec/granted) is a command line interface (CLI) application which simplifies access to cloud roles and allows multiple cloud accounts to be opened in your web browser simultaneously.
+
+#### 4.13.1. Installation
+
+##### 4.13.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**Granted**](https://github.com/fwdcloudsec/granted) on the `WSL File System`, following the [official Linux (APT) instructions](https://docs.commonfate.io/granted/getting-started), execute the following commands on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```bash
+sudo apt update
+sudo apt install gpg wget ca-certificates
+wget -O- https://apt.releases.commonfate.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/common-fate-linux.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/common-fate-linux.gpg] https://apt.releases.commonfate.io stable main" | sudo tee /etc/apt/sources.list.d/common-fate.list
+sudo apt update
+sudo apt install granted
+```
+
+To verify if the [**Granted**](https://github.com/fwdcloudsec/granted) installation was properly made, check the output of the following command:
+
+```bash
+granted --version
+granted --help
+```
+
+To pin [**Granted**](https://github.com/fwdcloudsec/granted) backend to `file` execute the following commands:
+
+```bash
+mkdir -p ~/.granted/keyring
+chmod 700 ~/.granted ~/.granted/keyring
+granted settings set --setting Keyring.Backend --value file
+granted settings set --setting Keyring.FileDir --value "${HOME}/.granted/keyring"
+```
+To set the browser opener unified to Windows default browser via the `XDG-OPEN` wrapper, execute the following commands:
+
+```bash
+granted settings set --setting DefaultBrowser --value CUSTOM
+granted settings set --setting CustomBrowserPath --value "${HOME}/.local/bin/xdg-open"
+granted settings set --setting CustomSSOBrowserPath --value "${HOME}/.local/bin/xdg-open"
+```
+
+To make [**Granted**](https://github.com/fwdcloudsec/granted) write SSO tokens to AWS’s standard cache location (`~/.aws/sso/cache`), which AWS CLI v2 reads, execute the following command:
+
+```bash
+granted settings set --setting ExportSSOToken --value true
+```
+
+To list all [**Granted**](https://github.com/fwdcloudsec/granted) settings execute the following command:
+
+```bash
+granted settings list
+```
+
+To set up [**Granted**](https://github.com/fwdcloudsec/granted) shell alias, open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/), executing the following command:
+
+```bash
+nano ~/.bashrc
+```
+
+Then, add the upcoming snippet to the `~/.bashrc` file.
+
+```bash
+# Set Granted shell alias
+#
+# + https://docs.commonfate.io/granted/internals/shell-alias
+# + https://docs.commonfate.io/granted/troubleshooting#manually-configuring-your-shell-profile
+alias assume="source assume"
+```
+
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
+
+```bash
+source ~/.bashrc
+```
+
+Now, after running `assume <profile>`, you can run AWS CLI commands without `--profile` because the AWS environment variables are set in your current shell session. To confirm that `assume` is executed as expected, execute `assume <profile>` and then check the output of the following command:
+
+```bash
+aws configure list
+```
+
+##### 4.13.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**Granted**](https://github.com/fwdcloudsec/granted) on the `Windows Native File System`, open a PowerShell console and execute the following command:
+
+```powershell
+scoop install main/granted
+```
+
+To verify if the [**Granted**](https://github.com/fwdcloudsec/granted) installation was properly made, check the output of the following command:
+
+```powershell
+granted --version
+granted --help
+```
+
+To pin [**Granted**](https://github.com/fwdcloudsec/granted) backend to `file` execute, on a [Git Bash](https://git-scm.com/) terminal, the following commands:
+
+```bash
+mkdir -p ~/.granted/keyring
+chmod 700 ~/.granted ~/.granted/keyring
+granted settings set --setting Keyring.Backend --value file
+granted settings set --setting Keyring.FileDir --value "${HOME}/.granted/keyring"
+```
+
+To set the browser opener unified to Windows default browser via the `XDG-OPEN` wrapper, replace the ***{LABEL}*** in the below commands as appropriate and then execute it, on a [Git Bash](https://git-scm.com/) terminal.
+
+```bash
+granted settings set --setting DefaultBrowser --value FIREFOX
+granted settings set --setting CustomSSOBrowserPath --value "{PATH_TO_DEFAULT_BROWSER}"
+```
+
+> **Label Definition**
+>
+> + **{PATH_TO_DEFAULT_BROWSER}**: The full path to the default browser executable file, e.g. *C:/Program Files/Mozilla Firefox/firefox.exe*
+
+To make [**Granted**](https://github.com/fwdcloudsec/granted) write SSO tokens to AWS’s standard cache location (`~/.aws/sso/cache`), which AWS CLI v2 reads, execute, on a [Git Bash](https://git-scm.com/) terminal, the following command:
+
+```bash
+granted settings set --setting ExportSSOToken --value true
+```
+
+To list all [**Granted**](https://github.com/fwdcloudsec/granted) settings execute the following command:
+
+```bash
+granted settings list
+```
+
+To make `assume` behave in [Git Bash](https://git-scm.com/) like it does in PowerShell (i.e., set AWS environment variables in the current shell), add the following function to your `~/.bashrc`:
+
+```bash
+# Use Granted's bash wrapper so AWS_* variables persist in this bash session
+assume() {
+    local granted_folder="$HOME/scoop/apps/granted/current"
+
+    # Temporarily add Granted's install folder to PATH so the bash wrapper can find `assumego.exe`
+    # and source the Granted’s bash script so exports persist in the current shell.
+    PATH="$granted_folder:$PATH" \
+        . "$granted_folder/assume" "$@"
+}
+```
+
+To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
+
+```bash
+source ~/.bashrc
+```
+
+Now, after running `assume <profile>`, you can run AWS CLI commands without `--profile` because the AWS environment variables are set in your current [Git Bash](https://git-scm.com/) session. To confirm that `assume` is executed as expected, execute `assume <profile>` and then check the output of the following command:
+
+```bash
+aws configure list
+```
+
+### 4.14. Terraform
+
+[**Terraform**](https://www.terraform.io/) is a tool for building, changing, and versioning infrastructure safely and efficiently.
 
 #### 4.14.1. Installation
 
 ##### 4.14.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+The easiest way to install and manage multiple versions of [**Terraform**](https://www.terraform.io/) on the `WSL File System` is to use [TFSwitch](https://tfswitch.warrensbox.com/). This is a command line tool that lets you switch between different versions of [**Terraform**](https://www.terraform.io/).
+
+Create a folder to [store the user's binaries](https://unix.stackexchange.com/a/36874) executing the following command:
+
+```bash
+mkdir -p ~/.local/bin
+```
+
+It's necessary that the folder `~/.local/bin` is included on the `PATH` and, on [Ubuntu](https://ubuntu.com/), that is normally done by the `~/.profile` script. Close the terminal and on a new [Ubuntu](https://ubuntu.com/) terminal and then check the output of the following command to confirm that `~/.local/bin` is included on the `PATH`.
+
+```bash
+echo $PATH
+```
+
+Following the [official instructions](https://tfswitch.warrensbox.com/Install/), download [TFSwitch](https://tfswitch.warrensbox.com/) installation script to the folder `/tmp` executing the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal:
+
+```bash
+wget https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh -P /tmp
+```
+
+Make the [TFSwitch](https://tfswitch.warrensbox.com/) installation script executable with the following command:
+
+```bash
+chmod 755 /tmp/install.sh
+```
+
+Install [TFSwitch](https://tfswitch.warrensbox.com/) on the `~/.local/bin` executing the following command:
+
+```bash
+/tmp/install.sh -b ~/.local/bin/
+```
+
+To verify if the [TFSwitch](https://tfswitch.warrensbox.com/) installation was properly made, check the output of the following command:
+
+```bash
+tfswitch --version
+```
+
+To install a specific [**Terraform**](https://www.terraform.io/) on the `WSL File System`, replace the ***{LABEL}*** in the below command as appropriate and then execute it on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```bash
+tfswitch -b ~/.local/bin/terraform {VERSION}
+```
+
+> **Label Definition**
+>
+> + **{VERSION}** : The desired [**Terraform**](https://www.terraform.io/) version
+
+To verify if the [**Terraform**](https://www.terraform.io/) installation was properly made, check the output of the following command:
+
+```bash
+terraform --version
+```
+
+##### 4.14.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**Terraform**](https://www.terraform.io/) on the `Windows Native File System`, open a PowerShell console and execute the following command:
+
+```powershell
+scoop install main/terraform
+```
+
+Using [Scoop](https://scoop.sh/), it's possible to [install a specific version](https://github.com/ScoopInstaller/Scoop/wiki/FAQ#how-do-i-install-a-specific-version-of-an-app) of an app. To do that for [**Terraform**](https://www.terraform.io/), replace the ***{LABEL}*** in the below command as appropriate and then execute it on a PowerShell console.
+
+```powershell
+scoop install terraform@ {VERSION}
+```
+
+> **Label Definition**
+>
+> + **{VERSION}** : The desired [**Terraform**](https://www.terraform.io/) version
+
+To verify if the [**Terraform**](https://www.terraform.io/) installation was properly made, check the output of the following command:
+
+```powershell
+terraform --version
+```
+
+### 4.15. Java
+
+[**Java**](https://openjdk.org/) is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let programmers write once, run anywhere, meaning that compiled Java code can run on all platforms that support Java without the need to recompile.
+
+#### 4.15.1. Installation
+
+##### 4.15.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -1100,7 +1190,7 @@ keytool -v -list -keystore $JAVA_HOME/lib/security/cacerts -alias {CERTIFICATE_A
 >
 > + **{CERTIFICATE_ALIAS}** : The chosen certificate alias
 
-##### 4.14.1.2. Installation on the Windows Native File System
+##### 4.15.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1207,13 +1297,13 @@ keytool -v -list -keystore $JAVA_HOME/lib/security/cacerts -alias {CERTIFICATE_A
 >
 > + **{CERTIFICATE_ALIAS}** : The chosen certificate alias
 
-### 4.15. Apache Maven
+### 4.16. Apache Maven
 
 [**Apache Maven**](https://maven.apache.org/) is a build automation tool used primarily for Java projects. It can also be used to build and manage projects written in C#, Ruby, Scala, and other languages and it is hosted by the [Apache Software Foundation](https://en.wikipedia.org/wiki/Apache_Software_Foundation).
 
-#### 4.15.1. Installation
+#### 4.16.1. Installation
 
-##### 4.15.1.1. Installation on the WSL File System
+##### 4.16.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -1334,7 +1424,7 @@ mvn -version
 
 If everything is correct, the above command will output the **Apache Maven** version.
 
-##### 4.15.1.2. Installation on the Windows Native File System
+##### 4.16.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1403,7 +1493,7 @@ mvn -version
 
 If everything is correct, the above command will output the **Apache Maven** version.
 
-#### 4.15.2. Configuration
+#### 4.16.2. Configuration
 
 The default location for the user's settings file and for the *Maven Local Repository* is the `.m2` folder at the user's *Home Folder*. Check it it already exists and if it doesn't create it with the upcoming command. If [**Apache Maven**](https://maven.apache.org/) is installed on the `WSL File System`, use a [Ubuntu](https://ubuntu.com/) terminal and if it is installed on the `Windows Native File System` use a  [Git Bash](https://git-scm.com/) terminal.
 
@@ -1429,7 +1519,7 @@ To set the folder created with the above command as the custom location for the 
 >
 > + **{PROJECT}** : The label that identifies the project name
 
-#### 4.15.3. Usage & Maintenance
+#### 4.16.3. Usage & Maintenance
 
 To maintain a transparent development environment, each project version uses a dedicated settings file. These are linked to the default Maven location (`~/.m2/settings.xml`) using **Symbolic Links** (Windows Developer mode must be enabled). This allows IDEs and the CLI to work without additional flags or admin permissions, while providing a clear visual indication of which configuration is currently active.
 
@@ -1468,17 +1558,17 @@ del %USERPROFILE%\.m2\settings.xml
 mklink %USERPROFILE%\.m2\settings.xml %USERPROFILE%\.m2\settings-{PROJECT}-{DATE}.xml
 ```
 
-### 4.16. Gradle
+### 4.17. Gradle
 
 [**Gradle**](https://gradle.org/) is a build automation tool used primarily for [Java](https://openjdk.org/) and [Kotlin](https://kotlinlang.org/) projects. It can also be used to build and manage projects written in C/C++, Python, and other languages, and it is the default build tool for [Android](https://www.android.com/) development.
 
-#### 4.16.1. Installation
+#### 4.17.1. Installation
 
-##### 4.16.1.1. Installation on the WSL File System
+##### 4.17.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-To be able to install a specific [**Gradle**](https://gradle.org/) version on the `WSL File System`, I like to follow a procedure similar to the one used for [**Apache Maven**](#4151-installation).
+To be able to install a specific [**Gradle**](https://gradle.org/) version on the `WSL File System`, I like to follow a procedure similar to the one used for [**Apache Maven**](#4161-installation).
 
 Start by creating the folder where [**Gradle**](https://gradle.org/) will be installed, executing the following commands:
 
@@ -1503,7 +1593,7 @@ wget {DOWNLOAD_LINK} -P /tmp
 >
 > + **{DOWNLOAD_LINK}** : Download link to the *binary-only* `bin` zip archive taken from the [official download page](https://gradle.org/releases/), e.g. `https://services.gradle.org/distributions/gradle-8.14.3-bin.zip`
 
-The `unzip` utility was already installed as a dependency of the [**Java**](#414-java) installation (see [SDKMAN](https://sdkman.io/)).
+The `unzip` utility was already installed as a dependency of the [**Java**](#415-java) installation (see [SDKMAN](https://sdkman.io/)).
 
 Once the download is completed, extract the archive in the `/opt/gradle/candidates` directory with the following command:
 
@@ -1597,7 +1687,7 @@ gradle --version
 
 If everything is correct, the above command will output the **Gradle** version.
 
-##### 4.16.1.2. Installation on the Windows Native File System
+##### 4.17.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1666,7 +1756,7 @@ gradle --version
 
 If everything is correct, the above command will output the **Gradle** version.
 
-#### 4.16.2. Configuration
+#### 4.17.2. Configuration
 
 The default location for the user's *Gradle User Home* is the `.gradle` folder at the user's *Home Folder*. It stores the global caches, the daemon logs and the wrapper distributions. Check if it already exists and if it doesn't create it with the upcoming command. If [**Gradle**](https://gradle.org/) is installed on the `WSL File System`, use a [Ubuntu](https://ubuntu.com/) terminal and if it is installed on the `Windows Native File System` use a [Git Bash](https://git-scm.com/) terminal.
 
@@ -1686,80 +1776,21 @@ mkdir -p ~/.gradle-{PROJECT}
 
 To set the folder created with the above command as the custom *Gradle User Home*, set the `GRADLE_USER_HOME` environment variable accordingly on the terminal that runs the build, or point the build tool of the IDE to it (see [Configure Build Tools](#4216-configure-build-tools)).
 
-### 4.17. Apache Tomcat
+### 4.18. Node.js
 
-[**Apache Tomcat**](http://tomcat.apache.org/) is an open source implementation of the [Jakarta Servlet](https://projects.eclipse.org/projects/ee4j.servlet), [Jakarta Server Pages](https://projects.eclipse.org/projects/ee4j.jsp), [Jakarta Expression Language](https://projects.eclipse.org/projects/ee4j.el), [Jakarta WebSocket](https://projects.eclipse.org/projects/ee4j.websocket), [Jakarta Annotations](https://projects.eclipse.org/projects/ee4j.cahttps://projects.eclipse.org/projects/ee4j.authentication) specifications. These specifications are part of the [Jakarta EE platform](https://projects.eclipse.org/projects/ee4j.jakartaee-platform).
-
-#### 4.17.1. Installation
-
-##### 4.17.1.1. Installation on the Windows Native File System
-
-![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
-
-To install [**Apache Tomcat**](http://tomcat.apache.org/) application server on the `Windows Native File System`, download the desired [release zip archive](http://tomcat.apache.org/) and unpack it to the folder `C:\dev\apache-tomcat\candidates`. Rename the extracted folder taking in consideration the following structure:
-
-    tomcat-{VERSION}-{PROJECT}
-
-The different parts in the above name structure, shall be replaced as explained next:
-
-> + **{VERSION}** : The Tomcat version number, e.g. *8.5.82*
-> + **{PROJECT}** : The name of the project where this instance of Tomcat will be used, e.g. *sa3*
->
-> With the above examples, the Tomcat folder name would be *tomcat-8.5.82-sa3*
-
-### 4.18. Quarkus CLI
-
-The [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) lets you create Quarkus projects, manage extensions and do essential build and development tasks using the underlying project build tool.
+[**Node.js**](https://nodejs.org/) is a cross-platform, open-source JavaScript runtime environment that runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
 
 #### 4.18.1. Installation
+
+The most pratical way to install [**Node.js**](https://nodejs.org/) is via a Node version manager because it allows you to easily install and switch between numerous versions of [**Node.js**](https://nodejs.org/). This is useful when a project you’re working on requires a different version of [**Node.js**](https://nodejs.org/) than what you currently have installed.
 
 ##### 4.18.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) on the `WSL File System`, following the [official instructions](https://quarkus.io/guides/cli-tooling), execute the following command on a [Ubuntu](https://ubuntu.com/) terminal.
-
-```bash
-sdk install quarkus
-```
-
-To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) installation was properly made, check the output of the following command:
-
-```bash
-quarkus --version
-```
-
-##### 4.18.1.2. Installation on the Windows Native File System
-
-![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
-
-To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling), open a PowerShell console and execute the following command:
-
-```powershell
-scoop install main/quarkus-cli
-```
-
-To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) installation was properly made, check the output of the following command:
-
-```powershell
-quarkus --version
-```
-
-### 4.19. Node.js
-
-[**Node.js**](https://nodejs.org/) is a cross-platform, open-source JavaScript runtime environment that runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
-
-#### 4.19.1. Installation
-
-The most pratical way to install [**Node.js**](https://nodejs.org/) is via a Node version manager because it allows you to easily install and switch between numerous versions of [**Node.js**](https://nodejs.org/). This is useful when a project you’re working on requires a different version of [**Node.js**](https://nodejs.org/) than what you currently have installed.
-
-##### 4.19.1.1. Installation on the WSL File System
-
-![WSL](https://img.shields.io/badge/WSL-purple)
-
 My go to Node version manager on Linux used to be [`nvm`](https://github.com/nvm-sh/nvm) but, now I'm starting to use [fnm (Fast Node Manager)](https://github.com/Schniz/fnm) because it has better performance.
 
-###### 4.19.1.1.1. fnm (Fast Node Manager)
+###### 4.18.1.1.1. fnm (Fast Node Manager)
 
 [fnm](https://github.com/Schniz/fnm) can be installed, as per the [official instructions](https://github.com/Schniz/fnm#using-a-script-macoslinux), executing the following command on a [Ubuntu](https://ubuntu.com/) terminal:
 
@@ -1819,7 +1850,7 @@ npm --version
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-###### 4.19.1.1.2. nvm (Node Version Manager)
+###### 4.18.1.1.2. nvm (Node Version Manager)
 
 Although I'm now using [fnm](https://github.com/Schniz/fnm) as my preferred Node Version Manager, I'm keeping here, for historical reference, my guide to install [`nvm`](https://github.com/nvm-sh/nvm), which I used before getting to know [fnm](https://github.com/Schniz/fnm).
 
@@ -1891,13 +1922,13 @@ When [**Node.js**](https://nodejs.org/) is installed, [`npm`](https://www.npmjs.
 nvm install-latest-npm
 ```
 
-##### 4.19.1.2. Installation on the Windows Native File System
+##### 4.18.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 My go to Node version manager on on the `Windows Native File System` used to be [NVS](https://github.com/jasongin/nvs) but, it has seen very little activity recently, with the last major release being in 2023. Therefore, I'm now starting to use [fnm (Fast Node Manager)](https://github.com/Schniz/fnm).
 
-###### 4.19.1.2.1. fnm (Fast Node Manager)
+###### 4.18.1.2.1. fnm (Fast Node Manager)
 
 [fnm](https://github.com/Schniz/fnm) can be installed with [scoop](https://scoop.sh/) executing, on PowerShell console, the following command:
 
@@ -1982,7 +2013,7 @@ npm --version
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-###### 4.19.1.2.2. NVS (Node Version Switcher)
+###### 4.18.1.2.2. NVS (Node Version Switcher)
 
 Although I'm now using [fnm](https://github.com/Schniz/fnm) as my preferred Node Version Manager, I'm keeping here, for historical reference, my guide to install [NVS](https://github.com/jasongin/nvs).
 
@@ -2081,9 +2112,30 @@ npm --version
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-### 4.20. Terraform
+### 4.19. Apache Tomcat
 
-[**Terraform**](https://www.terraform.io/) is a tool for building, changing, and versioning infrastructure safely and efficiently.
+[**Apache Tomcat**](http://tomcat.apache.org/) is an open source implementation of the [Jakarta Servlet](https://projects.eclipse.org/projects/ee4j.servlet), [Jakarta Server Pages](https://projects.eclipse.org/projects/ee4j.jsp), [Jakarta Expression Language](https://projects.eclipse.org/projects/ee4j.el), [Jakarta WebSocket](https://projects.eclipse.org/projects/ee4j.websocket), [Jakarta Annotations](https://projects.eclipse.org/projects/ee4j.cahttps://projects.eclipse.org/projects/ee4j.authentication) specifications. These specifications are part of the [Jakarta EE platform](https://projects.eclipse.org/projects/ee4j.jakartaee-platform).
+
+#### 4.19.1. Installation
+
+##### 4.19.1.1. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**Apache Tomcat**](http://tomcat.apache.org/) application server on the `Windows Native File System`, download the desired [release zip archive](http://tomcat.apache.org/) and unpack it to the folder `C:\dev\apache-tomcat\candidates`. Rename the extracted folder taking in consideration the following structure:
+
+    tomcat-{VERSION}-{PROJECT}
+
+The different parts in the above name structure, shall be replaced as explained next:
+
+> + **{VERSION}** : The Tomcat version number, e.g. *8.5.82*
+> + **{PROJECT}** : The name of the project where this instance of Tomcat will be used, e.g. *sa3*
+>
+> With the above examples, the Tomcat folder name would be *tomcat-8.5.82-sa3*
+
+### 4.20. Quarkus CLI
+
+The [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) lets you create Quarkus projects, manage extensions and do essential build and development tasks using the underlying project build tool.
 
 #### 4.20.1. Installation
 
@@ -2091,84 +2143,32 @@ If everything is correct, the above commands will output the **node** version an
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-The easiest way to install and manage multiple versions of [**Terraform**](https://www.terraform.io/) on the `WSL File System` is to use [TFSwitch](https://tfswitch.warrensbox.com/). This is a command line tool that lets you switch between different versions of [**Terraform**](https://www.terraform.io/).
-
-Create a folder to [store the user's binaries](https://unix.stackexchange.com/a/36874) executing the following command:
+To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) on the `WSL File System`, following the [official instructions](https://quarkus.io/guides/cli-tooling), execute the following command on a [Ubuntu](https://ubuntu.com/) terminal.
 
 ```bash
-mkdir -p ~/.local/bin
+sdk install quarkus
 ```
 
-It's necessary that the folder `~/.local/bin` is included on the `PATH` and, on [Ubuntu](https://ubuntu.com/), that is normally done by the `~/.profile` script. Close the terminal and on a new [Ubuntu](https://ubuntu.com/) terminal and then check the output of the following command to confirm that `~/.local/bin` is included on the `PATH`.
+To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) installation was properly made, check the output of the following command:
 
 ```bash
-echo $PATH
-```
-
-Following the [official instructions](https://tfswitch.warrensbox.com/Install/), download [TFSwitch](https://tfswitch.warrensbox.com/) installation script to the folder `/tmp` executing the upcoming commands on a [Ubuntu](https://ubuntu.com/) terminal:
-
-```bash
-wget https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh -P /tmp
-```
-
-Make the [TFSwitch](https://tfswitch.warrensbox.com/) installation script executable with the following command:
-
-```bash
-chmod 755 /tmp/install.sh
-```
-
-Install [TFSwitch](https://tfswitch.warrensbox.com/) on the `~/.local/bin` executing the following command:
-
-```bash
-/tmp/install.sh -b ~/.local/bin/
-```
-
-To verify if the [TFSwitch](https://tfswitch.warrensbox.com/) installation was properly made, check the output of the following command:
-
-```bash
-tfswitch --version
-```
-
-To install a specific [**Terraform**](https://www.terraform.io/) on the `WSL File System`, replace the ***{LABEL}*** in the below command as appropriate and then execute it on a [Ubuntu](https://ubuntu.com/) terminal.
-
-```bash
-tfswitch -b ~/.local/bin/terraform {VERSION}
-```
-
-> **Label Definition**
->
-> + **{VERSION}** : The desired [**Terraform**](https://www.terraform.io/) version
-
-To verify if the [**Terraform**](https://www.terraform.io/) installation was properly made, check the output of the following command:
-
-```bash
-terraform --version
+quarkus --version
 ```
 
 ##### 4.20.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-To install [**Terraform**](https://www.terraform.io/) on the `Windows Native File System`, open a PowerShell console and execute the following command:
+To install [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling), open a PowerShell console and execute the following command:
 
 ```powershell
-scoop install main/terraform
+scoop install main/quarkus-cli
 ```
 
-Using [Scoop](https://scoop.sh/), it's possible to [install a specific version](https://github.com/ScoopInstaller/Scoop/wiki/FAQ#how-do-i-install-a-specific-version-of-an-app) of an app. To do that for [**Terraform**](https://www.terraform.io/), replace the ***{LABEL}*** in the below command as appropriate and then execute it on a PowerShell console.
+To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) installation was properly made, check the output of the following command:
 
 ```powershell
-scoop install terraform@ {VERSION}
-```
-
-> **Label Definition**
->
-> + **{VERSION}** : The desired [**Terraform**](https://www.terraform.io/) version
-
-To verify if the [**Terraform**](https://www.terraform.io/) installation was properly made, check the output of the following command:
-
-```powershell
-terraform --version
+quarkus --version
 ```
 
 ### 4.21. IntelliJ IDEA
@@ -2280,7 +2280,7 @@ To make sure that the projects are created and opened on the [**WSL**](https://l
 
 ##### 4.21.2.2. Select the JDK on the WSL file system
 
-When a project is opened or created on the `WSL File System`, [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) scans the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution for the installed [**Java**](https://openjdk.org/) versions and lists them on the *Project Structure* dialog (`Ctrl+Alt+Shift+S`). Choose the [**Java**](#414-java) version installed with [SDKMAN](https://sdkman.io/) on the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution (`~/.sdkman/candidates/java/current`). [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) must use a [**Java**](https://openjdk.org/) version installed on the `WSL File System`, otherwise the project will be built with the Windows one.
+When a project is opened or created on the `WSL File System`, [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) scans the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution for the installed [**Java**](https://openjdk.org/) versions and lists them on the *Project Structure* dialog (`Ctrl+Alt+Shift+S`). Choose the [**Java**](#415-java) version installed with [SDKMAN](https://sdkman.io/) on the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution (`~/.sdkman/candidates/java/current`). [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) must use a [**Java**](https://openjdk.org/) version installed on the `WSL File System`, otherwise the project will be built with the Windows one.
 
 ##### 4.21.2.3. Enable the Remote Execution Agent plugin
 
@@ -2338,9 +2338,9 @@ To move changes to the shelf instead of committing them, take the following step
 
 To customize *Maven*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Maven`. On this tab, change the input boxes listed below as described:
 
-+ **Maven home path** : The path to the chosen [system *Maven* instance](#4151-installation);
-+ **User setting file** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#4152-configuration);
-+ **Local repository** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#4152-configuration);
++ **Maven home path** : The path to the chosen [system *Maven* instance](#4161-installation);
++ **User setting file** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#4162-configuration);
++ **Local repository** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#4162-configuration);
 
 Beware that you must choose the [Apache Maven](https://maven.apache.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
@@ -2349,9 +2349,9 @@ Beware that you must choose the [Apache Maven](https://maven.apache.org/) accord
 To customize *Gradle*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Gradle`. On this tab, change the input boxes listed below as described:
 
 + **Use Gradle from** : Select the `Specified location` option;
-+ **Gradle home path** : The path to the chosen [system *Gradle* instance](#4161-installation);
-+ **Gradle JVM** : The [**Java**](#414-java) version in use with the project, e.g. `$HOME/.sdkman/candidates/java/current` on the `WSL File System` or `C:\dev\java\current` on the `Windows Native File System`;
-+ **Gradle user home** : Check the `Override` checkbox and point to the [custom project's *Gradle User Home*](#4162-configuration);
++ **Gradle home path** : The path to the chosen [system *Gradle* instance](#4171-installation);
++ **Gradle JVM** : The [**Java**](#415-java) version in use with the project, e.g. `$HOME/.sdkman/candidates/java/current` on the `WSL File System` or `C:\dev\java\current` on the `Windows Native File System`;
++ **Gradle user home** : Check the `Override` checkbox and point to the [custom project's *Gradle User Home*](#4172-configuration);
 
 Beware that you must choose the [Gradle](https://gradle.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
