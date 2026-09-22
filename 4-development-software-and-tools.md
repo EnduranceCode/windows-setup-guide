@@ -2457,6 +2457,42 @@ To get the best possible performance out of the [**IntelliJ IDEA**](https://www.
 >
 > The *run targets* feature (running a `Windows Native File System` project inside [**WSL**](https://learn.microsoft.com/windows/wsl/)) is only available on the *Ultimate* edition. Since all the development work is done on the `WSL File System`, it is not needed.
 
+##### 4.21.10.1. IntelliJ-launched WSL processes can't see your exported environment variables
+
+When a project is opened from the `WSL File System`, [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) runs the build tools *inside* [**WSL**](https://learn.microsoft.com/windows/wsl/) (e.g. the *Gradle* daemon or *Maven*), which may cause a build failure because the build can't find an environment variable (e.g. `{ENV_VAR}`) that is definitely exported in a [**WSL**](https://learn.microsoft.com/windows/wsl/) terminal.
+
+That happens because [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) launches the process through a non-interactive `wsl.exe` call. That process does **not** source `~/.bashrc`, `~/.profile`, or any shell startup file, and it does not inherit the Windows environment. So any environment variable the build needs must be pushed into the [**WSL**](https://learn.microsoft.com/windows/wsl/) process explicitly.
+
+`WSLENV` is the supported [**WSL**](https://learn.microsoft.com/windows/wsl/) mechanism to share an environment variable from Windows into [**WSL**](https://learn.microsoft.com/windows/wsl/)-launched processes. To set it up, take the following steps:
+
+1. Open the Environment Variables editor: press `Win + R`, type `rundll32.exe sysdm.cpl,EditEnvironmentVariables` and press `Enter`.
+2. Under **User variables**, add the variable you need, e.g. `{ENV_VAR}` = **{VALUE}**.
+3. Under **User variables**, add or edit `WSLENV` to include `{ENV_VAR}/u`:
+   + The `/u` flag means the variable is only injected when launching [**WSL**](https://learn.microsoft.com/windows/wsl/) *from* Windows, which is exactly how [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) does it;
+   + If `WSLENV` already has a value, append `;{ENV_VAR}/u`;
+   + For multiple variables, separate them with `;`, e.g. `{ENV_VAR}/u;{OTHER_ENV_VAR}/u`;
+   + Plain values need no extra flag. Paths add `/p`, path lists add `/l`.
+4. Restart [**WSL**](https://learn.microsoft.com/windows/wsl/) so the new Windows environment and `WSLENV` are re-imported: `wsl --shutdown` (from *PowerShell* or *cmd*).
+5. Verify from a *PowerShell* or *cmd* window that the *non-interactive* launch path sees it, replacing the label in the command below as appropriate:
+   ```powershell
+   wsl.exe -e /bin/bash -c 'printenv {ENV_VAR}'
+   ```
+   It should print the value. A normal `wsl` terminal tab is interactive and would mask the problem, so always use the `-e` form to mimic [**IntelliJ IDEA**](https://www.jetbrains.com/idea/).
+6. Fully exit and restart [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), then reload the project with `File->Reload All Gradle Projects` or `File->Reload All Maven Projects`.
+
+> **Label Definition**
+>
+> + **{ENV_VAR}** : The name of the environment variable the build needs, e.g. *GITHUB_TOKEN*
+> + **{VALUE}** : The value of the environment variable, e.g. *ghp_xxxxxxxxxxxxxxxxxxxx*
+> + **{OTHER_ENV_VAR}** : The name of another environment variable to share, e.g. *MAVEN_ARGS*
+
+> **Note**
+>
+> + User-level variables require no admin rights;
+> + `setx` also persists to the registry (`HKCU\Environment`) but only affects new processes — restart [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) afterwards;
+> + `set` / `$env:` only affect the current shell; they do not persist;
+> + If the value ever changes, update it in the same dialog and repeat steps 4–6.
+
 ### 4.22. Visual Studio Code
 
 [**Visual Studio Code**](https://code.visualstudio.com/), also commonly referred to as **VS Code**, is a source-code editor made by Microsoft with the Electron Framework, for Windows, Linux and macOS. Features include support for debugging, syntax highlighting, intelligent code completion, snippets, code refactoring, and embedded Git.
