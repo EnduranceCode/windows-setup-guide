@@ -358,10 +358,12 @@ The above command should now show that "*TCP Dynamic Port Range*" has been chang
 
 This section describes the necessary steps to install [**Docker**](https://www.docker.com/) and [Docker Engine](https://docs.docker.com/engine/) on a [WSL](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) distribution. The following steps are based on the [official documentation for installing Docker on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) with some adaptations provided by [Paul Knulst](https://www.paulsblog.dev/how-to-install-docker-without-docker-desktop-on-windows/).
 
+On this guide's recommended [WSL](https://learn.microsoft.com/windows/wsl/) setup ([Fundamental Software](./1-fundamental-software.md#122-configuration)), `systemd` support is enabled (`systemd=true` on `/etc/wsl.conf`), so [**Docker**](https://www.docker.com/) and `containerd` are automatically started by `systemd` right after installation. Furthermore, because that same configuration also sets `appendWindowsPath=false`, the `docker` client available inside the [WSL](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) terminal is the only one in scope and there is no interference with any Windows-side [**Docker**](https://www.docker.com/) installation.
+
 As per [**Docker**](https://www.docker.com/) [documentation](https://docs.docker.com/engine/install/ubuntu/#uninstall-old-versions), before you can install Docker Engine, you need to uninstall any conflicting packages. Do it executing the following command:
 
 ```bash
-sudo apt remove docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc
+sudo apt remove docker.io docker-compose docker-compose-v2 docker-doc docker-buildx podman-docker containerd runc
 sudo apt autoremove
 ```
 
@@ -415,6 +417,7 @@ Check the installed versions using the following commands
 docker --version
 dockerd --version
 docker compose version
+docker buildx version
 docker info
 ```
 
@@ -432,12 +435,36 @@ sudo systemctl start docker
 sudo systemctl enable docker
 ```
 
-The default `iptables` frontend on [Ubuntu](https://ubuntu.com/) is usually `iptables-nft`. [**Docker**](https://www.docker.com/) works with `iptables-nft` and `iptables-legacy`, but if you experience Docker networking issues (for example, containers can’t reach the internet, port publishing doesn’t work, or firewall rules look wrong), you can try switching to the legacy backend as a troubleshooting step:
+The default `iptables` frontend on [Ubuntu](https://ubuntu.com/) is usually `iptables-nft`. [**Docker**](https://www.docker.com/) works with `iptables-nft` and `iptables-legacy`, but if you experience Docker networking issues (for example, containers can’t reach the internet, port publishing doesn’t work, or firewall rules look wrong), first check whether the issue is caused by the `iptables` backend before switching to the legacy one. Do it checking the output of the following commands:
+
+```bash
+iptables --version
+sudo iptables-nft -S | grep -c DOCKER
+sudo iptables-legacy -S | grep -c DOCKER
+docker run --rm alpine ping -c 1 1.1.1.1
+docker run --rm alpine wget -T 5 http://example.com/ -O /dev/null
+```
+
+Only switch to the `iptables-legacy` backend if the container can't reach the internet by IP (the `ping` command, which tests the NAT/masquerade rules) while the host can, or if the `DOCKER` chains are missing from the `nat` table (`sudo iptables-nft -t nat -L -n`). If `ping` succeeds but `wget` fails, the problem is [DNS](https://learn.microsoft.com/windows/wsl/wsl-config#network-settings) resolution and not `iptables`. If port publishing works inside [WSL](https://learn.microsoft.com/windows/wsl/) but not from Windows, that's a *mirrored* networking issue (see the note below) and not the `iptables` backend. If the switch is necessary, execute the following commands:
 
 ```bash
 sudo update-alternatives --config iptables
 sudo update-alternatives --config ip6tables
 sudo systemctl restart docker.service
+```
+
+On this guide's recommended [WSL](https://learn.microsoft.com/windows/wsl/) setup, *mirrored* networking mode (see [Fundamental Software](./1-fundamental-software.md#122-configuration)) is used. When running Docker Engine inside [WSL](https://learn.microsoft.com/windows/wsl/), keep the following points in mind:
+
++ **Accessing published ports.** Because the [WSL](https://learn.microsoft.com/windows/wsl/) instance shares the Windows host network interfaces, a container port published with `-p {HOST_PORT}:{CONTAINER_PORT}` is immediately reachable from Windows at `localhost:{HOST_PORT}`. There is no need to look up the [WSL](https://learn.microsoft.com/windows/wsl/) instance IP.
++ **Host networking works as expected.** Unlike [Docker Desktop](https://www.docker.com/products/docker-desktop/), running Docker Engine directly inside [WSL](https://learn.microsoft.com/windows/wsl/) exposes the *mirrored* interface to the containers, so `--network host` behaves like it would on a regular [Linux](https://www.linux.org/) distribution.
++ **Known issues.** The following bugs only manifest when the [WSL](https://learn.microsoft.com/windows/wsl/) instance uses *mirrored* networking mode:
+    + [moby/moby#48201](https://github.com/moby/moby/issues/48201): TCP connections inside containers can occasionally stall (for example, `apt update` or `wget` hangs indefinitely, but the same commands work fine on the host).
+    + [microsoft/WSL#40984](https://github.com/microsoft/WSL/issues/40984): on some [WSL](https://learn.microsoft.com/windows/wsl/) releases (2.9.x) containers fail to bind published ports with the error "*address already in use*", even though the port is free.
++ **Workarounds.** If you hit the issues described above, first check the installed [WSL](https://learn.microsoft.com/windows/wsl/) version from Windows with `wsl --version` and update it (`wsl --update`) or pin it to a known good release. If the problem persists, temporarily disable *mirrored* mode by removing `networkingMode=mirrored` from the `.wslconfig` file and restarting [WSL](https://learn.microsoft.com/windows/wsl/) with `wsl --shutdown`. In *NAT* mode, published ports must then be reached from Windows through the [WSL](https://learn.microsoft.com/windows/wsl/) instance IP (obtained with the command `hostname -I` on [Ubuntu](https://ubuntu.com/)) instead of `localhost`.
++ **LAN access to published ports.** In *mirrored* mode, inbound connections from other machines on the network are still subject to the Windows firewall, which blocks them by default. To allow access, you may need to configure the WSL (Hyper-V) firewall rules accordingly, e.g. executing the following command on a PowerShell console with *Administrator* privileges:
+
+```powershell
+Set-NetFirewallHyperVVMSetting -Name '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -DefaultInboundAction Allow
 ```
 
 Then, verify if everything is running properly by checking the output of the following commands:
@@ -503,6 +530,65 @@ echo '{
     "credsStore": "pass"
 }' > ~/.docker/config.json
 ```
+
+**Optional: Configure the Docker daemon to use a corporate proxy**
+
+When the machine is behind a corporate proxy (for example [Zscaler](https://www.zscaler.com/)), be aware that the [WSL](https://learn.microsoft.com/windows/wsl/) `autoProxy`/`dnsTunneling` settings only affect the [WSL](https://learn.microsoft.com/windows/wsl/) instance itself and are **not** automatically applied to the Docker daemon. Without this configuration, `dockerd` (and therefore `docker pull`, `docker run`, etc.) cannot reach external registries.
+
+To configure the daemon to use the proxy, replace the ***{LABELS}*** in the below commands as appropriate and then execute them on a [Ubuntu](https://ubuntu.com/) terminal:
+
+```bash
+sudo mkdir -p /etc/systemd/system/docker.service.d
+sudo tee /etc/systemd/system/docker.service.d/http-proxy.conf <<EOF
+[Service]
+Environment="HTTP_PROXY=http://{PROXY_HOST}:{PROXY_PORT}/"
+Environment="HTTPS_PROXY=http://{PROXY_HOST}:{PROXY_PORT}/"
+Environment="NO_PROXY=localhost,127.0.0.1,::1"
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+> **Label Definition**
+>
+> + **{PROXY_HOST}** : The hostname or IP address of the proxy server, e.g. *proxy.company.com*
+> + **{PROXY_PORT}** : The listening port of the proxy server, e.g. *8080*
+
+To confirm that the proxy environment variables took effect, check the output of the following command:
+
+```bash
+sudo systemctl show docker --property=Environment
+```
+
+To verify that the daemon can now reach external registries, pull a test image with the following command:
+
+```bash
+docker pull alpine:latest
+```
+
+For the proxy to also apply to image builds (which run inside *BuildKit* containers), add a `proxies` section to the file `~/.docker/config.json`. Since that file may already contain a `credsStore` configuration (see the [`pass`](https://www.passwordstore.org/) setup above), replace the ***{LABELS}*** in the below command as appropriate and then execute it to write the merged configuration:
+
+```bash
+mkdir -p ~/.docker
+tee ~/.docker/config.json <<EOF
+{
+    "credsStore": "pass",
+    "proxies": {
+        "default": {
+            "httpProxy": "http://{PROXY_HOST}:{PROXY_PORT}/",
+            "httpsProxy": "http://{PROXY_HOST}:{PROXY_PORT}/",
+            "noProxy": "localhost,127.0.0.1"
+        }
+    }
+}
+EOF
+```
+
+> **Note**
+>
+> The `credsStore` line above is only required if you configured the [`pass`](https://www.passwordstore.org/) credential helper. If you didn't, omit that line and keep only the `proxies` object.
+
+Also note that if your company's proxy intercepts TLS traffic (e.g. [Zscaler](https://www.zscaler.com/)), you may need to trust the corporate CA certificate on the system. The [Java](#415-java) section of this guide shows an example of how such certificates can be imported.
 
 ##### 4.8.2.2. Installation on the Windows Native File System with Rancher Desktop
 
