@@ -345,6 +345,356 @@ To verify if the `build-essentials` installation was properly made, check the ou
 gcc --version
 ```
 
+#### 1.2.3.2. Secret storage on the WSL File System
+
+Many command line tools can store their credentials (e.g. a **Personal Access Token**), but they usually delegate this task to an operating system credential store. On the `Windows Native File System`, the [Windows Credential Manager](https://learn.microsoft.com/windows/win32/secauthncredentialmanager) is available for that purpose. On the `WSL File System` there's no such service available by default: the desktop environment is absent, so there's no Secret Service provider (`GNOME Keyring` or `KWallet`) for the tools to talk to. Most of the tools then fall back to writing the secret in **plain text** inside a configuration file in your home folder, which can be read by any process running as your user and is included in backups of your home folder.
+
+This section documents two ways to store secrets securely on the `WSL File System`. The recommended one is [`pass`](https://www.passwordstore.org/), which stores each secret as a [GnuPG](https://gnupg.org/) encrypted file and is available on a headless distribution; the optional one is [`GNOME Keyring`](https://wiki.gnome.org/Projects/GNOMEKeyring), which integrates with the Secret Service API but requires a working D-Bus session.
+
+**Installation of `pass`**
+
+To install [`pass`](https://www.passwordstore.org/) and its dependencies on a [Ubuntu](https://ubuntu.com/) terminal, execute the following commands:
+
+```bash
+sudo apt update
+sudo apt install pass gnupg pinentry-curses
+```
+
+The package `pinentry-curses` provides the passphrase prompt, which is required every time the [GnuPG](https://gnupg.org/) agent needs to decrypt a secret.
+
+**Creation of the GPG key**
+
+[`pass`](https://www.passwordstore.org/) requires a [GnuPG](https://gnupg.org/) key pair to encrypt and decrypt secrets. Create it executing the following command:
+
+```bash
+gpg --full-generate-key
+```
+
+Following the above command, when prompted, set the following options:
+
+```bash
+Kind of key:    {KEY_TYPE}
+Key expiration: {KEY_EXPIRATION}
+Real name:      {REAL_NAME}
+Email address:  {EMAIL}
+Passphrase:     {PASSPHRASE}
+```
+
+> **Label Definition**
+>
+> + **{KEY_TYPE}**: The cryptographic algorithm and usage for your keypair. Recommended for `pass`: `RSA and RSA` (creates a primary key for signing/certifying + a subkey for encryption).
+> + **{KEY_SIZE}**: The size of the RSA key, in bits (security vs performance trade-off). Common choices: `3072` (good default) or `4096` (stronger, slightly slower).
+> + **{KEY_EXPIRATION}**: When the key should expire. Examples: `0` (never expires), `1y` (expires in one year), `2y`, `6m`, etc.
+> + **{REAL_NAME}**: A human-readable name embedded in the key’s user ID (UID).
+> + **{EMAIL}**: The email address embedded in the key’s UID. It does not have to be “real” for cryptographic purposes, but you should use something you’ll recognize.
+> + **{PASSPHRASE}**: The passphrase that protects your private key on disk, if you forget it, you effectively lose the ability to decrypt previously stored secrets.
+
+After generating the key, you can discover the Key ID with the following command:
+
+```bash
+gpg --list-secret-keys --keyid-format=long
+```
+
+The output lists one entry per key in the key pair, as the recommended `RSA and RSA` creates a **primary** key for signing and certifying and a **subkey** for encryption:
+
+```text
+sec   rsa3072/{PRIMARY_KEY_ID} {CREATION_DATE} [SC] [expires: {KEY_EXPIRATION_DATE}]
+      {PRIMARY_KEY_FINGERPRINT}
+uid                 [ultimate] {REAL_NAME} <{EMAIL}>
+ssb   rsa3072/{SUBKEY_ID} {CREATION_DATE} [E] [expires: {KEY_EXPIRATION_DATE}]
+```
+
+> **Label Definition**
+>
+> + **{PRIMARY_KEY_ID}** : The 16 hexadecimal characters identifier of the **primary** key, displayed in the `sec` line after the algorithm
+> + **{PRIMARY_KEY_FINGERPRINT}** : The full 40 hexadecimal characters identifier of the **primary** key, displayed on the line below the `sec` line. It's the extended form of the **{PRIMARY_KEY_ID}**, which it ends with, not a separate key
+> + **{SUBKEY_ID}** : The 16 hexadecimal characters identifier of the **encryption** subkey, displayed in the `ssb` line
+> + **{CREATION_DATE}** : The date the key was created
+> + **{KEY_EXPIRATION_DATE}** : The date the key expires
+
+The option `--keyid-format=long` is what makes [GnuPG](https://gnupg.org/) display the 16 characters identifiers instead of the 8 characters ones used by default. The letters in brackets are the key capabilities: `[SC]` on the `sec` line means **S**igning and **C**ertifying and `[E]` on the `ssb` line means **E**ncryption only. The primary key never handles the secrets themselves, which are encrypted with the subkey, so compromising the signing capability doesn't expose the ability to decrypt anything.
+
+To use the identifiers on the commands below, replace the ***{LABEL}*** with the **{PRIMARY_KEY_ID}**, with the **{PRIMARY_KEY_FINGERPRINT}** or with the ***{EMAIL}***, but never with the **{SUBKEY_ID}**, as the commands that renew the expiration date operate on the primary key.
+
+If you forget the passphrase, the secrets encrypted with that key can't be recovered, so store it on a password manager that doesn't depend on this [WSL](https://learn.microsoft.com/windows/wsl/) distribution, such as the [KeePassXC](#16-keepassxc) section of this guide or any other [KeePassXC](https://keepassxc.org/) database.
+
+The label **{KEY_EXPIRATION}** refers to the expiration of the **key**, not to the passphrase: the passphrase itself doesn't expire and can be changed at any time with the command `gpg --passwd {GPG_IDENTITY}`. When the expiration date of the key is reached, the secrets already stored can still be decrypted (the command `pass show` only reports that the key has expired), but new secrets can no longer be added: the commands `pass insert`, `pass edit` and `pass generate` fail with an `encryption failed: unusable public key` error, because [GnuPG](https://gnupg.org/) refuses to encrypt to an expired key. The store then becomes read-only, which means that a secret can't be rotated until the expiration date is renewed.
+
+Check the expiration date of the keys with the following command:
+
+```bash
+gpg --list-keys
+```
+
+The expiration date of a key is displayed as `[expires: YYYY-MM-DD]`, or as `[expired: YYYY-MM-DD]` when the date has already passed.
+
+To renew the expiration date of the key, replace the ***{LABEL}*** in the below command as appropriate and then execute it (you'll be asked for the passphrase of the key):
+
+```bash
+gpg --quick-set-expire {GPG_IDENTITY} 3y '*'
+```
+
+> **Label Definition**
+>
+> + **{GPG_IDENTITY}** : The email used when generating the key, the key ID or the fingerprint
+
+The expiration date of the primary key can be renewed at any time, even after it has expired. The third argument `'*'` sets the new expiration date on all non-revoked subkeys that **haven't expired yet**, so a subkey that has already expired keeps the old date. In that case, renew it individually by its fingerprint or create a new encryption subkey, executing the following command:
+
+```bash
+gpg --quick-add-key {GPG_IDENTITY} rsa{KEY_SIZE} encr 3y
+```
+
+> **Label Definition**
+>
+> + **{GPG_IDENTITY}** : The email used when generating the key, the key ID or the fingerprint
+> + **{KEY_SIZE}**: The size of the RSA key, in bits (security vs performance trade-off). Common choices: `3072` (good default) or `4096` (stronger, slightly slower).
+
+To remove the expiration date of the key, replace `3y` with `0` on the above commands. The tradeoff of both options: a key that doesn't expire requires no periodic maintenance, while a key with an expiration date forces you to review and renew it periodically, so that the store doesn't silently become read-only.
+
+**Configuration of the GPG agent**
+
+To avoid being asked for the passphrase on every single secret, configure the [GnuPG](https://gnupg.org/) agent to cache it.
+
+Create the file `~/.gnupg/gpg-agent.conf` with the upcoming content, using the folder `~/.gnupg` that [GnuPG](https://gnupg.org/) created automatically when the key pair was generated. Open the file with the [Nano text editor](https://www.nano-editor.org/), executing the following command:
+
+```bash
+nano ~/.gnupg/gpg-agent.conf
+```
+
+Add the upcoming content to the file:
+
+```text
+pinentry-program /usr/bin/pinentry-curses
+default-cache-ttl 43200
+max-cache-ttl 43200
+```
+
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. Restart the agent to load the new configuration, by executing the following command:
+
+```bash
+gpgconf --kill gpg-agent
+```
+
+The option `pinentry-program` states explicitly which program draws the passphrase prompt. Without it, [GnuPG](https://gnupg.org/) falls back to reading the terminal device directly, which fails with a `gpg: can't open '/dev/tty'` error on some [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) and terminal multiplexer configurations.
+
+The options `default-cache-ttl 43200` and `max-cache-ttl 43200` define how long the passphrase stays cached in memory, in seconds (12 hours for both). They cover the two different limits of the cache: `default-cache-ttl` is the time an entry stays valid and its timer is reset every time the entry is accessed, while `max-cache-ttl` is the absolute limit after which the entry expires regardless of how recently it was used. As both are set to the same value, the passphrase is requested once and then reused for as long as the secrets are used, up to 12 hours.
+
+There is no maximum supported by [GnuPG](https://gnupg.org/) for these options, so `86400` (24 hours) or even `0` (no limit) are valid values, but a longer cache widens the window in which any process running as your user can use the agent without knowing the passphrase. On a shared machine, prefer shorter values or don't cache it at all, as any process running as your user can use the agent while the passphrase is cached.
+
+The cache is kept in memory by the [gpg-agent](https://gnupg.org/) daemon, whose socket is created in the folder `/run/user/{UID}`, a `tmpfs` filesystem that is discarded when the [WSL](https://learn.microsoft.com/windows/wsl/) distribution is shut down. As a consequence, terminating the distribution with the command `wsl --shutdown` discards the cached passphrase and the next use of [`pass`](https://www.passwordstore.org/) asks for it again, regardless of the configured cache time.
+
+To verify if the agent is properly configured, check the output of the following command:
+
+```bash
+gpg-connect-agent 'getinfo version' /bye
+```
+
+**Initialization of `pass`**
+
+Replace the ***{LABEL}*** in the below command as appropriate and then execute it to initialize [`pass`](https://www.passwordstore.org/) with the GPG identity you want to use:
+
+```bash
+pass init {GPG_IDENTITY}
+```
+
+> **Label Definition**
+>
+> + **{GPG_IDENTITY}** : The email used when generating the key, or the key ID
+
+Upon success of the [`pass`](https://www.passwordstore.org/) initialization, check the output of the following commands:
+
+```bash
+pass show
+pass ls
+```
+
+The command `pass show` must print a folder named `Password Store` and the command `pass ls` must print an empty list of entries.
+
+**Verification of the installation**
+
+Store a throwaway secret to confirm that the whole setup works end to end, by executing the following command:
+
+```bash
+pass insert test/hello-world
+```
+
+Following the above command, type `hello-world` on the prompt `Enter password for test/hello-world:` and then type it again on the prompt `Retype password for test/hello-world:`. The terminal doesn't echo the input, so nothing is displayed while typing.
+
+To confirm that the secret was stored and that it decrypts correctly, check the output of the following commands:
+
+```bash
+pass ls
+pass show test/hello-world
+```
+
+The command `pass ls` must list the entry `test/hello-world` and the command `pass show test/hello-world` must print `hello-world`. The first time the secret is decrypted, the [GnuPG](https://gnupg.org/) agent asks for the passphrase of your key (unless it's still cached, see the previous step).
+
+To confirm that the secret is stored **encrypted** at rest and not in plain text, check the output of the following commands:
+
+```bash
+ls -l ~/.password-store/test/
+file ~/.password-store/test/hello-world.gpg
+cat ~/.password-store/test/hello-world.gpg
+```
+
+The file `~/.password-store/test/hello-world.gpg` must exist and the command `file` must report it as *GPG encrypted data*. The command `cat` must print binary content and **must not** contain the text `hello-world`.
+
+When the verification is complete, remove the throwaway secret by executing the following command and confirming the removal on the prompt:
+
+```bash
+pass rm test/hello-world
+```
+
+The command `pass rm` only removes the local entry. The command `pass show test/hello-world` must then fail with a `test/hello-world is not in the password store` error.
+
+**Usage of `pass`**
+
+Store a secret executing the following command:
+
+```bash
+pass insert services/my-service
+```
+
+The command `pass insert` reads the secret from the terminal with the keyboard echo disabled and asks for it twice, for confirmation. The entry name is the path inside the `~/.password-store` folder, so you can group your secrets by service and the folder creation is automatic.
+
+When the secret has multiple lines (e.g. a configuration file or a private key), use the option `--multiline`, which reads the input until `CTRL + D` is pressed:
+
+```bash
+pass insert --multiline settings/my-config
+```
+
+To edit an existing entry, execute the following command, which opens the current (decrypted) content on the editor set on the `EDITOR` environment variable:
+
+```bash
+pass edit services/my-service
+```
+
+To let [`pass`](https://www.passwordstore.org/) generate the secret instead of typing it, execute the following command:
+
+```bash
+pass generate services/my-token 32
+```
+
+The command `pass generate` creates the secret and prints it, so it's better suited to generate passwords than to store tokens that are issued by an external service.
+
+Retrieve a secret by executing the following command:
+
+```bash
+pass show services/my-service
+```
+
+The command `pass show services/my-service` **prints** the secret on the terminal and it's included in the terminal scrollback, so don't use it in scripts or on a shared screen. When the secret is consumed by a command line tool, it's preferable to pipe the output of `pass show` into that tool, either directly or through a wrapper function that decrypts the secret on a subshell. Each tool that needs a secret documents that wrapper on its own section of this guide. If a secret is printed by mistake, rotate it on the service that issued it.
+
+Remove a secret by executing the following command:
+
+```bash
+pass rm services/my-service
+```
+
+`pass rm` deletes the file, but a copy of a secret may still be present in the encrypted backups mentioned below and in the `git` history of the folder, if `~/.password-store` was version controlled at any point. When removing a secret, rotate it on the service that issued it.
+
+**Backup and recovery**
+
+The `~/.password-store` folder contains all your secrets, encrypted, and the `~/.gnupg` folder contains the key pair needed to decrypt them. A backup of the first folder is useless without the private key of the second one, so back up **both** folders. An export of the secret store and of the private key can be created executing the following commands:
+
+```bash
+tar czf password-store-backup.tgz ~/.password-store
+```
+
+```bash
+gpg --armor --export-secret-keys {GPG_IDENTITY} > gpg-private-keys-backup.asc
+```
+
+> **Label Definition**
+>
+> + **{GPG_IDENTITY}** : The email used when generating the key, or the key ID
+
+The file `gpg-private-keys-backup.asc` holds the **unencrypted private key**, so store it in an encrypted location and never in a repository. On a new machine, restore the two folders by extracting the archive and by executing the following command:
+
+```bash
+gpg --armor --import gpg-private-keys-backup.asc
+```
+
+Test the backup periodically by decrypting an entry with it (`pass show services/my-service`). A backup that was never verified is not a backup.
+
+**Optional: Secret storage with GNOME Keyring**
+
+[`GNOME Keyring`](https://wiki.gnome.org/Projects/GNOMEKeyring) stores the secrets encrypted in the `~/.local/share/keyrings` folder and exposes them through the Secret Service API, which is the interface expected by the command line tools that support this credential store. As it requires a D-Bus session, it's only practical on a [WSL](https://learn.microsoft.com/windows/wsl/) distribution with a desktop environment; on a headless distribution, prefer [`pass`](https://www.passwordstore.org/) as documented above.
+
+To install the required packages on a [Ubuntu](https://ubuntu.com/) terminal, execute the following command:
+
+```bash
+sudo apt install gnome-keyring libsecret-tools dbus-x11
+```
+
+Create the folder of the keyrings, if it doesn't exist yet, and make sure the D-Bus session is started on every new terminal. Start by creating the file `~/.profile.d/`:
+
+```bash
+mkdir -p ~/.profile.d
+```
+
+Create the file `~/.profile.d/wsl-gnome-keyring.sh` with the [Nano text editor](https://www.nano-editor.org/), executing the following command:
+
+```bash
+nano ~/.profile.d/wsl-gnome-keyring.sh
+```
+
+Then, add the upcoming content to the file:
+
+```bash
+if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
+    eval "$(dbus-launch --sh-syntax)"
+fi
+```
+
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. Then, open the file `~/.profile` with the [Nano text editor](https://www.nano-editor.org/), executing the following command:
+
+```bash
+nano ~/.profile
+```
+
+Then, add the upcoming line to the `~/.profile` file, before the line that sources `~/.bashrc` (the snippet is only executed on a new login shell, which is what every [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) tab is):
+
+```bash
+if [ -f "$HOME/.profile.d/wsl-gnome-keyring.sh" ]; then
+    . "$HOME/.profile.d/wsl-gnome-keyring.sh"
+fi
+```
+
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. Open a **new** [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) window for the changes to take effect and verify if the D-Bus session is available, by checking the output of the following command:
+
+```bash
+echo "$DBUS_SESSION_BUS_ADDRESS"
+```
+
+Then, verify if the Secret Service is available, by checking the output of the following commands:
+
+```bash
+ps -u "$USER" -o pid,args | grep -E '[g]nome-keyring-daemon'
+```
+
+```bash
+secret-tool store --label='Test entry' test/key
+```
+
+```bash
+secret-tool lookup test/key
+```
+
+```bash
+secret-tool clear test/key
+```
+
+The keyring must be created and unlocked on the first use: a window asking for a password pops up and, if it's dismissed, the daemon doesn't start and every subsequent command fails with a `No such secret collection` or `org.freedesktop.secrets was not provided by any .service files` error. With [WSL](https://learn.microsoft.com/windows/wsl/), the daemon must also be started manually on each boot, by executing the following command:
+
+```bash
+echo -n test | gnome-keyring-daemon --unlock --components=secrets
+```
+
+`GNOME Keyring` has two failure modes that must be known: the keyring is **not unlocked** after a `WSL` restart, so the tools prompt for the keyring password instead of reading the secret, and some tools **fall back to plain text storage** silently when the Secret Service is unavailable. Always confirm the credential source reported by the tool and check the plain text configuration file after any authentication change. Given those caveats, this guide uses [`pass`](https://www.passwordstore.org/) as the default on the `WSL File System`; if you opt for `GNOME Keyring`, keep [`pass`](#1232-secret-storage-on-the-wsl-file-system) as the fallback.
+
+The other sections of this guide that need to store secrets on the `WSL File System` build on the configurations described above.
+
 ### 1.3. Windows Terminal
 
 The [**Windows Terminal**](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) is a terminal application for users of command-line tools and shells like Command Prompt, PowerShell, and WSL. Its main features include multiple tabs, panes, Unicode and UTF-8 character support, a GPU accelerated text rendering engine, and custom themes, styles, and configurations.

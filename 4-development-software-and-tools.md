@@ -475,54 +475,9 @@ sudo systemctl status containerd.service
 docker run hello-world
 ```
 
-When you run `docker login`, [**Docker**](https://www.docker.com/) may use a credential helper to store credentials. On Linux, `secretservice` requires a running DBus session *and* a Secret Service provider (commonly GNOME Keyring or KWallet). On a headless [WSL](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) (no desktop environment), this is often not available, so using [`pass`](https://www.passwordstore.org/) is a practical alternative, which can be installed with the following command:
+When you run `docker login`, [**Docker**](https://www.docker.com/) may use a credential helper to store credentials. On Linux, `secretservice` requires a running DBus session *and* a Secret Service provider (commonly GNOME Keyring or KWallet). On a headless [WSL](https://learn.microsoft.com/windows/wsl/) [Ubuntu](https://ubuntu.com/) (no desktop environment), this is often not available, so using [`pass`](https://www.passwordstore.org/) is a practical alternative. The installation of [`pass`](https://www.passwordstore.org/), the creation of the GPG key and the initialization of the store are documented on the [Secret storage on the WSL File System](./1-fundamental-software.md#1232-secret-storage-on-the-wsl-file-system) section of this guide, together with the optional `GNOME Keyring` alternative.
 
-```bash
-sudo apt install pass
-```
-
-When it's necessary to manage credentials with [**Docker**](https://www.docker.com/), [`pass`](https://www.passwordstore.org/) requires a GPG key to encrypt passwords and it can be created with the following command:
-
-```bash
-gpg --full-generate-key
-```
-
-Following the above command, when prompted, set the following options:
-
-```bash
-Kind of key:    {KEY_TYPE}
-Key expiration: {KEY_EXPIRATION}
-Real name:      {REAL_NAME}
-Email address:  {EMAIL}
-Passphrase:     {PASSPHRASE}
-```
-
-> **Label Definition**
->
-> + **{KEY_TYPE}**: The cryptographic algorithm and usage for your keypair. Recommended for `pass`: `RSA and RSA` (creates a primary key for signing/certifying + a subkey for encryption).
-> + **{KEY_SIZE}**: The size of the RSA key, in bits (security vs performance trade-off). Common choices: `3072` (good default) or `4096` (stronger, slightly slower).
-> + **{KEY_EXPIRATION}**: When the key should expire. Examples: `0` (never expires), `1y` (expires in one year), `2y`, `6m`, etc.  
-> + **{REAL_NAME}**: A human-readable name embedded in the key’s user ID (UID).
-> + **{EMAIL}**: The email address embedded in the key’s UID. It does not have to be “real” for cryptographic purposes, but you should use something you’ll recognize.
-> + **{PASSPHRASE}**: The passphrase that protects your private key on disk, if you forget it, you effectively lose the ability to decrypt previously stored secrets.
-
-After generating the key, you can discover the Key ID with the following command:
-
-```bash
-gpg --list-secret-keys --keyid-format=long
-```
-
-Once the GPG key is created, replace the ***{LABEL}*** in the below command as appropriate and then execute it to initialize [`pass`](https://www.passwordstore.org/) with the GPG identity you want to use:
-
-```bash
-pass init {GPG_IDENTITY}
-```
-
-> **Label Definition**
->
-> + **{GPG_IDENTITY}** : The email used when generating the key, or the key ID
-
-Upon success of the GPG key initialization, edit the [**Docker**](https://www.docker.com/) configuration to use the [`pass`](https://www.passwordstore.org/) credentials helper executing the following commands:
+Upon completion of the [`pass`](https://www.passwordstore.org/) setup described on that section, edit the [**Docker**](https://www.docker.com/) configuration to use the [`pass`](https://www.passwordstore.org/) credentials helper executing the following commands:
 
 ```bash
 mkdir -p ~/.docker
@@ -530,6 +485,26 @@ echo '{
     "credsStore": "pass"
 }' > ~/.docker/config.json
 ```
+
+To verify if the credentials helper was properly configured, check the output of the following command:
+
+```bash
+docker-credential-pass list
+```
+
+The above command must print the content of the `~/.password-store` folder, which is the same content printed by the command `pass ls`. Then, log into [**Docker**](https://www.docker.com/) with the command `docker login` and check that no token was stored in clear text, with the following commands:
+
+```bash
+docker logout
+```
+
+```bash
+cat ~/.docker/config.json
+```
+
+> **Note**
+>
+> The file `~/.docker/config.json` must contain only the `credsStore` entry above and no `auths` entry with a base64 encoded token. If an `auths` entry exists, remove it from the file, as the credentials are stored encrypted by [`pass`](https://www.passwordstore.org/).
 
 **Optional: Configure the Docker daemon to use a corporate proxy**
 
@@ -566,7 +541,7 @@ To verify that the daemon can now reach external registries, pull a test image w
 docker pull alpine:latest
 ```
 
-For the proxy to also apply to image builds (which run inside *BuildKit* containers), add a `proxies` section to the file `~/.docker/config.json`. Since that file may already contain a `credsStore` configuration (see the [`pass`](https://www.passwordstore.org/) setup above), replace the ***{LABELS}*** in the below command as appropriate and then execute it to write the merged configuration:
+For the proxy to also apply to image builds (which run inside *BuildKit* containers), add a `proxies` section to the file `~/.docker/config.json`. Since that file may already contain a `credsStore` configuration (see the [`pass`](https://www.passwordstore.org/) setup on the [Secret storage on the WSL File System](./1-fundamental-software.md#1232-secret-storage-on-the-wsl-file-system) section of this guide), replace the ***{LABELS}*** in the below command as appropriate and then execute it to write the merged configuration:
 
 ```bash
 mkdir -p ~/.docker
