@@ -7,30 +7,32 @@ This file contains the **Development Software and Tools** section of my [Setup g
 4. [Development Software & Tools](#4-development-software--tools)
     1. [Notepad++](#41-notepad)
     2. [Meld](#42-meld)
-    3. [Command Line Fuzzy Finder](#43-command-line-fuzzy-finder)
-    4. [Make](#44-make)
-    5. [jq](#45-jq)
-    6. [ripgrep](#46-ripgrep)
-    7. [OpenCode](#47-opencode)
-    8. [Docker](#48-docker)
-    9. [kubectl](#49-kubectl)
-    10. [kubectx](#410-kubectx)
-    11. [K9s](#411-k9s)
-    12. [AWS CLI](#412-aws-cli)
-    13. [Granted](#413-granted)
-    14. [Terraform](#414-terraform)
-    15. [Java](#415-java)
-    16. [Apache Maven](#416-apache-maven)
-    17. [Gradle](#417-gradle)
-    18. [Node.js](#418-nodejs)
-    19. [Apache Tomcat](#419-apache-tomcat)
-    20. [Quarkus CLI](#420-quarkus-cli)
-    21. [IntelliJ IDEA](#421-intellij-idea)
-    22. [Visual Studio Code](#422-visual-studio-code)
-    23. [Zed](#423-zed)
-    24. [DBeaver](#424-dbeaver)
-    25. [Postman](#425-postman)
-    26. [Bruno](#426-bruno)
+    3. [GitHub CLI](#43-github-cli)
+    4. [Command Line Fuzzy Finder](#44-command-line-fuzzy-finder)
+    5. [Make](#45-make)
+    6. [jq](#46-jq)
+    7. [ripgrep](#47-ripgrep)
+    8. [OpenCode](#48-opencode)
+    9. [GitHub Copilot CLI](#49-github-copilot-cli)
+    10. [Docker](#410-docker)
+    11. [kubectl](#411-kubectl)
+    12. [kubectx](#412-kubectx)
+    13. [K9s](#413-k9s)
+    14. [AWS CLI](#414-aws-cli)
+    15. [Granted](#415-granted)
+    16. [Terraform](#416-terraform)
+    17. [Java](#417-java)
+    18. [Apache Maven](#418-apache-maven)
+    19. [Gradle](#419-gradle)
+    20. [Node.js](#420-nodejs)
+    21. [Apache Tomcat](#421-apache-tomcat)
+    22. [Quarkus CLI](#422-quarkus-cli)
+    23. [IntelliJ IDEA](#423-intellij-idea)
+    24. [Visual Studio Code](#424-visual-studio-code)
+    25. [Zed](#425-zed)
+    26. [DBeaver](#426-dbeaver)
+    27. [Postman](#427-postman)
+    28. [Bruno](#428-bruno)
 
 ## 4. Development Software & Tools
 
@@ -70,13 +72,256 @@ scoop bucket add extras
 scoop install extras/meld
 ```
 
-### 4.3. Command Line Fuzzy Finder
+### 4.3. GitHub CLI
 
-The [**Command-line Fuzzy Finder | fzf**](https://github.com/junegunn/fzf) is a general-purpose command-line fuzzy finder. It's an interactive filter program for any kind of list; files, command history, processes, hostnames, bookmarks, git commits, etc. It implements a "fuzzy" matching algorithm, so you can quickly type in patterns with omitted characters and still get the results you want.
+[**GitHub CLI**](https://cli.github.com/) (command `gh`) is GitHub's official command line tool. It brings pull requests, issues, workflows and API calls to the terminal, next to the local [Git](https://git-scm.com/) workflow configured on the [Git & Git Bash](./1-fundamental-software.md#15-git--git-bash) section of this guide.
 
 #### 4.3.1. Installation
 
 ##### 4.3.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**GitHub CLI**](https://cli.github.com/) on the `WSL File System`, following the [official instructions](https://github.com/cli/cli/blob/trunk/docs/install_linux.md), execute the following commands on a [Ubuntu](https://ubuntu.com/) terminal.
+
+Start by installing the required dependencies:
+
+```bash
+sudo apt update
+sudo apt install curl ca-certificates
+```
+
+Download the public signing key for the [**GitHub CLI**](https://cli.github.com/) package repository:
+
+```bash
+sudo install -d -m 0755 /etc/apt/keyrings
+sudo curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg -o /etc/apt/keyrings/githubcli-archive-keyring.gpg
+sudo chmod 644 /etc/apt/keyrings/githubcli-archive-keyring.gpg
+```
+
+Add the [**GitHub CLI**](https://cli.github.com/) package repository and install `gh` executing the following command:
+
+```bash
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list
+sudo apt update
+sudo apt install gh
+```
+
+To verify if the [**GitHub CLI**](https://cli.github.com/) installation was properly made, check the output of the following commands:
+
+```bash
+command -v gh
+gh --version
+gh --help
+```
+
+The output of the command `command -v gh` must point to a path inside the `WSL File System` (e.g. `/usr/bin/gh`). If it points to a file under `/mnt/c/` (or `/c/`), you're running the `Windows Native File System` installation of [**GitHub CLI**](https://cli.github.com/).
+
+##### 4.3.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**GitHub CLI**](https://cli.github.com/) on the `Windows Native File System`, open a PowerShell console and execute the following command:
+
+```powershell
+winget install --id GitHub.cli -e --source winget
+```
+
+The GitHub CLI package is supported by Microsoft with updates powered by [microsoft/winget-pkgs](https://github.com/microsoft/winget-pkgs). As the installation modifies the `PATH`, you will need to open a **new** [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) window (merely opening a new tab is not sufficient) for the changes to take effect.
+
+To verify if the [**GitHub CLI**](https://cli.github.com/) installation was properly made, open a PowerShell console and check the output of the following commands:
+
+```powershell
+gh --version
+gh --help
+```
+
+#### 4.3.2. Authentication
+
+##### 4.3.2.1. Authentication on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+Before authenticating, it's necessary to understand where [**GitHub CLI**](https://cli.github.com/) stores the credentials. On the `Windows Native File System` it uses the [Windows Credential Manager](https://learn.microsoft.com/windows/win32/secauthncredentialmanager) and on the `WSL File System` it uses a Secret Service provider (`GNOME Keyring` or `KWallet`), which is not available on a headless [Ubuntu](https://ubuntu.com/) distribution. When no credential store is found, `gh auth login` **silently** falls back to writing the token in clear text to the file `~/.config/gh/hosts.yml`, without requiring the `--insecure-storage` flag. A token stored that way can be read by any process running as your user and it's included in backups of your home folder.
+
+Because of that, the recommended approach on the `WSL File System` is to store the token encrypted with [`pass`](https://www.passwordstore.org/) and to supply it to [**GitHub CLI**](https://cli.github.com/) through the `GH_TOKEN` environment variable, which is the first credential checked by `gh`. The [`pass`](https://www.passwordstore.org/) setup is documented on the [Secret storage on the WSL File System](./1-fundamental-software.md#1232-secret-storage-on-the-wsl-file-system) section of this guide, together with the optional `GNOME Keyring` alternative. The resulting encrypted store is the same one used by the [Docker](#41021-installation-on-the-wsl-file-system) credentials helper.
+
+Create a **fine-grained personal access token** for [**GitHub CLI**](https://cli.github.com/), following the [official instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens), and store it immediately with the following command. The token is only displayed once and it's entered on a hidden prompt, so don't type it directly on a command line:
+
+```bash
+pass insert github/cli
+```
+
+The command `pass insert` reads the token from the terminal with the keyboard echo disabled and asks for it twice, for confirmation. The token must be stored as a **single line**: don't use the option `--multiline`, as only one line is expected.
+
+Grant the token an expiration date, only the access to the repositories you need and only the permissions required by the commands you run (e.g. **Pull requests** for `gh pr` operations and **Issues** for `gh issue` operations). See [Token rotation](#4322-token-rotation) on how to replace this token when it expires.
+
+This guide keeps two separate tokens: `github/cli` for [**GitHub CLI**](https://cli.github.com/) and `github/copilot` for [**GitHub Copilot CLI**](https://github.com/github/copilot-cli), so each one expires and is revoked independently. A single fine-grained token could hold both the repository permissions and the account-level *Copilot Requests* permission and serve both tools, but the tradeoff is that a single expiration date and a single revocation then apply to both, so compromising one compromises both. Keep the tokens separate unless you prefer that.
+
+Now open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/), executing the following command:
+
+```bash
+nano ~/.bashrc
+```
+
+Then, add the upcoming snippet to the `~/.bashrc` file. The `gh_secure` function retrieves the token from [`pass`](https://www.passwordstore.org/) and starts `gh` with `GH_TOKEN` set, on a subshell, so the decrypted token doesn't leak into the parent shell:
+
+```bash
+# Run GitHub CLI with the token stored in pass
+#
+# + https://cli.github.com/manual/gh_help_environment
+gh_secure() (
+    local token
+    if ! token="$(command pass show github/cli)"; then
+        printf 'Cannot decrypt the GitHub CLI token. gh was not started.\n' >&2
+        return 1
+    fi
+    if [[ -z "$token" || "$token" == *$'\n'* ]]; then
+        printf 'The github/cli entry must contain exactly one non-empty token line.\n' >&2
+        return 1
+    fi
+    export GH_TOKEN="$token"
+    unset token
+    command gh "$@"
+)
+```
+
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. Check the syntax of the file before loading it, by executing the following command:
+
+```bash
+bash -n ~/.bashrc
+```
+
+No output means no syntax error was detected. To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
+
+```bash
+source ~/.bashrc
+```
+
+To confirm that the function is available, check the output of the following command:
+
+```bash
+type -t gh_secure
+```
+
+The above command should print `function`.
+
+To verify the authentication, check the output of the following commands:
+
+```bash
+gh_secure auth status --hostname github.com
+gh_secure api user --jq .login
+```
+
+The credential source shown by `gh_secure auth status` must be `GH_TOKEN` and not `keyring`. That's the expected result for this approach. The function forwards all arguments, so any `gh` command can be executed through it, e.g.:
+
+```bash
+gh_secure pr list
+gh_secure workflow list
+```
+
+Always avoid the following commands, as they either store the token in clear text or display it on the terminal:
+
+```text
+gh auth login --insecure-storage
+gh auth token
+gh auth status --show-token
+```
+
+Plain `gh` does not invoke `gh_secure`, so it will not find any credentials. Use `gh_secure` consistently or export `GH_TOKEN` yourself for a single command. Because `gh_secure` runs on a subshell, you can also obtain a shell where every command has `GH_TOKEN` set, by running the following command and typing `exit` when finished:
+
+```bash
+gh_secure bash
+```
+
+If you prefer typing `gh`, add the upcoming snippet to the `~/.bashrc` file, immediately after the `gh_secure` function. The function is found by [Bash](https://www.gnu.org/software/bash/) before the executable on the `PATH` and `gh_secure` runs `command gh`, so there's no recursion:
+
+```bash
+gh() {
+    gh_secure "$@"
+}
+```
+
+After editing the file, check its syntax with the command `bash -n ~/.bashrc` and enable the change by running the command `source ~/.bashrc`. To confirm that both functions are available, check the output of the following command:
+
+```bash
+type -t gh gh_secure
+```
+
+The above command must print `function` twice. From that point on, every `gh` command transparently decrypts the token, so the `gh` examples of this section work as written and the `gh_secure` prefix is no longer needed.
+
+This approach configures the token used by the GitHub API and doesn't change how [Git](https://git-scm.com/) stores its own credentials. As the [Git configuration](./1-fundamental-software.md#152-git-configuration) of this guide already sets `credential.helper manager` and the [SSH keys](./1-fundamental-software.md#154-ssh-keys) are used for the `git` protocol, there's no need to run `gh auth setup-git`.
+
+If you also need a repository token for other tooling (e.g. to run scripts that expect the `GITHUB_TOKEN` variable), store it in a separate entry with the `pass insert github/repos` command and export it for the command that requires it, exactly as `gh_secure` does for `GH_TOKEN`.
+
+[`pass`](https://www.passwordstore.org/) protects the **stored** copy of a token, not the **live** copy. Any tool that requires `GH_TOKEN` or `GITHUB_TOKEN` in the environment pulls the decrypted secret into the process environment, where it's readable by any other process running as your user through `/proc/<pid>/environ` and is inherited by child processes. Prefer the narrowest scope and the shortest expiration that satisfy the tool, and don't `export` the token permanently in `~/.bashrc`, as that would remove the subshell isolation that `gh_secure` provides.
+
+##### 4.3.2.2. Token rotation
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+A **fine-grained personal access token** doesn't refresh itself: when its expiration date is reached, it's no longer accepted and a **new** token must be issued. This applies to the `github/cli` entry stored with [`pass`](https://www.passwordstore.org/), as described on the [Authentication on the WSL File System](#4321-authentication-on-the-wsl-file-system) section.
+
+An expired token doesn't produce an explicit *expired* message. Both `gh` and `copilot` report a generic authentication or authorization error instead (e.g. `HTTP 401: Bad credentials`), so when authentication suddenly fails on a command that worked before, check the expiration date of the token before investigating anything else.
+
+To rotate the token, first create a **new** fine-grained personal access token at [GitHub - Personal access tokens](https://github.com/settings/personal-access-tokens), granting the **same** permission set as the current token and selecting a new expiration date. The new token is only displayed once.
+
+Then replace the entry stored with [`pass`](https://www.passwordstore.org/), starting by deleting the current one:
+
+```bash
+pass rm github/cli
+```
+
+Then store the new token with the following command. The token is entered on a hidden prompt and asked for confirmation, so don't type it directly on a command line:
+
+```bash
+pass insert github/cli
+```
+
+The command `pass rm` before the `pass insert` is deliberate. Running `pass insert` over an existing entry overwrites the file, but the [GPG](./1-fundamental-software.md#1232-secret-storage-on-the-wsl-file-system) agent may still hold the old decrypted token cached until the cache expires, which would make the verification below test the previous token. If a previous token is still used after replacing the entry, restart the agent with the command `gpgconf --kill gpg-agent`.
+
+To verify that the new token is the one in use, check the output of the following command:
+
+```bash
+gh_secure auth status --hostname github.com
+```
+
+If you added the `gh` function described on the [Authentication on the WSL File System](#4321-authentication-on-the-wsl-file-system) section, plain `gh` produces the same result:
+
+```bash
+gh auth status --hostname github.com
+```
+
+Replacing the [`pass`](https://www.passwordstore.org/) entry doesn't invalidate anything on GitHub: the previous token remains valid until it expires or until it's revoked. Once the new token is confirmed to work, revoke the old one at [GitHub - Personal access tokens](https://github.com/settings/personal-access-tokens), as leaving it active until its expiration date grants an unnecessary window to anyone who obtained a copy of it.
+
+The `github/copilot` entry is rotated with the same procedure, replacing `github/cli` by `github/copilot` in the above commands, as documented on the [Token rotation](#4922-token-rotation) section of [**GitHub Copilot CLI**](#49-github-copilot-cli). The two entries are independent: each token has its own expiration date and revoking one doesn't affect the other.
+
+##### 4.3.2.3. Authentication on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+On the `Windows Native File System` there's a native credential store available, so the standard flow can be used. Open a PowerShell console and execute the following command:
+
+```powershell
+gh auth login --hostname github.com --git-protocol ssh
+```
+
+A browser window will open so that you can authorize [**GitHub CLI**](https://cli.github.com/). After completing the authorization, the token is stored in the [Windows Credential Manager](https://learn.microsoft.com/windows/win32/secauthncredentialmanager) and **not** in a plain text file.
+
+To verify the authentication, check the output of the following commands:
+
+```powershell
+gh auth status --hostname github.com
+gh api user --jq .login
+```
+
+### 4.4. Command Line Fuzzy Finder
+
+The [**Command-line Fuzzy Finder | fzf**](https://github.com/junegunn/fzf) is a general-purpose command-line fuzzy finder. It's an interactive filter program for any kind of list; files, command history, processes, hostnames, bookmarks, git commits, etc. It implements a "fuzzy" matching algorithm, so you can quickly type in patterns with omitted characters and still get the results you want.
+
+#### 4.4.1. Installation
+
+##### 4.4.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -114,7 +359,7 @@ To enable the changes made, you will need to source the `~/.bashrc` file, execut
 source ~/.bashrc
 ```
 
-##### 4.3.1.2. Installation on the Windows Native File System
+##### 4.4.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -152,13 +397,13 @@ To enable the changes made, you will need to source the `~/.bashrc` file, execut
 source ~/.bashrc
 ```
 
-### 4.4. Make
+### 4.5. Make
 
 [**GNU Make**](https://www.gnu.org/software/make/) is a tool which controls the generation of executables and other non-source files of a program from the program's source files.
 
-#### 4.4.1. Installation
+#### 4.5.1. Installation
 
-##### 4.4.1.1. Installation on the WSL File System
+##### 4.5.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -174,7 +419,7 @@ To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation
 make --version
 ```
 
-##### 4.4.1.2. Installation on the Windows Native File System
+##### 4.5.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -190,13 +435,13 @@ To verify if the [**GNU Make**](https://www.gnu.org/software/make/) installation
 make --version
 ```
 
-### 4.5. jq
+### 4.6. jq
 
 [**jq**](https://jqlang.org/) is a lightweight and flexible command-line JSON processor.
 
-#### 4.5.1. Installation
+#### 4.6.1. Installation
 
-##### 4.5.1.1. Installation on the WSL File System
+##### 4.6.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -213,7 +458,7 @@ jq --version
 jq --help
 ```
 
-##### 4.5.1.2. Installation on the Windows Native File System
+##### 4.6.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -230,13 +475,13 @@ jq --version
 jq --help
 ```
 
-### 4.6. ripgrep
+### 4.7. ripgrep
 
 [**ripgrep**](https://github.com/BurntSushi/ripgrep) is a line-oriented search tool that recursively searches the current directory for a regex pattern.
 
-#### 4.6.1. Installation
+#### 4.7.1. Installation
 
-##### 4.6.1.1. Installation on the WSL File System
+##### 4.7.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -260,7 +505,7 @@ rg --version
 rg --help
 ```
 
-##### 4.6.1.2. Installation on the Windows Native File System
+##### 4.7.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -277,13 +522,13 @@ rg --version
 rg --help
 ```
 
-### 4.7. OpenCode
+### 4.8. OpenCode
 
 [**OpenCode**](https://opencode.ai/) is an open source agent that helps you write code in your terminal, IDE, or desktop.
 
-#### 4.7.1. Installation
+#### 4.8.1. Installation
 
-##### 4.7.1.1. Installation on the WSL File System
+##### 4.8.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -306,7 +551,7 @@ opencode --version
 opencode --help
 ```
 
-##### 4.7.1.2. Installation on the Windows Native File System
+##### 4.8.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -323,7 +568,282 @@ opencode --version
 opencode --help
 ```
 
-### 4.8. Docker
+### 4.9. GitHub Copilot CLI
+
+[**GitHub Copilot CLI**](https://github.com/github/copilot-cli) is GitHub's terminal-native coding agent. It runs in your shell with the context of the current repository and can browse issues, pull requests and gists, delegate tasks to other agents and review your changes, all without leaving the terminal.
+
+An active [GitHub Copilot](https://github.com/features/copilot) subscription is required. If you get [Copilot](https://github.com/features/copilot) through an organization or an enterprise, your administrator must [enable the Copilot CLI policy](https://docs.github.com/en/copilot/how-tos/copilot-cli/administer-copilot-cli-for-your-enterprise) at the enterprise or organization level that grants you your license, otherwise the CLI won't be available to your account.
+
+#### 4.9.1. Installation
+
+##### 4.9.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**GitHub Copilot CLI**](https://github.com/github/copilot-cli) on the `WSL File System`, following the [official instructions](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli), execute the following command on a [Ubuntu](https://ubuntu.com/) terminal.
+
+```bash
+curl -fsSL https://gh.io/copilot-install | bash
+```
+
+Executed without elevated privileges, the installation script installs the `copilot` executable on the `$HOME/.local/bin` folder, which is already included on the `PATH` by the [WSL configuration](./1-fundamental-software.md#123-wsl-distribution-installation--configuration) of this guide. To confirm it, check the output of the following commands:
+
+```bash
+echo $PATH
+command -v copilot
+copilot --version
+copilot help
+```
+
+##### 4.9.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**GitHub Copilot CLI**](https://github.com/github/copilot-cli) on the `Windows Native File System`, open a PowerShell console and execute the following command:
+
+```powershell
+winget install GitHub.Copilot
+```
+
+Alternatively, if [**GitHub CLI**](#43-github-cli) is already installed, the command `gh copilot` prompts to install [**GitHub Copilot CLI**](https://github.com/github/copilot-cli) the first time it's executed and then runs it, forwarding all arguments and flags supported by the `gh` command.
+
+To verify if the [**GitHub Copilot CLI**](https://github.com/github/copilot-cli) installation was properly made, open a PowerShell console and check the output of the following commands:
+
+```powershell
+copilot version
+copilot help
+```
+
+#### 4.9.2. Authentication
+
+##### 4.9.2.1. Authentication on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+Just like [**GitHub CLI**](#43-github-cli), [**GitHub Copilot CLI**](https://github.com/github/copilot-cli) stores its OAuth token in the operating system keychain: the [Windows Credential Manager](https://learn.microsoft.com/windows/win32/secauthncredentialmanager) and, on *Linux*, a Secret Service provider (`GNOME Keyring` or `KWallet`). A Secret Service provider is not available on a headless [Ubuntu](https://ubuntu.com/) distribution and, when it's not available, the browser login flow offers to store the token in a **plain text** configuration file at `~/.copilot/config.json`.
+
+Because of that, the recommended approach on the `WSL File System` is to store the token encrypted with [`pass`](https://www.passwordstore.org/) and to supply it to [**GitHub Copilot CLI**](https://github.com/github/copilot-cli) through the `COPILOT_GITHUB_TOKEN` environment variable. The [`pass`](https://www.passwordstore.org/) setup is documented on the [Secret storage on the WSL File System](./1-fundamental-software.md#1232-secret-storage-on-the-wsl-file-system) section of this guide, together with the optional `GNOME Keyring` alternative.
+
+When the command `copilot login` asks whether the token can be stored in a plain text configuration file, always answer `N` and abort the login. Also note that a token stored by an earlier `GNOME Keyring` setup may end up in `~/.copilot/config.json` after the `WSL` restart; check the file for occurrences of `oauth_token` after each authentication change.
+
+Create a **fine-grained personal access token** with the account-level **Copilot Requests** permission, following the [official instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens), and store it immediately with the following command. The token is only displayed once and it's entered on a hidden prompt, so don't type it directly on a command line:
+
+```bash
+pass insert github/copilot
+```
+
+The command `pass insert` reads the token from the terminal with the keyboard echo disabled and asks for it twice, for confirmation. The token must be stored as a **single line**: don't use the option `--multiline`, as only one line is expected.
+
+When creating the token, choose your **personal account** as the *Resource owner*, restrict the repository access to the repositories you work with and set an expiration date. On the expiration date, the token must be replaced as documented on the [Token rotation](#4922-token-rotation) section.
+
+**Classic** personal access tokens (the ones prefixed with `ghp_`) are **not supported** by [**GitHub Copilot CLI**](https://github.com/github/copilot-cli). Use a **fine-grained** token, as described above. A token created only for [**GitHub CLI**](#4321-authentication-on-the-wsl-file-system) is also not suitable, as it doesn't hold the *Copilot Requests* permission.
+
+A single fine-grained token can hold the *Copilot Requests* permission **and** the repository permissions required by `gh`, serving both tools. This guide keeps them separate instead, so each token expires and is revoked independently. The separation is a deliberate choice, not a limitation of the token type.
+
+Now open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/), executing the following command:
+
+```bash
+nano ~/.bashrc
+```
+
+Then, add the upcoming snippet to the `~/.bashrc` file. The `copilot_secure` function retrieves the token from [`pass`](https://www.passwordstore.org/) and starts `copilot` with `COPILOT_GITHUB_TOKEN` set, on a subshell, so the decrypted token doesn't leak into the parent shell:
+
+```bash
+# Run GitHub Copilot CLI with the token stored in pass
+#
+# + https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/authenticate-copilot-cli
+copilot_secure() (
+    local token
+    if ! token="$(command pass show github/copilot)"; then
+        printf 'Cannot decrypt the Copilot token. Copilot was not started.\n' >&2
+        return 1
+    fi
+    if [[ -z "$token" || "$token" == *$'\n'* ]]; then
+        printf 'The github/copilot entry must contain exactly one non-empty token line.\n' >&2
+        return 1
+    fi
+    export COPILOT_GITHUB_TOKEN="$token"
+    unset token
+    command copilot "$@"
+)
+```
+
+Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. Check the syntax of the file before loading it, by executing the following command:
+
+```bash
+bash -n ~/.bashrc
+```
+
+No output means no syntax error was detected. To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
+
+```bash
+source ~/.bashrc
+```
+
+To confirm that the function is available, check the output of the following command:
+
+```bash
+type -t copilot_secure
+```
+
+The above command should print `function`.
+
+Change to one of your existing trusted repositories and start [**GitHub Copilot CLI**](https://github.com/github/copilot-cli) with the following command:
+
+```bash
+copilot_secure
+```
+
+[`pass`](https://www.passwordstore.org/) may ask for your GPG key passphrase (unless it's still cached by the [GPG](./1-fundamental-software.md#1232-secret-storage-on-the-wsl-file-system) agent) and [**GitHub Copilot CLI**](https://github.com/github/copilot-cli) will ask whether you trust the files on the current directory. Approve only a directory that you actually trust.
+
+Once inside the interactive interface, execute the following command to check the authenticated account:
+
+```text
+/user
+```
+
+Then send a harmless prompt to confirm that the token grants access to the models, e.g.:
+
+```text
+Reply with "Authentication works" and do not use tools or change files.
+```
+
+A model response confirms that the token works but it consumes [AI credits](https://docs.github.com/en/copilot/reference/copilot-billing/request-based-billing-legacy/copilot-requests). The `/user` command alone doesn't prove that the *Copilot Requests* permission was granted.
+
+Exit the interactive interface with the command `/exit`. The function forwards all arguments, so it can also be used for the non-interactive prompt mode, e.g.:
+
+```bash
+copilot_secure -sp "Summarize the last commit of this repository"
+```
+
+Plain `copilot` does not invoke `copilot_secure`, so it will not find any credentials. Use `copilot_secure` consistently. If you prefer typing `copilot`, add the upcoming snippet to the `~/.bashrc` file, immediately after the `copilot_secure` function. The function is found by [Bash](https://www.gnu.org/software/bash/) before the executable on the `PATH` and `copilot_secure` runs `command copilot`, so there's no recursion:
+
+```bash
+copilot() {
+    copilot_secure "$@"
+}
+```
+
+##### 4.9.2.2. Token rotation
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+A **fine-grained personal access token** doesn't refresh itself: when its expiration date is reached, it's no longer accepted and a **new** token must be issued. This applies to the `github/copilot` entry stored with [`pass`](https://www.passwordstore.org/), as described on the [Authentication on the WSL File System](#4921-authentication-on-the-wsl-file-system) section.
+
+An expired token doesn't produce an explicit *expired* message. [**GitHub Copilot CLI**](https://github.com/github/copilot-cli) reports a generic authentication or authorization error instead, e.g. *No authentication information found* or *HTTP 401: Bad credentials*, so when authentication suddenly fails on a command that worked before, check the expiration date of the token before investigating anything else.
+
+To rotate the token, first create a **new** fine-grained personal access token at [GitHub - Personal access tokens](https://github.com/settings/personal-access-tokens), choosing your **personal account** as the *Resource owner* (the *Copilot Requests* permission is only available on user-owned tokens) and granting the **same** *Copilot Requests* permission and repository access as the current token, with a new expiration date. The new token is only displayed once.
+
+Then, on a [Ubuntu](https://ubuntu.com/) terminal, replace the entry stored with [`pass`](https://www.passwordstore.org/), starting by deleting the current one:
+
+```bash
+pass rm github/copilot
+```
+
+Then store the new token with the following command. The token is entered on a hidden prompt and asked for confirmation, so don't type it directly on a command line:
+
+```bash
+pass insert github/copilot
+```
+
+The command `pass rm` before the `pass insert` is deliberate. Running `pass insert` over an existing entry overwrites the file, but the [GPG](./1-fundamental-software.md#1232-secret-storage-on-the-wsl-file-system) agent may still hold the old decrypted token cached until the cache expires, which would make the verification below test the previous token. If a previous token is still used after replacing the entry, restart the agent with the command `gpgconf --kill gpg-agent`.
+
+To verify that the new token is the one in use, change to one of your existing trusted repositories and start [**GitHub Copilot CLI**](https://github.com/github/copilot-cli) with the following command:
+
+```bash
+copilot_secure
+```
+
+Once inside the interactive interface, execute the following command to check the authenticated account:
+
+```text
+/user
+```
+
+Then send the following harmless prompt to confirm that the token grants access to the models:
+
+```text
+Reply with "Authentication works" and do not use tools or change files.
+```
+
+A model response is required to complete the verification: as explained on the [Authentication on the WSL File System](#4921-authentication-on-the-wsl-file-system) section, the `/user` command alone doesn't prove that the *Copilot Requests* permission was granted, as it only reports the authenticated account. The prompt confirms that the token was actually accepted for a model request, at the cost of consuming [AI credits](https://docs.github.com/en/copilot/reference/copilot-billing/request-based-billing-legacy/copilot-requests). Exit the interactive interface with the command `/exit` when finished.
+
+Replacing the [`pass`](https://www.passwordstore.org/) entry doesn't invalidate anything on GitHub: the previous token remains valid until it expires or until it's revoked. Once the new token is confirmed to work, revoke the old one at [GitHub - Personal access tokens](https://github.com/settings/personal-access-tokens), as leaving it active until its expiration date grants an unnecessary window to anyone who obtained a copy of it.
+
+The `github/cli` entry is rotated with the same procedure, replacing `github/copilot` by `github/cli` in the above commands, as documented on the [Token rotation](#4322-token-rotation) section of [**GitHub CLI**](#43-github-cli). The two entries are independent: each token has its own expiration date and revoking one doesn't affect the other.
+
+##### 4.9.2.3. Authentication on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+On the `Windows Native File System` there's a native credential store available, so the standard OAuth device flow can be used. Open a PowerShell console and execute the following command:
+
+```powershell
+copilot login
+```
+
+A browser window will open where the one-time code displayed on the terminal must be entered. After completing the authorization, the token is stored in the [Windows Credential Manager](https://learn.microsoft.com/windows/win32/secauthncredentialmanager) and **not** in a plain text file.
+
+To verify the authentication, check the output of the following commands:
+
+```powershell
+copilot version
+```
+
+Then, change to one of your existing trusted repositories, start [**GitHub Copilot CLI**](https://github.com/github/copilot-cli) with the `copilot` command and run the `/user` command to check the authenticated account.
+
+To sign out and remove the stored credentials, execute the following command:
+
+```powershell
+copilot logout
+```
+
+#### 4.9.3. Usage & Maintenance
+
+To update [**GitHub Copilot CLI**](https://github.com/github/copilot-cli) to the latest version, execute the following command:
+
+```bash
+copilot update
+```
+
+To check the installed version and whether an update is available, execute the following command:
+
+```bash
+copilot version
+```
+
+To enable shell tab completion for the `copilot` subcommands, command line options and known values for the options, write the completion script to the user completions directory of [**bash-completion**](https://github.com/scop/bash-completion). The package may already be installed as a dependency of other tools, but check it with the command `dpkg -s bash-completion` and install it, if needed, with the following command:
+
+```bash
+sudo apt install bash-completion
+```
+
+Then, create the user completions directory and write the completion script to it, executing the commands:
+
+```bash
+mkdir -p ~/.local/share/bash-completion/completions
+copilot completion bash > ~/.local/share/bash-completion/completions/copilot
+```
+
+Unlike the `gh_secure` and `copilot_secure` functions, which are added to the `~/.bashrc` file as documented above, the completion script is written to its own file. [**bash-completion**](https://github.com/scop/bash-completion) loads the files in this directory on demand, so the script is used automatically in every new terminal window and there's nothing to add to `~/.bashrc` and no restart requirement beyond opening a new [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) window.
+
+The [**GitHub Copilot CLI**](https://github.com/github/copilot-cli) official instructions recommend writing the script to the `/etc/bash_completion.d` directory with the command `sudo tee`. That directory is only read by [**bash-completion**](https://github.com/scop/bash-completion) when it's loaded, which on [Ubuntu](https://ubuntu.com/) is done by the file `/etc/profile.d/bash_completion.sh`. As that file is only read by **login** shells, and a new [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) window opens an interactive shell that is **not** a login shell, the script would be written but never loaded. The user completions directory documented above is loaded in both cases.
+
+To verify that the tab completion is working, open a **new** [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) window, type `copilot` followed by the `TAB` key and check that the subcommands are suggested.
+
+For the current session only, without writing any file, enable the tab completion with the following command. It must be repeated on every new terminal session:
+
+```bash
+source <(copilot completion bash)
+```
+
+For the complete list of commands, command line options and slash commands, use the following commands:
+
+```bash
+copilot help
+```
+
+### 4.10. Docker
 
 [**Docker**](https://www.docker.com/) is an open-source containerization platform. It enables developers to package applications into containers, which are standardized, executable components combining application source code with the operating system libraries and dependencies required to run that code in any environment.
 
@@ -331,7 +851,7 @@ opencode --help
 
 If you're going to do your development work on the Windows native file system, you should choose [Rancher Desktop](https://rancherdesktop.io/) to replace [Docker Desktop](https://www.docker.com/products/docker-desktop/). But if you're planning to do all you development work on the [WSL](https://learn.microsoft.com/windows/wsl/) file system (taking advantage of the Linux tools), you should utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
 
-#### 4.8.1. Pre-Installation requirements
+#### 4.10.1. Pre-Installation requirements
 
 To avoid future conflicts between the ports reserved by ***Hyper-V*** and the ports used by the [**Docker**](https://www.docker.com/) containers, you should [reset the "*TCP Dynamic Port Range*"](https://medium.com/@sevenall/completely-solve-the-problem-of-docker-containers-not-starting-or-running-on-windows-10-due-to-port-57f16ed6143). That is achieved executing the upcoming commands from a PowerShell console with *Administrator* privileges:
 
@@ -350,9 +870,9 @@ netsh int ipv4 show dynamicport tcp
 
 The above command should now show that "*TCP Dynamic Port Range*" has been changed to 49152–65535. Now only the ports in this range may be reserved by ***Hyper-V***.
 
-#### 4.8.2. Installation
+#### 4.10.2. Installation
 
-##### 4.8.2.1. Installation on the WSL File System
+##### 4.10.2.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -563,9 +1083,9 @@ EOF
 >
 > The `credsStore` line above is only required if you configured the [`pass`](https://www.passwordstore.org/) credential helper. If you didn't, omit that line and keep only the `proxies` object.
 
-Also note that if your company's proxy intercepts TLS traffic (e.g. [Zscaler](https://www.zscaler.com/)), you may need to trust the corporate CA certificate on the system. The [Java](#415-java) section of this guide shows an example of how such certificates can be imported.
+Also note that if your company's proxy intercepts TLS traffic (e.g. [Zscaler](https://www.zscaler.com/)), you may need to trust the corporate CA certificate on the system. The [Java](#417-java) section of this guide shows an example of how such certificates can be imported.
 
-##### 4.8.2.2. Installation on the Windows Native File System with Rancher Desktop
+##### 4.10.2.2. Installation on the Windows Native File System with Rancher Desktop
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -573,7 +1093,7 @@ Also note that if your company's proxy intercepts TLS traffic (e.g. [Zscaler](ht
 
 [**Rancher Desktop**](https://rancherdesktop.io/) installation is only necessary if you're going to do your development work on the Windows Native File System because, if you're going to do all you development work on the [WSL](https://learn.microsoft.com/windows/wsl/) file system, you should utilize [WSL](https://learn.microsoft.com/windows/wsl/) to run [**Docker**](https://www.docker.com/) or the [Docker Engine](https://docs.docker.com/engine/).
 
-[Windows Linux Subsystem (WSL)](https://learn.microsoft.com/en-us/windows/wsl/) is required to run [**Rancher Desktop**](https://rancherdesktop.io/). If it isn't installed, follow the [instructions on this repository](./1-fundamental-software.md#13-windows-subsystem-for-linux) to install it.
+[Windows Linux Subsystem (WSL)](https://learn.microsoft.com/en-us/windows/wsl/) is required to run [**Rancher Desktop**](https://rancherdesktop.io/). If it isn't installed, follow the [instructions on this repository](./1-fundamental-software.md#12-windows-subsystem-for-linux) to install it.
 
 To install [**Rancher Desktop**](https://rancherdesktop.io/), take the following steps:
 
@@ -646,13 +1166,13 @@ The [**Rancher Desktop**](https://rancherdesktop.io/) installation and usage fil
 
 + `%USERPROFILE%\AppData\Local\rancher-desktop` contains the distribution data, container images, logs, etc;
 
-### 4.9. kubectl
+### 4.11. kubectl
 
 [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) is the command line tool for controlling Kubernetes clusters. It allows you to deploy applications, inspect and manage cluster resources, and view logs.
 
-#### 4.9.1. Installation
+#### 4.11.1. Installation
 
-##### 4.9.1.1. Installation on the WSL File System
+##### 4.11.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -704,11 +1224,11 @@ kubectl version --client
 >
 > To upgrade [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) to another minor release, you'll need to bump the version in `/etc/apt/sources.list.d/kubernetes.list` before running `apt update` and `apt-get upgrade`. This procedure is described in more detail in [Changing The Kubernetes Package Repository](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
 
-##### 4.9.1.2. Installation on the Windows Native File System
+##### 4.11.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
-When doing development work on the `Windows Native File System`, [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) is automatically provided by [**Rancher Desktop**](https://rancherdesktop.io/). If [**Rancher Desktop**](https://rancherdesktop.io/) is installed, no additional steps are required. Refer to the [Rancher Desktop installation instructions](#4822-installation-on-the-windows-native-file-system-with-rancher-desktop) in this guide for details.
+When doing development work on the `Windows Native File System`, [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) is automatically provided by [**Rancher Desktop**](https://rancherdesktop.io/). If [**Rancher Desktop**](https://rancherdesktop.io/) is installed, no additional steps are required. Refer to the [Rancher Desktop installation instructions](#41022-installation-on-the-windows-native-file-system-with-rancher-desktop) in this guide for details.
 
 To verify the [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) installation, check the output of the following command:
 
@@ -716,13 +1236,13 @@ To verify the [**kubectl**](https://kubernetes.io/docs/reference/kubectl/) insta
 kubectl version --client
 ```
 
-### 4.10. kubectx
+### 4.12. kubectx
 
 [**kubectx**](https://github.com/ahmetb/kubectx/) is a tool to switch between contexts (clusters) on `kubectl` faster. It also includes`kubens`, which is a tool to switch between Kubernetes namespaces (and configure them for `kubectl`) easily.
 
-#### 4.10.1. Installation
+#### 4.12.1. Installation
 
-##### 4.10.1.1. Installation on the WSL File System
+##### 4.12.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -739,7 +1259,7 @@ kubectx --version
 kubectx --help
 ```
 
-##### 4.10.1.2. Installation on the Windows Native File System
+##### 4.12.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -756,13 +1276,13 @@ kubectx --version
 kubectx --help
 ```
 
-### 4.11. K9s
+### 4.13. K9s
 
 [**K9s**](https://github.com/derailed/k9s) provides a terminal UI to interact with your Kubernetes clusters. The aim of the project is to make it easier to navigate, observe and manage your applications in the wild. [**K9s**](https://github.com/derailed/k9s) continually watches Kubernetes for changes and offers subsequent commands to interact with your observed resources.
 
-#### 4.11.1. Installation
+#### 4.13.1. Installation
 
-##### 4.11.1.1. Installation on the WSL File System
+##### 4.13.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -784,7 +1304,7 @@ k9s help
 
 If the command `k9s info` shows a warning/error stating "*ERROR Unable to reads k9s config file*", that's because it was just installed and haven't actually been launched yet. By design, [**K9s**](https://github.com/derailed/k9s) does not create its configuration files or folders during the apt install process. Instead, it generates them dynamically the very first time you start the program. All you need to do is launch [**K9s**](https://github.com/derailed/k9s) once to initialize your environment.
 
-##### 4.11.1.2. Installation on the Windows Native File System
+##### 4.13.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -802,13 +1322,13 @@ k9s info
 k9s help
 ```
 
-### 4.12. AWS CLI
+### 4.14. AWS CLI
 
 The [**AWS Command Line Interface (AWS CLI)**](https://aws.amazon.com/cli/) is a unified tool to manage your AWS services. With just one tool to download and configure, you can control multiple AWS services from the command line and automate them through scripts.
 
-#### 4.12.1. Installation
+#### 4.14.1. Installation
 
-##### 4.12.1.1. Installation on the WSL File System
+##### 4.14.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -852,7 +1372,7 @@ If the installation was successful, the following message is returned.
 The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
 ```
 
-##### 4.12.1.2. Installation on the Windows Native File System
+##### 4.14.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -889,13 +1409,13 @@ If the installation was successful, the following message is returned.
 The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
 ```
 
-### 4.13. Granted
+### 4.15. Granted
 
 [**Granted**](https://github.com/fwdcloudsec/granted) is a command line interface (CLI) application which simplifies access to cloud roles and allows multiple cloud accounts to be opened in your web browser simultaneously.
 
-#### 4.13.1. Installation
+#### 4.15.1. Installation
 
-##### 4.13.1.1. Installation on the WSL File System
+##### 4.15.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -973,7 +1493,7 @@ Now, after running `assume <profile>`, you can run AWS CLI commands without `--p
 aws configure list
 ```
 
-##### 4.13.1.2. Installation on the Windows Native File System
+##### 4.15.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1048,13 +1568,13 @@ Now, after running `assume <profile>`, you can run AWS CLI commands without `--p
 aws configure list
 ```
 
-### 4.14. Terraform
+### 4.16. Terraform
 
 [**Terraform**](https://www.terraform.io/) is a tool for building, changing, and versioning infrastructure safely and efficiently.
 
-#### 4.14.1. Installation
+#### 4.16.1. Installation
 
-##### 4.14.1.1. Installation on the WSL File System
+##### 4.16.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -1112,7 +1632,7 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 terraform --version
 ```
 
-##### 4.14.1.2. Installation on the Windows Native File System
+##### 4.16.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1138,13 +1658,13 @@ To verify if the [**Terraform**](https://www.terraform.io/) installation was pro
 terraform --version
 ```
 
-### 4.15. Java
+### 4.17. Java
 
 [**Java**](https://openjdk.org/) is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let programmers write once, run anywhere, meaning that compiled Java code can run on all platforms that support Java without the need to recompile.
 
-#### 4.15.1. Installation
+#### 4.17.1. Installation
 
-##### 4.15.1.1. Installation on the WSL File System
+##### 4.17.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -1251,7 +1771,7 @@ keytool -v -list -keystore $JAVA_HOME/lib/security/cacerts -alias {CERTIFICATE_A
 >
 > + **{CERTIFICATE_ALIAS}** : The chosen certificate alias
 
-##### 4.15.1.2. Installation on the Windows Native File System
+##### 4.17.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1358,13 +1878,13 @@ keytool -v -list -keystore $JAVA_HOME/lib/security/cacerts -alias {CERTIFICATE_A
 >
 > + **{CERTIFICATE_ALIAS}** : The chosen certificate alias
 
-### 4.16. Apache Maven
+### 4.18. Apache Maven
 
 [**Apache Maven**](https://maven.apache.org/) is a build automation tool used primarily for Java projects. It can also be used to build and manage projects written in C#, Ruby, Scala, and other languages and it is hosted by the [Apache Software Foundation](https://en.wikipedia.org/wiki/Apache_Software_Foundation).
 
-#### 4.16.1. Installation
+#### 4.18.1. Installation
 
-##### 4.16.1.1. Installation on the WSL File System
+##### 4.18.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -1485,7 +2005,7 @@ mvn -version
 
 If everything is correct, the above command will output the **Apache Maven** version.
 
-##### 4.16.1.2. Installation on the Windows Native File System
+##### 4.18.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1554,7 +2074,7 @@ mvn -version
 
 If everything is correct, the above command will output the **Apache Maven** version.
 
-#### 4.16.2. Configuration
+#### 4.18.2. Configuration
 
 The default location for the user's settings file and for the *Maven Local Repository* is the `.m2` folder at the user's *Home Folder*. Check it it already exists and if it doesn't create it with the upcoming command. If [**Apache Maven**](https://maven.apache.org/) is installed on the `WSL File System`, use a [Ubuntu](https://ubuntu.com/) terminal and if it is installed on the `Windows Native File System` use a  [Git Bash](https://git-scm.com/) terminal.
 
@@ -1580,7 +2100,7 @@ To set the folder created with the above command as the custom location for the 
 >
 > + **{PROJECT}** : The label that identifies the project name
 
-#### 4.16.3. Usage & Maintenance
+#### 4.18.3. Usage & Maintenance
 
 To maintain a transparent development environment, each project version uses a dedicated settings file. These are linked to the default Maven location (`~/.m2/settings.xml`) using **Symbolic Links** (Windows Developer mode must be enabled). This allows IDEs and the CLI to work without additional flags or admin permissions, while providing a clear visual indication of which configuration is currently active.
 
@@ -1619,17 +2139,17 @@ del %USERPROFILE%\.m2\settings.xml
 mklink %USERPROFILE%\.m2\settings.xml %USERPROFILE%\.m2\settings-{PROJECT}-{DATE}.xml
 ```
 
-### 4.17. Gradle
+### 4.19. Gradle
 
 [**Gradle**](https://gradle.org/) is a build automation tool used primarily for [Java](https://openjdk.org/) and [Kotlin](https://kotlinlang.org/) projects. It can also be used to build and manage projects written in C/C++, Python, and other languages, and it is the default build tool for [Android](https://www.android.com/) development.
 
-#### 4.17.1. Installation
+#### 4.19.1. Installation
 
-##### 4.17.1.1. Installation on the WSL File System
+##### 4.19.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
-To be able to install a specific [**Gradle**](https://gradle.org/) version on the `WSL File System`, I like to follow a procedure similar to the one used for [**Apache Maven**](#4161-installation).
+To be able to install a specific [**Gradle**](https://gradle.org/) version on the `WSL File System`, I like to follow a procedure similar to the one used for [**Apache Maven**](#4181-installation).
 
 Start by creating the folder where [**Gradle**](https://gradle.org/) will be installed, executing the following commands:
 
@@ -1654,7 +2174,7 @@ wget {DOWNLOAD_LINK} -P /tmp
 >
 > + **{DOWNLOAD_LINK}** : Download link to the *binary-only* `bin` zip archive taken from the [official download page](https://gradle.org/releases/), e.g. `https://services.gradle.org/distributions/gradle-8.14.3-bin.zip`
 
-The `unzip` utility was already installed as a dependency of the [**Java**](#415-java) installation (see [SDKMAN](https://sdkman.io/)).
+The `unzip` utility was already installed as a dependency of the [**Java**](#417-java) installation (see [SDKMAN](https://sdkman.io/)).
 
 Once the download is completed, extract the archive in the `/opt/gradle/candidates` directory with the following command:
 
@@ -1748,7 +2268,7 @@ gradle --version
 
 If everything is correct, the above command will output the **Gradle** version.
 
-##### 4.17.1.2. Installation on the Windows Native File System
+##### 4.19.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -1817,7 +2337,7 @@ gradle --version
 
 If everything is correct, the above command will output the **Gradle** version.
 
-#### 4.17.2. Configuration
+#### 4.19.2. Configuration
 
 The default location for the user's *Gradle User Home* is the `.gradle` folder at the user's *Home Folder*. It stores the global caches, the daemon logs and the wrapper distributions. Check if it already exists and if it doesn't create it with the upcoming command. If [**Gradle**](https://gradle.org/) is installed on the `WSL File System`, use a [Ubuntu](https://ubuntu.com/) terminal and if it is installed on the `Windows Native File System` use a [Git Bash](https://git-scm.com/) terminal.
 
@@ -1835,23 +2355,23 @@ mkdir -p ~/.gradle-{PROJECT}
 >
 > + **{PROJECT}** : The label that identifies the project name
 
-To set the folder created with the above command as the custom *Gradle User Home*, set the `GRADLE_USER_HOME` environment variable accordingly on the terminal that runs the build, or point the build tool of the IDE to it (see [Configure Build Tools](#4216-configure-build-tools)).
+To set the folder created with the above command as the custom *Gradle User Home*, set the `GRADLE_USER_HOME` environment variable accordingly on the terminal that runs the build, or point the build tool of the IDE to it (see [Configure Build Tools](#4236-configure-build-tools)).
 
-### 4.18. Node.js
+### 4.20. Node.js
 
 [**Node.js**](https://nodejs.org/) is a cross-platform, open-source JavaScript runtime environment that runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
 
-#### 4.18.1. Installation
+#### 4.20.1. Installation
 
 The most pratical way to install [**Node.js**](https://nodejs.org/) is via a Node version manager because it allows you to easily install and switch between numerous versions of [**Node.js**](https://nodejs.org/). This is useful when a project you’re working on requires a different version of [**Node.js**](https://nodejs.org/) than what you currently have installed.
 
-##### 4.18.1.1. Installation on the WSL File System
+##### 4.20.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
 My go to Node version manager on Linux used to be [`nvm`](https://github.com/nvm-sh/nvm) but, now I'm starting to use [fnm (Fast Node Manager)](https://github.com/Schniz/fnm) because it has better performance.
 
-###### 4.18.1.1.1. fnm (Fast Node Manager)
+###### 4.20.1.1.1. fnm (Fast Node Manager)
 
 [fnm](https://github.com/Schniz/fnm) can be installed, as per the [official instructions](https://github.com/Schniz/fnm#using-a-script-macoslinux), executing the following command on a [Ubuntu](https://ubuntu.com/) terminal:
 
@@ -1911,7 +2431,7 @@ npm --version
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-###### 4.18.1.1.2. nvm (Node Version Manager)
+###### 4.20.1.1.2. nvm (Node Version Manager)
 
 Although I'm now using [fnm](https://github.com/Schniz/fnm) as my preferred Node Version Manager, I'm keeping here, for historical reference, my guide to install [`nvm`](https://github.com/nvm-sh/nvm), which I used before getting to know [fnm](https://github.com/Schniz/fnm).
 
@@ -1983,13 +2503,13 @@ When [**Node.js**](https://nodejs.org/) is installed, [`npm`](https://www.npmjs.
 nvm install-latest-npm
 ```
 
-##### 4.18.1.2. Installation on the Windows Native File System
+##### 4.20.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 My go to Node version manager on on the `Windows Native File System` used to be [NVS](https://github.com/jasongin/nvs) but, it has seen very little activity recently, with the last major release being in 2023. Therefore, I'm now starting to use [fnm (Fast Node Manager)](https://github.com/Schniz/fnm).
 
-###### 4.18.1.2.1. fnm (Fast Node Manager)
+###### 4.20.1.2.1. fnm (Fast Node Manager)
 
 [fnm](https://github.com/Schniz/fnm) can be installed with [scoop](https://scoop.sh/) executing, on PowerShell console, the following command:
 
@@ -2074,7 +2594,7 @@ npm --version
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-###### 4.18.1.2.2. NVS (Node Version Switcher)
+###### 4.20.1.2.2. NVS (Node Version Switcher)
 
 Although I'm now using [fnm](https://github.com/Schniz/fnm) as my preferred Node Version Manager, I'm keeping here, for historical reference, my guide to install [NVS](https://github.com/jasongin/nvs).
 
@@ -2173,13 +2693,13 @@ npm --version
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-### 4.19. Apache Tomcat
+### 4.21. Apache Tomcat
 
 [**Apache Tomcat**](http://tomcat.apache.org/) is an open source implementation of the [Jakarta Servlet](https://projects.eclipse.org/projects/ee4j.servlet), [Jakarta Server Pages](https://projects.eclipse.org/projects/ee4j.jsp), [Jakarta Expression Language](https://projects.eclipse.org/projects/ee4j.el), [Jakarta WebSocket](https://projects.eclipse.org/projects/ee4j.websocket), [Jakarta Annotations](https://projects.eclipse.org/projects/ee4j.cahttps://projects.eclipse.org/projects/ee4j.authentication) specifications. These specifications are part of the [Jakarta EE platform](https://projects.eclipse.org/projects/ee4j.jakartaee-platform).
 
-#### 4.19.1. Installation
+#### 4.21.1. Installation
 
-##### 4.19.1.1. Installation on the Windows Native File System
+##### 4.21.1.1. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -2194,13 +2714,13 @@ The different parts in the above name structure, shall be replaced as explained 
 >
 > With the above examples, the Tomcat folder name would be *tomcat-8.5.82-sa3*
 
-### 4.20. Quarkus CLI
+### 4.22. Quarkus CLI
 
 The [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) lets you create Quarkus projects, manage extensions and do essential build and development tasks using the underlying project build tool.
 
-#### 4.20.1. Installation
+#### 4.22.1. Installation
 
-##### 4.20.1.1. Installation on the WSL File System
+##### 4.22.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -2216,7 +2736,7 @@ To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) instal
 quarkus --version
 ```
 
-##### 4.20.1.2. Installation on the Windows Native File System
+##### 4.22.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -2232,11 +2752,11 @@ To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) instal
 quarkus --version
 ```
 
-### 4.21. IntelliJ IDEA
+### 4.23. IntelliJ IDEA
 
 [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) is an integrated development environment written in Java for developing computer software written in Java, Kotlin, Groovy, and other JVM-based languages. It is developed by JetBrains and is available as an Apache 2 Licensed community edition, and in a proprietary commercial edition.
 
-#### 4.21.1. Installation
+#### 4.23.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -2263,7 +2783,7 @@ Some antivirus software can interfere with the IDE build process, [causing build
 >   Select-Object DistributionName, BasePath
 > ```
 
-##### 4.21.1.1. Microsoft Defender exclusions
+##### 4.23.1.1. Microsoft Defender exclusions
 
 The *Microsoft Defender* exclusions are added on the *Windows Security* application:
 
@@ -2285,7 +2805,7 @@ It is also recommend to [exclude the IDE process from the antivirus](https://int
 + `idea64.exe`
 + `fsnotifier.exe`
 
-##### 4.21.1.2. ESET Security exclusions
+##### 4.23.1.2. ESET Security exclusions
 
 The [**ESET**](https://www.eset.com/) exclusions are added on a dedicated list inside the [**ESET**](https://www.eset.com/) application, and not on the *Windows Security* application. Unlike *Microsoft Defender*, [**ESET**](https://www.eset.com/) does not expand user-specific environment variables (like `%APPDATA%`), so the full paths must be used instead.
 
@@ -2314,7 +2834,7 @@ It is also recommend to [exclude the IDE process from the antivirus](https://int
 >
 > [**ESET**](https://www.eset.com/) requires the full path to the executable for process exclusions to work correctly, so use the browse button to make sure the correct path is used (otherwise *HIPS* may report errors).
 
-#### 4.21.2. Configure the WSL development environment
+#### 4.23.2. Configure the WSL development environment
 
 [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) provides native support for developing projects stored on the [**WSL**](https://learn.microsoft.com/windows/wsl/) file system. You install and run the IDE on Windows as usual, but you create, open, build, run and debug the projects located on the `WSL File System` directly, without leaving the IDE.
 
@@ -2324,7 +2844,7 @@ When you open a project stored on the `WSL File System`, recent [**IntelliJ IDEA
 >
 > Do not run [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) *inside* [**WSL**](https://learn.microsoft.com/windows/wsl/) through [WSLg](https://learn.microsoft.com/windows/wsl/tutorials/gui-apps). That setup is slow, lacks desktop integration and is [not recommended by JetBrains](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html). The native integration described next is the preferred approach.
 
-##### 4.21.2.1. Create or open a project on the WSL file system
+##### 4.23.2.1. Create or open a project on the WSL file system
 
 All the projects are stored on the folder `code` on the [**WSL**](https://learn.microsoft.com/windows/wsl/) file system, i.e. `\\wsl.localhost\Ubuntu\home\{USER}\code`, mirroring the `C:\code` folder on the `Windows Native File System`.
 
@@ -2339,47 +2859,47 @@ To create a new project on the `WSL File System`, on the welcome screen choose `
 
 To make sure that the projects are created and opened on the [**WSL**](https://learn.microsoft.com/windows/wsl/) file system by default, on the welcome screen choose `All Settings` from the `Customize` tab and then the tab `Appearance & Behavior->System Settings`. On this tab, change the input box **Default project directory** to the folder `\\wsl.localhost\Ubuntu\home\{USER}\code`.
 
-##### 4.21.2.2. Select the JDK on the WSL file system
+##### 4.23.2.2. Select the JDK on the WSL file system
 
-When a project is opened or created on the `WSL File System`, [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) scans the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution for the installed [**Java**](https://openjdk.org/) versions and lists them on the *Project Structure* dialog (`Ctrl+Alt+Shift+S`). Choose the [**Java**](#415-java) version installed with [SDKMAN](https://sdkman.io/) on the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution (`~/.sdkman/candidates/java/current`). [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) must use a [**Java**](https://openjdk.org/) version installed on the `WSL File System`, otherwise the project will be built with the Windows one.
+When a project is opened or created on the `WSL File System`, [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) scans the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution for the installed [**Java**](https://openjdk.org/) versions and lists them on the *Project Structure* dialog (`Ctrl+Alt+Shift+S`). Choose the [**Java**](#417-java) version installed with [SDKMAN](https://sdkman.io/) on the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution (`~/.sdkman/candidates/java/current`). [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) must use a [**Java**](https://openjdk.org/) version installed on the `WSL File System`, otherwise the project will be built with the Windows one.
 
-##### 4.21.2.3. Enable the Remote Execution Agent plugin
+##### 4.23.2.3. Enable the Remote Execution Agent plugin
 
 To work with *Maven* and *Gradle* projects on the `WSL File System`, make sure the bundled **Remote Execution Agent** plugin is enabled. On the welcome screen choose `Plugins` and then, on the `Installed` tab, search for "Remote Execution Agent". If it is disabled, enable it and make sure its `Binary Files` support is also enabled, then restart the IDE.
 
-##### 4.21.2.4. Use the Git installation on the WSL file system
+##### 4.23.2.4. Use the Git installation on the WSL file system
 
 [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) automatically uses the *Git* installed on the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution for projects opened with a `\\wsl.localhost` path, provided `git` is available on the distribution (see [Git & Git Bash](./1-fundamental-software.md#15-git--git-bash)). Because `appendWindowsPath=false` is set on the `/etc/wsl.conf` file (see [WSL distribution installation & configuration](./1-fundamental-software.md#123-wsl-distribution-installation--configuration)), installing [Git](https://git-scm.com/) on the `WSL File System` guarantees that the IDE finds the Linux `git`.
 
-#### 4.21.3. Install plugins
+#### 4.23.3. Install plugins
 
-##### 4.21.3.1. Install SonarQube plugin
+##### 4.23.3.1. Install SonarQube plugin
 
 [SonarQube](https://plugins.jetbrains.com/plugin/7973-sonarqube-for-ide) is an IDE extension that helps to detect and fix quality issues as the code is written. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "SonarQube". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-##### 4.21.3.2. Install JPA Buddy
+##### 4.23.3.2. Install JPA Buddy
 
 [JPA Buddy](https://plugins.jetbrains.com/plugin/15075-jpa-buddy) is an IDE extension that helps developers work efficiently with Hibernate, EclipseLink, Spring Data JPA, Flyway, Liquibase, Lombok, MapStruct, and other related technologies in both Java and Kotlin. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "JPA Buddy". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-##### 4.21.3.3. Install Kotlin plugin
+##### 4.23.3.3. Install Kotlin plugin
 
 Unlike the *Ultimate* edition, where [Kotlin](https://kotlinlang.org/) support is bundled, the *Community* edition of [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) requires the [Kotlin plugin](https://plugins.jetbrains.com/plugin/6954-kotlin) to be installed. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "Kotlin". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it. The plugin also provides the *Kotlin code style* scheme based on the [official Kotlin style guide](https://kotlinlang.org/docs/coding-conventions.html).
 
-#### 4.21.4. Set code formatters
+#### 4.23.4. Set code formatters
 
-##### 4.21.4.1. Java
+##### 4.23.4.1. Java
 
 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) seems to be the most popular **Code Style Guide** for [Java](https://www.java.com/en/). This style guide is licensed under the [CC-By 3.0 License](https://creativecommons.org/licenses/by/3.0/) and a there's a [repository](https://github.com/google/styleguide) where a formatter configuration file for [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) is available.
 
 To add the above mentioned Code Style Formatter settings, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Editor->Code Style->Java`. On this tab, click the `settings` icon choose `Import Scheme/IntelliJ IDEA code style XML` and pick the file(s) with the desired settings.
 
-##### 4.21.4.2. Kotlin
+##### 4.23.4.2. Kotlin
 
-The [Kotlin plugin](#42133-install-kotlin-plugin) includes a *Kotlin code style* scheme based on the [official Kotlin style guide](https://kotlinlang.org/docs/coding-conventions.html). To make sure it is in use, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen choose `All Settings` from the `Customize` tab. Then choose the tab `Editor->Code Style->Kotlin`. On this tab, on the `Scheme` dropdown, select the `Kotlin style guide` scheme.
+The [Kotlin plugin](#42333-install-kotlin-plugin) includes a *Kotlin code style* scheme based on the [official Kotlin style guide](https://kotlinlang.org/docs/coding-conventions.html). To make sure it is in use, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen choose `All Settings` from the `Customize` tab. Then choose the tab `Editor->Code Style->Kotlin`. On this tab, on the `Scheme` dropdown, select the `Kotlin style guide` scheme.
 
-#### 4.21.5. Configure Version Control
+#### 4.23.5. Configure Version Control
 
-##### 4.21.5.1. Commit
+##### 4.23.5.1. Commit
 
 Modern IntelliJ IDEA versions uses a **non-modal Commit tool window** (accessible via `Alt + 0` or the checkmark icon on the left sidebar). The **Shelf** tab is contextual; it only appears in the Commit tool window when you have at least one shelved change. To manage your shelf:
 
@@ -2393,34 +2913,34 @@ To move changes to the shelf instead of committing them, take the following step
 2.  Select **Shelf Changes...** from the context menu.
 3.  Provide a name for the shelf and click **Shelf Changes**. The **Shelf** tab will now become visible.
 
-#### 4.21.6. Configure Build Tools
+#### 4.23.6. Configure Build Tools
 
-##### 4.21.6.1. Maven
+##### 4.23.6.1. Maven
 
 To customize *Maven*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Maven`. On this tab, change the input boxes listed below as described:
 
-+ **Maven home path** : The path to the chosen [system *Maven* instance](#4161-installation);
-+ **User setting file** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#4162-configuration);
-+ **Local repository** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#4162-configuration);
++ **Maven home path** : The path to the chosen [system *Maven* instance](#4181-installation);
++ **User setting file** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#4182-configuration);
++ **Local repository** : Check the `Override` checkbox and point to the [custom project's *Maven Local Repository*](#4182-configuration);
 
 Beware that you must choose the [Apache Maven](https://maven.apache.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-##### 4.21.6.2. Gradle
+##### 4.23.6.2. Gradle
 
 To customize *Gradle*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Gradle`. On this tab, change the input boxes listed below as described:
 
 + **Use Gradle from** : Select the `Specified location` option;
-+ **Gradle home path** : The path to the chosen [system *Gradle* instance](#4171-installation);
-+ **Gradle JVM** : The [**Java**](#415-java) version in use with the project, e.g. `$HOME/.sdkman/candidates/java/current` on the `WSL File System` or `C:\dev\java\current` on the `Windows Native File System`;
-+ **Gradle user home** : Check the `Override` checkbox and point to the [custom project's *Gradle User Home*](#4172-configuration);
++ **Gradle home path** : The path to the chosen [system *Gradle* instance](#4191-installation);
++ **Gradle JVM** : The [**Java**](#417-java) version in use with the project, e.g. `$HOME/.sdkman/candidates/java/current` on the `WSL File System` or `C:\dev\java\current` on the `Windows Native File System`;
++ **Gradle user home** : Check the `Override` checkbox and point to the [custom project's *Gradle User Home*](#4192-configuration);
 
 Beware that you must choose the [Gradle](https://gradle.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.21.7. Languages & Frameworks
+#### 4.23.7. Languages & Frameworks
 
-##### 4.21.7.1. JavaScript Runtime
+##### 4.23.7.1. JavaScript Runtime
 
-Because [**Node.js**](https://nodejs.org/) is installed and managed with [fnm](https://github.com/Schniz/fnm) (see the [Node.js](#418-nodejs) section), it is not available on the system `PATH`, so [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) cannot detect it automatically and reports a "*Node.js not found*" popup. The JavaScript Runtime is always executed by the Windows [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) process, regardless of where the project files are stored (`WSL File System` or `Windows Native File System`), so pointing it to the [fnm](https://github.com/Schniz/fnm) installation on the `Windows Native File System` is enough.
+Because [**Node.js**](https://nodejs.org/) is installed and managed with [fnm](https://github.com/Schniz/fnm) (see the [Node.js](#420-nodejs) section), it is not available on the system `PATH`, so [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) cannot detect it automatically and reports a "*Node.js not found*" popup. The JavaScript Runtime is always executed by the Windows [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) process, regardless of where the project files are stored (`WSL File System` or `Windows Native File System`), so pointing it to the [fnm](https://github.com/Schniz/fnm) installation on the `Windows Native File System` is enough.
 
 To set the JavaScript Runtime, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Languages & Frameworks->JavaScript Runtime`. On this tab, make sure `Node.js` is selected in the **Preferred runtime** field. Then, click the browse button next to the **Node runtime** input box, and on the *Node.js Runtimes* dialog that opens, click the add button and choose `Add Local`. Finally, point to the `node.exe` of the desired [**Node.js**](https://nodejs.org/) installation, using the [fnm](https://github.com/Schniz/fnm) `default` alias folder:
 
@@ -2446,9 +2966,9 @@ To verify the configuration, check that the **Version** read-only field, on the 
 
 This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.21.8. Configure Tools
+#### 4.23.8. Configure Tools
 
-##### 4.21.8.1. Terminal
+##### 4.23.8.1. Terminal
 
 To customize the *Terminal* in use with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Tools->Terminal`. On this tab, take in consideration the file system you're working on and change the input boxes listed below as described:
 
@@ -2469,7 +2989,7 @@ This is a per project setting, therefore it might be necessary to set it for eve
 
 When working on a project opened from the `WSL File System`, the integrated terminal opens a [**WSL**](https://learn.microsoft.com/windows/wsl/) shell automatically, therefore no additional configuration is required beyond the `Shell path` shown above.
 
-#### 4.21.9. Run/Debug Configurations
+#### 4.23.9. Run/Debug Configurations
 
 When `networkingMode=mirrored` is enabled on the `.wslconfig` file (as recommended on the [WSL configuration](./1-fundamental-software.md#122-configuration)), the [**WSL**](https://learn.microsoft.com/windows/wsl/) 2 network is shared with Windows, `localhost` works in both directions and **no firewall configuration is required** to build and debug a project on the `WSL File System`. In that case, skip the upcoming steps.
 
@@ -2497,7 +3017,7 @@ Get-NetFirewallProfile -Name Public | Get-NetFirewallRule | where DisplayName -I
 
 After starting a debugger session, the Windows Firewall popup might appears and them, select the *Public networks* checkbox and click the `Allow access` button.
 
-##### 4.21.9.1. Shorten command line method
+##### 4.23.9.1. Shorten command line method
 
 To avoid the error "*Command line is too long*" when running tests it's necessary to set the "*Shorten command line*" method in the Run/Debug configuration to "*JAR manifest*". That can be done for the specific method or class, but it's better to [set it as default](https://stackoverflow.com/a/47927544) on [run/debug configuration templates](https://www.jetbrains.com/help/idea/run-debug-configuration.html#templates).
 
@@ -2505,20 +3025,20 @@ From the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) main menu, select 
 
 [Then](https://stackoverflow.com/a/65639857), click on the `Modify options` link (`ALT+M`) and set/select the `Shorten command line` option. Back on the `JUnit` tab, there will be a new dropdown input box named `Shorten command line`. In this new dropdown, choose the *Jar manifest* option. Click the button `OK` (once to close the `Select configuration templates` pop up and again to close the  `Run->Edit Configurations` pop up screen) and from now on all the new `JUnit` Run/Debug configurations will use this template.
 
-#### 4.21.10. Performance tips & WSL gotchas
+#### 4.23.10. Performance tips & WSL gotchas
 
 To get the best possible performance out of the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) + [**WSL**](https://learn.microsoft.com/windows/wsl/) set up and to avoid the usual [**WSL**](https://learn.microsoft.com/windows/wsl/) pitfalls, keep in mind the upcoming tips.
 
 + **Keep the projects on the `WSL File System`** : Accessing the `Windows Native File System` from [**WSL**](https://learn.microsoft.com/windows/wsl/) through `/mnt/c/...` (DrvFs) is dramatically slower than working on the `WSL File System`. Store the projects and their build caches (`~/.m2` and `~/.gradle`) on the `WSL File System`.
 + **Do not store the projects on the `Windows Native File System`** : A project opened from `C:\` but built inside [**WSL**](https://learn.microsoft.com/windows/wsl/) crosses the file system boundary on every file operation, which is the single biggest performance killer.
-+ **Keep the antivirus exclusions up to date** : Keep the exclusions listed on the [Installation](#4211-installation) section, including the [**WSL**](https://learn.microsoft.com/windows/wsl/) virtual disk, otherwise *Microsoft Defender* real-time scanning will slow down the WSL file access and the builds.
++ **Keep the antivirus exclusions up to date** : Keep the exclusions listed on the [Installation](#4231-installation) section, including the [**WSL**](https://learn.microsoft.com/windows/wsl/) virtual disk, otherwise *Microsoft Defender* real-time scanning will slow down the WSL file access and the builds.
 + **Allocate enough memory to WSL** : The [**WSL**](https://learn.microsoft.com/windows/wsl/) virtual machine memory is bounded by the `.wslconfig` file (see [WSL configuration](./1-fundamental-software.md#122-configuration)). Make sure the memory size is adequate for the projects and the IDE indexing.
 
 > **Note**
 >
 > The *run targets* feature (running a `Windows Native File System` project inside [**WSL**](https://learn.microsoft.com/windows/wsl/)) is only available on the *Ultimate* edition. Since all the development work is done on the `WSL File System`, it is not needed.
 
-##### 4.21.10.1. IntelliJ-launched WSL processes can't see your exported environment variables
+##### 4.23.10.1. IntelliJ-launched WSL processes can't see your exported environment variables
 
 When a project is opened from the `WSL File System`, [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) runs the build tools *inside* [**WSL**](https://learn.microsoft.com/windows/wsl/) (e.g. the *Gradle* daemon or *Maven*), which may cause a build failure because the build can't find an environment variable (e.g. `{ENV_VAR}`) that is definitely exported in a [**WSL**](https://learn.microsoft.com/windows/wsl/) terminal.
 
@@ -2554,11 +3074,11 @@ That happens because [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) launch
 > + `set` / `$env:` only affect the current shell; they do not persist;
 > + If the value ever changes, update it in the same dialog and repeat steps 4–6.
 
-### 4.22. Visual Studio Code
+### 4.24. Visual Studio Code
 
 [**Visual Studio Code**](https://code.visualstudio.com/), also commonly referred to as **VS Code**, is a source-code editor made by Microsoft with the Electron Framework, for Windows, Linux and macOS. Features include support for debugging, syntax highlighting, intelligent code completion, snippets, code refactoring, and embedded Git.
 
-#### 4.22.1. Installation
+#### 4.24.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -2572,7 +3092,7 @@ Execute [**Visual Studio Code**](https://code.visualstudio.com) and to enable th
 + Extensions
 + UI State
 
-#### 4.22.2. Install extensions
+#### 4.24.2. Install extensions
 
 With the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sync) option on, [**Visual Studio Code**](https://code.visualstudio.com) will installed all the synced extensions. Wait for while to allow the full synchronization and then check if all of the following extensions were properly installed:
 
@@ -2614,11 +3134,11 @@ With the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sy
 + [WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl);
 + [XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml).
 
-### 4.23. Zed
+### 4.25. Zed
 
 [**Zed**](https://zed.dev/) is a minimal code editor crafted for speed and collaboration with humans and AI.
 
-#### 4.23.1. Installation
+#### 4.25.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -2629,11 +3149,11 @@ scoop bucket add extras
 scoop install extras/zed
 ```
 
-### 4.24. DBeaver
+### 4.26. DBeaver
 
 [**DBeaver**](https://dbeaver.io/) is free and open source universal database tool for developers and database administrators.
 
-#### 4.24.1. Installation
+#### 4.26.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -2665,21 +3185,21 @@ keytool -v -list -keystore cacerts -alias {CERTIFICATE_ALIAS} -storepass changei
 >
 > + **{CERTIFICATE_ALIAS}** : The chosen certificate alias
 
-### 4.25. Postman
+### 4.27. Postman
 
 [**Postman**](https://www.postman.com/) helps you be more efficient while working with APIs. Using Postman, you can construct complex HTTP requests quickly, organize them in collections.
 
-#### 4.25.1. Installation
+#### 4.27.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 Download [**Postman**](https://www.postman.com/) installer latest version from [official downloads page](https://www.postman.com/downloads/). Then, execute the downloaded file and when prompted, sign in into the [**Postman**](https://www.postman.com/) account.
 
-### 4.26. Bruno
+### 4.28. Bruno
 
 [**Bruno**](https://www.usebruno.com/) is an open source IDE for exploring and testing APIs. It is a lightweight, Git-native, local-first alternative to [Postman](https://www.postman.com/).
 
-#### 4.26.1. Installation
+#### 4.28.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
