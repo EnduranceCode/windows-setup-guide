@@ -25,14 +25,15 @@ This file contains the **Development Software and Tools** section of my [Setup g
     18. [Apache Maven](#418-apache-maven)
     19. [Gradle](#419-gradle)
     20. [Node.js](#420-nodejs)
-    21. [Apache Tomcat](#421-apache-tomcat)
-    22. [Quarkus CLI](#422-quarkus-cli)
-    23. [IntelliJ IDEA](#423-intellij-idea)
-    24. [Visual Studio Code](#424-visual-studio-code)
-    25. [Zed](#425-zed)
-    26. [DBeaver](#426-dbeaver)
-    27. [Postman](#427-postman)
-    28. [Bruno](#428-bruno)
+    21. [Python](#421-python)
+    22. [Apache Tomcat](#422-apache-tomcat)
+    23. [Quarkus CLI](#423-quarkus-cli)
+    24. [IntelliJ IDEA](#424-intellij-idea)
+    25. [Visual Studio Code](#425-visual-studio-code)
+    26. [Zed](#426-zed)
+    27. [DBeaver](#427-dbeaver)
+    28. [Postman](#428-postman)
+    29. [Bruno](#429-bruno)
 
 ## 4. Development Software & Tools
 
@@ -2355,7 +2356,9 @@ mkdir -p ~/.gradle-{PROJECT}
 >
 > + **{PROJECT}** : The label that identifies the project name
 
-To set the folder created with the above command as the custom *Gradle User Home*, set the `GRADLE_USER_HOME` environment variable accordingly on the terminal that runs the build, or point the build tool of the IDE to it (see [Configure Build Tools](#4236-configure-build-tools)).
+To set the folder created with the above command as the custom *Gradle User Home*, set the `GRADLE_USER_HOME`
+environment variable accordingly on the terminal that runs the build, or point the build tool of the IDE to it
+(see [Configure Build Tools](#4246-configure-build-tools)).
 
 ### 4.20. Node.js
 
@@ -2693,13 +2696,58 @@ npm --version
 
 If everything is correct, the above commands will output the **node** version and the **npm** version.
 
-### 4.21. Apache Tomcat
+### 4.21. Python
 
-[**Apache Tomcat**](http://tomcat.apache.org/) is an open source implementation of the [Jakarta Servlet](https://projects.eclipse.org/projects/ee4j.servlet), [Jakarta Server Pages](https://projects.eclipse.org/projects/ee4j.jsp), [Jakarta Expression Language](https://projects.eclipse.org/projects/ee4j.el), [Jakarta WebSocket](https://projects.eclipse.org/projects/ee4j.websocket), [Jakarta Annotations](https://projects.eclipse.org/projects/ee4j.cahttps://projects.eclipse.org/projects/ee4j.authentication) specifications. These specifications are part of the [Jakarta EE platform](https://projects.eclipse.org/projects/ee4j.jakartaee-platform).
+[**Python**](https://www.python.org/) is a high-level, general-purpose programming language.
 
 #### 4.21.1. Installation
 
-##### 4.21.1.1. Installation on the Windows Native File System
+##### 4.21.1.1. Installation on the WSL File System
+
+![WSL](https://img.shields.io/badge/WSL-purple)
+
+To install [**Python**](https://www.python.org/) on the `WSL File System`, open an [Ubuntu](https://ubuntu.com/)
+terminal and execute the following commands:
+
+```bash
+sudo apt update
+sudo apt install python3 python3-pip python3-venv
+```
+
+To verify if the [**Python**](https://www.python.org/) installation was properly made, check the output of the following
+commands:
+
+```bash
+python3 --version
+python3 -m pip --version
+```
+
+##### 4.21.1.2. Installation on the Windows Native File System
+
+![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
+
+To install [**Python**](https://www.python.org/) on the `Windows Native File System`, open a PowerShell console and
+execute the following command:
+
+```powershell
+scoop install main/python
+```
+
+To verify if the [**Python**](https://www.python.org/) installation was properly made, open a PowerShell console and
+check the output of the following commands:
+
+```powershell
+python --version
+python -m pip --version
+```
+
+### 4.22. Apache Tomcat
+
+[**Apache Tomcat**](http://tomcat.apache.org/) is an open source implementation of the [Jakarta Servlet](https://projects.eclipse.org/projects/ee4j.servlet), [Jakarta Server Pages](https://projects.eclipse.org/projects/ee4j.jsp), [Jakarta Expression Language](https://projects.eclipse.org/projects/ee4j.el), [Jakarta WebSocket](https://projects.eclipse.org/projects/ee4j.websocket), [Jakarta Annotations](https://projects.eclipse.org/projects/ee4j.cahttps://projects.eclipse.org/projects/ee4j.authentication) specifications. These specifications are part of the [Jakarta EE platform](https://projects.eclipse.org/projects/ee4j.jakartaee-platform).
+
+#### 4.22.1. Installation
+
+##### 4.22.1.1. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -2714,13 +2762,13 @@ The different parts in the above name structure, shall be replaced as explained 
 >
 > With the above examples, the Tomcat folder name would be *tomcat-8.5.82-sa3*
 
-### 4.22. Quarkus CLI
+### 4.23. Quarkus CLI
 
 The [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) lets you create Quarkus projects, manage extensions and do essential build and development tasks using the underlying project build tool.
 
-#### 4.22.1. Installation
+#### 4.23.1. Installation
 
-##### 4.22.1.1. Installation on the WSL File System
+##### 4.23.1.1. Installation on the WSL File System
 
 ![WSL](https://img.shields.io/badge/WSL-purple)
 
@@ -2736,7 +2784,7 @@ To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) instal
 quarkus --version
 ```
 
-##### 4.22.1.2. Installation on the Windows Native File System
+##### 4.23.1.2. Installation on the Windows Native File System
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -2752,11 +2800,11 @@ To verify if the [**Quarkus CLI**](https://quarkus.io/guides/cli-tooling) instal
 quarkus --version
 ```
 
-### 4.23. IntelliJ IDEA
+### 4.24. IntelliJ IDEA
 
 [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) is an integrated development environment written in Java for developing computer software written in Java, Kotlin, Groovy, and other JVM-based languages. It is developed by JetBrains and is available as an Apache 2 Licensed community edition, and in a proprietary commercial edition.
 
-#### 4.23.1. Installation
+#### 4.24.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -2783,7 +2831,7 @@ Some antivirus software can interfere with the IDE build process, [causing build
 >   Select-Object DistributionName, BasePath
 > ```
 
-##### 4.23.1.1. Microsoft Defender exclusions
+##### 4.24.1.1. Microsoft Defender exclusions
 
 The *Microsoft Defender* exclusions are added on the *Windows Security* application:
 
@@ -2805,7 +2853,7 @@ It is also recommend to [exclude the IDE process from the antivirus](https://int
 + `idea64.exe`
 + `fsnotifier.exe`
 
-##### 4.23.1.2. ESET Security exclusions
+##### 4.24.1.2. ESET Security exclusions
 
 The [**ESET**](https://www.eset.com/) exclusions are added on a dedicated list inside the [**ESET**](https://www.eset.com/) application, and not on the *Windows Security* application. Unlike *Microsoft Defender*, [**ESET**](https://www.eset.com/) does not expand user-specific environment variables (like `%APPDATA%`), so the full paths must be used instead.
 
@@ -2834,7 +2882,7 @@ It is also recommend to [exclude the IDE process from the antivirus](https://int
 >
 > [**ESET**](https://www.eset.com/) requires the full path to the executable for process exclusions to work correctly, so use the browse button to make sure the correct path is used (otherwise *HIPS* may report errors).
 
-#### 4.23.2. Configure the WSL development environment
+#### 4.24.2. Configure the WSL development environment
 
 [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) provides native support for developing projects stored on the [**WSL**](https://learn.microsoft.com/windows/wsl/) file system. You install and run the IDE on Windows as usual, but you create, open, build, run and debug the projects located on the `WSL File System` directly, without leaving the IDE.
 
@@ -2844,7 +2892,7 @@ When you open a project stored on the `WSL File System`, recent [**IntelliJ IDEA
 >
 > Do not run [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) *inside* [**WSL**](https://learn.microsoft.com/windows/wsl/) through [WSLg](https://learn.microsoft.com/windows/wsl/tutorials/gui-apps). That setup is slow, lacks desktop integration and is [not recommended by JetBrains](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html). The native integration described next is the preferred approach.
 
-##### 4.23.2.1. Create or open a project on the WSL file system
+##### 4.24.2.1. Create or open a project on the WSL file system
 
 All the projects are stored on the folder `code` on the [**WSL**](https://learn.microsoft.com/windows/wsl/) file system, i.e. `\\wsl.localhost\Ubuntu\home\{USER}\code`, mirroring the `C:\code` folder on the `Windows Native File System`.
 
@@ -2859,47 +2907,51 @@ To create a new project on the `WSL File System`, on the welcome screen choose `
 
 To make sure that the projects are created and opened on the [**WSL**](https://learn.microsoft.com/windows/wsl/) file system by default, on the welcome screen choose `All Settings` from the `Customize` tab and then the tab `Appearance & Behavior->System Settings`. On this tab, change the input box **Default project directory** to the folder `\\wsl.localhost\Ubuntu\home\{USER}\code`.
 
-##### 4.23.2.2. Select the JDK on the WSL file system
+##### 4.24.2.2. Select the JDK on the WSL file system
 
 When a project is opened or created on the `WSL File System`, [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) scans the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution for the installed [**Java**](https://openjdk.org/) versions and lists them on the *Project Structure* dialog (`Ctrl+Alt+Shift+S`). Choose the [**Java**](#417-java) version installed with [SDKMAN](https://sdkman.io/) on the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution (`~/.sdkman/candidates/java/current`). [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) must use a [**Java**](https://openjdk.org/) version installed on the `WSL File System`, otherwise the project will be built with the Windows one.
 
-##### 4.23.2.3. Enable the Remote Execution Agent plugin
+##### 4.24.2.3. Enable the Remote Execution Agent plugin
 
 To work with *Maven* and *Gradle* projects on the `WSL File System`, make sure the bundled **Remote Execution Agent** plugin is enabled. On the welcome screen choose `Plugins` and then, on the `Installed` tab, search for "Remote Execution Agent". If it is disabled, enable it and make sure its `Binary Files` support is also enabled, then restart the IDE.
 
-##### 4.23.2.4. Use the Git installation on the WSL file system
+##### 4.24.2.4. Use the Git installation on the WSL file system
 
 [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) automatically uses the *Git* installed on the [**WSL**](https://learn.microsoft.com/windows/wsl/) distribution for projects opened with a `\\wsl.localhost` path, provided `git` is available on the distribution (see [Git & Git Bash](./1-fundamental-software.md#15-git--git-bash)). Because `appendWindowsPath=false` is set on the `/etc/wsl.conf` file (see [WSL distribution installation & configuration](./1-fundamental-software.md#123-wsl-distribution-installation--configuration)), installing [Git](https://git-scm.com/) on the `WSL File System` guarantees that the IDE finds the Linux `git`.
 
-#### 4.23.3. Install plugins
+#### 4.24.3. Install plugins
 
-##### 4.23.3.1. Install SonarQube plugin
+##### 4.24.3.1. Install SonarQube plugin
 
 [SonarQube](https://plugins.jetbrains.com/plugin/7973-sonarqube-for-ide) is an IDE extension that helps to detect and fix quality issues as the code is written. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "SonarQube". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-##### 4.23.3.2. Install JPA Buddy
+##### 4.24.3.2. Install JPA Buddy
 
 [JPA Buddy](https://plugins.jetbrains.com/plugin/15075-jpa-buddy) is an IDE extension that helps developers work efficiently with Hibernate, EclipseLink, Spring Data JPA, Flyway, Liquibase, Lombok, MapStruct, and other related technologies in both Java and Kotlin. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "JPA Buddy". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it.
 
-##### 4.23.3.3. Install Kotlin plugin
+##### 4.24.3.3. Install Kotlin plugin
 
 Unlike the *Ultimate* edition, where [Kotlin](https://kotlinlang.org/) support is bundled, the *Community* edition of [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) requires the [Kotlin plugin](https://plugins.jetbrains.com/plugin/6954-kotlin) to be installed. To install it, choose `Plugins` from the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen and then, on the `Marketplace` tab search for "Kotlin". Within the listed plugins, click "Install" on the right one and follow the "Wizard" instructions to install it. The plugin also provides the *Kotlin code style* scheme based on the [official Kotlin style guide](https://kotlinlang.org/docs/coding-conventions.html).
 
-#### 4.23.4. Set code formatters
+#### 4.24.4. Set code formatters
 
-##### 4.23.4.1. Java
+##### 4.24.4.1. Java
 
 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) seems to be the most popular **Code Style Guide** for [Java](https://www.java.com/en/). This style guide is licensed under the [CC-By 3.0 License](https://creativecommons.org/licenses/by/3.0/) and a there's a [repository](https://github.com/google/styleguide) where a formatter configuration file for [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) is available.
 
 To add the above mentioned Code Style Formatter settings, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Editor->Code Style->Java`. On this tab, click the `settings` icon choose `Import Scheme/IntelliJ IDEA code style XML` and pick the file(s) with the desired settings.
 
-##### 4.23.4.2. Kotlin
+##### 4.24.4.2. Kotlin
 
-The [Kotlin plugin](#42333-install-kotlin-plugin) includes a *Kotlin code style* scheme based on the [official Kotlin style guide](https://kotlinlang.org/docs/coding-conventions.html). To make sure it is in use, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen choose `All Settings` from the `Customize` tab. Then choose the tab `Editor->Code Style->Kotlin`. On this tab, on the `Scheme` dropdown, select the `Kotlin style guide` scheme.
+The [Kotlin plugin](#42433-install-kotlin-plugin) includes a *Kotlin code style* scheme based on
+the [official Kotlin style guide](https://kotlinlang.org/docs/coding-conventions.html). To make sure it is in use, on
+the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen choose `All Settings` from the `Customize` tab.
+Then choose the tab `Editor->Code Style->Kotlin`. On this tab, on the `Scheme` dropdown, select the `Kotlin style guide`
+scheme.
 
-#### 4.23.5. Configure Version Control
+#### 4.24.5. Configure Version Control
 
-##### 4.23.5.1. Commit
+##### 4.24.5.1. Commit
 
 Modern IntelliJ IDEA versions uses a **non-modal Commit tool window** (accessible via `Alt + 0` or the checkmark icon on the left sidebar). The **Shelf** tab is contextual; it only appears in the Commit tool window when you have at least one shelved change. To manage your shelf:
 
@@ -2913,9 +2965,9 @@ To move changes to the shelf instead of committing them, take the following step
 2.  Select **Shelf Changes...** from the context menu.
 3.  Provide a name for the shelf and click **Shelf Changes**. The **Shelf** tab will now become visible.
 
-#### 4.23.6. Configure Build Tools
+#### 4.24.6. Configure Build Tools
 
-##### 4.23.6.1. Maven
+##### 4.24.6.1. Maven
 
 To customize *Maven*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Maven`. On this tab, change the input boxes listed below as described:
 
@@ -2925,7 +2977,7 @@ To customize *Maven*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/
 
 Beware that you must choose the [Apache Maven](https://maven.apache.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-##### 4.23.6.2. Gradle
+##### 4.24.6.2. Gradle
 
 To customize *Gradle*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Build, Execution, Deployment->Build Tools->Gradle`. On this tab, change the input boxes listed below as described:
 
@@ -2936,9 +2988,9 @@ To customize *Gradle*, on the [**IntelliJ IDEA**](https://www.jetbrains.com/idea
 
 Beware that you must choose the [Gradle](https://gradle.org/) according to the file system you're working on (`WSL File System` or the `Windows Native File System`). This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.23.7. Languages & Frameworks
+#### 4.24.7. Languages & Frameworks
 
-##### 4.23.7.1. JavaScript Runtime
+##### 4.24.7.1. JavaScript Runtime
 
 Because [**Node.js**](https://nodejs.org/) is installed and managed with [fnm](https://github.com/Schniz/fnm) (see the [Node.js](#420-nodejs) section), it is not available on the system `PATH`, so [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) cannot detect it automatically and reports a "*Node.js not found*" popup. The JavaScript Runtime is always executed by the Windows [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) process, regardless of where the project files are stored (`WSL File System` or `Windows Native File System`), so pointing it to the [fnm](https://github.com/Schniz/fnm) installation on the `Windows Native File System` is enough.
 
@@ -2966,9 +3018,9 @@ To verify the configuration, check that the **Version** read-only field, on the 
 
 This is a per project setting, therefore it might be necessary to set it for every project when opened with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) for the first time.
 
-#### 4.23.8. Configure Tools
+#### 4.24.8. Configure Tools
 
-##### 4.23.8.1. Terminal
+##### 4.24.8.1. Terminal
 
 To customize the *Terminal* in use with [**IntelliJ IDEA**](https://www.jetbrains.com/idea/), on the application welcome screen, choose `All Settings` from the `Customize` tab. Then choose the tab `Tools->Terminal`. On this tab, take in consideration the file system you're working on and change the input boxes listed below as described:
 
@@ -2989,7 +3041,7 @@ This is a per project setting, therefore it might be necessary to set it for eve
 
 When working on a project opened from the `WSL File System`, the integrated terminal opens a [**WSL**](https://learn.microsoft.com/windows/wsl/) shell automatically, therefore no additional configuration is required beyond the `Shell path` shown above.
 
-#### 4.23.9. Run/Debug Configurations
+#### 4.24.9. Run/Debug Configurations
 
 When `networkingMode=mirrored` is enabled on the `.wslconfig` file (as recommended on the [WSL configuration](./1-fundamental-software.md#122-configuration)), the [**WSL**](https://learn.microsoft.com/windows/wsl/) 2 network is shared with Windows, `localhost` works in both directions and **no firewall configuration is required** to build and debug a project on the `WSL File System`. In that case, skip the upcoming steps.
 
@@ -3017,7 +3069,7 @@ Get-NetFirewallProfile -Name Public | Get-NetFirewallRule | where DisplayName -I
 
 After starting a debugger session, the Windows Firewall popup might appears and them, select the *Public networks* checkbox and click the `Allow access` button.
 
-##### 4.23.9.1. Shorten command line method
+##### 4.24.9.1. Shorten command line method
 
 To avoid the error "*Command line is too long*" when running tests it's necessary to set the "*Shorten command line*" method in the Run/Debug configuration to "*JAR manifest*". That can be done for the specific method or class, but it's better to [set it as default](https://stackoverflow.com/a/47927544) on [run/debug configuration templates](https://www.jetbrains.com/help/idea/run-debug-configuration.html#templates).
 
@@ -3025,20 +3077,22 @@ From the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) main menu, select 
 
 [Then](https://stackoverflow.com/a/65639857), click on the `Modify options` link (`ALT+M`) and set/select the `Shorten command line` option. Back on the `JUnit` tab, there will be a new dropdown input box named `Shorten command line`. In this new dropdown, choose the *Jar manifest* option. Click the button `OK` (once to close the `Select configuration templates` pop up and again to close the  `Run->Edit Configurations` pop up screen) and from now on all the new `JUnit` Run/Debug configurations will use this template.
 
-#### 4.23.10. Performance tips & WSL gotchas
+#### 4.24.10. Performance tips & WSL gotchas
 
 To get the best possible performance out of the [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) + [**WSL**](https://learn.microsoft.com/windows/wsl/) set up and to avoid the usual [**WSL**](https://learn.microsoft.com/windows/wsl/) pitfalls, keep in mind the upcoming tips.
 
 + **Keep the projects on the `WSL File System`** : Accessing the `Windows Native File System` from [**WSL**](https://learn.microsoft.com/windows/wsl/) through `/mnt/c/...` (DrvFs) is dramatically slower than working on the `WSL File System`. Store the projects and their build caches (`~/.m2` and `~/.gradle`) on the `WSL File System`.
 + **Do not store the projects on the `Windows Native File System`** : A project opened from `C:\` but built inside [**WSL**](https://learn.microsoft.com/windows/wsl/) crosses the file system boundary on every file operation, which is the single biggest performance killer.
-+ **Keep the antivirus exclusions up to date** : Keep the exclusions listed on the [Installation](#4231-installation) section, including the [**WSL**](https://learn.microsoft.com/windows/wsl/) virtual disk, otherwise *Microsoft Defender* real-time scanning will slow down the WSL file access and the builds.
++ **Keep the antivirus exclusions up to date** : Keep the exclusions listed on the [Installation](#4241-installation)
+  section, including the [**WSL**](https://learn.microsoft.com/windows/wsl/) virtual disk, otherwise *Microsoft
+  Defender* real-time scanning will slow down the WSL file access and the builds.
 + **Allocate enough memory to WSL** : The [**WSL**](https://learn.microsoft.com/windows/wsl/) virtual machine memory is bounded by the `.wslconfig` file (see [WSL configuration](./1-fundamental-software.md#122-configuration)). Make sure the memory size is adequate for the projects and the IDE indexing.
 
 > **Note**
 >
 > The *run targets* feature (running a `Windows Native File System` project inside [**WSL**](https://learn.microsoft.com/windows/wsl/)) is only available on the *Ultimate* edition. Since all the development work is done on the `WSL File System`, it is not needed.
 
-##### 4.23.10.1. IntelliJ-launched WSL processes can't see your exported environment variables
+##### 4.24.10.1. IntelliJ-launched WSL processes can't see your exported environment variables
 
 When a project is opened from the `WSL File System`, [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) runs the build tools *inside* [**WSL**](https://learn.microsoft.com/windows/wsl/) (e.g. the *Gradle* daemon or *Maven*), which may cause a build failure because the build can't find an environment variable (e.g. `{ENV_VAR}`) that is definitely exported in a [**WSL**](https://learn.microsoft.com/windows/wsl/) terminal.
 
@@ -3074,11 +3128,11 @@ That happens because [**IntelliJ IDEA**](https://www.jetbrains.com/idea/) launch
 > + `set` / `$env:` only affect the current shell; they do not persist;
 > + If the value ever changes, update it in the same dialog and repeat steps 4–6.
 
-### 4.24. Visual Studio Code
+### 4.25. Visual Studio Code
 
 [**Visual Studio Code**](https://code.visualstudio.com/), also commonly referred to as **VS Code**, is a source-code editor made by Microsoft with the Electron Framework, for Windows, Linux and macOS. Features include support for debugging, syntax highlighting, intelligent code completion, snippets, code refactoring, and embedded Git.
 
-#### 4.24.1. Installation
+#### 4.25.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -3092,7 +3146,7 @@ Execute [**Visual Studio Code**](https://code.visualstudio.com) and to enable th
 + Extensions
 + UI State
 
-#### 4.24.2. Install extensions
+#### 4.25.2. Install extensions
 
 With the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sync) option on, [**Visual Studio Code**](https://code.visualstudio.com) will installed all the synced extensions. Wait for while to allow the full synchronization and then check if all of the following extensions were properly installed:
 
@@ -3134,11 +3188,11 @@ With the [`Settings Sync`](https://code.visualstudio.com/docs/editor/settings-sy
 + [WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl);
 + [XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml).
 
-### 4.25. Zed
+### 4.26. Zed
 
 [**Zed**](https://zed.dev/) is a minimal code editor crafted for speed and collaboration with humans and AI.
 
-#### 4.25.1. Installation
+#### 4.26.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -3149,11 +3203,11 @@ scoop bucket add extras
 scoop install extras/zed
 ```
 
-### 4.26. DBeaver
+### 4.27. DBeaver
 
 [**DBeaver**](https://dbeaver.io/) is free and open source universal database tool for developers and database administrators.
 
-#### 4.26.1. Installation
+#### 4.27.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
@@ -3185,21 +3239,21 @@ keytool -v -list -keystore cacerts -alias {CERTIFICATE_ALIAS} -storepass changei
 >
 > + **{CERTIFICATE_ALIAS}** : The chosen certificate alias
 
-### 4.27. Postman
+### 4.28. Postman
 
 [**Postman**](https://www.postman.com/) helps you be more efficient while working with APIs. Using Postman, you can construct complex HTTP requests quickly, organize them in collections.
 
-#### 4.27.1. Installation
+#### 4.28.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
 Download [**Postman**](https://www.postman.com/) installer latest version from [official downloads page](https://www.postman.com/downloads/). Then, execute the downloaded file and when prompted, sign in into the [**Postman**](https://www.postman.com/) account.
 
-### 4.28. Bruno
+### 4.29. Bruno
 
 [**Bruno**](https://www.usebruno.com/) is an open source IDE for exploring and testing APIs. It is a lightweight, Git-native, local-first alternative to [Postman](https://www.postman.com/).
 
-#### 4.28.1. Installation
+#### 4.29.1. Installation
 
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-blue)
 
