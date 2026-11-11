@@ -145,7 +145,7 @@ gh --help
 
 Before authenticating, it's necessary to understand where [**GitHub CLI**](https://cli.github.com/) stores the credentials. On the `Windows Native File System` it uses the [Windows Credential Manager](https://learn.microsoft.com/windows/win32/secauthncredentialmanager) and on the `WSL File System` it uses a Secret Service provider (`GNOME Keyring` or `KWallet`), which is not available on a headless [Ubuntu](https://ubuntu.com/) distribution. When no credential store is found, `gh auth login` **silently** falls back to writing the token in clear text to the file `~/.config/gh/hosts.yml`, without requiring the `--insecure-storage` flag. A token stored that way can be read by any process running as your user and it's included in backups of your home folder.
 
-Because of that, the recommended approach on the `WSL File System` is to store the token encrypted with [`pass`](https://www.passwordstore.org/) and to supply it to [**GitHub CLI**](https://cli.github.com/) through the `GH_TOKEN` environment variable, which is the first credential checked by `gh`. The [`pass`](https://www.passwordstore.org/) setup is documented on the [Secret storage on the WSL File System](./1-fundamental-software.md#1232-secret-storage-on-the-wsl-file-system) section of this guide, together with the optional `GNOME Keyring` alternative. The resulting encrypted store is the same one used by the [Docker](#41021-installation-on-the-wsl-file-system) credentials helper.
+Because of that, the recommended approach on the `WSL File System` is to store the token encrypted with [`pass`](https://www.passwordstore.org/) and to supply it to [**GitHub CLI**](https://cli.github.com/) through the `GH_TOKEN` environment variable, which is the first credential checked by `gh`. The `~/.local/bin/gh` wrapper configured below retrieves the token from `pass` and runs the actual executable at `/usr/bin/gh`. The [`pass`](https://www.passwordstore.org/) setup is documented on the [Secret storage on the WSL File System](./1-fundamental-software.md#1232-secret-storage-on-the-wsl-file-system) section of this guide, together with the optional `GNOME Keyring` alternative. The resulting encrypted store is the same one used by the [Docker](#41021-installation-on-the-wsl-file-system) credentials helper.
 
 Create a **fine-grained personal access token** for [**GitHub CLI**](https://cli.github.com/), following the [official instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens), and store it immediately with the following command. The token is only displayed once and it's entered on a hidden prompt, so don't type it directly on a command line:
 
@@ -159,66 +159,54 @@ Grant the token an expiration date, only the access to the repositories you need
 
 This guide keeps two separate tokens: `github/cli` for [**GitHub CLI**](https://cli.github.com/) and `github/copilot` for [**GitHub Copilot CLI**](https://github.com/github/copilot-cli), so each one expires and is revoked independently. A single fine-grained token could hold both the repository permissions and the account-level *Copilot Requests* permission and serve both tools, but the tradeoff is that a single expiration date and a single revocation then apply to both, so compromising one compromises both. Keep the tokens separate unless you prefer that.
 
-Now open the file `~/.bashrc` with the [Nano text editor](https://www.nano-editor.org/), executing the following command:
+Create the `~/.local/bin/gh` wrapper script. This directory is already included on the `PATH` by the [WSL configuration](./1-fundamental-software.md#123-wsl-distribution-installation--configuration) of this guide, so the wrapper takes precedence over `/usr/bin/gh`:
 
 ```bash
-nano ~/.bashrc
+mkdir -p ~/.local/bin
+nano ~/.local/bin/gh
 ```
 
-Then, add the upcoming snippet to the `~/.bashrc` file. The `gh_secure` function retrieves the token from [`pass`](https://www.passwordstore.org/) and starts `gh` with `GH_TOKEN` set, on a subshell, so the decrypted token doesn't leak into the parent shell:
+Add the following script:
 
 ```bash
+#!/bin/bash
+
 # Run GitHub CLI with the token stored in pass
-#
-# + https://cli.github.com/manual/gh_help_environment
-gh_secure() (
-    local token
-    if ! token="$(command pass show github/cli)"; then
-        printf 'Cannot decrypt the GitHub CLI token. gh was not started.\n' >&2
-        return 1
-    fi
-    if [[ -z "$token" || "$token" == *$'\n'* ]]; then
-        printf 'The github/cli entry must contain exactly one non-empty token line.\n' >&2
-        return 1
-    fi
-    export GH_TOKEN="$token"
-    unset token
-    command gh "$@"
-)
+if ! token="$(/usr/bin/pass show github/cli)"; then
+    printf 'Cannot decrypt the GitHub CLI token. gh was not started.\n' >&2
+    exit 1
+fi
+
+if [[ -z "$token" || "$token" == *$'\n'* ]]; then
+    printf 'The github/cli entry must contain exactly one non-empty token line.\n' >&2
+    exit 1
+fi
+
+export GH_TOKEN="$token"
+unset token
+
+exec /usr/bin/gh "$@"
 ```
 
-Save the changes with the command `CTRL + O` and then exit the [Nano text editor](https://www.nano-editor.org/) with the command `CTRL + X`. Check the syntax of the file before loading it, by executing the following command:
+Save the changes with `CTRL + O` and exit the [Nano text editor](https://www.nano-editor.org/) with `CTRL + X`. Make the script executable:
 
 ```bash
-bash -n ~/.bashrc
+chmod 0755 ~/.local/bin/gh
 ```
 
-No output means no syntax error was detected. To enable the changes made, you will need to source the `~/.bashrc` file, executing the following command:
+Verify that `gh` resolves to the wrapper, then check its authentication:
 
 ```bash
-source ~/.bashrc
+command -v gh
+gh auth status --hostname github.com
+gh api user --jq .login
 ```
 
-To confirm that the function is available, check the output of the following command:
+The output of `command -v gh` must be `~/.local/bin/gh`. The credential source shown by `gh auth status` must be `GH_TOKEN` and not `keyring`. The wrapper forwards all arguments, so GitHub CLI commands can be run as usual:
 
 ```bash
-type -t gh_secure
-```
-
-The above command should print `function`.
-
-To verify the authentication, check the output of the following commands:
-
-```bash
-gh_secure auth status --hostname github.com
-gh_secure api user --jq .login
-```
-
-The credential source shown by `gh_secure auth status` must be `GH_TOKEN` and not `keyring`. That's the expected result for this approach. The function forwards all arguments, so any `gh` command can be executed through it, e.g.:
-
-```bash
-gh_secure pr list
-gh_secure workflow list
+gh pr list
+gh workflow list
 ```
 
 Always avoid the following commands, as they either store the token in clear text or display it on the terminal:
@@ -229,33 +217,13 @@ gh auth token
 gh auth status --show-token
 ```
 
-Plain `gh` does not invoke `gh_secure`, so it will not find any credentials. Use `gh_secure` consistently or export `GH_TOKEN` yourself for a single command. Because `gh_secure` runs on a subshell, you can also obtain a shell where every command has `GH_TOKEN` set, by running the following command and typing `exit` when finished:
-
-```bash
-gh_secure bash
-```
-
-If you prefer typing `gh`, add the upcoming snippet to the `~/.bashrc` file, immediately after the `gh_secure` function. The function is found by [Bash](https://www.gnu.org/software/bash/) before the executable on the `PATH` and `gh_secure` runs `command gh`, so there's no recursion:
-
-```bash
-gh() {
-    gh_secure "$@"
-}
-```
-
-After editing the file, check its syntax with the command `bash -n ~/.bashrc` and enable the change by running the command `source ~/.bashrc`. To confirm that both functions are available, check the output of the following command:
-
-```bash
-type -t gh gh_secure
-```
-
-The above command must print `function` twice. From that point on, every `gh` command transparently decrypts the token, so the `gh` examples of this section work as written and the `gh_secure` prefix is no longer needed.
+The wrapper starts a separate `/usr/bin/gh` process with `GH_TOKEN` set, so the decrypted token is not retained in the parent shell. Do not bypass it by running `/usr/bin/gh` directly, as that executable does not retrieve the token from `pass`.
 
 This approach configures the token used by the GitHub API and doesn't change how [Git](https://git-scm.com/) stores its own credentials. As the [Git configuration](./1-fundamental-software.md#152-git-configuration) of this guide already sets `credential.helper manager` and the [SSH keys](./1-fundamental-software.md#154-ssh-keys) are used for the `git` protocol, there's no need to run `gh auth setup-git`.
 
-If you also need a repository token for other tooling (e.g. to run scripts that expect the `GITHUB_TOKEN` variable), store it in a separate entry with the `pass insert github/repos` command and export it for the command that requires it, exactly as `gh_secure` does for `GH_TOKEN`.
+If you also need a repository token for other tooling (e.g. to run scripts that expect the `GITHUB_TOKEN` variable), store it in a separate entry with the `pass insert github/repos` command and export it only for the command that requires it, as the `gh` wrapper does for `GH_TOKEN`.
 
-[`pass`](https://www.passwordstore.org/) protects the **stored** copy of a token, not the **live** copy. Any tool that requires `GH_TOKEN` or `GITHUB_TOKEN` in the environment pulls the decrypted secret into the process environment, where it's readable by any other process running as your user through `/proc/<pid>/environ` and is inherited by child processes. Prefer the narrowest scope and the shortest expiration that satisfy the tool, and don't `export` the token permanently in `~/.bashrc`, as that would remove the subshell isolation that `gh_secure` provides.
+[`pass`](https://www.passwordstore.org/) protects the **stored** copy of a token, not the **live** copy. Any tool that requires `GH_TOKEN` or `GITHUB_TOKEN` in the environment pulls the decrypted secret into the process environment, where it's readable by any other process running as your user through `/proc/<pid>/environ` and is inherited by child processes. Prefer the narrowest scope and the shortest expiration that satisfy the tool, and don't `export` the token permanently in `~/.bashrc`, as that would expose it to every process launched from the shell instead of limiting it to the wrapper and its child process.
 
 ##### 4.3.2.2. Token rotation
 
@@ -282,12 +250,6 @@ pass insert github/cli
 The command `pass rm` before the `pass insert` is deliberate. Running `pass insert` over an existing entry overwrites the file, but the [GPG](./1-fundamental-software.md#1232-secret-storage-on-the-wsl-file-system) agent may still hold the old decrypted token cached until the cache expires, which would make the verification below test the previous token. If a previous token is still used after replacing the entry, restart the agent with the command `gpgconf --kill gpg-agent`.
 
 To verify that the new token is the one in use, check the output of the following command:
-
-```bash
-gh_secure auth status --hostname github.com
-```
-
-If you added the `gh` function described on the [Authentication on the WSL File System](#4321-authentication-on-the-wsl-file-system) section, plain `gh` produces the same result:
 
 ```bash
 gh auth status --hostname github.com
@@ -826,7 +788,7 @@ mkdir -p ~/.local/share/bash-completion/completions
 copilot completion bash > ~/.local/share/bash-completion/completions/copilot
 ```
 
-Unlike the `gh_secure` and `copilot_secure` functions, which are added to the `~/.bashrc` file as documented above, the completion script is written to its own file. [**bash-completion**](https://github.com/scop/bash-completion) loads the files in this directory on demand, so the script is used automatically in every new terminal window and there's nothing to add to `~/.bashrc` and no restart requirement beyond opening a new [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) window.
+Unlike the `gh` wrapper and `copilot_secure` function, which are configured as documented above, the completion script is written to its own file. [**bash-completion**](https://github.com/scop/bash-completion) loads the files in this directory on demand, so the script is used automatically in every new terminal window and there's nothing to add to `~/.bashrc` and no restart requirement beyond opening a new [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) window.
 
 The [**GitHub Copilot CLI**](https://github.com/github/copilot-cli) official instructions recommend writing the script to the `/etc/bash_completion.d` directory with the command `sudo tee`. That directory is only read by [**bash-completion**](https://github.com/scop/bash-completion) when it's loaded, which on [Ubuntu](https://ubuntu.com/) is done by the file `/etc/profile.d/bash_completion.sh`. As that file is only read by **login** shells, and a new [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) window opens an interactive shell that is **not** a login shell, the script would be written but never loaded. The user completions directory documented above is loaded in both cases.
 
